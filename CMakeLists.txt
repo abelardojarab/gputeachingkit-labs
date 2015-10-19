@@ -36,7 +36,7 @@ if (APPLE)
         set(CUDA_HOST_COMPILER ${GCC_EXECUTABLE})
     else ()
         # OS X 10.8+
-	find_program(CLANG_EXECUTABLE NAMES clang++ PATHS ENV PATH)
+	find_program(CLANG_EXECUTABLE NAMES clang++-3.6 clang++ PATHS ENV PATH)
 	if (NOT CLANG_EXECUTABLE)
 	    message(FATAL_ERROR "Could not find host compiler 'clang++'")
 	endif ()
@@ -71,7 +71,14 @@ set(WBLIB "wb")
 
 include_directories(${PROJECT_SOURCE_DIR}/support)
 
-function(add_lab NAME SOURCES)
+function(add_generator NAME SOURCES)
+	add_executable("${NAME}_DatasetGenerator" ${SOURCES})
+	if(UNIX)
+		target_link_libraries("${NAME}_DatasetGenerator" ${LINK_LIBRARIES})
+	endif()
+endfunction()
+
+function(add_lab_helper NAME SOURCES)
 	cuda_add_executable(${NAME} ${SOURCES})
 	target_link_libraries(${NAME} ${WBLIB})
 	if(UNIX)
@@ -79,6 +86,15 @@ function(add_lab NAME SOURCES)
 	endif()
 endfunction()
 
+function(add_lab_solution NAME SOURCES)
+	add_lab_helper("${NAME}_Solution" ${SOURCES})
+endfunction()
+
+function(add_lab_template NAME SOURCES)
+	add_lab_helper("${NAME}_Template" ${SOURCES})
+endfunction()
+
 include(support/sources.cmake)
 include(Module1/sources.cmake)
+include(Module2/sources.cmake)
 
