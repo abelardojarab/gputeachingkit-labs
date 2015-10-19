@@ -1,14 +1,15 @@
-############################################################################################
-# <summary> CMakeLists.txt for libWB and CUDA.                </summary>
-# <date>    2013-01-07                                </date>
-# <author>  Tran Minh Quan. edit by Johannes Kast, Michael Sarahan      </author>
-# <email>   quantm@unist.ac.kr  kast.jo@googlemail.com msarahan@gmail.com </email>
-############################################################################################
-cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
-project(libwb)
+cmake_minimum_required(VERSION 3.0 FATAL_ERROR)
+
+set(CMAKE_BUILD_TYPE Release)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+set(CMAKE_COLOR_MAKEFILE ON)
+set(VERBOSE_BUILD ON)
+set_property(GLOBAL PROPERTY USE_FOLDERS ON)
+
+
+project(labs)
 find_package(CUDA REQUIRED)
 
-include_directories(${PROJECT_SOURCE_DIR})
 
 # For some MPs it may be necessary to specify the compute capability of your
 # NVIDIA GPU. In that case, simply uncomment the following two lines that start
@@ -20,7 +21,8 @@ include_directories(${PROJECT_SOURCE_DIR})
 
 # Set warning levels for host compilation
 if (UNIX)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wno-unused-function -Wextra")
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wno-unused-function -Wno-unused-parameter -Wextra")
+	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wno-unused-function -Wno-unused-parameter -Wextra")
 endif ()
 
 # Select the correct host compiler on OS X
@@ -34,12 +36,13 @@ if (APPLE)
         set(CUDA_HOST_COMPILER ${GCC_EXECUTABLE})
     else ()
         # OS X 10.8+
-        find_program(CLANG_EXECUTABLE NAMES clang++ PATHS ENV PATH)
-        if (NOT CLANG_EXECUTABLE)
-            message(FATAL_ERROR "Could not find host compiler 'clang++'")
-        endif ()
-        set(CUDA_HOST_COMPILER ${CLANG_EXECUTABLE})
-        set(CMAKE_CXX_FLAGS    "${CMAKE_CXX_FLAGS} -stdlib=libstdc++ -isystem ${CUDA_INCLUDE_DIRS}")
+	find_program(CLANG_EXECUTABLE NAMES clang++ PATHS ENV PATH)
+	if (NOT CLANG_EXECUTABLE)
+	    message(FATAL_ERROR "Could not find host compiler 'clang++'")
+	endif ()
+	set(CUDA_HOST_COMPILER ${CLANG_EXECUTABLE})
+        set(CMAKE_CXX_FLAGS    "${CMAKE_CXX_FLAGS} -std=c++11 -isystem ${CUDA_INCLUDE_DIRS}")
+	set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -stdlib=libc++" )
     endif ()
 endif ()
 
@@ -64,15 +67,18 @@ if (UNIX)
     endif ()
 endif ()
 
-# Collect source files
-file(GLOB WBHDR *.hpp *.h)
-file(GLOB WBSRC *.cpp *.c)
+set(WBLIB "wb")
 
-set(EXECUTABLES mp0 mp1 mp2 mp3 mp4 mp5 mp6 mp11 mp12)
-foreach (EXECUTABLE ${EXECUTABLES})
-    string(TOUPPER "${EXECUTABLE}" LABEL)
-    CUDA_ADD_EXECUTABLE(${LABEL} skel/${EXECUTABLE}.cu ${WBHDR} ${WBSRC})
-    if (UNIX)
-        target_link_libraries(${LABEL} ${LINK_LIBRARIES})
-    endif ()
-endforeach ()
+include_directories(${PROJECT_SOURCE_DIR}/support)
+
+function(add_lab NAME SOURCES)
+	cuda_add_executable(${NAME} ${SOURCES})
+	target_link_libraries(${NAME} ${WBLIB})
+	if(UNIX)
+		target_link_libraries(${NAME} ${LINK_LIBRARIES})
+	endif()
+endfunction()
+
+include(support/sources.cmake)
+include(Module1/sources.cmake)
+
