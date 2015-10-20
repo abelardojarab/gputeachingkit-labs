@@ -27,14 +27,16 @@ static void _mkdir(const char *dir) {
 }
 
 static void compute(float *output, float *input0, float *input1, int num) {
-  for (int ii = 0; ii < num; ++ii) {
+  int ii;
+  for (ii = 0; ii < num; ++ii) {
     output[ii] = input0[ii] + input1[ii];
   }
 }
 
 static float *generate_data(int n) {
+  int i;
   float *data = (float *)malloc(sizeof(float) * n);
-  for (int i = 0; i < n; i++) {
+  for (i = 0; i < n; i++) {
     data[i] = ((float)(rand() % 20) - 5) / 5.0f;
   }
   return data;
@@ -48,9 +50,10 @@ static char *strjoin(const char *s1, const char *s2) {
 }
 
 static void write_data(char *file_name, float *data, int num) {
+  int ii;
   FILE *handle = fopen(file_name, "w");
   fprintf(handle, "%d", num);
-  for (int ii = 0; ii < num; ii++) {
+  for (ii = 0; ii < num; ii++) {
     fprintf(handle, "\n%.2f", *data++);
   }
   fflush(handle);

@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.0 FATAL_ERROR)
+cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
 
 set(CMAKE_BUILD_TYPE Release)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
@@ -102,7 +102,7 @@ include(support/sources.cmake)
 include(Module2/sources.cmake)
 include(Module3/sources.cmake)
 include(Module4/sources.cmake)
-include(Module6/sources.cmake)
+#include(Module6/sources.cmake)
 include(Module11/sources.cmake)
 include(Module23/sources.cmake)
 

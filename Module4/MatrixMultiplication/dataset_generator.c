@@ -35,11 +35,11 @@ static void compute(float *output, float *input0, float *input1, int numARows,
 #define A(i, j) value(input0, i, j, numAColumns)
 #define B(i, j) value(input1, i, j, numBColumns)
 #define C(i, j) value(output, i, j, numCColumns)
-
-  for (int ii = 0; ii < numCRows; ++ii) {
-    for (int jj = 0; jj < numCColumns; ++jj) {
+  int ii, jj, kk;
+  for (ii = 0; ii < numCRows; ++ii) {
+    for (jj = 0; jj < numCColumns; ++jj) {
       float sum = 0;
-      for (int kk = 0; kk < numAColumns; ++kk) {
+      for (kk = 0; kk < numAColumns; ++kk) {
         sum += A(ii, kk) * B(kk, jj);
       }
       C(ii, jj) = sum;
@@ -52,7 +52,8 @@ static void compute(float *output, float *input0, float *input1, int numARows,
 
 static float *generate_data(int height, int width) {
   float *data = (float *)malloc(sizeof(float) * width * height);
-  for (int i = 0; i < width * height; i++) {
+  int i;
+  for (i = 0; i < width * height; i++) {
     data[i] = ((float)(rand() % 20) - 5) / 5.0f;
   }
   return data;
@@ -66,10 +67,11 @@ static char *strjoin(const char *s1, const char *s2) {
 }
 
 static void write_data(char *file_name, float *data, int height, int width) {
+  int ii, jj;
   FILE *handle = fopen(file_name, "w");
   fprintf(handle, "%d %d\n", height, width);
-  for (int ii = 0; ii < height; ii++) {
-    for (int jj = 0; jj < width; jj++) {
+  for (ii = 0; ii < height; ii++) {
+    for (jj = 0; jj < width; jj++) {
       fprintf(handle, "%.2f", *data++);
       if (jj != width - 1) {
         fprintf(handle, " ");
@@ -85,10 +87,11 @@ static void write_data(char *file_name, float *data, int height, int width) {
 
 static void write_transpose_data(char *file_name, float *data, int height,
                                  int width) {
+  int ii, jj;
   FILE *handle = fopen(file_name, "w");
   fprintf(handle, "%d %d\n", width, height);
-  for (int jj = 0; jj < width; jj++) {
-    for (int ii = 0; ii < height; ii++) {
+  for (jj = 0; jj < width; jj++) {
+    for (ii = 0; ii < height; ii++) {
       fprintf(handle, "%.2f", data[ii * width + jj]);
       if (ii != height - 1) {
         fprintf(handle, " ");

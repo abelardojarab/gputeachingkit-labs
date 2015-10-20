@@ -6,7 +6,7 @@
 #include "limits.h"
 #include "sys/stat.h"
 
-static char base_dir[] = "./ListScan/Dataset";
+static char base_dir[] = "./ThrustVectorAdd/Dataset";
 
 static void _mkdir(const char *dir) {
   char tmp[PATH_MAX];
@@ -26,20 +26,18 @@ static void _mkdir(const char *dir) {
   mkdir(tmp, S_IRWXU);
 }
 
-static void compute(int *output, int *input, int num) {
-  int accum = 0;
+static void compute(float *output, float *input0, float *input1, int num) {
   int ii;
   for (ii = 0; ii < num; ++ii) {
-    accum += input[ii];
-    output[ii] = accum;
+    output[ii] = input0[ii] + input1[ii];
   }
 }
 
-static int *generate_data(int n) {
-  int *data = (int *)malloc(sizeof(int) * n);
+static float *generate_data(int n) {
   int i;
+  float *data = (float *)malloc(sizeof(float) * n);
   for (i = 0; i < n; i++) {
-    data[i] = rand() % 4;
+    data[i] = ((float)(rand() % 20) - 5) / 5.0f;
   }
   return data;
 }
@@ -51,12 +49,12 @@ static char *strjoin(const char *s1, const char *s2) {
   return result;
 }
 
-static void write_data(char *file_name, int *data, int num) {
+static void write_data(char *file_name, float *data, int num) {
   int ii;
   FILE *handle = fopen(file_name, "w");
   fprintf(handle, "%d", num);
   for (ii = 0; ii < num; ii++) {
-    fprintf(handle, "\n%d", *data++);
+    fprintf(handle, "\n%.2f", *data++);
   }
   fflush(handle);
   fclose(handle);
@@ -67,18 +65,22 @@ static void create_dataset(int datasetNum, int dim) {
   sprintf(dir_name, "%s/%d", base_dir, datasetNum);
   _mkdir(dir_name);
 
-  char *input_file_name = strjoin(dir_name, "/input.raw");
+  char *input0_file_name = strjoin(dir_name, "/input0.raw");
+  char *input1_file_name = strjoin(dir_name, "/input1.raw");
   char *output_file_name = strjoin(dir_name, "/output.raw");
 
-  int *input_data = generate_data(dim);
-  int *output_data = (int *)calloc(sizeof(int), dim);
+  float *input0_data = generate_data(dim);
+  float *input1_data = generate_data(dim);
+  float *output_data = (float *)calloc(sizeof(float), dim);
 
-  compute(output_data, input_data, dim);
+  compute(output_data, input0_data, input1_data, dim);
 
-  write_data(input_file_name, input_data, dim);
+  write_data(input0_file_name, input0_data, dim);
+  write_data(input1_file_name, input1_data, dim);
   write_data(output_file_name, output_data, dim);
 
-  free(input_data);
+  free(input0_data);
+  free(input1_data);
   free(output_data);
 }
 
