@@ -1,13 +1,13 @@
 #include <wb.h>
 
-#define wbCheck(stmt)                                                          \
-  do {                                                                         \
-    cudaError_t err = stmt;                                                    \
-    if (err != cudaSuccess) {                                                  \
-      wbLog(ERROR, "Failed to run stmt ", #stmt);                              \
-      wbLog(ERROR, "Got CUDA error ...  ", cudaGetErrorString(err));           \
-      return -1;                                                               \
-    }                                                                          \
+#define wbCheck(stmt)                                                     \
+  do {                                                                    \
+    cudaError_t err = stmt;                                               \
+    if (err != cudaSuccess) {                                             \
+      wbLog(ERROR, "Failed to run stmt ", #stmt);                         \
+      wbLog(ERROR, "Got CUDA error ...  ", cudaGetErrorString(err));      \
+      return -1;                                                          \
+    }                                                                     \
   } while (0)
 
 //@@ INSERT CODE HERE
@@ -85,14 +85,16 @@ int main(int argc, char *argv[]) {
   dim3 dimGrid(ceil((float)imageWidth / TILE_WIDTH),
                ceil((float)imageHeight / TILE_WIDTH));
   dim3 dimBlock(TILE_WIDTH, TILE_WIDTH, 1);
-  rgb2gray<<<dimGrid, dimBlock>>>(deviceOutputImageData, deviceInputImageData,
-                                  imageChannels, imageWidth, imageHeight);
+  rgb2gray<<<dimGrid, dimBlock>>>(deviceOutputImageData,
+                                  deviceInputImageData, imageChannels,
+                                  imageWidth, imageHeight);
   wbTime_stop(Compute, "Doing the computation on the GPU");
 
   ///////////////////////////////////////////////////////
   wbTime_start(Copy, "Copying data from the GPU");
   cudaMemcpy(hostOutputImageData, deviceOutputImageData,
-             imageWidth * imageHeight * sizeof(float), cudaMemcpyDeviceToHost);
+             imageWidth * imageHeight * sizeof(float),
+             cudaMemcpyDeviceToHost);
   wbTime_stop(Copy, "Copying data from the GPU");
 
   wbTime_stop(GPU, "Doing GPU Computation (memory + compute)");

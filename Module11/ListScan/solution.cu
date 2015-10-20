@@ -1,5 +1,6 @@
 // Given a list (lst) of length n
-// Output its prefix sum = {lst[0], lst[0] + lst[1], lst[0] + lst[1] + ... + lst[n-1]}
+// Output its prefix sum = {lst[0], lst[0] + lst[1], lst[0] + lst[1] + ...
+// + lst[n-1]}
 
 #include <wb.h>
 

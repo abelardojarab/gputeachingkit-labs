@@ -16,13 +16,13 @@ __global__ void sgemm(float *A, float *B, float *C, int numARows,
   }
 }
 
-#define wbCheck(stmt)                                                          \
-  do {                                                                         \
-    cudaError_t err = stmt;                                                    \
-    if (err == cudaSuccess) {                                                  \
-      wbLog(ERROR, "Failed to run stmt ", #stmt);                              \
-      return -1;                                                               \
-    }                                                                          \
+#define wbCheck(stmt)                                                     \
+  do {                                                                    \
+    cudaError_t err = stmt;                                               \
+    if (err == cudaSuccess) {                                             \
+      wbLog(ERROR, "Failed to run stmt ", #stmt);                         \
+      return -1;                                                          \
+    }                                                                     \
   } while (0)
 
 int main(int argc, char **argv) {
@@ -43,10 +43,10 @@ int main(int argc, char **argv) {
   args = wbArg_read(argc, argv);
 
   wbTime_start(Generic, "Importing data and creating memory on host");
-  hostA =
-      (float *)wbImport(wbArg_getInputFile(args, 0), &numARows, &numAColumns);
-  hostB =
-      (float *)wbImport(wbArg_getInputFile(args, 1), &numBRows, &numBColumns);
+  hostA = (float *)wbImport(wbArg_getInputFile(args, 0), &numARows,
+                            &numAColumns);
+  hostB = (float *)wbImport(wbArg_getInputFile(args, 1), &numBRows,
+                            &numBColumns);
   //@@ Allocate the hostC matrix
   hostC = (float *)malloc(numARows * numBColumns * sizeof(float));
   wbTime_stop(Generic, "Importing data and creating memory on host");
@@ -60,19 +60,21 @@ int main(int argc, char **argv) {
 
   wbTime_start(GPU, "Allocating GPU memory.");
   //@@ Allocate GPU memory here
-  wbCheck(
-      cudaMalloc((void **)&deviceA, numARows * numAColumns * sizeof(float)));
-  wbCheck(
-      cudaMalloc((void **)&deviceB, numBRows * numBColumns * sizeof(float)));
-  wbCheck(
-      cudaMalloc((void **)&deviceC, numARows * numBColumns * sizeof(float)));
+  wbCheck(cudaMalloc((void **)&deviceA,
+                     numARows * numAColumns * sizeof(float)));
+  wbCheck(cudaMalloc((void **)&deviceB,
+                     numBRows * numBColumns * sizeof(float)));
+  wbCheck(cudaMalloc((void **)&deviceC,
+                     numARows * numBColumns * sizeof(float)));
   wbTime_stop(GPU, "Allocating GPU memory.");
 
   wbTime_start(GPU, "Copying input memory to the GPU.");
   //@@ Copy memory to the GPU here
-  wbCheck(cudaMemcpy(deviceA, hostA, numARows * numAColumns * sizeof(float),
+  wbCheck(cudaMemcpy(deviceA, hostA,
+                     numARows * numAColumns * sizeof(float),
                      cudaMemcpyHostToDevice));
-  wbCheck(cudaMemcpy(deviceB, hostB, numBRows * numBColumns * sizeof(float),
+  wbCheck(cudaMemcpy(deviceB, hostB,
+                     numBRows * numBColumns * sizeof(float),
                      cudaMemcpyHostToDevice));
   wbTime_stop(GPU, "Copying input memory to the GPU.");
 
@@ -87,15 +89,16 @@ int main(int argc, char **argv) {
   wbTime_start(Compute, "Performing CUDA computation");
   //@@ Launch the GPU Kernel here
   wbCheck(cudaMemset(deviceC, 0, numARows * numBColumns * sizeof(float)));
-  sgemm<<<gridDim, blockDim>>>(deviceA, deviceB, deviceC, numARows, numAColumns,
-                               numBRows, numBColumns);
+  sgemm<<<gridDim, blockDim>>>(deviceA, deviceB, deviceC, numARows,
+                               numAColumns, numBRows, numBColumns);
   cudaDeviceSynchronize();
   wbTime_stop(Compute, "Performing CUDA computation");
 
   wbTime_start(Copy, "Copying output memory to the CPU");
   //@@ Copy the GPU memory back to the CPU here
 
-  wbCheck(cudaMemcpy(hostC, deviceC, numARows * numBColumns * sizeof(float),
+  wbCheck(cudaMemcpy(hostC, deviceC,
+                     numARows * numBColumns * sizeof(float),
                      cudaMemcpyDeviceToHost));
   wbTime_stop(Copy, "Copying output memory to the CPU");
 

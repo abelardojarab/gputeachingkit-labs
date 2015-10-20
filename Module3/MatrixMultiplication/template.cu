@@ -1,20 +1,21 @@
 
 #include <wb.h>
 
-#define wbCheck(stmt)                                                          \
-  do {                                                                         \
-    cudaError_t err = stmt;                                                    \
-    if (err != cudaSuccess) {                                                  \
-      wbLog(ERROR, "Failed to run stmt ", #stmt);                              \
-      wbLog(ERROR, "Got CUDA error ...  ", cudaGetErrorString(err));           \
-      return -1;                                                               \
-    }                                                                          \
+#define wbCheck(stmt)                                                     \
+  do {                                                                    \
+    cudaError_t err = stmt;                                               \
+    if (err != cudaSuccess) {                                             \
+      wbLog(ERROR, "Failed to run stmt ", #stmt);                         \
+      wbLog(ERROR, "Got CUDA error ...  ", cudaGetErrorString(err));      \
+      return -1;                                                          \
+    }                                                                     \
   } while (0)
 
 // Compute C = A * B
 __global__ void matrixMultiply(float *A, float *B, float *C, int numARows,
-                               int numAColumns, int numBRows, int numBColumns,
-                               int numCRows, int numCColumns) {
+                               int numAColumns, int numBRows,
+                               int numBColumns, int numCRows,
+                               int numCColumns) {
   //@@ Insert code to implement matrix multiplication here
 }
 
@@ -37,10 +38,10 @@ int main(int argc, char **argv) {
   args = wbArg_read(argc, argv);
 
   wbTime_start(Generic, "Importing data and creating memory on host");
-  hostA =
-      (float *)wbImport(wbArg_getInputFile(args, 0), &numARows, &numAColumns);
-  hostB =
-      (float *)wbImport(wbArg_getInputFile(args, 1), &numBRows, &numBColumns);
+  hostA = (float *)wbImport(wbArg_getInputFile(args, 0), &numARows,
+                            &numAColumns);
+  hostB = (float *)wbImport(wbArg_getInputFile(args, 1), &numBRows,
+                            &numBColumns);
   //@@ Set numCRows and numCColumns
   numCRows = 0;
   numCColumns = 0;
