@@ -1,2 +1,2 @@
-include(${CMAKE_CURRENT_LIST_DIR}/PrefixSum/sources.cmake)
-include(${CMAKE_CURRENT_LIST_DIR}/Scan/sources.cmake)
+include(${CMAKE_CURRENT_LIST_DIR}/ListScan/sources.cmake)
+include(${CMAKE_CURRENT_LIST_DIR}/ListReduction/sources.cmake)
