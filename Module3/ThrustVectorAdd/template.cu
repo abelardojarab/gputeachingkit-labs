@@ -1,83 +1,55 @@
 #include <wb.h>
-
-#define wbCheck(stmt)                                                     \
-  do {                                                                    \
-    cudaError_t err = stmt;                                               \
-    if (err != cudaSuccess) {                                             \
-      wbLog(ERROR, "Failed to run stmt ", #stmt);                         \
-      wbLog(ERROR, "Got CUDA error ...  ", cudaGetErrorString(err));      \
-      return -1;                                                          \
-    }                                                                     \
-  } while (0)
-
-//@@ INSERT CODE HERE
+#include <thrust/host_vector.h>
+#include <thrust/device_vector.h>
 
 int main(int argc, char *argv[]) {
   wbArg_t args;
-  int imageChannels;
-  int imageWidth;
-  int imageHeight;
-  char *inputImageFile;
-  wbImage_t inputImage;
-  wbImage_t outputImage;
-  float *hostInputImageData;
-  float *hostOutputImageData;
-  float *deviceInputImageData;
-  float *deviceOutputImageData;
+  float *hostInput1;
+  float *hostInput2;
+  float *hostOutput;
+  int inputLength;
 
   args = wbArg_read(argc, argv); /* parse the input arguments */
 
-  inputImageFile = wbArg_getInputFile(args, 0);
-  inputMaskFile = wbArg_getInputFile(args, 1);
+  // Import host input data
+  wbTime_start(Generic, "Importing data to host");
+  hostInput1 =
+      (float *)wbImport(wbArg_getInputFile(args, 0), &inputLength);
+  hostInput2 =
+      (float *)wbImport(wbArg_getInputFile(args, 1), &inputLength);
+  wbTime_stop(Generic, "Importing data to host");
 
-  inputImage = wbImport(inputImageFile);
-
-  imageWidth = wbImage_getWidth(inputImage);
-  imageHeight = wbImage_getHeight(inputImage);
-  // For this lab the value is always 3
-  imageChannels = wbImage_getChannels(inputImage);
-
-  // Since the image is monochromatic, it only contains one channel
-  outputImage = wbImage_new(imageWidth, imageHeight, 1);
-
-  hostInputImageData = wbImage_getData(inputImage);
-  hostOutputImageData = wbImage_getData(outputImage);
-
+  // Declare and allocate host output
+  //@@ Insert code here
   wbTime_start(GPU, "Doing GPU Computation (memory + compute)");
 
+  // Declare and allocate thrust device input and output vectors
   wbTime_start(GPU, "Doing GPU memory allocation");
-  cudaMalloc((void **)&deviceInputImageData,
-             imageWidth * imageHeight * imageChannels * sizeof(float));
-  cudaMalloc((void **)&deviceOutputImageData,
-             imageWidth * imageHeight * sizeof(float));
+  //@@ Insert code here
   wbTime_stop(GPU, "Doing GPU memory allocation");
 
+  // Copy to device
   wbTime_start(Copy, "Copying data to the GPU");
-  cudaMemcpy(deviceInputImageData, hostInputImageData,
-             imageWidth * imageHeight * imageChannels * sizeof(float),
-             cudaMemcpyHostToDevice);
+  //@@ Insert code here
   wbTime_stop(Copy, "Copying data to the GPU");
 
+  // Execute vector addition
   wbTime_start(Compute, "Doing the computation on the GPU");
-  //@@ INSERT CODE HERE
-
+  //@@ Insert Code here
+  wbTime_stop(Compute, "Doing the computation on the GPU");
+  /////////////////////////////////////////////////////////
+  
+  // Copy data back to host
   wbTime_start(Copy, "Copying data from the GPU");
-  cudaMemcpy(hostOutputImageData, deviceOutputImageData,
-             imageWidth * imageHeight * sizeof(float),
-             cudaMemcpyDeviceToHost);
+  //@@ Insert code here
   wbTime_stop(Copy, "Copying data from the GPU");
 
   wbTime_stop(GPU, "Doing GPU Computation (memory + compute)");
 
-  wbSolution(args, outputImage);
+  wbSolution(args, hostOutput, inputLength);
 
-  cudaFree(deviceInputImageData);
-  cudaFree(deviceOutputImageData);
-  cudaFree(deviceMaskData);
-
-  free(hostMaskData);
-  wbImage_delete(outputImage);
-  wbImage_delete(inputImage);
-
+  free(hostInput1);
+  free(hostInput2);
+  free(hostOutput);
   return 0;
 }
