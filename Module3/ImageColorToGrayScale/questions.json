@@ -5,6 +5,6 @@
 		"How many global memory reads are being performed by your kernel? explain.",
 		"How many global memory writes are being performed by your kernel? explain.",
 		"Describe what possible optimizations can be implemented to your kernel to achieve a performance speedup.",
-		"Name three applications of color conversion."
+		"Name three applications for color conversion."
 	]
 }

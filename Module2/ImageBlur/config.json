@@ -2,7 +2,7 @@
    "week" : 7,
    "output_type" : "image",
    "coding_deadline" : "2015-03-18T23:00:00Z",
-   "name" : "Image Color to Grayscale Conversion",
+   "name" : "Image Blur",
    "compile_score" : 0,
    "language" : "CUDA",
    "peer_review_score" : 0,
