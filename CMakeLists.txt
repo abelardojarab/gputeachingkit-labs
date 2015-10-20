@@ -99,9 +99,9 @@ endmacro(add_lab)
 
 
 include(support/sources.cmake)
-include(Module1/sources.cmake)
 include(Module2/sources.cmake)
 include(Module3/sources.cmake)
+include(Module4/sources.cmake)
 include(Module6/sources.cmake)
 include(Module11/sources.cmake)
 include(Module23/sources.cmake)
