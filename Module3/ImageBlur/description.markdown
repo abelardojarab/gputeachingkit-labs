@@ -1,12 +1,15 @@
+---
+title: CUDA Image Blur
+author: GPU Teaching Kit
+---
 
 ## Objective
 
-The purpose of this lab is to implement an efficient histogramming equalization
-	algorithm for an input image.
+The purpose of this lab is to implement an efficient image blurring algorithm for
+an input image.
 Like the image convolution MP, the image is represented as `RGB float` values.
-You will convert that to `GrayScale unsigned char` values and compute the histogram.
-Based on the histogram, you will compute a histogram equalization function which you will
-	then apply to the original image to get the color corrected image.	
+You will operate directly on the RGB float values and use a 3x3 Box Filter to blur
+the original image to produce the burred image.
 
 ## Prerequisites
 
@@ -18,10 +21,6 @@ Before starting this lab, make sure that:
 
 Edit the code in the code tab to perform the following:
 
-* Cast the image to `unsigned char`
-
-* Convert the image from RGB to Gray Scale
-
 * Compute the histogram of the image
 
 * Compute the scan and prefix sum of the histogram to arrive at the histogram equalization function
@@ -30,7 +29,7 @@ Edit the code in the code tab to perform the following:
 
 ## Background
 
-In this section we discuss some of the background details of the histogram equalization algorithm.
+In this section we discuss some of the background details of the image blur algorithm.
 For images that represent the full color space, we expect an image's histogram to be evenly distributed.
 This means that we expect the bin values in the histogram to be `256/pixel_count`.
 This algorithm adjust an image's histogram so that all bins have equal probability.
