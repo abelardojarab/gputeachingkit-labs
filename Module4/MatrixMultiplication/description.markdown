@@ -1,5 +1,5 @@
 ---
-title: CUDA Dense Matrix-Matrix Multiply
+title: Basic Matrix Multiplication
 author: GPU Teaching Kit -- Accelerated Computing
 ---
 
