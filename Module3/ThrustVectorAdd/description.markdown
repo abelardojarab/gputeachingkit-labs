@@ -15,9 +15,6 @@ Before starting this lab, make sure that:
 
 * You have completed "Device Query" lab
 
-* You have looked over the [tutorial](/help) document.
-
-* Chapter 3 of the text book would also be helpful
 
 # Instruction
 
