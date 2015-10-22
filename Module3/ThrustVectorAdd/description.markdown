@@ -11,7 +11,7 @@ The purpose of this lab is to get you familiar with using the NVIDA Thrust libra
 
 Before starting this lab, make sure that:
 
-* You have completed all of Module 1 in the teaching kit
+* You have completed all of Module 1 and 2 in the teaching kit
 
 * You have completed "Device Query" lab
 
