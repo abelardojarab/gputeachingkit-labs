@@ -1,13 +1,13 @@
 ---
-title: Tiled Matrix Multiplication
-author: GPU Teaching Kit
+title: CUDA Tiled Matrix Multiplication
+author: GPU Teaching Kit: Accelerated Computing
 ---
 
-# Objective
+## Objective
 
 Implement a tiled dense matrix multiplication routine using shared memory.
 
-# Prerequisites
+## Prerequisites
 
 Before starting this lab, make sure that:
 
@@ -15,7 +15,7 @@ Before starting this lab, make sure that:
 
 * You have completed the required module lectures
 
-# Instructions
+## Instructions
 
 Edit the code in the code tab to perform the following:
 
@@ -30,3 +30,6 @@ Edit the code in the code tab to perform the following:
 Instructions about where to place each part of the code is
 demarcated by the `//@@` comment lines.
 
+## Running Locally
+
+Run `./TiledMatrixMultiplication_Template -e <expected.raw> -i <input0.raw>,<input1.raw> -o <output.raw> -t matrix`.

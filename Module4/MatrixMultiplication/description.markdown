@@ -1,10 +1,15 @@
+---
+title: CUDA Dense Matrix-Matrix Multiply
+author: GPU Teaching Kit: Accelerated Computing
+---
 
-# Objective
+
+## Objective
 
 Implement a basic dense matrix multiplication routine. Optimizations such
 as tiling and usage of shared memory are not required for this lab.
 
-# Prerequisites
+## Prerequisites
 
 Before starting this lab, make sure that:
 
@@ -12,7 +17,7 @@ Before starting this lab, make sure that:
 
 * You have completed the required teaching kit modules
 
-# Instructions
+## Instructions
 
 Edit the code in the code tab to perform the following:
 
@@ -26,4 +31,6 @@ Edit the code in the code tab to perform the following:
 Instructions about where to place each part of the code is
 demarcated by the `//@@` comment lines.
 
+## Running Locally
 
+Run `./MatrixMultiplication_Template -e <expected.raw> -i <input0.raw>,<input1.raw> -o <output.raw> -t matrix`.

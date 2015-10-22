@@ -1,13 +1,13 @@
 ---
 title: CUDA Thrust Vector Add
-author: GPU Teaching Kit
+author: GPU Teaching Kit: Accelerated Computing
 ---
 
-# Objective
+## Objective
 
 The purpose of this lab is to get you familiar with using the NVIDA Thrust library by implementing a simple vector addition operation and its associated setup code.
 
-# Prerequisites
+## Prerequisites
 
 Before starting this lab, make sure that:
 
@@ -19,7 +19,7 @@ Before starting this lab, make sure that:
 
 * Chapter 3 of the text book would also be helpful
 
-# Instruction
+## Instruction
 
 Edit the code in the code tab to perform the following:
 
@@ -34,3 +34,6 @@ Edit the code in the code tab to perform the following:
 Instructions about where to place each part of the code is
 demarcated by the `//@@` comment lines.
 
+## Running Locally
+
+Run ./ThrustVectorAdd_Template -e <expected.raw> -i <input1.raw>,<input2.raw> -o <output.raw> -t vector`.

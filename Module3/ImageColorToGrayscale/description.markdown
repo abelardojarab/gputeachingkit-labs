@@ -1,3 +1,8 @@
+---
+title: CUDA Image Color to Grayscale
+author: GPU Teaching Kit: Accelerated Computing
+---
+
 
 ## Objective
 
@@ -30,3 +35,6 @@ For people who are developing on their own system.
 The images are stored in PPM (`P6`) format, this means that you can (if you want) create your own input images.
 The easiest way to create image is via external tools. You can use tools such as `bmptoppm`.
 
+## Running Locally
+
+Run `./ImageColorToGrayscale_Template -e <expected.ppm> -i <input.ppm> -o <output.ppm> -t image`.
