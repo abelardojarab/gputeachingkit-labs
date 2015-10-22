@@ -4,9 +4,9 @@
 
 int main(int argc, char *argv[]) {
   wbArg_t args;
-  float *hostInput1;
-  float *hostInput2;
-  float *hostOutput;
+  float *hostInput1 = nullptr;
+  float *hostInput2 = nullptr;
+  float *hostOutput = nullptr;
   int inputLength;
 
   args = wbArg_read(argc, argv); /* parse the input arguments */
@@ -38,7 +38,7 @@ int main(int argc, char *argv[]) {
   //@@ Insert Code here
   wbTime_stop(Compute, "Doing the computation on the GPU");
   /////////////////////////////////////////////////////////
-  
+
   // Copy data back to host
   wbTime_start(Copy, "Copying data from the GPU");
   //@@ Insert code here

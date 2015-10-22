@@ -18,7 +18,7 @@ __global__ void blurKernel(float *out, float *in, int width, int height) {
   int col = blockIdx.x * blockDim.x + threadIdx.x;
   int row = blockIdx.y * blockDim.y + threadIdx.y;
 
-  if (col < w && row < h) {
+  if (col < width && row < height) {
     int pixVal = 0;
     int pixels = 0;
 
@@ -29,15 +29,15 @@ __global__ void blurKernel(float *out, float *in, int width, int height) {
         int currow = row + blurrow;
         int curcol = col + blurcol;
         // Verify we have a valid image pixel
-        if (currow > -1 && currow < h && curcol > -1 && curcol < w) {
-          pixVal += in[currow * w + curcol];
+        if (currow > -1 && currow < height && curcol > -1 && curcol < width) {
+          pixVal += in[currow * width + curcol];
           pixels++; // Keep track of number of pixels in the avg
         }
       }
     }
 
     // Write our new pixel value out
-    out[row * w + col] = (unsigned char)(pixVal / pixels);
+    out[row * width + col] = (unsigned char)(pixVal / pixels);
   }
 }
 
@@ -56,7 +56,6 @@ int main(int argc, char *argv[]) {
   args = wbArg_read(argc, argv); /* parse the input arguments */
 
   inputImageFile = wbArg_getInputFile(args, 0);
-  inputMaskFile = wbArg_getInputFile(args, 1);
 
   inputImage = wbImport(inputImageFile);
 
@@ -110,9 +109,7 @@ int main(int argc, char *argv[]) {
 
   cudaFree(deviceInputImageData);
   cudaFree(deviceOutputImageData);
-  cudaFree(deviceMaskData);
 
-  free(hostMaskData);
   wbImage_delete(outputImage);
   wbImage_delete(inputImage);
 

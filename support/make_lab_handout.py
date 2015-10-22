@@ -1,4 +1,4 @@
-#!/bin/python
+#!/usr/bin/env python
 
 import os.path
 import json
@@ -6,10 +6,11 @@ import subprocess
 import shutil
 import errno
 import codecs
+import sys
 from tempfile import mkdtemp
 
-def create_mp_handout(out_file, mp_num):
-    base_path = str(mp_num)
+def create_mp_handout(out_file, mp_dir):
+    base_path = mp_dir
 
     config_file_name = os.path.join(base_path, "config.json")
     description_file_name = os.path.join(base_path, "description.markdown")
@@ -18,6 +19,11 @@ def create_mp_handout(out_file, mp_num):
     code_template_file_name = os.path.join(base_path, "template.cu")
     code_solution_file_name = os.path.join(base_path, "solution.cu")
 
+    if not os.path.isfile(code_template_file_name):
+        code_template_file_name = os.path.join(base_path, "template.cpp")
+
+    if not os.path.isfile(code_solution_file_name):
+        code_solution_file_name = os.path.join(base_path, "solution.cpp")
 
     with codecs.open(config_file_name, "r", "utf-8") as config_file:
         config = config_file.read()
@@ -55,10 +61,8 @@ def create_mp_handout(out_file, mp_num):
         print("Cannot parse answers ", e)
         answers_json = {"answers":[]}
 
-    # We need to modify the heading level in the description
-    description_markdown = description.replace("##", "#", 1)
     # We modify all occurences of MP with lab
-    description_markdown = description_markdown.replace("MP", "Lab", 1)
+    description_markdown = description.replace("MP", "Lab", 1)
 
     # Create the question markdown format
 
@@ -67,13 +71,6 @@ def create_mp_handout(out_file, mp_num):
         questions_markdown = questions_markdown + "\n\n" + \
                              "(@) " + question + "\n\n" + \
                              "ANSWER: **" + answer + "**\n"
-
-    header_markdown = "\n".join([
-        "---",
-        "title: " + config_json["name"],
-        "author: " + "UIUC and NVIDIA GPU Teaching Kit",
-        "---"
-    ])
 
     if code_solution == "":
         code_solution_markdown = ""
@@ -101,7 +98,6 @@ def create_mp_handout(out_file, mp_num):
     ])
 
     handout = "\n\n".join([
-        header_markdown,
         description_markdown,
         questions_markdown,
         code_template_markdown,
@@ -123,10 +119,10 @@ def copy_dir(src, dst):
         else:
             shutil.copy2(s, d)
 
-def compile_mp_description(mp_num):
-    print "Processing mp ", mp_num
+def compile_mp_description(mp_dir, support_dir, out_dir):
+    print "Processing mp ", mp_dir
     temp_dir = mkdtemp()
-    copy_dir("latex_template", temp_dir)
+    copy_dir(os.path.join(support_dir, "latex_template"), temp_dir)
     template_tex_file = os.path.join(temp_dir, "template.tex")
     structure_tex_file = os.path.join(temp_dir, "structure.tex")
     description_md_file = os.path.join(temp_dir, "description.md")
@@ -134,11 +130,8 @@ def compile_mp_description(mp_num):
     description_rtf_file = os.path.join(temp_dir, "description.rtf")
     description_docx_file = os.path.join(temp_dir, "description.docx")
     description_pdf_file = os.path.join(temp_dir, "description.pdf")
-    if mp_num == "thrust":
-        target = shutil.copy2("thrust/fig1.png", os.path.join(temp_dir, "fig1.png"))
-        target = shutil.copy2("thrust/" + mp_num + ".md", description_md_file)
-    else:
-        target = create_mp_handout(description_md_file, mp_num)
+
+    target = create_mp_handout(description_md_file, mp_dir)
     subprocess.call(
         [
             "pandoc",
@@ -193,38 +186,19 @@ def compile_mp_description(mp_num):
 
     # we now need to get the name of the MP and move the pdf
     # file to there with the tile from the config
-    base_path = str(mp_num)
-    if mp_num == "thrust":
-        title = "C++Thrust"
-    else:
-        config_file_name = os.path.join(base_path, "config.json")
-        with open(config_file_name, "r") as config:
-            config_json = json.load(config)
-        title = config_json["name"]
-    final_pdf_file = os.path.join(base_path, title + ".pdf")
+    config_file_name = os.path.join(mp_dir, "config.json")
+    with open(config_file_name, "r") as config:
+        config_json = json.load(config)
+    title = config_json["name"]
+    final_pdf_file = os.path.join(out_dir, title + ".pdf")
     shutil.copy2(description_pdf_file, final_pdf_file)
-    final_rtf_file = os.path.join(base_path, title + ".rtf")
+    final_rtf_file = os.path.join(out_dir, title + ".rtf")
     shutil.copy2(description_rtf_file, final_rtf_file)
-    final_docx_file = os.path.join(base_path, title + ".docx")
-    shutil.copy2(description_docx_file, final_docx_file)
-    # makes it a little easier to distribute
-    try:
-        os.mkdir("pdfs")
-    except:
-        None
-    final_pdf_file = os.path.join("pdfs", title + ".pdf")
-    final_rtf_file = os.path.join("pdfs", title + ".rtf")
-    final_docx_file = os.path.join("pdfs", title + ".docx")
-    shutil.copy2(description_pdf_file, final_pdf_file)
-    shutil.copy2(description_rtf_file, final_rtf_file)
+    final_docx_file = os.path.join(out_dir, title + ".docx")
     shutil.copy2(description_docx_file, final_docx_file)
 
-compile_mp_description("thrust")
-compile_mp_description(0)
-compile_mp_description(1)
-compile_mp_description(2)
-compile_mp_description(3)
-compile_mp_description(4)
-compile_mp_description(5)
-compile_mp_description(6)
-compile_mp_description(9)
+if __name__ == "__main__":
+    mp_dir = sys.argv[1]
+    support_dir = sys.argv[2]
+    out_dir = sys.argv[3]
+    compile_mp_description(mp_dir, support_dir, out_dir)
