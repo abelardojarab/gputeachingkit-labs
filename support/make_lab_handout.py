@@ -7,10 +7,16 @@ import shutil
 import errno
 import codecs
 import sys
+import re
 from tempfile import mkdtemp
+
+BITBUCKET_BASE_DIR = "https://bitbucket.org/adakkak/gpulabs/src/master/"
 
 def create_mp_handout(out_file, mp_dir):
     base_path = mp_dir
+
+    mp_relative_dir = re.sub(".*/(Module.*)", r'\1', mp_dir)
+    module_number_str = re.sub(".*Module(\d+)/.*", r'\1', mp_dir)
 
     config_file_name = os.path.join(base_path, "config.json")
     description_file_name = os.path.join(base_path, "description.markdown")
@@ -62,7 +68,23 @@ def create_mp_handout(out_file, mp_dir):
         answers_json = {"answers":[]}
 
     # We modify all occurences of MP with lab
-    description_markdown = description.replace("MP", "Lab", 1)
+    description_markdown = description
+    description_markdown = description_markdown.replace(
+                                "title: ",
+                                "title: Module " + module_number_str + " Lab - ",
+                                1
+    )
+    description_markdown = description_markdown.replace(
+        "LINKTOLAB",
+        BITBUCKET_BASE_DIR + mp_relative_dir,
+        1
+    )
+    description_markdown = description_markdown.replace(
+        "LINKTOREADME",
+        BITBUCKET_BASE_DIR + "README.md",
+        1
+    )
+    description_markdown = description_markdown.replace("MP", "Lab", 1)
 
     # Create the question markdown format
 
@@ -76,7 +98,7 @@ def create_mp_handout(out_file, mp_dir):
         code_solution_markdown = ""
     else:
         code_solution_markdown = "\n".join([
-            "#Solution\n",
+            "# Solution\n",
             "The following is a possible implementation of the lab. \n" +
             "This solution is intended for use only by the teaching staff \n" +
             "and should not be distributed to students.",
@@ -86,7 +108,7 @@ def create_mp_handout(out_file, mp_dir):
         ])
 
     code_template_markdown = "\n".join([
-        "#Code Template\n",
+        "# Code Template\n",
         "You are suggested to use the following code " +
         "as a starting point when developing the lab " +
         "the code below handles the import and export as well " +

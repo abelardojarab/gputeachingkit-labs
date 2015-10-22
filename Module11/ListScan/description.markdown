@@ -34,6 +34,8 @@ Edit the code in the code tab to perform the following:
 Instructions about where to place each part of the code is
 demarcated by the `//@@` comment lines.
 
-# Running Locally
+# Local Setup Instruction
 
-Run `./ListScan_Template -e <expected.raw> -i <input.raw> -o <output.raw> -t vector`.
+The most recent version of source code for this lab along with the build-scripts can be found on the [Bitbucket repository](LINKTOLAB). Descriptions on how to use the repository is found in the [README](LINKTOREADME) document in the root of the repository..
+
+To run the lab locally run the following command `./ListScan_Template -e <expected.raw> -i <input.raw> -o <output.raw> -t vector`.

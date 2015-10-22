@@ -1,5 +1,5 @@
 ---
-title: Module 2 Lab - Device Query
+title: Device Query
 author: GPU Teaching Kit - Accelerated Computing
 ---
 
@@ -32,6 +32,8 @@ The `wbLog` function logs results, specifically we log the following hardware fe
 The details and meaning of these quantities will be explained in the
 first few lectures of the teaching kit.
 
-# Running Locally
+# Local Setup Instruction
 
-Run `./DeviceQuery_Template`
+The most recent version of source code for this lab along with the build-scripts can be found on the [Bitbucket repository](LINKTOLAB). Descriptions on how to use the repository is found in the [README](LINKTOREADME) document in the root of the repository..
+
+To run the lab locally run the following command `./DeviceQuery_Template`

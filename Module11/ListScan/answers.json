@@ -1,6 +1,6 @@
 {
 	"answers": [
-		"Sorting, resource allocation, integration."
+		"Sorting, resource allocation, integration.",
 		"Let N be the input length. Reduction phase has N-1 adds. N-1-log2(N) adds.",
 		"One per input element.",
 		"Scratch work is done in shared memory, so one per input element.",

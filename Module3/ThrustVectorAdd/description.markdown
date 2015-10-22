@@ -1,5 +1,5 @@
 ---
-title: Module 3 Lab - CUDA Thrust Vector Add
+title: CUDA Thrust Vector Add
 author: GPU Teaching Kit - Accelerated Computing
 ---
 
@@ -16,7 +16,7 @@ Before starting this lab, make sure that:
 * You have completed "Device Query" lab
 
 
-# Instruction
+Local Setup Instruction
 
 Edit the code in the code tab to perform the following:
 
@@ -31,6 +31,8 @@ Edit the code in the code tab to perform the following:
 Instructions about where to place each part of the code is
 demarcated by the `//@@` comment lines.
 
-# Running Locally
+# Local Setup Instruction
 
-Run `./ThrustVectorAdd_Template -e <expected.raw> -i <input1.raw>,<input2.raw> -o <output.raw> -t vector`.
+The most recent version of source code for this lab along with the build-scripts can be found on the [Bitbucket repository](LINKTOLAB). Descriptions on how to use the repository is found in the [README](LINKTOREADME) document in the root of the repository..
+
+To run the lab locally run the following command `./ThrustVectorAdd_Template -e <expected.raw> -i <input1.raw>,<input2.raw> -o <output.raw> -t vector`.
