@@ -1,5 +1,5 @@
 
-## Suggestions
+# Suggestions
 
 * The system's autosave feature is not an excuse to not backup your code and answers to your questions regularly.
 
@@ -38,13 +38,13 @@ The datasets reflect different sizes of input that you are expected to handle
 An example usage is `wbCheck(cudaMalloc(...))`. A similar macro can be
 developed while programming OpenCL code.
 
-## Plagiarism
+# Plagiarism
 
 Plagiarism will not be tolerated.
 The first offense will result in the two parties getting a 0 for the machine problem.
 Second offense results in a 0 for the course.
 
-## Grading
+# Grading
 
 Grading is performed based on criteria that are specific for each lab.
 
@@ -67,7 +67,7 @@ You will have to submit your grade back to Coursera by clicking the button submi
 Note: you cannot submit code for grading after the corresponding deadlines have passed.
 
 
-## Local Development
+# Local Development
 
 While not required, the library used throughout the course can be
 downloaded from [Github](https://github.com/abduld/libwb). The library
@@ -90,7 +90,7 @@ In case of issues or suggestions with the library, please report them
 through the [issue tracker](https://github.com/abduld/libwb/issues) on Github.
 
 
-## Issues/Questions/Suggestions
+# Issues/Questions/Suggestions
 
 In case of questions, please post them to the forums.
 For issues or suggestions, please use the [issue tracker](https://github.com/abduld/wb/issues).

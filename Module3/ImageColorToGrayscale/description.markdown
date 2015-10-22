@@ -1,8 +1,8 @@
 ---
-title: CUDA Image Color to Grayscale
-author: GPU Teaching Kit -- Accelerated Computing
+title: Module 3 Lab - CUDA Image Color to Grayscale
+author: GPU Teaching Kit - Accelerated Computing
 ---
-## Objective
+# Objective
 
 The purpose of this lab is to implement an efficient histogramming equalization
 	algorithm for an input image.
@@ -21,18 +21,18 @@ A pseudo-code version of the algorithm is shown bellow:
 		end
 	end
 
-## Prerequisites
+# Prerequisites
 
 Before starting this lab, make sure that:
 
 * You have completed the required module videos
 
-## Image Format
+# Image Format
 
 For people who are developing on their own system.
 The images are stored in PPM (`P6`) format, this means that you can (if you want) create your own input images.
 The easiest way to create image is via external tools. You can use tools such as `bmptoppm`.
 
-## Running Locally
+# Running Locally
 
 Run `./ImageColorToGrayscale_Template -e <expected.ppm> -i <input.ppm> -o <output.ppm> -t image`.

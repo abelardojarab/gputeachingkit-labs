@@ -1,14 +1,14 @@
 ---
-title: Lab Tour with Device Query
-author: GPU Teaching Kit (Accelerated Computing)
+title: Module 2 Lab - Device Query
+author: GPU Teaching Kit - Accelerated Computing
 ---
 
 
-## Objective
+# Objective
 
 The purpose of this lab is to get you familiar with using the submission system for this course as well as the hardware used.
 
-## Instructions
+# Instructions
 
 The code provided queries the GPU hardware on the system.
 Do not concentrate on the API calls, but on functions starting with `wb`.
@@ -32,6 +32,6 @@ The `wbLog` function logs results, specifically we log the following hardware fe
 The details and meaning of these quantities will be explained in the
 first few lectures of the teaching kit.
 
-## Running Locally
+# Running Locally
 
-Run `./DeviceQuery_Template` 
+Run `./DeviceQuery_Template`

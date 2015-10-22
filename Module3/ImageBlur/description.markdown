@@ -1,9 +1,9 @@
 ---
-title: CUDA Image Blur
-author: GPU Teaching Kit -- Accelerated Computing
+title: Module 3 Lab - CUDA Image Blur
+author: GPU Teaching Kit - Accelerated Computing
 ---
 
-## Objective
+# Objective
 
 The purpose of this lab is to implement an efficient image blurring algorithm for
 an input image.
@@ -11,13 +11,13 @@ Like the image convolution MP, the image is represented as `RGB float` values.
 You will operate directly on the RGB float values and use a 3x3 Box Filter to blur
 the original image to produce the burred image.
 
-## Prerequisites
+# Prerequisites
 
 Before starting this lab, make sure that:
 
 * You have completed all week 5 lecture videos
 
-## Instruction
+# Instruction
 
 Edit the code in the code tab to perform the following:
 
@@ -27,7 +27,7 @@ Edit the code in the code tab to perform the following:
 
 * Apply the equalization function to the input image to get the color corrected image
 
-## Background
+# Background
 
 In this section we discuss some of the background details of the image blur algorithm.
 For images that represent the full color space, we expect an image's histogram to be evenly distributed.
@@ -68,12 +68,12 @@ Note that the CDF of the histogram of the new image has been transformed into an
 
 ![compare](/mp/11/imgs/compare.png "thumbnail")
 
-## Implementation Steps
+# Implementation Steps
 
 Here we show the steps to be performed.
 The computation to be performed by each kernel is illustrated with serial pseudo code.
 
-### Cast the image from `float` to `unsigned char`
+Kit - Accelerated ComputingCast the image from `float` to `unsigned char`
 
 Implement a kernel that casts the image from `float *` to `unsigned char *`.
 
@@ -81,7 +81,7 @@ Implement a kernel that casts the image from `float *` to `unsigned char *`.
 		ucharImage[ii] = (unsigned char) (255 * inputImage[ii])
 	end
 
-### Convert the image from RGB to GrayScale
+Kit - Accelerated ComputingConvert the image from RGB to GrayScale
 
 Implement a kernel that converts the the RGB image to GrayScale
 
@@ -96,7 +96,7 @@ Implement a kernel that converts the the RGB image to GrayScale
 		end
 	end
 
-### Compute the histogram of `grayImage`
+Kit - Accelerated ComputingCompute the histogram of `grayImage`
 
 Implement a kernel that computes the histogram (like in the lectures) of the image.
 
@@ -106,7 +106,7 @@ Implement a kernel that computes the histogram (like in the lectures) of the ima
 	end
 
 
-### Compute the Cumulative Distribution Function of `histogram`
+Kit - Accelerated ComputingCompute the Cumulative Distribution Function of `histogram`
 
 This is a scan operation like you have done in the previous lab
 
@@ -121,7 +121,7 @@ Where `p` is the probability of a pixel to be in a histogram bin
 		return x / (width * height)
 	end
 
-### Compute the minimum value of the CDF
+Kit - Accelerated ComputingCompute the minimum value of the CDF
 
 This is a reduction operation using the min function
 
@@ -130,7 +130,7 @@ This is a reduction operation using the min function
 		cdfmin = min(cdfmin, cdf[ii])
 	end
 
-### Define the histogram equalization function
+Kit - Accelerated ComputingDefine the histogram equalization function
 
 The histogram equalization function (`correct`) remaps the cdf of the histogram of the image to a linear function and is defined as
 
@@ -144,7 +144,7 @@ Use the same clamp function you used in the Image Convolution MP.
     	return min(max(x, start), end)
 	end
 
-### Apply the histogram equalization function
+Kit - Accelerated ComputingApply the histogram equalization function
 
 Once you have implemented all of the above, then you
 	are ready to correct the input image
@@ -153,7 +153,7 @@ Once you have implemented all of the above, then you
 		ucharImage[ii] = correct_color(ucharImage[ii])
 	end
 
-### Cast back to `float`
+Kit - Accelerated ComputingCast back to `float`
 
 	for ii from 0 to (width * height * channels) do
 		outputImage[ii] = (float) (ucharImage[ii]/255.0)
@@ -161,12 +161,12 @@ Once you have implemented all of the above, then you
 
 And you're done
 
-## Image Format
+# Image Format
 
 For people who are developing on their own system.
 The images are stored in PPM (`P6`) format, this means that you can (if you want) create your own input images.
 The easiest way to create image is via external tools. You can use tools such as `bmptoppm`.
 
-## Running Locally
+# Running Locally
 
 Run `./ImageBlur_Template -e <expected.ppm> -i <input.ppm> -o <output.ppm> -t image`.

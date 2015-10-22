@@ -11,12 +11,12 @@ This document describes the online system, walking through the pages that you wi
 The submission system is designed to support the entire development and submission cycle for all the lab assignments.
 While you have to use the submission system to receive grades for this course, we will allow you to develop locally and use the submission system after you are reasonably satisfied with your code.
 
-## Web System
+# Web System
 
 This section describes the interface and system you will be using for this course. 
 
 
-### Signup
+Kit - Accelerated ComputingSignup
 
 The first thing you have to do is to signup for the site.
 You can use whatever username and password you want (it does not have to match the username and password used by Coursera).
@@ -24,7 +24,7 @@ You can use whatever username and password you want (it does not have to match t
 ![Signup1](help/imgs/signup.png "thumbnail")
 
 
-### Connecting Account to Coursera
+Kit - Accelerated ComputingConnecting Account to Coursera
 
 After completing the first step (or when submitting your first MP for a grade), you may be required to connect your account to Coursera (this allows us to post the grades back to Coursera).
 
@@ -36,7 +36,7 @@ You will then be asked to login using your Coursera account.
 
 Once you fill in the Coursera information, you have connected your account to Coursera.
 
-### Development Interface
+Kit - Accelerated ComputingDevelopment Interface
 
 Once you have signed up and logged into the website, you can start your development.
 You can access the machine problems (MP) by using the **Machine Problem** tab.
@@ -70,7 +70,7 @@ The **Attempts** tab shows previous code submission attempts
 ![MPAttempts](help/imgs/attempts.png "thumbnail")
 
 
-### Insertion Points
+Kit - Accelerated ComputingInsertion Points
 
 Most of instructions for the lab are found in the code.
 We use `//@@` to demarcate where code needs to be inserted.
@@ -82,7 +82,7 @@ In lab 1, for example, you see code such as:
 
 This means that you need to insert a CUDA memory copy operation where the comment is located. 
 
-### Logging and Debugging
+Kit - Accelerated ComputingLogging and Debugging
 
 Logging is facilitated through the use of a logging API.
 The logging function `wbLog` takes a level which is either `OFF`, `FATAL`, `ERROR`, `WARN`, `INFO`, `DEBUG`, or `TRACE` and a message to be printed.
@@ -95,7 +95,7 @@ The result of the logging messages is shown in the **Attempts** tab once you sub
 
 Debugging is done in the form of logging, so you cannot place break points, etc...
 
-### Timing Code
+Kit - Accelerated ComputingTiming Code
 
 Logging is facilitated through the use of a timing API.
 The timing functions `wbTime_start` and `wbTime_stop`.
@@ -114,7 +114,7 @@ The timing result is shown in the **Attempts** tab after you submit the program.
 The timing information includes the tag and message you specified when you timed your code, and also which line you are timing.
 Since it is important to understand the performance of your code, it is valuable to spend time to understand the output of the timer. 
 
-### Previous Attempts
+Kit - Accelerated ComputingPrevious Attempts
 
 All previous attempts are saved and recorded on the server side.
 To be graded for an attempt, you must click the grade button when that attempt is displayed.
@@ -123,7 +123,7 @@ To be graded for an attempt, you must click the grade button when that attempt i
 
 While developing the labs, you may encounter one or more of the following behaviors.
 
-### No Error
+Kit - Accelerated ComputingNo Error
 
 ![SolutionisCorrect](help/imgs/noerror.png "thumbnail")
 
@@ -133,7 +133,7 @@ Your program has been checked against the expected solution of the dataset you s
 Note that it might be the case that the program may run correctly on one dataset and not the other.
 You should check that your program runs on all datasets before submitting a program for grading.
 
-### Solution is Incorrect
+Kit - Accelerated ComputingSolution is Incorrect
 
 <!--
 #TODO: Need screenshot!!
@@ -144,7 +144,7 @@ This means that while the program did compile and run without errors, the soluti
 This problem could stem from either having an implementation error in your algorithm, or from having incorrect logic in the host code.
 Logging the state of your program at different points would help you debug the problem. 
 
-### Compilation Failed
+Kit - Accelerated ComputingCompilation Failed
 
 ![Compilation Failed](help/imgs/syntax.png "thumbnail")
 
@@ -152,7 +152,7 @@ This error message occurs when the program submitted failed to compile.
 The output from the compiler is shown in the error window.
 The line number of where the compilation error occurs is given in the error message.
 
-### Attempt Limiter
+Kit - Accelerated ComputingAttempt Limiter
 
 <!--
 ![Attempt Limiter](help/imgs/limit.png "thumbnail")
@@ -161,7 +161,7 @@ The line number of where the compilation error occurs is given in the error mess
 This error occurs when you submit more than one program within 10 seconds of each other.
 To maintain stability, users can only submit one program every 10 seconds.
 
-### Program Terminated due to Timeout
+Kit - Accelerated ComputingProgram Terminated due to Timeout
 
 ![Program Terminated](help/imgs/timeout.png "thumbnail")
 
@@ -170,13 +170,13 @@ Part of the reason for this behavior is that the system ensures fairness (i.e. y
 To ensure fairness, the system is configured to terminate long running processes.
 When you see this error, you have hit that timeout limit.
 
-### Memory Allocation Error
+Kit - Accelerated ComputingMemory Allocation Error
 
 ![Memory Allocation](help/imgs/memory.png "thumbnail")
 
 To maintain system stability, users are not allowed to allocate too much memory.
 
-### Sandboxing Error
+Kit - Accelerated ComputingSandboxing Error
 
 ![Sandbox](help/imgs/sandbox.png "thumbnail")
 
@@ -184,7 +184,7 @@ To maintain security, we run your program in a sandboxed mode.
 This means that you are restricted to using our API functions for certain tasks, rather than using system calls or C library functions.
 The sandbox error will sometimes tell you what call is being caught, although that might not always be the case.
 
-## Machine Problem Questions
+# Machine Problem Questions
 
 The machine problem questions are meant to allow you to think and explore your code further.
 Unlike the code section, it is enough to save your answer to submit the questions for reviewing.
@@ -201,7 +201,7 @@ Note: if we detect that you have not answered your questions, then you'll get 0 
 for the peer review. On the second offense you'll get 0 points for the code section as well.
 -->
 
-## Development Suggestions
+# Development Suggestions
 
 The following suggestions are recommended when getting started using the system
 
@@ -213,7 +213,7 @@ The following suggestions are recommended when getting started using the system
 
 * Do not wait until the last minute to attempt the lab.
 
-### Further Tips
+Kit - Accelerated ComputingFurther Tips
 
 * Code is autosaved every 3 seconds and you can see the history in the history tag.
 Again, do keep a backup of your programs. We suggest you backup using a private source code repository.
@@ -227,7 +227,7 @@ Free `git` private repositories are offered by Github and Bitbucket.
 
 * `Ctrl+S` saves your code along with the answers to the questions to the server
 
-## Grading
+# Grading
 
 Grading is performed based on criteria that are specific for each lab.
 
@@ -248,7 +248,7 @@ The grades are automatically sent to Coursera.
 You will have to submit your grade back to Coursera by clicking the button.
 
 <!--
-## Peer Review
+# Peer Review
 
 Two hours after the coding deadline has expired, you will have
 a few days to review the work of your peers.
@@ -282,9 +282,9 @@ We expect you to give constructive feedback that would help your peer in progres
 If we detect that you have not been giving adequate reviews,  you will get a 0 for the peer review section for the first offense.
 The second offense will result in a 0 for the machine problem.
 
-### Peer Review Guidelines
+Kit - Accelerated ComputingPeer Review Guidelines
 
-#### Coding part
+#Kit - Accelerated ComputingCoding part
 
 * Do you think the user handled all the boundary cases? if not which cases do you think they missed. If unsure, then you can copy their program into your coding section and run it on the datasets. Comment on what changes are needed to make the program handle all boundary cases.
 * Did the user follow good programming practices?
@@ -294,7 +294,7 @@ The second offense will result in a 0 for the machine problem.
 * Are there other comments you'd like to share with the user?
 * Based on the above, give a grade to the program.
 
-#### Question/Answer part
+#Kit - Accelerated ComputingQuestion/Answer part
 
 * Since some of the questions reference the program implementation, make sure to read the program before starting to review the questions.
 * Read through the questions and answers commenting on whether an answer is correct or not. If not sure, ask about the question on the forums.
@@ -305,7 +305,7 @@ The second offense will result in a 0 for the machine problem.
 -->
 
 
-## Local Development
+# Local Development
 
 While not required, the library used throughout the course can be downloaded from [Github](https://github.com/abduld/libwb).
 The library does not depend on any external library (and should be cross platform), you can use `make` to generate the shared object file (further instructions are found on the Github page).
@@ -323,7 +323,7 @@ In case of issues or suggestions with the library, please report them
 through the [issue tracker](https://github.com/abduld/libwb/issues) on Github.
 
 
-## Resetting Password
+# Resetting Password
 
 If you have forgotten your account password, then you can reset it by going to
 the [password reset](/reset_password) page and filling in your user name and email.
@@ -340,17 +340,17 @@ Which will direct you to the password reset form
 ![PasswordResetLink](help/imgs/password_reset_form.png "thumbnail")
 
 
-## Plagiarism
+# Plagiarism
 
 If we detect any plagiarism in the code or answers, the two parties will get 0 as their grade for the MP for the first offense.
 Multiple offenses will result in a 0 for the entire course.
 
-## System Requirements
+# System Requirements
 
 A recent web browser is the only requirement for using and submitting labs in this course.
 We have mainly tested the website using the Google Chrome browser.
 
-## Issues/Questions/Suggestions
+# Issues/Questions/Suggestions
 
 In case of questions, please post them to the forums.
 For issues or suggestions, please use the [issue tracker](https://github.com/abduld/wb/issues).
