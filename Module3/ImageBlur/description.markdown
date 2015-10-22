@@ -1,6 +1,6 @@
 ---
 title: CUDA Image Blur
-author: GPU Teaching Kit
+author: GPU Teaching Kit -- Accelerated Computing
 ---
 
 ## Objective
@@ -75,7 +75,7 @@ The computation to be performed by each kernel is illustrated with serial pseudo
 
 ### Cast the image from `float` to `unsigned char`
 
-Implement a kernel that casts the image from `float *` to `unsigned char *`. 
+Implement a kernel that casts the image from `float *` to `unsigned char *`.
 
 	for ii from 0 to (width * height * channels) do
 		ucharImage[ii] = (unsigned char) (255 * inputImage[ii])
@@ -134,7 +134,7 @@ This is a reduction operation using the min function
 
 The histogram equalization function (`correct`) remaps the cdf of the histogram of the image to a linear function and is defined as
 
-	def correct_color(val) 
+	def correct_color(val)
 		return clamp(255*(cdf[val] - cdfmin)/(1 - cdfmin), 0, 255)
 	end
 
@@ -166,4 +166,3 @@ And you're done
 For people who are developing on their own system.
 The images are stored in PPM (`P6`) format, this means that you can (if you want) create your own input images.
 The easiest way to create image is via external tools. You can use tools such as `bmptoppm`.
-

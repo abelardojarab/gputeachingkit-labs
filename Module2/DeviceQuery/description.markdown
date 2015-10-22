@@ -1,6 +1,6 @@
 ---
 title: Lab Tour with Device Query
-author: GPU Teaching Kit
+author: GPU Teaching Kit (Accelerated Computing)
 ---
 
 
@@ -31,4 +31,3 @@ The `wbLog` function logs results, specifically we log the following hardware fe
 
 The details and meaning of these quantities will be explained in the
 first few lectures of the teaching kit.
-

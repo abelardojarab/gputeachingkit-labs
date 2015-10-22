@@ -1,3 +1,7 @@
+---
+title: Color to Grayscale Conversion
+author: GPU Teaching Kit -- Accelerated Computing
+---
 
 ## Objective
 
@@ -29,4 +33,3 @@ Before starting this lab, make sure that:
 For people who are developing on their own system.
 The images are stored in PPM (`P6`) format, this means that you can (if you want) create your own input images.
 The easiest way to create image is via external tools. You can use tools such as `bmptoppm`.
-

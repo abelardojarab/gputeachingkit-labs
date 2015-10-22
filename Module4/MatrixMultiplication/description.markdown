@@ -1,3 +1,8 @@
+---
+title: Basic Matrix Multiplication
+author: GPU Teaching Kit -- Accelerated Computing
+---
+
 
 # Objective
 
@@ -25,5 +30,3 @@ Edit the code in the code tab to perform the following:
 
 Instructions about where to place each part of the code is
 demarcated by the `//@@` comment lines.
-
-

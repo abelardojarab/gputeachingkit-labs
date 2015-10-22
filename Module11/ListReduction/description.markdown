@@ -1,6 +1,6 @@
 ---
 title: List Reduction
-author: GPU Teaching Kit
+author: GPU Teaching Kit -- Accelerated Computing
 ---
 
 # Objective
