@@ -49,7 +49,7 @@ int main(int argc, char *argv[]) {
                     thrust::plus<float>());
   wbTime_stop(Compute, "Doing the computation on the GPU");
   /////////////////////////////////////////////////////////
-  
+
   // Copy data back to host
   wbTime_start(Copy, "Copying data from the GPU");
   //@@ Insert code here

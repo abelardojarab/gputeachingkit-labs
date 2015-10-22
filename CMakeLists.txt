@@ -4,6 +4,8 @@ set(CMAKE_BUILD_TYPE Release)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_COLOR_MAKEFILE ON)
 set(VERBOSE_BUILD ON)
+set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
+set(CMAKE_MACOSX_RPATH TRUE)
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 
@@ -23,6 +25,8 @@ find_package(CUDA REQUIRED)
 if (UNIX)
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wno-unused-function -Wno-unused-parameter -Wextra")
 	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wno-unused-function -Wno-unused-parameter -Wextra")
+	set(CUDA_NVCC_FLAGS ${CUDA_NVCC_FLAGS} " -Xcompiler;-Wno-unused-function")
+	set(CUDA_NVCC_FLAGS ${CUDA_NVCC_FLAGS} " -Xcompiler;-Wno-unused-parameter")
 endif ()
 
 # Select the correct host compiler on OS X
@@ -36,13 +40,13 @@ if (APPLE)
         set(CUDA_HOST_COMPILER ${GCC_EXECUTABLE})
     else ()
         # OS X 10.8+
-	find_program(CLANG_EXECUTABLE NAMES clang++-3.6 clang++ PATHS ENV PATH)
-	if (NOT CLANG_EXECUTABLE)
-	    message(FATAL_ERROR "Could not find host compiler 'clang++'")
-	endif ()
-	set(CUDA_HOST_COMPILER ${CLANG_EXECUTABLE})
-        set(CMAKE_CXX_FLAGS    "${CMAKE_CXX_FLAGS} -std=c++11 -isystem ${CUDA_INCLUDE_DIRS}")
-	set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -stdlib=libc++" )
+				find_program(CLANG_EXECUTABLE NAMES clang++-3.6 clang++ PATHS ENV PATH)
+				if (NOT CLANG_EXECUTABLE)
+				    message(FATAL_ERROR "Could not find host compiler 'clang++'")
+				endif ()
+				set(CUDA_HOST_COMPILER ${CLANG_EXECUTABLE})
+			        set(CMAKE_CXX_FLAGS    "${CMAKE_CXX_FLAGS} -std=c++11 -isystem ${CUDA_INCLUDE_DIRS}")
+				set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -stdlib=libc++" )
     endif ()
 endif ()
 
@@ -69,6 +73,13 @@ endif ()
 
 set(WBLIB "wb")
 
+
+set(BUILD_LIBWB_LIBRARY ON CACHE BOOL "Turn on build of libwb library")
+set(BUILD_SOLUTION ON CACHE BOOL "Turn on build of code solution")
+set(BUILD_DESCRIPTION OFF CACHE BOOL "Turn on build of lab description")
+set(BUILD_GENERATOR ON CACHE BOOL "Turn on building of dataset generator")
+set(BUILD_TEMPLATE OFF CACHE BOOL "Turn on build of code templates")
+
 include_directories(${PROJECT_SOURCE_DIR}/support)
 
 macro(add_lab_helper NAME SOURCES)
@@ -80,21 +91,46 @@ macro(add_lab_helper NAME SOURCES)
 endmacro(add_lab_helper)
 
 macro(add_lab_solution NAME SOURCES)
-	add_lab_helper("${NAME}_Solution" ${SOURCES})
+	if (BUILD_SOLUTION)
+		add_lab_helper("${NAME}_Solution" ${SOURCES})
+	endif(BUILD_SOLUTION)
 endmacro(add_lab_solution)
 
+
 macro(add_lab_template NAME SOURCES)
-	add_lab_helper("${NAME}_Template" ${SOURCES})
+# template code is not meant to be compilable,
+# so we do not copile it. Enable the BUILD_TEMPLATE
+# flag during cmake generation to override this
+# behavior
+	if (BUILD_TEMPLATE)
+		add_lab_helper("${NAME}_Template" ${SOURCES})
+	endif(BUILD_TEMPLATE)
 endmacro(add_lab_template)
 
 macro(add_generator NAME SOURCES)
-	add_executable("${NAME}_DatasetGenerator" ${SOURCES})
-	if(UNIX)
-		target_link_libraries("${NAME}_DatasetGenerator" ${LINK_LIBRARIES})
-	endif()
+	if (BUILD_GENERATOR)
+		add_executable("${NAME}_DatasetGenerator" ${SOURCES})
+		if(UNIX)
+			target_link_libraries("${NAME}_DatasetGenerator" ${LINK_LIBRARIES})
+		endif(UNIX)
+	endif (BUILD_GENERATOR)
 endmacro(add_generator)
 
 macro(add_lab NAME)
+	if (BUILD_DESCRIPTION)
+		find_program(PANDOC pandoc)
+		set(MAKE_LAB_HANDOUT_PY "${PROJECT_SOURCE_DIR}/support/make_lab_handout.py")
+		add_custom_target(
+			"Build${NAME}Description"
+			COMMAND python ${MAKE_LAB_HANDOUT_PY}
+							${CMAKE_CURRENT_LIST_DIR}
+							${PROJECT_SOURCE_DIR}/support
+							${CMAKE_CURRENT_BINARY_DIR}
+		)
+		add_custom_target("${NAME}Description" ALL echo DEPENDS "Build${NAME}Description")
+		set_property(DIRECTORY APPEND PROPERTY ADDITIONAL_MAKE_CLEAN_FILES ${NAME}.pdf)
+		set_property(DIRECTORY APPEND PROPERTY ADDITIONAL_MAKE_CLEAN_FILES ${NAME}.docx)
+	endif (BUILD_DESCRIPTION)
 endmacro(add_lab)
 
 
@@ -105,4 +141,3 @@ include(Module4/sources.cmake)
 #include(Module6/sources.cmake)
 include(Module11/sources.cmake)
 include(Module23/sources.cmake)
-

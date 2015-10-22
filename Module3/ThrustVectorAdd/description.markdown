@@ -1,6 +1,6 @@
 ---
 title: CUDA Thrust Vector Add
-author: GPU Teaching Kit: Accelerated Computing
+author: GPU Teaching Kit -- Accelerated Computing
 ---
 
 ## Objective
@@ -11,13 +11,10 @@ The purpose of this lab is to get you familiar with using the NVIDA Thrust libra
 
 Before starting this lab, make sure that:
 
-* You have completed all of Module 1 in the teaching kit
+* You have completed all of Module 1 and 2 in the teaching kit
 
 * You have completed "Device Query" lab
 
-* You have looked over the [tutorial](/help) document.
-
-* Chapter 3 of the text book would also be helpful
 
 ## Instruction
 
@@ -36,4 +33,4 @@ demarcated by the `//@@` comment lines.
 
 ## Running Locally
 
-Run ./ThrustVectorAdd_Template -e <expected.raw> -i <input1.raw>,<input2.raw> -o <output.raw> -t vector`.
+Run `./ThrustVectorAdd_Template -e <expected.raw> -i <input1.raw>,<input2.raw> -o <output.raw> -t vector`.

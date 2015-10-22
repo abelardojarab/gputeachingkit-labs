@@ -3,6 +3,6 @@
 		"How many floating operations are being performed in your vector add kernel? explain.",
 		"How many global memory reads are being performed by your kernel? explain.",
 		"How many global memory writes are being performed by your kernel? explain.",
-		"In what ways did Thrust make developing a functional vector addition code easier or harder?",
+		"In what ways did Thrust make developing a functional vector addition code easier or harder?"
 	]
 }

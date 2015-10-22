@@ -1,6 +1,6 @@
 ---
 title: Lab Tour with Device Query
-author: GPU Teaching Kit: Accelerated Computing
+author: GPU Teaching Kit (Accelerated Computing)
 ---
 
 

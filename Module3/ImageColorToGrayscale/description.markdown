@@ -1,9 +1,7 @@
 ---
 title: CUDA Image Color to Grayscale
-author: GPU Teaching Kit: Accelerated Computing
+author: GPU Teaching Kit -- Accelerated Computing
 ---
-
-
 ## Objective
 
 The purpose of this lab is to implement an efficient histogramming equalization

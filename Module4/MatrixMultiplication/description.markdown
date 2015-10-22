@@ -1,8 +1,7 @@
 ---
 title: CUDA Dense Matrix-Matrix Multiply
-author: GPU Teaching Kit: Accelerated Computing
+author: GPU Teaching Kit -- Accelerated Computing
 ---
-
 
 ## Objective
 

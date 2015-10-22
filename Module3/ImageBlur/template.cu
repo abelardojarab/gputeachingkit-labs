@@ -14,6 +14,7 @@
 
 //@@ INSERT CODE HERE
 
+
 int main(int argc, char *argv[]) {
   wbArg_t args;
   int imageWidth;
@@ -29,7 +30,6 @@ int main(int argc, char *argv[]) {
   args = wbArg_read(argc, argv); /* parse the input arguments */
 
   inputImageFile = wbArg_getInputFile(args, 0);
-  inputMaskFile = wbArg_getInputFile(args, 1);
 
   inputImage = wbImport(inputImageFile);
 
@@ -47,19 +47,28 @@ int main(int argc, char *argv[]) {
   wbTime_start(GPU, "Doing GPU Computation (memory + compute)");
 
   wbTime_start(GPU, "Doing GPU memory allocation");
-  //@@ INSERT CODE HERE
+  cudaMalloc((void **)&deviceInputImageData,
+             imageWidth * imageHeight * sizeof(float));
+  cudaMalloc((void **)&deviceOutputImageData,
+             imageWidth * imageHeight * sizeof(float));
   wbTime_stop(GPU, "Doing GPU memory allocation");
 
   wbTime_start(Copy, "Copying data to the GPU");
-  //@@ INSERT CODE HERE
+  cudaMemcpy(deviceInputImageData, hostInputImageData,
+             imageWidth * imageHeight * sizeof(float),
+             cudaMemcpyHostToDevice);
   wbTime_stop(Copy, "Copying data to the GPU");
 
+  ///////////////////////////////////////////////////////
   wbTime_start(Compute, "Doing the computation on the GPU");
-  //@@ INSERT CODE HERE
+
   wbTime_stop(Compute, "Doing the computation on the GPU");
 
+  ///////////////////////////////////////////////////////
   wbTime_start(Copy, "Copying data from the GPU");
-  //@@ INSERT CODE HERE
+  cudaMemcpy(hostOutputImageData, deviceOutputImageData,
+             imageWidth * imageHeight * sizeof(float),
+             cudaMemcpyDeviceToHost);
   wbTime_stop(Copy, "Copying data from the GPU");
 
   wbTime_stop(GPU, "Doing GPU Computation (memory + compute)");
@@ -68,9 +77,7 @@ int main(int argc, char *argv[]) {
 
   cudaFree(deviceInputImageData);
   cudaFree(deviceOutputImageData);
-  cudaFree(deviceMaskData);
 
-  free(hostMaskData);
   wbImage_delete(outputImage);
   wbImage_delete(inputImage);
 
