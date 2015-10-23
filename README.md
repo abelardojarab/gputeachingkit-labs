@@ -18,7 +18,7 @@ also found in the [CUDA Toolkit Documentation Page](http://docs.nvidia.com/cuda/
 
 Aside from a C compiler and the CUDA Toolkit, [CMake](https://cmake.org/) is required
 to generate build scripts for your target IDE and compiler. The next section describes
-the process of compiling and running the a lab.
+the process of compiling and running a lab.
 
 ## Compiling and Running Labs
 
