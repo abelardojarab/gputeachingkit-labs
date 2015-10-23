@@ -8,15 +8,15 @@ to use the compiled binaries.**_
 
 The labs in the teaching kit require a CUDA supported operating system,
 C compiler, and a recent CUDA Toolkit. The CUDA Toolkit can be downloaded
-from the (CUDA Download)[https://developer.nvidia.com/cuda-downloads] page.
+from the [CUDA Download](https://developer.nvidia.com/cuda-downloads) page.
 Instructions on how install the CUDA Toolkit is found in the
-(Quick Start page)[http://docs.nvidia.com/cuda/cuda-quick-start-guide/index.html].
-Installation guides and list of supported C compilers for (Windows)[http://docs.nvidia.com/cuda/cuda-installation-guide-microsoft-windows/index.html],
-(Linux)[http://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html], and
-(OSX)[http://docs.nvidia.com/cuda/cuda-installation-guide-mac-os-x/index.html] are
-also found in the (CUDA Toolkit Documentation Page)[http://docs.nvidia.com/cuda/index.html].
+[Quick Start page](http://docs.nvidia.com/cuda/cuda-quick-start-guide/index.html).
+Installation guides and list of supported C compilers for [Windows](http://docs.nvidia.com/cuda/cuda-installation-guide-microsoft-windows/index.html),
+[Linux](http://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html), and
+[OSX](http://docs.nvidia.com/cuda/cuda-installation-guide-mac-os-x/index.html) are
+also found in the [CUDA Toolkit Documentation Page](http://docs.nvidia.com/cuda/index.html).
 
-Aside from a C compiler and the CUDA Toolkit, (CMake)[https://cmake.org/] is required
+Aside from a C compiler and the CUDA Toolkit, [CMake](https://cmake.org/) is required
 to generate build scripts for your target IDE and compiler. The next section describes
 the process of compiling and running the `DeviceQuery` lab.
 
@@ -24,11 +24,11 @@ the process of compiling and running the `DeviceQuery` lab.
 
 In this section we describe how to setup your machine to compile the labs.
 First, regardless of the platform compiling the labs requires the
-(CUDA Toolkit)[https://developer.nvidia.com/cuda-downloads] along with
-the (CMake)[https://cmake.org/] cross platform build generation tool.
+[CUDA Toolkit](https://developer.nvidia.com/cuda-downloads) along with
+the [CMake](https://cmake.org/) cross platform build generation tool.
 
 First, checkout the the GPU Teaching Kit -- Accelerated Computing Labs from the
-(Bitbucket repository)[https://bitbucket.org/hwuligans/gputeachingkit-labs]
+[Bitbucket repository](https://bitbucket.org/hwuligans/gputeachingkit-labs)
 
 ~~~
 git clone git@bitbucket.org:hwuligans/gputeachingkit-labs.git
@@ -38,7 +38,7 @@ In the next section we will show how to compile and run the labs on Linux, OSX,
 and Windows. We will assume that you have setup and installed both the CUDA Toolkit
 as well as the C compiler on your system.
 
-### Linux and OSX
+### Linux and Mac OSX
 
 We will show how to compile the labs on both Linux and OSX using Makefiles.
 First, create the target build directory
