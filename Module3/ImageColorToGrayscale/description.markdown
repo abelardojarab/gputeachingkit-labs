@@ -44,4 +44,4 @@ The executable generated as a result of compiling the lab can be run using the f
 	-i <input.ppm> -o <output.ppm> -t image`.
 ~~~
 
-Where `<expected.ppm>` is the expected output, `<input.ppm>` is the input dataset, and `<output.ppm>` is an optional path to store the results. The datasets can be generated using the dataset generator built as part of the compilation process.
+where `<expected.ppm>` is the expected output, `<input.ppm>` is the input dataset, and `<output.ppm>` is an optional path to store the results. The datasets can be generated using the dataset generator built as part of the compilation process.
