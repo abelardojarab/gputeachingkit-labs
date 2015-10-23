@@ -45,7 +45,8 @@ The executable generated as a result of compiling the lab can be run using the f
 
 
 ~~~
-./ThrustListReduction_Template -e <expected.raw> -i <input.raw> -o <output.raw> -t vector
+./ThrustListReduction_Template -e <expected.raw> \
+  -i <input.raw> -o <output.raw> -t vector
 ~~~
 
-Where `<expected>` is the expected output, `<input#>` is the input dataset, and `<output>` is an optional path to store the results. The datasets can be generated using the dataset generator built as part of the compilation process.
+Where `<expected.raw>` is the expected output, `<input.raw>` is the input dataset, and `<output.raw>` is an optional path to store the results. The datasets can be generated using the dataset generator built as part of the compilation process.
