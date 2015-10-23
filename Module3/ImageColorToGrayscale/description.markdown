@@ -35,6 +35,12 @@ The easiest way to create image is via external tools. You can use tools such as
 
 # Local Setup Instruction
 
-The most recent version of source code for this lab along with the build-scripts can be found on the [Bitbucket repository](LINKTOLAB). Descriptions on how to use the repository is found in the [README](LINKTOREADME) document in the root of the repository..
+The most recent version of source code for this lab along with the build-scripts can be found on the [Bitbucket repository](LINKTOLAB). A description on how to use the [CMake](https://cmake.org/) tool in along with how to build the labs for local development found in the [README](LINKTOREADME) document in the root of the repository.
 
-To run the lab locally run the following command `./ImageColorToGrayscale_Template -e <expected.ppm> -i <input.ppm> -o <output.ppm> -t image`.
+The executable generated as a result of compiling the lab can be run using the following command:
+
+~~~
+./ImageColorToGrayscale_Template -e <expected.ppm> -i <input.ppm> -o <output.ppm> -t image`.
+~~~
+
+Where `expected` is the expected output, `input#` is the input dataset, and `output` is an optional path to store the results. The datasets can be generated using the dataset generator built as part of the compilation process.
