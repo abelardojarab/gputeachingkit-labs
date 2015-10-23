@@ -21,4 +21,4 @@ Where `expected` is the expected output, `input#` is the input dataset, and `out
 
 # Obtaining a PGI Compiler Licence
 
-Information on how to obtain a licence to the PGI compiler is available on the [Bitbucket repository](https://bitbucket.org/hwuligans/gputeachingkit-labs/src/master/Module23/OpenACCVectorAdd/PGI_LICENCE_INFO.markdown) as well.
+Information on how to obtain a licence to the PGI compiler is available on the [Bitbucket repository](https://bitbucket.org/hwuligans/gputeachingkit-labs/src/master/Module23/OpenACCVectorAdd/PGI_LICENCE_INFO.markdown).
