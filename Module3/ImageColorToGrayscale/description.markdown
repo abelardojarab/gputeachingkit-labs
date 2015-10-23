@@ -43,4 +43,4 @@ The executable generated as a result of compiling the lab can be run using the f
 ./ImageColorToGrayscale_Template -e <expected.ppm> -i <input.ppm> -o <output.ppm> -t image`.
 ~~~
 
-Where `expected` is the expected output, `input#` is the input dataset, and `output` is an optional path to store the results. The datasets can be generated using the dataset generator built as part of the compilation process.
+Where `<expected>` is the expected output, `<input#>` is the input dataset, and `<output>` is an optional path to store the results. The datasets can be generated using the dataset generator built as part of the compilation process.
