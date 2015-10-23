@@ -1,69 +1,131 @@
----
-title: GPU Teaching Kit
----
+# GPU Teaching Kit -- Accelerated Computing Labs
 
-# Compiling and Running on Linux and Windows
-# by Tran Minh Quan
 
-This is a tutorial explains how to compile and run your Machine
-Problems (MPs) offline **without separating on building libwb.**
+## Software Requirements
 
-_Caution: **If you don't have NVIDIA GPUs ([CUDA Capable GPU](https://developer.nvidia.com/cuda-gpus)s) on your local machine, you cannot run the executable binaries.**_
+_Caution: **You must have an [NVIDIA CUDA Capable GPU](https://developer.nvidia.com/cuda-gpus)
+to use the compiled binaries.**_
 
-First, regardless your platform is, please install CUDA 5.5
-and Cmake 2.8 ([](http://www.cmake.org/)[](http://www.cmake.org/)[](http://www.cmake.org/)[](http://www.cmake.org/)[http://www.cmake.org/](http://www.cmake.org/)) , then set the path appropriate to these things (linux).
+The labs in the teaching kit require a CUDA supported operating system,
+C compiler, and a recent CUDA Toolkit. The CUDA Toolkit can be downloaded
+from the (CUDA Download)[https://developer.nvidia.com/cuda-downloads] page.
+Instructions on how install the CUDA Toolkit is found in the
+(Quick Start page)[http://docs.nvidia.com/cuda/cuda-quick-start-guide/index.html].
+Installation guides and list of supported C compilers for (Windows)[http://docs.nvidia.com/cuda/cuda-installation-guide-microsoft-windows/index.html],
+(Linux)[http://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html], and
+(OSX)[http://docs.nvidia.com/cuda/cuda-installation-guide-mac-os-x/index.html] are
+also found in the (CUDA Toolkit Documentation Page)[http://docs.nvidia.com/cuda/index.html].
 
-Check out the source codes (only skeleton codes) for MPs as
-following
+Aside from a C compiler and the CUDA Toolkit, (CMake)[https://cmake.org/] is required
+to generate build scripts for your target IDE and compiler. The next section describes
+the process of compiling and running the `DeviceQuery` lab.
 
-[](https://github.com/hvcl/hetero13)[](https://github.com/hvcl/hetero13)[](https://github.com/hvcl/hetero13)[](https://github.com/hvcl/hetero13)[https://github.com/hvcl/hetero13](https://github.com/hvcl/hetero13)
+## Compiling and Running Labs
 
-    git clone https://github.com/abduld/libwb
+In this section we describe how to setup your machine to compile the labs.
+First, regardless of the platform compiling the labs requires the
+(CUDA Toolkit)[https://developer.nvidia.com/cuda-downloads] along with
+the (CMake)[https://cmake.org/] cross platform build generation tool.
 
-1\. If you are under Linux environment, you should use gcc lower than 4.7 (mine is 4.4.7). 
-Ortherwise, it will not be compatible with nvcc
+First, checkout the the GPU Teaching Kit -- Accelerated Computing Labs from the
+(Bitbucket repository)[https://bitbucket.org/hwuligans/gputeachingkit-labs]
 
-    cd libwb
-    ls
-    mkdir build
-    cd build/
-    cmake ..
-    make -j4
-    ./MP0
+~~~
+git clone git@bitbucket.org:hwuligans/gputeachingkit-labs.git
+~~~
 
-2\. If you are under Windows environment
+In the next section we will show how to compile and run the labs on Linux, OSX,
+and Windows. We will assume that you have setup and installed both the CUDA Toolkit
+as well as the C compiler on your system.
 
-Open Cmake Gui:
+### Linux and OSX
 
-    Where is the source code: {libwb}/
-    Where to build the binary: {libwb}/build
+We will show how to compile the labs on both Linux and OSX using Makefiles.
+First, create the target build directory
 
-![image](https://coursera-forum-screenshots.s3.amazonaws.com/5d/d77a10785611e3ae687ff4063e578b/1.png) 
+~~~
+mkdir build-dir
+cd build-dir
+~~~
 
-Press Configure, Yes and choose your compiler (in this case Visual
-Studio 10 (32 bit) or Visual Studio 10 Win64 (64 bit), then press Finish
+We will use `ccmake`
 
-![image](https://coursera-forum-screenshots.s3.amazonaws.com/75/ee29f0785611e3ae687ff4063e578b/2.png) 
+~~~
+ccmake /path/to/gpu-kit-git-checkout
+~~~
 
-![image](https://coursera-forum-screenshots.s3.amazonaws.com/e5/1e0fc0785611e3ae687ff4063e578b/3.png) 
+You will see the following screen
 
-Press Configure one more time and generate
+![ccmake](https://s3.amazonaws.com/gpuedx/resources/screenshots/Screenshot+2015-10-23+11.58.27.png)
 
-![image](https://coursera-forum-screenshots.s3.amazonaws.com/11/315360785711e3ae687ff4063e578b/4.png) 
+Pressing `c` would configure the build to your system (in the process detecting
+  the compiler, the CUDA Toolkit location, etc...).
 
-Open your generated folder and Double click on libwb.sln
+![ccmake-config](https://s3.amazonaws.com/gpuedx/resources/screenshots/Screenshot+2015-10-23+12.03.26.png)
 
-![image](https://coursera-forum-screenshots.s3.amazonaws.com/3a/5da3b0785711e3ae687ff4063e578b/5.png) 
+Note the options available to you, specifically:
 
-Right click to MP0 and click "set as startup project"
+~~~
+BUILD_DESCRIPTION               *OFF
+BUILD_GENERATOR                 *ON
+BUILD_LIBWB_LIBRARY             *ON
+BUILD_SOLUTION                  *ON
+BUILD_TEMPLATE                  *OFF
+~~~
 
-Press Ctrl F5
+* `BUILD_DESCRIPTION` -- option toggles whether to regenerate
+`pdf` and `docx` lab output (this requires a python, latex, and pandoc installation)
+* `BUILD_GENERATOR` -- option toggles whether to build the dataset
+generator scripts as part of the build process
+* `BUILD_LIBWB_LIBRARY` -- option toggles whether to build the `libwb` (the support library)
+as part of the build process
+* `BUILD_TEMPLATE` -- option toggles whether to build the code templates
+as part of the build process (the templates are missing critical code that
+makes them uncompilable)
 
-Whenever you do the MPs, change the MP accordingly.
+Press the `g` option to generate the Makefile and then `q` to quite out of `ccmake`.
+You can then use the `make` command to build the labs.
 
-Best regards,
+![make](https://s3.amazonaws.com/gpuedx/resources/screenshots/Screenshot+2015-10-23+12.11.15.png)
 
-P/s1: Sorry about the name of project, it should be hetero14 but I forget that we are already in the new year. My appologize :-P 
+The `make` scripts builds the executables which can be run using the command template
+provided in the lab's description. Here we run the `DeviceQuery` lab.
 
-P/s2: If you are using MAC, please consider reading this link and modify your CMakeLists.txt
-[https://class.coursera.org/hetero-002/forum/thread?thread\_id=83](https://class.coursera.org/hetero-002/forum/thread?thread_id=83)
+![device-query-osx](https://s3.amazonaws.com/gpuedx/resources/screenshots/Screenshot+2015-10-23+12.12.28.png)
+
+
+### Windows
+
+>> In Progress
+
+## Development Suggestions
+
+
+>> In Progress
+
+## `libWB` API
+
+The labs in the teaching kit depend on the `libwb` library which provide support functions
+such as file import/export, timing, logging, and validation of the results. The following
+is a summary of the exposed API functions used throughout the labs:
+
+### wbTime
+
+
+>> In Progress
+
+### wbLog
+
+>> In Progress
+
+### wbSolution
+
+>> In Progress
+
+### wbImport
+
+>> In Progress
+
+### wbExport
+
+>> In Progress
