@@ -22,4 +22,4 @@ where `<expected.raw>` is the expected output, `<input0.raw>,<input1.raw>` is th
 
 # Obtaining a PGI Compiler License
 
-Information on how to obtain a license to the PGI compiler is available on the [Bitbucket repository](https://bitbucket.org/hwuligans/gputeachingkit-labs/src/master/Module23/OpenACCVectorAdd/PGI_LICENCE_INFO.markdown).
+The usage of OpenACC directives requires access to the PGI OpenACC compiler. Please follow the instructions on [Bitbucket repository](https://bitbucket.org/hwuligans/gputeachingkit-labs/src/master/Module23/OpenACCVectorAdd/PGI_LICENCE_INFO.markdown) to download the tools, generate the license file and install the license.
