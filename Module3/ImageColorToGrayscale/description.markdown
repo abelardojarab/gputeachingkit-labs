@@ -33,7 +33,7 @@ For people who are developing on their own system.
 The images are stored in PPM (`P6`) format, this means that you can (if you want) create your own input images.
 The easiest way to create image is via external tools. You can use tools such as `bmptoppm`.
 
-# Local Setup Instruction
+# Local Setup Instructions
 
 The most recent version of source code for this lab along with the build-scripts can be found on the [Bitbucket repository](LINKTOLAB). A description on how to use the [CMake](https://cmake.org/) tool in along with how to build the labs for local development found in the [README](LINKTOREADME) document in the root of the repository.
 

@@ -32,7 +32,7 @@ The `wbLog` function logs results, specifically we log the following hardware fe
 The details and meaning of these quantities will be explained in the
 first few lectures of the teaching kit.
 
-# Local Setup Instruction
+# Local Setup Instructions
 
 The most recent version of source code for this lab along with the build-scripts can be found on the [Bitbucket repository](LINKTOLAB). A description on how to use the [CMake](https://cmake.org/) tool in along with how to build the labs for local development found in the [README](LINKTOREADME) document in the root of the repository.
 
