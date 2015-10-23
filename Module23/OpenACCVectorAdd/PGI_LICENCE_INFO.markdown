@@ -9,6 +9,7 @@ Follow these steps to access and activate your PGI trial software.
 7.  By using the software, you agree to be bound by the [PGI End-User License Agreement](http://www.pgroup.com/doc/LICENSE.txt).
 
 
+~~~
     SERVER ANY ANY
     PACKAGE PGI2015-STARTER pgroupd 2016.0117 5CD688B17864 \
        COMPONENTS="pgi-hpf-lin64 pgi-f95-lin64 pgi-f77-lin64 \
@@ -31,3 +32,4 @@ Follow these steps to access and activate your PGI trial software.
        SUITE_DUP_GROUP=UH TS_OK SIGN="1B24 BE82 59C3 0F4F EA10 A245 \
        38A4 CE67 A124 D161 EAC8 B139 5FD0 51B5 89AF 0C54 6BC2 2AC8 \
        BCCB F9A8 A330 5CBF 61FD 7E23 B783 94D7 E1FA BC9E 2469 6AE5"
+~~~
