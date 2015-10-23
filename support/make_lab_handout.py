@@ -10,7 +10,7 @@ import sys
 import re
 from tempfile import mkdtemp
 
-BITBUCKET_BASE_DIR = "https://bitbucket.org/adakkak/gpulabs/src/master/"
+BITBUCKET_BASE_DIR = "https://bitbucket.org/hwuligans/gputeachingkit-labs/src/master/"
 
 def create_mp_handout(out_file, mp_dir):
     base_path = mp_dir
