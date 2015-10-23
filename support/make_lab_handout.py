@@ -92,7 +92,7 @@ def create_mp_handout(out_file, mp_dir):
     for question, answer in zip(questions_json["questions"], answers_json["answers"]):
         questions_markdown = questions_markdown + "\n\n" + \
                              "(@) " + question + "\n\n" + \
-                             "ANSWER: **<span style=\"color:red;\">" + answer + "</span>**\n"
+                             "ANSWER: <RED>" + answer + "</RED>\n"
 
     if code_solution == "":
         code_solution_markdown = ""
@@ -154,56 +154,92 @@ def compile_mp_description(mp_dir, support_dir, out_dir):
     description_pdf_file = os.path.join(temp_dir, "description.pdf")
 
     target = create_mp_handout(description_md_file, mp_dir)
+
+    # we want to add colors for both the tex and the docx files
+    description_tex_md_file = os.path.join(temp_dir, "description_tex.md")
+    description_docx_md_file = os.path.join(temp_dir, "description_docx.md")
+
+
+    # Fix RED for TeX files
+    with codecs.open(description_md_file, "r", "utf-8") as f:
+        description_tex_md_data = f.read()
+        description_tex_md_data = re.sub(
+            "<RED>(.*)</RED>",
+            r'\\textcolor[rgb]{0.9,0.1,0.1}{\\textbf{\1}}',
+            description_tex_md_data
+        )
+        with codecs.open(description_tex_md_file, "w", "utf-8") as target:
+            target.write(description_tex_md_data)
+
+
     subprocess.call(
         [
             "pandoc",
             "-s",
             "-N",
             "--template=" + template_tex_file,
-            description_md_file,
+            description_tex_md_file,
             "-o",
             description_tex_file
         ],
         cwd=temp_dir
     )
-    # we also want to insert the copy right information
-    # for docx since it's not part of the template
 
-    with codecs.open(description_md_file, "a+", "utf-8") as md:
-        md.write("\n\n*  *  *  *\n\n") # a horizontal rule
-        md.write("This work is licensed by UIUC and NVIDIA (2015) " + \
-                 "under a Creative Commons Attribution-NonCommercial " +\
-                 "4.0 License.")
-    subprocess.call(
-        [
-            "pandoc",
-            "-s",
-            "--smart",
-            "-N",
-            description_md_file,
-            "-o",
-            description_rtf_file
-        ],
-        cwd=temp_dir
-    )
-    subprocess.call(
-        [
-            "pandoc",
-            "-s",
-            "--smart",
-            "-N",
-            description_md_file,
-            "-o",
-            description_docx_file
-        ],
-        cwd=temp_dir
-    )
     subprocess.call(
         [
             "pdflatex",
             description_tex_file,
             "-o",
             description_pdf_file
+        ],
+        cwd=temp_dir
+    )
+
+    # Fix RED for DocX files
+    with codecs.open(description_md_file, "r", "utf-8") as f:
+        description_docx_md_data = f.read()
+        # (this is disabled since it does
+        # not work)
+        if False:
+            description_docx_md_data = re.sub(
+                "<RED>(.*)</RED>",
+                "\
+<w:r>\
+<w:rPr>\
+<w:rStyle w:val=\"KeywordTok\" />\
+</w:rPr>\
+<w:t xml:space=\"preserve\">\\1</w:t>\
+</w:r>",
+                description_docx_md_data
+            )
+        else:
+            description_docx_md_data = re.sub(
+                "\*\*<RED>(.*)</RED>\*\*",
+                "**\\1**",
+                description_docx_md_data
+            )
+        # write the output
+        with codecs.open(description_docx_md_file, "w", "utf-8") as target:
+            target.write(description_docx_md_data)
+
+    # we also want to insert the copy right information
+    # for docx since it's not part of the template
+    with codecs.open(description_docx_md_file, "a+", "utf-8") as md:
+        md.write("\n\n*  *  *  *\n\n") # a horizontal rule
+        md.write("This work is licensed by UIUC and NVIDIA (2015) " + \
+                 "under a Creative Commons Attribution-NonCommercial " +\
+                 "4.0 License.")
+    print(description_docx_md_file)
+    subprocess.call(
+        [
+            "pandoc",
+            "-R",
+            "-s",
+            "--smart",
+            "-N",
+            description_docx_md_file,
+            "-o",
+            description_docx_file
         ],
         cwd=temp_dir
     )
@@ -216,8 +252,6 @@ def compile_mp_description(mp_dir, support_dir, out_dir):
     title = config_json["name"]
     final_pdf_file = os.path.join(out_dir, title + ".pdf")
     shutil.copy2(description_pdf_file, final_pdf_file)
-    final_rtf_file = os.path.join(out_dir, title + ".rtf")
-    shutil.copy2(description_rtf_file, final_rtf_file)
     final_docx_file = os.path.join(out_dir, title + ".docx")
     shutil.copy2(description_docx_file, final_docx_file)
 
