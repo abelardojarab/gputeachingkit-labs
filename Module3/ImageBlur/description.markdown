@@ -1,6 +1,6 @@
 ---
 title: CUDA Image Blur
-author: GPU Teaching Kit - Accelerated Computing
+author: GPU Teaching Kit -- Accelerated Computing
 ---
 
 # Objective

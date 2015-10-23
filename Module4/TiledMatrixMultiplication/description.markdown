@@ -1,6 +1,6 @@
 ---
 title: CUDA Tiled Matrix Multiplication
-author: GPU Teaching Kit - Accelerated Computing
+author: GPU Teaching Kit -- Accelerated Computing
 ---
 
 # Objective

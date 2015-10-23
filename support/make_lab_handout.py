@@ -71,7 +71,7 @@ def create_mp_handout(out_file, mp_dir):
     description_markdown = description
     description_markdown = description_markdown.replace(
                                 "title: ",
-                                "title: Module " + module_number_str + " Lab - ",
+                                "title: Module " + module_number_str + " Lab -- ",
                                 1
     )
     description_markdown = description_markdown.replace(
@@ -92,7 +92,7 @@ def create_mp_handout(out_file, mp_dir):
     for question, answer in zip(questions_json["questions"], answers_json["answers"]):
         questions_markdown = questions_markdown + "\n\n" + \
                              "(@) " + question + "\n\n" + \
-                             "ANSWER: **" + answer + "**\n"
+                             "ANSWER: **<span style=\"color:red;\">" + answer + "</span>**\n"
 
     if code_solution == "":
         code_solution_markdown = ""
@@ -102,7 +102,7 @@ def create_mp_handout(out_file, mp_dir):
             "The following is a possible implementation of the lab. \n" +
             "This solution is intended for use only by the teaching staff \n" +
             "and should not be distributed to students.",
-            "```{.cpp}",
+            "```{.cpp .numberLines}",
             code_solution,
             "```"
         ])
@@ -114,7 +114,7 @@ def create_mp_handout(out_file, mp_dir):
         "the code below handles the import and export as well " +
         "as the checking of the solution. " +
         "The tutorial page describes the functionality of the `wb*` methods.\n"
-        "```{.cpp}",
+        "```{.cpp .numberLines}",
         code_template,
         "```"
     ])
@@ -178,6 +178,7 @@ def compile_mp_description(mp_dir, support_dir, out_dir):
         [
             "pandoc",
             "-s",
+            "--smart",
             "-N",
             description_md_file,
             "-o",
@@ -189,6 +190,7 @@ def compile_mp_description(mp_dir, support_dir, out_dir):
         [
             "pandoc",
             "-s",
+            "--smart",
             "-N",
             description_md_file,
             "-o",

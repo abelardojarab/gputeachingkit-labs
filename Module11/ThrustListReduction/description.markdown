@@ -1,6 +1,6 @@
 ---
 title: Thrust List Reduction
-author: GPU Teaching Kit - Accelerated Computing
+author: GPU Teaching Kit -- Accelerated Computing
 ---
 
 # Objective
