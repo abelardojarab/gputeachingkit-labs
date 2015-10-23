@@ -1,3 +1,6 @@
+---
+title: GPU Teaching Kit
+---
 
 # Compiling and Running on Linux and Windows
 # by Tran Minh Quan
