@@ -9,7 +9,7 @@ to use the compiled binaries.**_
 The labs in the teaching kit require a CUDA supported operating system,
 C compiler, and a recent CUDA Toolkit. The CUDA Toolkit can be downloaded
 from the [CUDA Download](https://developer.nvidia.com/cuda-downloads) page.
-Instructions on how install the CUDA Toolkit is available in the
+Instructions on how to install the CUDA Toolkit is available in the
 [Quick Start page](http://docs.nvidia.com/cuda/cuda-quick-start-guide/index.html).
 Installation guides and list of supported C compilers for [Windows](http://docs.nvidia.com/cuda/cuda-installation-guide-microsoft-windows/index.html),
 [Linux](http://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html), and
