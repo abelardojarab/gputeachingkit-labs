@@ -9,9 +9,9 @@ to use the compiled binaries.**_
 The labs in the teaching kit require a CUDA supported operating system,
 C compiler, and a recent CUDA Toolkit. The CUDA Toolkit can be downloaded
 from the [CUDA Download](https://developer.nvidia.com/cuda-downloads) page.
-Instructions on how to install the CUDA Toolkit is available in the
+Instructions on how to install the CUDA Toolkit are available in the
 [Quick Start page](http://docs.nvidia.com/cuda/cuda-quick-start-guide/index.html).
-Installation guides and list of supported C compilers for [Windows](http://docs.nvidia.com/cuda/cuda-installation-guide-microsoft-windows/index.html),
+Installation guides and the list of supported C compilers for [Windows](http://docs.nvidia.com/cuda/cuda-installation-guide-microsoft-windows/index.html),
 [Linux](http://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html), and
 [OSX](http://docs.nvidia.com/cuda/cuda-installation-guide-mac-os-x/index.html) are
 also found in the [CUDA Toolkit Documentation Page](http://docs.nvidia.com/cuda/index.html).
@@ -23,11 +23,11 @@ the process of compiling and running a lab.
 ## Compiling and Running Labs
 
 In this section we describe how to setup your machine to compile the labs.
-First, regardless of the platform compiling the labs requires the
-[CUDA Toolkit](https://developer.nvidia.com/cuda-downloads) along with
-the [CMake](https://cmake.org/) cross platform build generation tool.
+First, regardless of the platform compiling the labs the
+[CUDA Toolkit](https://developer.nvidia.com/cuda-downloads) and 
+[CMake](https://cmake.org/) must be installed.
 
-First, checkout the the GPU Teaching Kit -- Accelerated Computing Labs from the
+Now, checkout the the GPU Teaching Kit -- Accelerated Computing Labs from the
 [Bitbucket repository](https://bitbucket.org/hwuligans/gputeachingkit-labs)
 
 ~~~
@@ -35,8 +35,7 @@ git clone git@bitbucket.org:hwuligans/gputeachingkit-labs.git
 ~~~
 
 In the next section we will show how to compile and run the labs on Linux, OSX,
-and Windows. We will assume that you have setup and installed both the CUDA Toolkit
-as well as the C compiler on your system.
+and Windows.
 
 ### Linux and Mac OSX
 
