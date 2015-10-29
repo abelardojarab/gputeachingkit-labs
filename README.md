@@ -113,7 +113,7 @@ Clicking `Generate` button, the CMake system creates the build scripts in the pr
 
 ![vs-dir](https://s3.amazonaws.com/gpuedx/resources/screenshots/4.PNG)
 
-Opening the Visual Studio solution, you will be able to see and compile all the labs  
+Opening the Visual Studio solution, you can edit and compile all the labs  
 
 ![vs-view](https://s3.amazonaws.com/gpuedx/resources/screenshots/5.PNG)
 
@@ -121,6 +121,6 @@ The labs are built like any Visual Studio project using the build button
 
 ![vs-build](https://s3.amazonaws.com/gpuedx/resources/screenshots/6.PNG)
 
-One the lab is built, it can be run. Here we run the device query lab
+Once the lab is built, it can be run. Here we run the device query lab
 
 ![dev-query](https://s3.amazonaws.com/gpuedx/resources/screenshots/7.PNG)
