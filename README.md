@@ -91,3 +91,36 @@ The `make` scripts builds the executables which can be run using the command tem
 provided in the lab's description. Here we run the `DeviceQuery` lab.
 
 ![device-query-osx](https://s3.amazonaws.com/gpuedx/resources/screenshots/Screenshot+2015-10-23+12.12.28.png)
+
+### Windows
+
+The usage of CMake on windows is the same as that on linux, except for windows we will using the GUI version (one can still use the command line version however).
+
+First, launch the CMake gui application and set your source directory (the checkout directory) and the build directory (where you want the labs to be built).
+
+
+![cmake-gui1](https://s3.amazonaws.com/gpuedx/resources/screenshots/1.PNG)
+
+Clicking configure gives you an option to select which compiler to use to compile the labs. The compiler must be installed on the system and support by the CUDA toolkit
+
+![compiler-select](https://s3.amazonaws.com/gpuedx/resources/screenshots/2.PNG)
+
+The CMake system then searches the system and populates the proper options in your configuration. As a user you can override these options if needed
+
+![compiler-options](https://s3.amazonaws.com/gpuedx/resources/screenshots/3.PNG)
+
+Clicking `Generate` button, the CMake system creates the build scripts in the previously specified build directory. Since we selected Visual Studio, a Visual Studio solution is generated. 
+
+![vs-dir](https://s3.amazonaws.com/gpuedx/resources/screenshots/4.PNG)
+
+Opening the Visual Studio solution, you will be able to see and compile all the labs  
+
+![vs-view](https://s3.amazonaws.com/gpuedx/resources/screenshots/5.PNG)
+
+The labs are built like any Visual Studio project using the build button
+
+![vs-build](https://s3.amazonaws.com/gpuedx/resources/screenshots/6.PNG)
+
+One the lab is built, it can be run. Here we run the device query lab
+
+![dev-query](https://s3.amazonaws.com/gpuedx/resources/screenshots/7.PNG)
