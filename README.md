@@ -82,7 +82,7 @@ as part of the build process
 as part of the build process (the templates are missing critical code that
 makes them uncompilable)
 
-Press the `g` option to generate the Makefile and then `q` to quit out of `ccmake`.
+If you have modified the above, then you should type `g` to regenerate the Makefile and then `q` to quit out of `ccmake`.
 You can then use the `make` command to build the labs.
 
 ![make](https://s3.amazonaws.com/gpuedx/resources/screenshots/Screenshot+2015-10-23+12.11.15.png)
