@@ -23,7 +23,7 @@ __global__ void rgb2gray(float *grayImage, float *rgbImage, int channels,
     int grayOffset = y * width + x;
     // one can think of the RGB image having
     // CHANNEL times columns than the gray scale image
-    int rgbOffset = grayOffset * CHANNELS;
+    int rgbOffset = grayOffset * channels;
     float r = rgbImage[rgbOffset];     // red value for pixel
     float g = rgbImage[rgbOffset + 1]; // green value for pixel
     float b = rgbImage[rgbOffset + 2]; // blue value for pixel
