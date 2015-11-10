@@ -80,7 +80,10 @@ generator scripts as part of the build process
 as part of the build process
 * `BUILD_TEMPLATE` -- option toggles whether to build the code templates
 as part of the build process (the templates are missing critical code that
-makes them uncompilable)
+makes them uncompilable).
+
+Templates are meant to be used as starting 
+code for students whereas the solution is meant for instructor use.
 
 If you have modified the above, then you should type `g` to regenerate the Makefile and then `q` to quit out of `ccmake`.
 You can then use the `make` command to build the labs.
