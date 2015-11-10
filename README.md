@@ -16,7 +16,7 @@ Installation guides and the list of supported C compilers for [Windows](http://d
 [OSX](http://docs.nvidia.com/cuda/cuda-installation-guide-mac-os-x/index.html) are
 also found in the [CUDA Toolkit Documentation Page](http://docs.nvidia.com/cuda/index.html).
 
-Aside from a C compiler and the CUDA Toolkit, [CMake](https://cmake.org/) is required
+Aside from a C compiler and the CUDA Toolkit, [CMake](https://cmake.org/) 2.8 or later is required
 to generate build scripts for your target IDE and compiler. The next section describes
 the process of compiling and running a lab.
 
