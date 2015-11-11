@@ -49,7 +49,6 @@ int main(int argc, char *argv[]) {
   args = wbArg_read(argc, argv); /* parse the input arguments */
 
   inputImageFile = wbArg_getInputFile(args, 0);
-  inputMaskFile = wbArg_getInputFile(args, 1);
 
   inputImage = wbImport(inputImageFile);
 
@@ -103,9 +102,7 @@ int main(int argc, char *argv[]) {
 
   cudaFree(deviceInputImageData);
   cudaFree(deviceOutputImageData);
-  cudaFree(deviceMaskData);
 
-  free(hostMaskData);
   wbImage_delete(outputImage);
   wbImage_delete(inputImage);
 

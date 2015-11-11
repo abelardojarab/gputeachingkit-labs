@@ -6,7 +6,6 @@ int main(int argc, char **argv) {
   wbArg_t args;
   float total;
   float *hostInput; // The input 1D list
-  float *deviceInput;
   int numInputElements; // number of elements in the input list
 
   args = wbArg_read(argc, argv);
@@ -31,11 +30,6 @@ int main(int argc, char **argv) {
   total = thrust::reduce(deviceInput.begin(), deviceInput.end(), 0.0f,
                          thrust::plus<float>());
   wbTime_stop(Compute, "Doing the computation on the GPU");
-
-  wbTime_start(GPU, "Freeing GPU Memory");
-  //@@ Free the GPU memory here
-  cudaFree(deviceInput);
-  wbTime_stop(GPU, "Freeing GPU Memory");
 
   wbSolution(args, &total, 1);
 

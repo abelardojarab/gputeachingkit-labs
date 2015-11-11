@@ -9,9 +9,20 @@ set(CMAKE_MACOSX_RPATH TRUE)
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 
-project(labs)
+project(teachingkit-labs)
 find_package(CUDA REQUIRED)
 
+# allow C99 for cmake versions less than 3.1
+macro(use_c99)
+  if (CMAKE_VERSION VERSION_LESS "3.1")
+    if (CMAKE_C_COMPILER_ID STREQUAL "GNU")
+      set (CMAKE_C_FLAGS "--std=gnu99 ${CMAKE_C_FLAGS}")
+    endif ()
+  else ()
+    set (CMAKE_C_STANDARD 99)
+  endif ()
+endmacro(use_c99)
+use_c99()
 
 # For some MPs it may be necessary to specify the compute capability of your
 # NVIDIA GPU. In that case, simply uncomment the following two lines that start
@@ -110,6 +121,7 @@ endmacro(add_lab_template)
 macro(add_generator NAME SOURCES)
 	if (BUILD_GENERATOR)
 		add_executable("${NAME}_DatasetGenerator" ${SOURCES})
+                set_property(TARGET "${NAME}_DatasetGenerator" PROPERTY C_STANDARD 99)
 		if(UNIX)
 			target_link_libraries("${NAME}_DatasetGenerator" ${LINK_LIBRARIES})
 		endif(UNIX)
