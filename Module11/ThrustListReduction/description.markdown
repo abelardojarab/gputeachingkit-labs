@@ -16,7 +16,7 @@ Before starting this lab, make sure that:
 
 * You have completed the required course modules
 
-* You have completed the Thrust vector add lab
+* You have completed the Thrust vector addition lab
 
 # Instructions
 

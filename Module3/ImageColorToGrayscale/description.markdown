@@ -2,6 +2,7 @@
 title: CUDA Image Color to Grayscale
 author: GPU Teaching Kit -- Accelerated Computing
 ---
+
 # Objective
 
 The purpose of this lab is to convert an RGB image into
@@ -31,8 +32,8 @@ Before starting this lab, make sure that:
 # Image Format
 
 For people who are developing on their own system.
-The images are stored in PPM (`P6`) format, this means that you can (if you want) create your own input images.
-The easiest way to create image is via external tools. You can use tools such as `bmptoppm`.
+The input image is stored in PPM `P6` format while the output grayscale image is stored in PPM `P5` format. Students can  create their own input images by exporting their image into PPM images.
+The easiest way to create image is via external tools. On Unix, `bmptoppm` converts BMP images to PPM images.
 
 # Local Setup Instructions
 
@@ -41,8 +42,8 @@ The most recent version of source code for this lab along with the build-scripts
 The executable generated as a result of compiling the lab can be run using the following command:
 
 ~~~
-./ImageColorToGrayscale_Template -e <expected.ppm> \
-	-i <input.ppm> -o <output.ppm> -t image`.
+./ImageColorToGrayscale_Template -e <expected.pbm> \
+	-i <input.ppm> -o <output.pbm> -t image`.
 ~~~
 
 where `<expected.ppm>` is the expected output, `<input.ppm>` is the input dataset, and `<output.ppm>` is an optional path to store the results. The datasets can be generated using the dataset generator built as part of the compilation process.
