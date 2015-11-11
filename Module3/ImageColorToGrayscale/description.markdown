@@ -4,22 +4,23 @@ author: GPU Teaching Kit -- Accelerated Computing
 ---
 # Objective
 
-The purpose of this lab is to implement an efficient histogramming equalization
-	algorithm for an input image.
-Like the image convolution MP, the image is represented as `RGB float` values.
-You will convert that to `GrayScale unsigned char` values.
+The purpose of this lab is to convert an RGB image into
+a gray scale image.
+The input is an RGB triple of float values and the student will convert that triple to a single float grayscale intensity value.
 A pseudo-code version of the algorithm is shown bellow:
 
+~~~
 	for ii from 0 to height do
 		for jj from 0 to width do
 			idx = ii * width + jj
 			# here channels is 3
-			r = ucharImage[3*idx]
-			g = ucharImage[3*idx + 1]
-			b = ucharImage[3*idx + 2]
-			grayImage[idx] = (unsigned char) (0.21*r + 0.71*g + 0.07*b)
+			r = input[3*idx]
+			g = input[3*idx + 1]
+			b = input[3*idx + 2]
+			grayImage[idx] = (0.21*r + 0.71*g + 0.07*b)
 		end
 	end
+~~~
 
 # Prerequisites
 
