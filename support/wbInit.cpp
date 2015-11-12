@@ -5,7 +5,7 @@
 
 #define MB (1 << 20)
 #ifndef WB_DEFAULT_HEAP_SIZE
-const size_t WB_DEFAULT_HEAP_SIZE = (1024 * MB);
+#define WB_DEFAULT_HEAP_SIZE (1024 * MB)
 #endif /* WB_DEFAULT_HEAP_SIZE */
 
 static bool _initializedQ = wbFalse;
@@ -13,7 +13,15 @@ static bool _initializedQ = wbFalse;
 #if 0 // ndef _MSC_VER
 __attribute__((__constructor__))
 #endif /* _MSC_VER */
-void wb_init(int *argc, char ***argv) {
+void wb_init(int *
+#ifdef WB_USE_MPI
+argc
+#endif /* WB_USE_MPI */
+, char ***
+#ifdef WB_USE_MPI
+argv
+#endif /* WB_USE_MPI */
+) {
   if (_initializedQ == wbTrue) {
     return;
   }
