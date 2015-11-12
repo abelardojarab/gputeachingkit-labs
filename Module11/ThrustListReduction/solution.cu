@@ -22,6 +22,8 @@ int main(int argc, char **argv) {
   wbTime_start(GPU, "Allocating GPU memory.");
   //@@ Insert code here
   thrust::device_vector<float> deviceInput(numInputElements);
+  thrust::copy(hostInput, hostInput + numInputElements, deviceInput.begin());
+
   wbTime_stop(GPU, "Allocating GPU memory.");
 
   // Execute vector addition
