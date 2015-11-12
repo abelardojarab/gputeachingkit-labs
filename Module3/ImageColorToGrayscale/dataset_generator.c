@@ -95,7 +95,7 @@ static void create_dataset(const int datasetNum, const int y, const int x) {
   _mkdir(dir_name);
 
   char *input_file_name = strjoin(dir_name, "/input.ppm");
-  char *output_file_name = strjoin(dir_name, "/output.pbm");
+  char *output_file_name = strjoin(dir_name, "/output.ppm");
 
   unsigned char *input_data = generate_data(y, x);
   unsigned char *output_data =
