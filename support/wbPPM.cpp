@@ -92,18 +92,18 @@ wbImage_t wbPPM_import(const char *filename) {
 
 
   // P5 are monochrome while P6/S6 are rgb
+  // S6 needs to parse number of channels out of file
   if (strcmp(header, "P5") == 0 || strcmp(header, "P5\n") == 0) {
-      channels = 1;
-  } else {
-      channels = 3;
-  }
-
-  // the line now contains the dimension information
-  line = nextLine(file);
-  if (strcmp(header, "S6") != 0 && strcmp(header, "S6\n") != 0) {
-    parseDimensions(line, &width, &height, &channels);
-  } else {
+    channels = 1;
+    line = nextLine(file);
     parseDimensions(line, &width, &height);
+  } else if (strcmp(header, "P6") == 0 || strcmp(header, "P6\n") == 0) {
+    channels = 3;
+    line = nextLine(file);
+    parseDimensions(line, &width, &height);
+  } else {
+    line = nextLine(file);
+    parseDimensions(line, &width, &height, &channels);
   }
 
   // the line now contains the depth information
