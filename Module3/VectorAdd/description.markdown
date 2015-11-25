@@ -5,7 +5,11 @@ author: GPU Teaching Kit -- Accelerated Computing
 
 # Objective
 
-The purpose of this lab is to get you familiar with using the CUDA API by implementing a simple vector addition kernel and its associated setup code.
+
+The purpose of this lab is to introduce the student to the
+CUDA API by implementing vector addition.
+The student will implement vector addition by writing the GPU
+kernel code as well as the associated host code.
 
 # Prerequisites
 
@@ -13,9 +17,9 @@ Before starting this lab, make sure that:
 
 * You have completed all of Module 2 in the teaching kit
 
-* You have completed "Device Query" lab
+* You have completed the "Device Query" lab
 
-Local Setup Instructions
+# Instructions
 
 Edit the code in the code tab to perform the following:
 

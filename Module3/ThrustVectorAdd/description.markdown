@@ -5,18 +5,20 @@ author: GPU Teaching Kit -- Accelerated Computing
 
 # Objective
 
-The purpose of this lab is to get you familiar with using the NVIDA Thrust library by implementing a simple vector addition operation and its associated setup code.
+
+The purpose of this lab is to introduce the student to the
+CUDA API by implementing vector addition using Thrust.
 
 # Prerequisites
 
 Before starting this lab, make sure that:
 
-* You have completed all of Module 1 and 2 in the teaching kit
+* You have completed all of Module 2 in the teaching kit
 
-* You have completed "Device Query" lab
+* You have completed the "Device Query" lab
 
 
-Local Setup Instructions
+# Instructions
 
 Edit the code in the code tab to perform the following:
 

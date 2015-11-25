@@ -214,7 +214,7 @@ static inline wbExport_t wbExport_open(const char *file, const char *type0) {
     kind = wbExportKind_tsv;
   } else if (wbString_sameQ(type, "raw") || wbString_sameQ(type, "dat")) {
     kind = wbExportKind_raw;
-  } else if (wbString_sameQ(type, "ppm")) {
+  } else if (wbString_sameQ(type, "ppm") || wbString_sameQ(type, "pbm")) {
     kind = wbExportKind_ppm;
   } else {
     wbLog(ERROR, "Invalid export type ", type0);

@@ -6,7 +6,6 @@ int main(int argc, char **argv) {
   wbArg_t args;
   float total;
   float *hostInput; // The input 1D list
-  float *deviceInput;
   int numInputElements; // number of elements in the input list
 
   args = wbArg_read(argc, argv);
@@ -22,17 +21,14 @@ int main(int argc, char **argv) {
   // Declare and allocate thrust device input and output vectors
   wbTime_start(GPU, "Allocating GPU memory.");
   //@@ Insert code here
+
   wbTime_stop(GPU, "Allocating GPU memory.");
 
   // Execute vector addition
   wbTime_start(Compute, "Doing the computation on the GPU");
   //@@ Insert Code here
+  
   wbTime_stop(Compute, "Doing the computation on the GPU");
-
-  wbTime_start(GPU, "Freeing GPU Memory");
-  //@@ Free the GPU memory here
-  cudaFree(deviceInput);
-  wbTime_stop(GPU, "Freeing GPU Memory");
 
   wbSolution(args, &total, 1);
 

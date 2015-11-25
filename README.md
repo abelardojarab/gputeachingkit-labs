@@ -16,7 +16,7 @@ Installation guides and the list of supported C compilers for [Windows](http://d
 [OSX](http://docs.nvidia.com/cuda/cuda-installation-guide-mac-os-x/index.html) are
 also found in the [CUDA Toolkit Documentation Page](http://docs.nvidia.com/cuda/index.html).
 
-Aside from a C compiler and the CUDA Toolkit, [CMake](https://cmake.org/) is required
+Aside from a C compiler and the CUDA Toolkit, [CMake](https://cmake.org/) 2.8 or later is required
 to generate build scripts for your target IDE and compiler. The next section describes
 the process of compiling and running a lab.
 
@@ -80,9 +80,12 @@ generator scripts as part of the build process
 as part of the build process
 * `BUILD_TEMPLATE` -- option toggles whether to build the code templates
 as part of the build process (the templates are missing critical code that
-makes them uncompilable)
+makes them uncompilable).
 
-Press the `g` option to generate the Makefile and then `q` to quite out of `ccmake`.
+Templates are meant to be used as starting 
+code for students whereas the solution is meant for instructor use.
+
+If you have modified the above, then you should type `g` to regenerate the Makefile and then `q` to quit out of `ccmake`.
 You can then use the `make` command to build the labs.
 
 ![make](https://s3.amazonaws.com/gpuedx/resources/screenshots/Screenshot+2015-10-23+12.11.15.png)

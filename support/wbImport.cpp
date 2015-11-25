@@ -494,7 +494,8 @@ static wbImportKind_t _parseImportExtension(const char *file) {
   } else if (wbString_sameQ(extension, "raw") ||
              wbString_sameQ(extension, "dat")) {
     kind = wbImportKind_raw;
-  } else if (wbString_sameQ(extension, "ppm")) {
+  } else if (wbString_sameQ(extension, "ppm") ||
+             wbString_sameQ(extension, "pbm")) {
     kind = wbImportKind_ppm;
   } else {
     kind = wbImportKind_unknown;

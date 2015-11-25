@@ -98,10 +98,10 @@ def create_mp_handout(out_file, mp_dir):
         code_solution_markdown = ""
     else:
         code_solution_markdown = "\n".join([
-            "# Solution\n",
+            "# Code Solution\n",
             "The following is a possible implementation of the lab. \n" +
             "This solution is intended for use only by the teaching staff \n" +
-            "and should not be distributed to students.",
+            "and should not be distributed to students. \n ",
             "```{.cpp .numberLines}",
             code_solution,
             "```"
@@ -109,10 +109,11 @@ def create_mp_handout(out_file, mp_dir):
 
     code_template_markdown = "\n".join([
         "# Code Template\n",
-        "You are suggested to use the following code " +
-        "as a starting point when developing the lab " +
-        "the code below handles the import and export as well " +
+        "The following code is suggested as a starting point for students. " +
+        "The code handles the import and export as well " +
         "as the checking of the solution. " +
+        "Students are expected to insert their code is the sections demakated with " +
+        "`//@@`. Students expected the other code unchanged. "  +
         "The tutorial page describes the functionality of the `wb*` methods.\n"
         "```{.cpp .numberLines}",
         code_template,

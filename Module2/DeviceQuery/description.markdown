@@ -6,7 +6,11 @@ author: GPU Teaching Kit -- Accelerated Computing
 
 # Objective
 
-The purpose of this lab is to get you familiar with using the submission system for this course as well as the hardware used.
+The purpose of this lab is to introduce the student to the
+CUDA hardware resources along with their capabilities.
+The student is not expected to understand the details of
+the code, but should understand the process of compiling
+and running code that will be used in subsequent modules.
 
 # Instructions
 
@@ -29,8 +33,7 @@ The `wbLog` function logs results, specifically we log the following hardware fe
 
 * Warp size
 
-The details and meaning of these quantities will be explained in the
-first few lectures of the teaching kit.
+The details and meaning of these quantities will be explained in the first and second modules of the teaching kit.
 
 # Local Setup Instructions
 
