@@ -1,7 +1,7 @@
 Follow these steps to access and activate your PGI trial software.
 
 1.  [Create a PGI account](https://www.pgroup.com/account/register.php) (please use the same email address used for your Teaching Kit request), or [login](https://www.pgroup.com/account/login.php) if you already have one.
-2.  For a new account, you will receive an account activation email that includes 30-day trial keys. Ignore these keys and use the longer-term keys provided below which expire 17-Jan-2016.
+2.  For a new account, you will receive an account activation email that includes 30-day trial keys. Ignore these keys and use the longer-term keys provided below which expire 06-June-2016.
 3.  [Download](http://www.pgroup.com/support/downloads.php) the latest software for your system.
 4.  Install the software as directed in the [PGI Installation Guide](http://www.pgroup.com/doc/pgiinstall.pdf) or [PGI Visual Fortran Installation Guide](http://www.pgroup.com/doc/pvfinstall.pdf).
 5.  Copy the license key text below into a file named license.dat in your PGI installation directory, which is by default /opt/pgi on linux and C:\Program Files\PGI on Windows.
