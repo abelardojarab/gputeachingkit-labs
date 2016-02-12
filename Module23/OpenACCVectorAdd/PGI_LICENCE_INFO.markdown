@@ -11,7 +11,7 @@ Follow these steps to access and activate your PGI trial software.
 
 ~~~
 SERVER ANY ANY
-PACKAGE PGI2015-STARTER pgroupd 2016.0606 56C1D340A1B5 \
+PACKAGE PGI2016-STARTER pgroupd 2016.0630 5198B317C3F0 \
    COMPONENTS="pgi-hpf-lin64 pgi-f95-lin64 pgi-f77-lin64 \
    pgi-cc-lin64 pgi-cpp-lin64 pgi-gpp-lin64 pgi-hpf-lin32 \
    pgi-f95-lin32 pgi-f77-lin32 pgi-cc-lin32 pgi-cpp-lin32 \
@@ -23,13 +23,15 @@ PACKAGE PGI2015-STARTER pgroupd 2016.0606 56C1D340A1B5 \
    pgi-gpp-osx32 pgi-prof-lin64 pgi-prof-lin32 pgi-prof-win64 \
    pgi-prof-win32 pgi-prof-osx64 pgi-prof-osx32 pgi-dbg-lin64 \
    pgi-dbg-lin32 pgi-dbg-win64 pgi-dbg-win32 pgi-dbg-osx64 \
-   pgi-dbg-osx32 pgi-pvf" OPTIONS=SUITE SIGN="04C0 4703 580A B1A4 \
-   66DC 8C96 31A5 F012 BF38 960C B8B1 5998 CAE4 874F 6AD2 0600 \
-   EECB B75B AD18 B1B0 8B2B 8E0D 6E8E 9F31 4DEA 3CBD 2214 4D7A \
-   12FC B6CA"
-FEATURE PGI2015-STARTER pgroupd 2016.0606 6-jun-2016 uncounted \
-   130B0E184342 VENDOR_STRING=STARTER:16:cdk:accel HOSTID=DEMO \
-   SUITE_DUP_GROUP=UH TS_OK SIGN="1242 46C5 0CF6 8D7F 6FE3 1FC5 \
-   3AFE 4A72 020B EBB6 F69B 56BC FC30 4239 A74B 1DE8 AA61 7378 \
-   18FF B162 EEE1 2E9F 9F8C 66A4 F1F3 1627 9325 F5E4 9ADF 5819"
+   pgi-dbg-osx32 pgi-pvf pghpf pgfortran pgcc pgc++ pvf pgprof \
+   pgdbg" OPTIONS=SUITE SIGN="01AE D901 B5F4 EB53 BF65 BECC 00C3 \
+   25FE 8F24 17ED 7474 5474 751B D2A6 D2F1 0F47 1CED 6FB0 19E1 \
+   DF7C D9DD 0919 9281 7E0F E90F 03BB 62E3 12E8 5433 9E5A"
+FEATURE PGI2016-STARTER pgroupd 2016.0630 30-jun-2016 uncounted \
+   65EF67CD99F6 VENDOR_STRING=STARTER:16:cdk:accel HOSTID=DEMO \
+   PLATFORMS="lin-acc x64_lsb i86_lsb win-acc x64_n i86_n osx-acc \
+   x64_mac i86_mac cdk" SUITE_DUP_GROUP=UH TS_OK SIGN="0E20 EFD1 \
+   E342 CE0E 4B1F 1226 488E 266D 05A3 B94E DBC1 59E9 55C0 A978 \
+   E610 11D3 D012 B2AD CDF0 D6FD 5F5D 53C9 F527 5D39 3606 9B1C \
+   ACE9 13CF 93B1 273E"
 ~~~
