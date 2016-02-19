@@ -1,0 +1,36 @@
+# This references a standard debian container from the
+# Docker Hub https://registry.hub.docker.com/_/debian/
+# Read more about containers on our dev center
+# http://devcenter.wercker.com/docs/containers/index.html
+box: jagregory/pandoc
+build:
+  # Steps make up the actions in your pipeline
+  # Read more about steps on our dev center:
+  # http://devcenter.wercker.com/docs/steps/index.html
+  install-packages:
+    packages: cabal-install texlive-xetex texlive-latex-recommended texlive-latex-extra
+  steps:
+    - script:
+      name: echo
+      code: |
+        sudo apt-get update -y
+        sudo apt-get install wget -y
+        echo 'export PATH=$PATH:$HOME/.cabal/bin' >> ~/.profile
+        echo 'export PATH=$PATH:$HOME/.cabal/bin' >> ~/.bashrc
+        echo 'export PATH=$PATH:$HOME/.cabal/bin' >> ~/.bash_profile
+        echo "hello world!"
+
+# The steps that will be executed in the deploy pipeline
+deploy:
+  after-steps:
+    - slack-notifier:
+      url: $SLACK_URL
+      channel: notifications
+      username: myamazingbotname
+  steps:
+    # Execute the s3sync deploy step, a step provided by wercker
+    - s3sync:
+      key_id: $AWS_ACCESS_KEY_ID
+      key_secret: $AWS_SECRET_ACCESS_KEY
+      bucket_url: $AWS_BUCKET_URL
+      source_dir: build/
