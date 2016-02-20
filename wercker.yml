@@ -11,7 +11,7 @@ build:
     - script:
       name: install golang
       code: |
-        apt-get install golang
+        apt-get install -y --no-install-recommends golang
     - script:
       name: get golang packages
       code: |
