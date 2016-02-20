@@ -9,6 +9,10 @@ box: webgpu/pandoc
 build:
   steps:
     - script:
+      name: install golang
+      code: |
+        apt-get install golang
+    - script:
       name: get golang packages
       code: |
         go get github.com/k0kubun/pp
