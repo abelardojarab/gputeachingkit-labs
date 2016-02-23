@@ -9,6 +9,10 @@ box: webgpu/pandoc
 build:
   steps:
     - script:
+      name: install cmake
+      code: |
+        apt-get install -y --no-install-recommends cmake build-essential
+    - script:
       name: build documents
       code: |
         mkdir build
