@@ -8,12 +8,23 @@
 box: webgpu/pandoc
 build:
   steps:
+    - setup-go-workspace
     - script:
-      name: install golang
+      name: build documents
       code: |
-        apt-get install -y --no-install-recommends golang
-    - script:
-      name: get golang packages
-      code: |
-        go get github.com/k0kubun/pp
+        mkdir build
+        cd build 
+        cmake -DBUILD_LIBWB_LIBRARY=OFF \
+              -DBUILD_SOLUTION=OFF \
+              -DBUILD_DESCRIPTION=ON \
+              -DBUILD_DATASET_GENERATOR=OFF \
+              -DBUILD_TEMPLATE=OFF .. 
+        make
+        ls -l
+    - s3sync:
+      key-id: $AWS_KEY
+      key-secret: $AWS_SECRET
+      bucket-url: $S3_BUCKET
+      source-dir: build
+      opts: --acl-private
 
