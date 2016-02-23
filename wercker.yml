@@ -8,7 +8,6 @@
 box: webgpu/pandoc
 build:
   steps:
-    - setup-go-workspace
     - script:
       name: build documents
       code: |
@@ -22,9 +21,12 @@ build:
         make
         ls -l
     - s3sync:
-      key-id: $AWS_KEY
-      key-secret: $AWS_SECRET
-      bucket-url: $S3_BUCKET
+      key-id: $AWS_ACCESS_KEY_ID
+      key-secret: $AWS_SECRET_ACCESS_KEY
+      bucket-url: $AWS_BUCKET_URL
       source-dir: build
       opts: --acl-private
+  after-steps:
+    - wantedly/pretty-slack-notify:
+        webhook_url: $SLACK_WEBHOOK_URL
 
