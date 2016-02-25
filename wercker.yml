@@ -50,4 +50,7 @@ build:
   after-steps:
     - wantedly/pretty-slack-notify:
         webhook_url: $SLACK_WEBHOOK_URL
-    - rm ~/.ssh/id_rsa
+    - script:
+      name: delete ssh key
+      code: |
+        rm ~/.ssh/id_rsa
