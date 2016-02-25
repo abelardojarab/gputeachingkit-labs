@@ -1,3 +1,7 @@
+---
+title: Image Equalization
+author: GPU Teaching Kit -- Accelerated Computing
+---
 
 ## Objective
 
@@ -6,7 +10,7 @@ The purpose of this lab is to implement an efficient histogramming equalization
 Like the image convolution MP, the image is represented as `RGB float` values.
 You will convert that to `GrayScale unsigned char` values and compute the histogram.
 Based on the histogram, you will compute a histogram equalization function which you will
-	then apply to the original image to get the color corrected image.	
+	then apply to the original image to get the color corrected image.
 
 ## Prerequisites
 
@@ -47,7 +51,6 @@ Dividing by the number of pixels (width * height) gives us the probability of a 
 
 ![OrigProb](/mp/11/imgs/orig_prob.png "thumbnail")
 
-
 A color balanced image is expected to have a uniform distribution of the luminosity values.
 
 This means that if we compute the Cumulative Distribution Function (CDF) we expect a linear curve for a color equalized image.
@@ -76,7 +79,7 @@ The computation to be performed by each kernel is illustrated with serial pseudo
 
 ### Cast the image from `float` to `unsigned char`
 
-Implement a kernel that casts the image from `float *` to `unsigned char *`. 
+Implement a kernel that casts the image from `float *` to `unsigned char *`.
 
 	for ii from 0 to (width * height * channels) do
 		ucharImage[ii] = (unsigned char) (255 * inputImage[ii])
@@ -135,7 +138,7 @@ This is a reduction operation using the min function
 
 The histogram equalization function (`correct`) remaps the cdf of the histogram of the image to a linear function and is defined as
 
-	def correct_color(val) 
+	def correct_color(val)
 		return clamp(255*(cdf[val] - cdfmin)/(1 - cdfmin), 0, 255)
 	end
 
@@ -167,4 +170,3 @@ And you're done
 For people who are developing on their own system.
 The images are stored in PPM (`P6`) format, this means that you can (if you want) create your own input images.
 The easiest way to create image is via external tools. You can use tools such as `bmptoppm`.
-

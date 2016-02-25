@@ -1,3 +1,8 @@
+---
+title: Breadth-First Search
+author: GPU Teaching Kit -- Accelerated Computing
+---
+
 ## Objective
 
 The purpose of this lab is to understand hierarchical queuing in the context of the breadth first search algorithm as an example. You will implement a single iteration of breadth first search that takes a set of nodes in the current level (also called wave-front) as input and outputs the set of nodes belonging to the next level.

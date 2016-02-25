@@ -1,12 +1,18 @@
+---
+title: Convolution
+author: GPU Teaching Kit -- Accelerated Computing
+---
 
 ## Objective
 
-The lab's objective is to implement a tiled image convolution using both shared and constant memory as discussed in class.
-Like what's discussed in class, we will have a constant 5x5 convolution mask, but will have arbitrarily sized image (We will assume the image dimensions are greater than 5x5 in this Lab).
+The lab's objective is to implement a tiled image convolution using both shared
+and constant memory.
+We will have a constant 5x5 convolution mask, but will have arbitrarily sized
+image (assume the image dimensions are greater than 5x5 for this Lab).
 
-To use the constant memory for the convolution mask, you can first transfer the mask data  to the device.
+To use the constant memory for the convolution mask, you can first transfer the mask data to the device.
 Assume you decided to name the pointer to the device array for the mask M.
-As described in Lecture 3-5, you can use `const float * __restrict__ M` as one of the parameters during your kernel launch.
+You can use `const float * __restrict__ M` as one of the parameters during your kernel launch.
 This informs the compiler that the contents of the mask array are constants and will only be accessed through pointer variable `M`.
 This will enable the compiler to place the data into constant memory and allow the SM hardware to aggressively cache the mask data at runtime.
 
@@ -32,7 +38,7 @@ Before starting this lab, make sure that:
 
 The input is an interleaved image of `height x width x channels`.
 By interleaved, we mean that the the element `I[y][x]` contains three values representing the RGB channels.
-This means that to index a particular elementâ€™s value, you will have to do something like:
+This means that to index a particular element's value, you will have to do something like:
 
 ~~~
     index = (yIndex*width + xIndex)*channels + channelIndex;
@@ -43,7 +49,7 @@ For this assignment, the channel index is 0 for R, 1 for G, and 2 for B. So, to 
 For simplicity, you can assume that `channels` is always set to `3`.
 
 
-## Instruction
+## Instructions
 
 Edit the code in the code tab to perform the following:
 
@@ -59,10 +65,9 @@ Edit the code in the code tab to perform the following:
 Instructions about where to place each part of the code is
 demarcated by the `//@@` comment lines.
 
-
 ## Pseudo Code
 
-Your sequential pseudo code would look something like
+A sequential pseudo code would look something like this:
 
 ~~~
 maskWidth := 5
@@ -93,8 +98,8 @@ end
 where `clamp` is defined as
 
 ~~~
-def clamp(x, start, end)
-  return min(max(x, start), end)
+def clamp(x, lower, upper)
+  return min(max(x, lower), upper)
 end
 ~~~
 
