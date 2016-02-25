@@ -6,3 +6,6 @@
 *.fatbin
 build
 build-*
+
+.srclib-cache/
+.srclib-store/

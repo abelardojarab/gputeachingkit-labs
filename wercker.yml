@@ -9,21 +9,38 @@ box: webgpu/pandoc
 build:
   steps:
     - script:
-      name: install cmake
+      name: install golang
       code: |
-        apt-get install -y --no-install-recommends cmake build-essential
+        version="1.6"
+        sudo apt-get update
+        sudo apt-get install bzr
+        sudo apt-get install mercurial
+        wget http://golang.org/dl/go${version}.linux-amd64.tar.gz
+        sudo tar -C /usr/local -xzf go${version}.linux-amd64.tar.gz
+        echo "export PATH=$PATH:/usr/local/go/bin" | sudo tee -a /etc/profile
+        rm go${version}.linux-amd64.tar.gz
+        # Set GOPATH
+        export GOPATH="$HOME/go"
+        echo 'export GOPATH="$HOME/go"' | sudo tee -a /etc/profile
+        # Adds go bin directory to path so tools
+        # and buils are available on the commandline
+        export PATH="$PATH:$GOPATH/bin"
+        echo 'export PATH="$PATH:$GOPATH/bin"' | sudo tee -a /etc/profile
+        # Make actual go workspace dir structure
+        mkdir -p "$HOME/go/{src,pkg,bin}"
+
+    - script:
+      name: install ssh key
+      code: |
+        mkdir -p ~/.ssh
+        echo "$SSH_KEY" > ~/.ssh/id_rsa
+        git config --global url."git@gitlab.com:".insteadOf "https://gitlab.com"
     - script:
       name: build documents
       code: |
+        go get gitlab.com/abduld/wgx-pandoc
         mkdir build
-        cd build 
-        cmake -DBUILD_LIBWB_LIBRARY=OFF \
-              -DBUILD_SOLUTION=OFF \
-              -DBUILD_DESCRIPTION=ON \
-              -DBUILD_DATASET_GENERATOR=OFF \
-              -DBUILD_TEMPLATE=OFF .. 
-        make
-        ls -l
+        wgx-pandoc .
     - s3sync:
       key-id: $AWS_ACCESS_KEY_ID
       key-secret: $AWS_SECRET_ACCESS_KEY
@@ -33,4 +50,4 @@ build:
   after-steps:
     - wantedly/pretty-slack-notify:
         webhook_url: $SLACK_WEBHOOK_URL
-
+    - rm ~/.ssh/id_rsa
