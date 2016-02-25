@@ -10,7 +10,21 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 
 project(teachingkit-labs)
-find_package(CUDA REQUIRED)
+
+set(WBLIB "wb")
+
+
+set(BUILD_LIBWB_LIBRARY ON CACHE BOOL "Turn on build of libwb library")
+set(BUILD_SOLUTION ON CACHE BOOL "Turn on build of code solution")
+set(BUILD_DESCRIPTION OFF CACHE BOOL "Turn on build of lab description")
+set(BUILD_DATASET_GENERATOR ON CACHE BOOL "Turn on building of dataset generator")
+set(BUILD_TEMPLATE OFF CACHE BOOL "Turn on build of code templates")
+
+if (BUILD_SOLUTION OR BUILD_TEMPLATE) 
+  find_package(CUDA REQUIRED)
+else()
+  find_package(CUDA)
+endif ()
 
 # allow C99 for cmake versions less than 3.1
 macro(use_c99)
@@ -56,7 +70,7 @@ if (APPLE)
 				    message(FATAL_ERROR "Could not find host compiler 'clang++'")
 				endif ()
 				set(CUDA_HOST_COMPILER ${CLANG_EXECUTABLE})
-			        set(CMAKE_CXX_FLAGS    "${CMAKE_CXX_FLAGS} -std=c++11 -isystem ${CUDA_INCLUDE_DIRS}")
+			        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -isystem ${CUDA_INCLUDE_DIRS}")
 				set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -stdlib=libc++" )
     endif ()
 endif ()
@@ -81,15 +95,6 @@ if (UNIX)
         endif ()
     endif ()
 endif ()
-
-set(WBLIB "wb")
-
-
-set(BUILD_LIBWB_LIBRARY ON CACHE BOOL "Turn on build of libwb library")
-set(BUILD_SOLUTION ON CACHE BOOL "Turn on build of code solution")
-set(BUILD_DESCRIPTION OFF CACHE BOOL "Turn on build of lab description")
-set(BUILD_DATASET_GENERATOR ON CACHE BOOL "Turn on building of dataset generator")
-set(BUILD_TEMPLATE OFF CACHE BOOL "Turn on build of code templates")
 
 include_directories(${PROJECT_SOURCE_DIR}/support)
 
@@ -125,7 +130,7 @@ macro(add_generator NAME SOURCES)
 		if(UNIX)
 			target_link_libraries("${NAME}_DatasetGenerator" ${LINK_LIBRARIES})
 		endif(UNIX)
-              endif (BUILD_DATASET_GENERATOR)
+  endif (BUILD_DATASET_GENERATOR)
 endmacro(add_generator)
 
 macro(add_lab NAME)

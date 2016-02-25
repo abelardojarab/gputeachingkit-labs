@@ -1,5 +1,6 @@
 # GPU Teaching Kit -- Accelerated Computing Labs
 
+[![wercker status](https://app.wercker.com/status/9d9b1d04c2f4c3afc6a3d829dcf7e68e/m "wercker status")](https://app.wercker.com/project/bykey/9d9b1d04c2f4c3afc6a3d829dcf7e68e)
 
 ## Software Requirements
 
@@ -24,7 +25,7 @@ the process of compiling and running a lab.
 
 In this section we describe how to setup your machine to compile the labs.
 First, regardless of the platform compiling the labs the
-[CUDA Toolkit](https://developer.nvidia.com/cuda-downloads) and 
+[CUDA Toolkit](https://developer.nvidia.com/cuda-downloads) and
 [CMake](https://cmake.org/) must be installed.
 
 Now, checkout the the GPU Teaching Kit -- Accelerated Computing Labs from the
@@ -82,7 +83,7 @@ as part of the build process
 as part of the build process (the templates are missing critical code that
 makes them uncompilable).
 
-Templates are meant to be used as starting 
+Templates are meant to be used as starting
 code for students whereas the solution is meant for instructor use.
 
 If you have modified the above, then you should type `g` to regenerate the Makefile and then `q` to quit out of `ccmake`.
@@ -112,7 +113,7 @@ The CMake system then searches the system and populates the proper options in yo
 
 ![compiler-options](https://s3.amazonaws.com/gpuedx/resources/screenshots/3.PNG)
 
-Clicking `Generate` button, the CMake system creates the build scripts in the previously specified build directory. Since we selected Visual Studio, a Visual Studio solution is generated. 
+Clicking `Generate` button, the CMake system creates the build scripts in the previously specified build directory. Since we selected Visual Studio, a Visual Studio solution is generated.
 
 ![vs-dir](https://s3.amazonaws.com/gpuedx/resources/screenshots/4.PNG)
 
