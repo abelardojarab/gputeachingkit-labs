@@ -1,4 +1,4 @@
-// MP 4 Reduction
+
 // Given a list (lst) of length n
 // Output its sum = lst[0] + lst[1] + ... + lst[n-1];
 
