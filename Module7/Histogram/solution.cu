@@ -118,10 +118,6 @@ int main(int argc, char* argv[]) {
   CUDA_CHECK(cudaDeviceSynchronize());
   wbTime_stop(Copy, "Copying output memory to the CPU");
 
-  for (int i = 0; i < 10; ++i) {
-    fprintf(stderr, "%d\n", hostBins[i]);
-  }
-
   wbTime_start(GPU, "Freeing GPU Memory");
   //@@ Free the GPU memory here
   CUDA_CHECK(cudaFree(deviceInput));
