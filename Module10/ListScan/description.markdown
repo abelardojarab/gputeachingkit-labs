@@ -5,7 +5,7 @@ author: GPU Teaching Kit -- Accelerated Computing
 
 # Objective
 
-Implement a kernel to perform a parallel scan on a 1D list.
+Implement a kernel to perform an inclusive parallel scan on a 1D list.
 The scan operator will be the addition (plus) operator.
 You should implement the work efficient kernel in Lecture 4.6.
 Your kernel should be able to handle input lists of arbitrary length.
