@@ -5,7 +5,7 @@ author: GPU Teaching Kit -- Accelerated Computing
 
 # Objective
 
-Implement a kernel to perform an exclusive prefix scan on a 1D list using
+Implement a kernel to perform an inclusive prefix scan on a 1D list using
 [Thrust](https://thrust.github.io/).
 
 Given an input
@@ -44,7 +44,7 @@ Edit the code in the code tab to perform the following:
 
 * Copy host memory to device
 
-* Invoke `thrust::exclusive_scan`
+* Invoke `thrust::inclusive_scan`
 
 * Copy results from device to host
 
@@ -59,7 +59,7 @@ The most recent version of source code for this lab along with the build-scripts
 The executable generated as a result of compiling the lab can be run using the following command:
 
 ~~~
-./ThrustListReduction_Template -e <expected.raw> \
+./ThrustListScan_Template -e <expected.raw> \
   -i <input.raw> -o <output.raw> -t vector
 ~~~
 
