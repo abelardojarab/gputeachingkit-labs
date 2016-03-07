@@ -1,4 +1,4 @@
-// MP Reduction
+
 // Given a list (lst) of length n
 // Output its sum = lst[0] + lst[1] + ... + lst[n-1];
 
@@ -11,14 +11,15 @@
     cudaError_t err = stmt;                                               \
     if (err != cudaSuccess) {                                             \
       wbLog(ERROR, "Failed to run stmt ", #stmt);                         \
-      wbLog(ERROR, "Got CUDA error ...  ", cudaGetErrorString(err));      \
       return -1;                                                          \
     }                                                                     \
   } while (0)
 
-void total(float *input, float *output, int len) {
+__global__ void total(float *input, float *output, int len) {
   //@@ Load a segment of the input vector into shared memory
+
   //@@ Traverse the reduction tree
+
   //@@ Write the computed sum of the block to the output vector at the
   //@@ correct index
 }
@@ -54,24 +55,19 @@ int main(int argc, char **argv) {
 
   wbTime_start(GPU, "Allocating GPU memory.");
   //@@ Allocate GPU memory here
-
   wbTime_stop(GPU, "Allocating GPU memory.");
 
   wbTime_start(GPU, "Copying input memory to the GPU.");
   //@@ Copy memory to the GPU here
-
   wbTime_stop(GPU, "Copying input memory to the GPU.");
   //@@ Initialize the grid and block dimensions here
-
   wbTime_start(Compute, "Performing CUDA computation");
   //@@ Launch the GPU Kernel here
-
   cudaDeviceSynchronize();
   wbTime_stop(Compute, "Performing CUDA computation");
 
   wbTime_start(Copy, "Copying output memory to the CPU");
   //@@ Copy the GPU memory back to the CPU here
-
   wbTime_stop(Copy, "Copying output memory to the CPU");
 
   /********************************************************************
@@ -80,13 +76,9 @@ int main(int argc, char **argv) {
    * recursively and support any size input. For simplicity, we do not
    * require that for this lab.
    ********************************************************************/
-  for (ii = 1; ii < numOutputElements; ii++) {
-    hostOutput[0] += hostOutput[ii];
-  }
 
   wbTime_start(GPU, "Freeing GPU Memory");
   //@@ Free the GPU memory here
-
   wbTime_stop(GPU, "Freeing GPU Memory");
 
   wbSolution(args, hostOutput, 1);
