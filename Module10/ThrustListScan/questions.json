@@ -1,0 +1,8 @@
+{
+	"questions": [
+		"Name 3 applications of reduction.",
+		"Suppose the input is greater than 2048*6535, what modifications are needed to your code?",
+		"Suppose a you want to perform the algorithm using a binary operator that's not commutative, can you use still use parallel reduction?",
+		"Is it possible to get different results from running the serial version and parallel version of reduction? EXPLAIN."
+	]
+}
