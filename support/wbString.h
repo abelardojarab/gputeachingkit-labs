@@ -3,13 +3,13 @@
 #ifndef __WB_STRING_H__
 #define __WB_STRING_H__
 
-#include <wb.h>
-#include <vector>
-#include <string>
-#include <ostream>
-#include <iostream>
-#include <sstream>
 #include <cstring>
+#include <iostream>
+#include <ostream>
+#include <sstream>
+#include <string>
+#include <vector>
+#include <wb.h>
 
 using std::string;
 using std::vector;
@@ -204,9 +204,10 @@ static inline string wbString(const T0 &x0, const T1 &x1, const T2 &x2,
 
 template <typename T0, typename T1, typename T2, typename T3, typename T4,
           typename T5, typename T6, typename T7, typename T8, typename T9>
-static inline string
-wbString(const T0 &x0, const T1 &x1, const T2 &x2, const T3 &x3, const T4 &x4,
-         const T5 &x5, const T6 &x6, const T7 &x7, const T8 &x8, const T9 &x9) {
+static inline string wbString(const T0 &x0, const T1 &x1, const T2 &x2,
+                              const T3 &x3, const T4 &x4, const T5 &x5,
+                              const T6 &x6, const T7 &x7, const T8 &x8,
+                              const T9 &x9) {
   stringstream ss;
   ss << wbString(x0) << wbString(x1) << wbString(x2) << wbString(x3)
      << wbString(x4) << wbString(x5) << wbString(x6) << wbString(x7)
@@ -233,10 +234,10 @@ static inline string wbString(const T0 &x0, const T1 &x1, const T2 &x2,
 template <typename T0, typename T1, typename T2, typename T3, typename T4,
           typename T5, typename T6, typename T7, typename T8, typename T9,
           typename T10, typename T11>
-static inline string wbString(const T0 &x0, const T1 &x1, const T2 &x2,
-                              const T3 &x3, const T4 &x4, const T5 &x5,
-                              const T6 &x6, const T7 &x7, const T8 &x8,
-                              const T9 &x9, const T10 &x10, const T11 &x11) {
+static inline string
+wbString(const T0 &x0, const T1 &x1, const T2 &x2, const T3 &x3,
+         const T4 &x4, const T5 &x5, const T6 &x6, const T7 &x7,
+         const T8 &x8, const T9 &x9, const T10 &x10, const T11 &x11) {
   stringstream ss;
   ss << wbString(x0) << wbString(x1) << wbString(x2) << wbString(x3)
      << wbString(x4) << wbString(x5) << wbString(x6) << wbString(x7)
@@ -248,10 +249,11 @@ static inline string wbString(const T0 &x0, const T1 &x1, const T2 &x2,
 template <typename T0, typename T1, typename T2, typename T3, typename T4,
           typename T5, typename T6, typename T7, typename T8, typename T9,
           typename T10, typename T11, typename T12>
-static inline string
-wbString(const T0 &x0, const T1 &x1, const T2 &x2, const T3 &x3, const T4 &x4,
-         const T5 &x5, const T6 &x6, const T7 &x7, const T8 &x8, const T9 &x9,
-         const T10 &x10, const T11 &x11, const T12 &x12) {
+static inline string wbString(const T0 &x0, const T1 &x1, const T2 &x2,
+                              const T3 &x3, const T4 &x4, const T5 &x5,
+                              const T6 &x6, const T7 &x7, const T8 &x8,
+                              const T9 &x9, const T10 &x10, const T11 &x11,
+                              const T12 &x12) {
   stringstream ss;
   ss << wbString(x0) << wbString(x1) << wbString(x2) << wbString(x3)
      << wbString(x4) << wbString(x5) << wbString(x6) << wbString(x7)
@@ -263,10 +265,11 @@ wbString(const T0 &x0, const T1 &x1, const T2 &x2, const T3 &x3, const T4 &x4,
 template <typename T0, typename T1, typename T2, typename T3, typename T4,
           typename T5, typename T6, typename T7, typename T8, typename T9,
           typename T10, typename T11, typename T12, typename T13>
-static inline string
-wbString(const T0 &x0, const T1 &x1, const T2 &x2, const T3 &x3, const T4 &x4,
-         const T5 &x5, const T6 &x6, const T7 &x7, const T8 &x8, const T9 &x9,
-         const T10 &x10, const T11 &x11, const T12 &x12, const T13 &x13) {
+static inline string wbString(const T0 &x0, const T1 &x1, const T2 &x2,
+                              const T3 &x3, const T4 &x4, const T5 &x5,
+                              const T6 &x6, const T7 &x7, const T8 &x8,
+                              const T9 &x9, const T10 &x10, const T11 &x11,
+                              const T12 &x12, const T13 &x13) {
   stringstream ss;
   ss << wbString(x0) << wbString(x1) << wbString(x2) << wbString(x3)
      << wbString(x4) << wbString(x5) << wbString(x6) << wbString(x7)
@@ -300,7 +303,8 @@ static inline char *wbString_toLower(const char *str) {
   }
 }
 
-static inline wbBool wbString_startsWith(const char *str, const char *prefix) {
+static inline wbBool wbString_startsWith(const char *str,
+                                         const char *prefix) {
   while (*prefix != '\0') {
     if (*str == '\0' || *str != *prefix) {
       return wbFalse;

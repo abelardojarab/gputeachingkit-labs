@@ -2,7 +2,8 @@
 
 #include <wb.h>
 
-static inline void wbImportCSV_setFile(wbImportCSV_t csv, const char *path) {
+static inline void wbImportCSV_setFile(wbImportCSV_t csv,
+                                       const char *path) {
   if (csv != NULL) {
     if (wbImportCSV_getFile(csv) != NULL) {
       wbFile_delete(wbImportCSV_getFile(csv));
@@ -41,8 +42,9 @@ static inline void wbImportCSV_delete(wbImportCSV_t csv) {
   }
 }
 
-static inline wbImportCSV_t
-wbImportCSV_findDimensions(wbImportCSV_t csv, int *resRows, int *resColumns) {
+static inline wbImportCSV_t wbImportCSV_findDimensions(wbImportCSV_t csv,
+                                                       int *resRows,
+                                                       int *resColumns) {
   int rows = 0, columns = -1;
   char *line;
   wbFile_t file;
@@ -168,7 +170,8 @@ static inline wbReal_t *csv_readAsReal(wbFile_t file, char sep, int rows,
   return data;
 }
 
-static inline wbImportCSV_t wbImportCSV_read(wbImportCSV_t csv, wbType_t type) {
+static inline wbImportCSV_t wbImportCSV_read(wbImportCSV_t csv,
+                                             wbType_t type) {
   void *data;
   wbFile_t file;
   char seperator;
@@ -218,7 +221,8 @@ static inline wbImportCSV_t wbImportCSV_readAsReal(wbImportCSV_t csv) {
   return wbImportCSV_read(csv, wbType_real);
 }
 
-static inline void wbImportRaw_setFile(wbImportRaw_t raw, const char *path) {
+static inline void wbImportRaw_setFile(wbImportRaw_t raw,
+                                       const char *path) {
   if (raw != NULL) {
     if (wbImportRaw_getFile(raw) != NULL) {
       wbFile_delete(wbImportRaw_getFile(raw));
@@ -272,8 +276,8 @@ static inline char *lineStrip(const char *line) {
   size_t slen = strlen(line);
 
   iter += slen - 1;
-  while (*iter == '\0' || *iter == '\r' || *iter == '\t' || *iter == '\n' ||
-         *iter == ' ') {
+  while (*iter == '\0' || *iter == '\r' || *iter == '\t' ||
+         *iter == '\n' || *iter == ' ') {
     *iter-- = '\0';
   }
   return sl;
@@ -317,7 +321,8 @@ static inline wbBool wbImportRaw_findDimensions(wbImportRaw_t raw) {
   return wbTrue;
 }
 
-static inline wbImportRaw_t wbImportRaw_read(wbImportRaw_t raw, wbType_t type) {
+static inline wbImportRaw_t wbImportRaw_read(wbImportRaw_t raw,
+                                             wbType_t type) {
   void *data;
   wbFile_t file;
   char seperator;
@@ -365,7 +370,8 @@ static inline wbImportRaw_t wbImportRaw_readAsReal(wbImportRaw_t raw) {
   return wbImportRaw_read(raw, wbType_real);
 }
 
-static inline wbImport_t wbImport_open(const char *file, wbImportKind_t kind) {
+static inline wbImport_t wbImport_open(const char *file,
+                                       wbImportKind_t kind) {
   wbImport_t imp;
 
   if (file == NULL) {
@@ -404,7 +410,8 @@ static inline wbImport_t wbImport_open(const char *file, wbImportKind_t kind) {
   return imp;
 }
 
-static inline wbImport_t wbImport_open(const char *file, const char *type0) {
+static inline wbImport_t wbImport_open(const char *file,
+                                       const char *type0) {
   wbImport_t imp;
   wbImportKind_t kind;
   char *type;

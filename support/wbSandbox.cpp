@@ -5,11 +5,11 @@
 #ifdef WB_USE_SANDBOX
 
 #define _GNU_SOURCE 1
-#include <stdio.h>
-#include <stddef.h>
-#include <stdlib.h>
 #include <errno.h>
 #include <signal.h>
+#include <stddef.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
 
@@ -18,10 +18,10 @@
 #define PR_SET_NO_NEW_PRIVS 38
 #endif
 
-#include <linux/unistd.h>
 #include <linux/audit.h>
 #include <linux/filter.h>
 #include <linux/seccomp.h>
+#include <linux/unistd.h>
 
 #ifndef SECCOMP_MODE_FILTER
 #define SECCOMP_MODE_FILTER 2         /* uses user-supplied filter. */
@@ -54,15 +54,15 @@ struct seccomp_data {
 #define ARCH_NR 0
 #endif
 
-#define VALIDATE_ARCHITECTURE                                                  \
-  BPF_STMT(BPF_LD + BPF_W + BPF_ABS, arch_nr)                                  \
-  , BPF_JUMP(BPF_JMP + BPF_JEQ + BPF_K, ARCH_NR, 1, 0),                        \
+#define VALIDATE_ARCHITECTURE                                             \
+  BPF_STMT(BPF_LD + BPF_W + BPF_ABS, arch_nr)                             \
+  , BPF_JUMP(BPF_JMP + BPF_JEQ + BPF_K, ARCH_NR, 1, 0),                   \
       BPF_STMT(BPF_RET + BPF_K, SECCOMP_RET_KILL)
 
 #define EXAMINE_SYSCALL BPF_STMT(BPF_LD + BPF_W + BPF_ABS, syscall_nr)
 
-#define ALLOW_SYSCALL(name)                                                    \
-  BPF_JUMP(BPF_JMP + BPF_JEQ + BPF_K, __NR_##name, 0, 1)                       \
+#define ALLOW_SYSCALL(name)                                               \
+  BPF_JUMP(BPF_JMP + BPF_JEQ + BPF_K, __NR_##name, 0, 1)                  \
   , BPF_STMT(BPF_RET + BPF_K, SECCOMP_RET_ALLOW)
 
 #define KILL_PROCESS BPF_STMT(BPF_RET + BPF_K, SECCOMP_RET_KILL)

@@ -1,8 +1,8 @@
 
 #ifdef WB_USE_CUSTOM_MALLOC
 
-#include <wb.h>
 #include <sys/mman.h>
+#include <wb.h>
 
 //
 // Memory manager: dynamically allocates memory from
@@ -181,7 +181,8 @@ static mem_header_t *get_mem_from_pool(ulong nquantas) {
 // where the last block was found.
 // If a too-big block is found, it is split and the tail is returned (this
 // way the header of the original needs only to have its size adjusted).
-// The pointer returned to the user points to the free space within the block,
+// The pointer returned to the user points to the free space within the
+// block,
 // which begins one quanta after the header.
 //
 void *memmgr_alloc(ulong nbytes, int *err) {
@@ -191,7 +192,8 @@ void *memmgr_alloc(ulong nbytes, int *err) {
   *err = 0;
 
   // Calculate how many quantas are required: we need enough to house all
-  // the requested bytes, plus the header. The -1 and +1 are there to make sure
+  // the requested bytes, plus the header. The -1 and +1 are there to make
+  // sure
   // that if nbytes is a multiple of nquantas, we don't allocate too much
   //
   ulong nquantas =
@@ -240,9 +242,12 @@ void *memmgr_alloc(ulong nbytes, int *err) {
   }
 }
 
-// Scans the free list, starting at freep, looking the the place to insert the
-// free block. This is either between two existing blocks or at the end of the
-// list. In any case, if the block being freed is adjacent to either neighbor,
+// Scans the free list, starting at freep, looking the the place to insert
+// the
+// free block. This is either between two existing blocks or at the end of
+// the
+// list. In any case, if the block being freed is adjacent to either
+// neighbor,
 // the adjacent blocks are combined.
 //
 void memmgr_free(void *ap) {
@@ -252,7 +257,8 @@ void memmgr_free(void *ap) {
   // acquire pointer to block header
   block = ((mem_header_t *)ap) - 1;
 
-  // Find the correct place to place the block in (the free list is sorted by
+  // Find the correct place to place the block in (the free list is sorted
+  // by
   // address, increasing order)
   //
   for (p = freep; p && !(block > p && block < p->s.next); p = p->s.next) {

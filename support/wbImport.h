@@ -35,11 +35,13 @@ typedef struct st_wbImportCSV_t {
 #define wbImportCSV_getFile(csv) ((csv)->file)
 #define wbImportCSV_getSeperator(csv) ((csv)->seperator)
 
-#define wbImportCSV_setRowCount(csv, val) (wbImportCSV_getRowCount(csv) = val)
-#define wbImportCSV_setColumnCount(csv, val)                                   \
+#define wbImportCSV_setRowCount(csv, val)                                 \
+  (wbImportCSV_getRowCount(csv) = val)
+#define wbImportCSV_setColumnCount(csv, val)                              \
   (wbImportCSV_getColumnCount(csv) = val)
 #define wbImportCSV_setData(csv, val) (wbImportCSV_getData(csv) = val)
-#define wbImportCSV_setSeperator(csv, val) (wbImportCSV_getSeperator(csv) = val)
+#define wbImportCSV_setSeperator(csv, val)                                \
+  (wbImportCSV_getSeperator(csv) = val)
 
 typedef struct st_wbImportRaw_t {
   int rows;
@@ -53,8 +55,9 @@ typedef struct st_wbImportRaw_t {
 #define wbImportRaw_getData(raw) ((raw)->data)
 #define wbImportRaw_getFile(raw) ((raw)->file)
 
-#define wbImportRaw_setRowCount(raw, val) (wbImportRaw_getRowCount(raw) = val)
-#define wbImportRaw_setColumnCount(raw, val)                                   \
+#define wbImportRaw_setRowCount(raw, val)                                 \
+  (wbImportRaw_getRowCount(raw) = val)
+#define wbImportRaw_setColumnCount(raw, val)                              \
   (wbImportRaw_getColumnCount(raw) = val)
 #define wbImportRaw_setData(raw, val) (wbImportRaw_getData(raw) = val)
 

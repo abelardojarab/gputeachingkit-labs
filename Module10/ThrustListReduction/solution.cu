@@ -1,11 +1,11 @@
-#include <wb.h>
-#include <thrust/host_vector.h>
 #include <thrust/device_vector.h>
+#include <thrust/host_vector.h>
+#include <wb.h>
 
 int main(int argc, char **argv) {
   wbArg_t args;
   float total;
-  float *hostInput; // The input 1D list
+  float *hostInput;     // The input 1D list
   int numInputElements; // number of elements in the input list
 
   args = wbArg_read(argc, argv);
@@ -22,7 +22,8 @@ int main(int argc, char **argv) {
   wbTime_start(GPU, "Allocating GPU memory.");
   //@@ Insert code here
   thrust::device_vector<float> deviceInput(numInputElements);
-  thrust::copy(hostInput, hostInput + numInputElements, deviceInput.begin());
+  thrust::copy(hostInput, hostInput + numInputElements,
+               deviceInput.begin());
 
   wbTime_stop(GPU, "Allocating GPU memory.");
 

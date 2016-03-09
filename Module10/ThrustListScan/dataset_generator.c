@@ -1,9 +1,9 @@
 
 #include "stdio.h"
-#include "stdlib.h"
 #include "assert.h"
-#include "string.h"
 #include "limits.h"
+#include "stdlib.h"
+#include "string.h"
 #include "sys/stat.h"
 
 static char base_dir[] = "./ThrustListScan/Dataset";
@@ -71,7 +71,7 @@ static void create_dataset(int datasetNum, int dim) {
   char *output_file_name = strjoin(dir_name, "/output.raw");
 
   float *input_data = generate_data(dim);
-  float *output_data = (float *) malloc (sizeof(float) * dim);
+  float *output_data = (float *)malloc(sizeof(float) * dim);
 
   compute(output_data, input_data, dim);
 

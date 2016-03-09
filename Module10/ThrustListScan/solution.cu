@@ -1,11 +1,11 @@
-#include <wb.h>
-#include <thrust/host_vector.h>
 #include <thrust/device_vector.h>
+#include <thrust/host_vector.h>
+#include <wb.h>
 
 int main(int argc, char **argv) {
   wbArg_t args;
   float *hostInput, *hostOutput; // The input 1D list
-  int num_elements; // number of elements in the input list
+  int num_elements;              // number of elements in the input list
 
   args = wbArg_read(argc, argv);
 
@@ -19,7 +19,7 @@ int main(int argc, char **argv) {
 
   // Declare and allocate the host output array
   //@@ Insert code here
-  hostOutput = (float *) malloc(num_elements * sizeof(float));
+  hostOutput = (float *)malloc(num_elements * sizeof(float));
 
   // Declare and allocate thrust device input and output vectors
   wbTime_start(GPU, "Allocating GPU memory.");
@@ -30,15 +30,15 @@ int main(int argc, char **argv) {
   wbTime_stop(GPU, "Allocating GPU memory.");
 
   // Execute vector addition
-  wbTime_start(Compute, "Doing the computation on the GPU and copying data back to host");
+  wbTime_start(
+      Compute,
+      "Doing the computation on the GPU and copying data back to host");
   //@@ Insert Code here
-  thrust::inclusive_scan(deviceInput.begin(), 
-                         deviceInput.end(), 
+  thrust::inclusive_scan(deviceInput.begin(), deviceInput.end(),
                          deviceOutput.begin());
   thrust::copy(deviceOutput.begin(), deviceOutput.end(), hostOutput);
 
   wbTime_stop(Compute, "Doing the computation on the GPU");
-
 
   wbSolution(args, hostOutput, num_elements);
 

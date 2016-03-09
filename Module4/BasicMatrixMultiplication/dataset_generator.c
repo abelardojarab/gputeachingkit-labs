@@ -1,9 +1,9 @@
 
 #include "stdio.h"
-#include "stdlib.h"
 #include "assert.h"
-#include "string.h"
 #include "limits.h"
+#include "stdlib.h"
+#include "string.h"
 #include "sys/stat.h"
 
 static char base_dir[] = "./MatrixMultiplication/Dataset";
@@ -28,9 +28,9 @@ static void _mkdir(const char *dir) {
 
 #define value(arry, i, j, width) arry[(i)*width + (j)]
 
-static void compute(float *output, float *input0, float *input1, int numARows,
-                    int numAColumns, int numBRows, int numBColumns,
-                    int numCRows, int numCColumns) {
+static void compute(float *output, float *input0, float *input1,
+                    int numARows, int numAColumns, int numBRows,
+                    int numBColumns, int numCRows, int numCColumns) {
 
 #define A(i, j) value(input0, i, j, numAColumns)
 #define B(i, j) value(input1, i, j, numBColumns)
@@ -66,7 +66,8 @@ static char *strjoin(const char *s1, const char *s2) {
   return result;
 }
 
-static void write_data(char *file_name, float *data, int height, int width) {
+static void write_data(char *file_name, float *data, int height,
+                       int width) {
   int ii, jj;
   FILE *handle = fopen(file_name, "w");
   fprintf(handle, "%d %d\n", height, width);
@@ -105,7 +106,8 @@ static void write_transpose_data(char *file_name, float *data, int height,
   fclose(handle);
 }
 
-static void create_dataset(int num, int numARows, int numACols, int numBCols) {
+static void create_dataset(int num, int numARows, int numACols,
+                           int numBCols) {
   char dir_name[PATH_MAX];
   int numBRows = numACols;
   int numCRows = numARows;
@@ -123,8 +125,8 @@ static void create_dataset(int num, int numARows, int numACols, int numBCols) {
   float *input1_data = generate_data(numBRows, numBCols);
   float *output_data = (float *)calloc(sizeof(float), numCRows * numCCols);
 
-  compute(output_data, input0_data, input1_data, numARows, numACols, numBRows,
-          numBCols, numCRows, numCCols);
+  compute(output_data, input0_data, input1_data, numARows, numACols,
+          numBRows, numBCols, numCRows, numCCols);
 
   write_transpose_data(input0_file_name, input0_data, numARows, numACols);
   write_data(input1_file_name, input1_data, numBRows, numBCols);

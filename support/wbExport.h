@@ -25,8 +25,9 @@ typedef struct st_wbExportRaw_t {
 #define wbExportRaw_getRowCount(raw) ((raw)->rows)
 #define wbExportRaw_getFile(raw) ((raw)->file)
 
-#define wbExportRaw_setRowCount(raw, val) (wbExportRaw_getRowCount(raw) = val)
-#define wbExportRaw_setColumnCount(raw, val)                                   \
+#define wbExportRaw_setRowCount(raw, val)                                 \
+  (wbExportRaw_getRowCount(raw) = val)
+#define wbExportRaw_setColumnCount(raw, val)                              \
   (wbExportRaw_getColumnCount(raw) = val)
 
 typedef struct st_wbExportCSV_t {
@@ -41,10 +42,12 @@ typedef struct st_wbExportCSV_t {
 #define wbExportCSV_getFile(csv) ((csv)->file)
 #define wbExportCSV_getSeperator(csv) ((csv)->seperator)
 
-#define wbExportCSV_setRowCount(csv, val) (wbExportCSV_getRowCount(csv) = val)
-#define wbExportCSV_setColumnCount(csv, val)                                   \
+#define wbExportCSV_setRowCount(csv, val)                                 \
+  (wbExportCSV_getRowCount(csv) = val)
+#define wbExportCSV_setColumnCount(csv, val)                              \
   (wbExportCSV_getColumnCount(csv) = val)
-#define wbExportCSV_setSeperator(csv, val) (wbExportCSV_getSeperator(csv) = val)
+#define wbExportCSV_setSeperator(csv, val)                                \
+  (wbExportCSV_getSeperator(csv) = val)
 
 typedef struct st_wbExport_t {
   wbExportKind_t kind;
@@ -71,7 +74,8 @@ typedef struct st_wbExport_t {
 
 void wbExport(const char *file, int *data, int rows, int columns);
 void wbExport(const char *file, int *data, int rows);
-void wbExport(const char *file, unsigned char *data, int rows, int columns);
+void wbExport(const char *file, unsigned char *data, int rows,
+              int columns);
 void wbExport(const char *file, unsigned char *data, int rows);
 void wbExport(const char *file, int *data, int rows, int columns);
 void wbExport(const char *file, int *data, int rows);

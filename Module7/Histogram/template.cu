@@ -2,17 +2,19 @@
 
 #define NUM_BINS 4096
 
-#define CUDA_CHECK(ans) { gpuAssert((ans), __FILE__, __LINE__); }
-inline void gpuAssert(cudaError_t code, const char *file, int line, bool abort=true)
-{
-   if (code != cudaSuccess) 
-   {
-      fprintf(stderr,"GPUassert: %s %s %d\n", cudaGetErrorString(code), file, line);
-      if (abort) exit(code);
-   }
+#define CUDA_CHECK(ans)                                                   \
+  { gpuAssert((ans), __FILE__, __LINE__); }
+inline void gpuAssert(cudaError_t code, const char *file, int line,
+                      bool abort = true) {
+  if (code != cudaSuccess) {
+    fprintf(stderr, "GPUassert: %s %s %d\n", cudaGetErrorString(code),
+            file, line);
+    if (abort)
+      exit(code);
+  }
 }
 
-int main(int argc, char* argv[]) {
+int main(int argc, char *argv[]) {
   wbArg_t args;
   int inputLength;
   unsigned int *hostInput;
@@ -23,8 +25,8 @@ int main(int argc, char* argv[]) {
   args = wbArg_read(argc, argv);
 
   wbTime_start(Generic, "Importing data and creating memory on host");
-  hostInput =
-      (unsigned int *)wbImport(wbArg_getInputFile(args, 0), &inputLength, "Integer");
+  hostInput = (unsigned int *)wbImport(wbArg_getInputFile(args, 0),
+                                       &inputLength, "Integer");
   hostBins = (unsigned int *)malloc(NUM_BINS * sizeof(unsigned int));
   wbTime_stop(Generic, "Importing data and creating memory on host");
 
@@ -41,7 +43,8 @@ int main(int argc, char* argv[]) {
   CUDA_CHECK(cudaDeviceSynchronize());
   wbTime_stop(GPU, "Copying input memory to the GPU.");
 
-  // Launch kernel ----------------------------------------------------------
+  // Launch kernel
+  // ----------------------------------------------------------
   wbLog(TRACE, "Launching kernel");
   wbTime_start(Compute, "Performing CUDA computation");
   //@@ Perform kernel computation here
@@ -56,7 +59,8 @@ int main(int argc, char* argv[]) {
   //@@ Free the GPU memory here
   wbTime_stop(GPU, "Freeing GPU Memory");
 
-  // Verify correctness -----------------------------------------------------
+  // Verify correctness
+  // -----------------------------------------------------
   wbSolution(args, hostBins, NUM_BINS);
 
   free(hostBins);

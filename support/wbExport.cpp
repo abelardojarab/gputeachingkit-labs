@@ -1,7 +1,8 @@
 
 #include <wb.h>
 
-static inline void wbExportRaw_setFile(wbExportRaw_t raw, const char *path) {
+static inline void wbExportRaw_setFile(wbExportRaw_t raw,
+                                       const char *path) {
   if (raw != NULL) {
     if (wbExportRaw_getFile(raw) != NULL) {
       wbFile_delete(wbExportRaw_getFile(raw));
@@ -36,8 +37,9 @@ static inline void wbExportRaw_delete(wbExportRaw_t raw) {
   return;
 }
 
-static inline void wbExportRaw_write(wbExportRaw_t raw, void *data, int rows,
-                                     int columns, wbType_t type) {
+static inline void wbExportRaw_write(wbExportRaw_t raw, void *data,
+                                     int rows, int columns,
+                                     wbType_t type) {
   int ii, jj;
   FILE *handle;
   wbFile_t file;
@@ -83,7 +85,8 @@ static inline void wbExportRaw_write(wbExportRaw_t raw, void *data, int rows,
   return;
 }
 
-static inline void wbExportCSV_setFile(wbExportCSV_t csv, const char *path) {
+static inline void wbExportCSV_setFile(wbExportCSV_t csv,
+                                       const char *path) {
   if (csv != NULL) {
     if (wbExportCSV_getFile(csv) != NULL) {
       wbFile_delete(wbExportCSV_getFile(csv));
@@ -118,8 +121,9 @@ static inline void wbExportCSV_delete(wbExportCSV_t csv) {
   }
 }
 
-static inline void wbExportCSV_write(wbExportCSV_t csv, void *data, int rows,
-                                     int columns, char sep, wbType_t type) {
+static inline void wbExportCSV_write(wbExportCSV_t csv, void *data,
+                                     int rows, int columns, char sep,
+                                     wbType_t type) {
   int ii, jj;
   wbFile_t file;
   FILE *handle;
@@ -167,7 +171,8 @@ static inline void wbExportCSV_write(wbExportCSV_t csv, void *data, int rows,
   return;
 }
 
-static inline wbExport_t wbExport_open(const char *file, wbExportKind_t kind) {
+static inline wbExport_t wbExport_open(const char *file,
+                                       wbExportKind_t kind) {
   wbExport_t exprt;
 
   if (file == NULL) {
@@ -201,7 +206,8 @@ static inline wbExport_t wbExport_open(const char *file, wbExportKind_t kind) {
   return exprt;
 }
 
-static inline wbExport_t wbExport_open(const char *file, const char *type0) {
+static inline wbExport_t wbExport_open(const char *file,
+                                       const char *type0) {
   wbExport_t exprt;
   wbExportKind_t kind;
   char *type;
@@ -340,7 +346,8 @@ void wbExport(const char *file, wbReal_t *data, int rows) {
   return;
 }
 
-void wbExport(const char *file, unsigned char *data, int rows, int columns) {
+void wbExport(const char *file, unsigned char *data, int rows,
+              int columns) {
   wbExportKind_t kind;
   wbExport_t exprt;
 

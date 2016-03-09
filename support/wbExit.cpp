@@ -58,7 +58,8 @@ void wb_atExit(void) {
       cout << "]" << endl; // close logger
 
       cout << "," << endl; // start solutionExists
-      cout << wbString_quote("cuda_memory") << ":" << _cudaMallocSize << ",\n";
+      cout << wbString_quote("cuda_memory") << ":" << _cudaMallocSize
+           << ",\n";
 
       if (solutionJSON) {
         cout << wbString_quote("solution_exists") << ": true,\n";
@@ -82,7 +83,8 @@ void wb_atExit(void) {
          << "],\n";
 
 #ifdef WB_USE_CUDA
-    cout << wbString_quote("cuda_memory") << ":" << _cudaMallocSize << ",\n";
+    cout << wbString_quote("cuda_memory") << ":" << _cudaMallocSize
+         << ",\n";
 #endif /* WB_USE_CUDA */
 
     if (solutionJSON) {

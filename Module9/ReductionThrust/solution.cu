@@ -1,6 +1,6 @@
-#include <wb.h>
-#include <thrust/host_vector.h>
 #include <thrust/device_vector.h>
+#include <thrust/host_vector.h>
+#include <wb.h>
 
 int main(int argc, char *argv[]) {
   wbArg_t args;
@@ -12,8 +12,7 @@ int main(int argc, char *argv[]) {
 
   // Import host input data
   wbTime_start(Generic, "Importing data to host");
-  hostInput =
-      (float *)wbImport(wbArg_getInputFile(args, 0), &inputLength);
+  hostInput = (float *)wbImport(wbArg_getInputFile(args, 0), &inputLength);
   wbTime_stop(Generic, "Importing data to host");
 
   // Declare and allocate host output

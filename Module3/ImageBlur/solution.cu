@@ -29,7 +29,8 @@ __global__ void blurKernel(float *out, float *in, int width, int height) {
         int currow = row + blurrow;
         int curcol = col + blurcol;
         // Verify we have a valid image pixel
-        if (currow > -1 && currow < height && curcol > -1 && curcol < width) {
+        if (currow > -1 && currow < height && curcol > -1 &&
+            curcol < width) {
           pixVal += in[currow * width + curcol];
           pixels++; // Keep track of number of pixels in the avg
         }

@@ -9,3 +9,5 @@ build-*
 
 .srclib-cache/
 .srclib-store/
+*.swp
+*.log

@@ -30,7 +30,8 @@ static inline cudaError_t wbCUDAMalloc(void **devPtr, size_t sz) {
 
   if (idx == 0) {
     srand(time(NULL));
-    memset(_cudaMemoryList, 0, sizeof(wbCUDAMemory_t) * _cudaMemoryListSize);
+    memset(_cudaMemoryList, 0,
+           sizeof(wbCUDAMemory_t) * _cudaMemoryListSize);
   }
 
   if (err == cudaSuccess) {
@@ -54,10 +55,12 @@ static inline cudaError_t wbCUDAMalloc(void **devPtr, size_t sz) {
 static inline cudaError_t wbCUDAFree(void *mem) {
   int idx = _cudaMemoryListIdx;
   if (idx == 0) {
-    memset(_cudaMemoryList, 0, sizeof(wbCUDAMemory_t) * _cudaMemoryListSize);
+    memset(_cudaMemoryList, 0,
+           sizeof(wbCUDAMemory_t) * _cudaMemoryListSize);
   }
   for (int ii = 0; ii < idx; ii++) {
-    if (_cudaMemoryList[ii].mem != NULL && _cudaMemoryList[ii].mem == mem) {
+    if (_cudaMemoryList[ii].mem != NULL &&
+        _cudaMemoryList[ii].mem == mem) {
       cudaError_t err = cudaFree(mem);
       _cudaMallocSize -= _cudaMemoryList[ii].sz;
       _cudaMemoryList[ii].mem = NULL;

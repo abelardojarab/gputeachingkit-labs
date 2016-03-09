@@ -28,9 +28,10 @@ static void sort(int *data, int *key, int start, int end) {
   }
 }
 
-EXTERN_C void CSRToJDS(int dim, int *csrRowPtr, int *csrColIdx, float *csrData,
-                       int **jdsRowPerm, int **jdsRowNNZ, int **jdsColStartIdx,
-                       int **jdsColIdx, float **jdsData) {
+EXTERN_C void CSRToJDS(int dim, int *csrRowPtr, int *csrColIdx,
+                       float *csrData, int **jdsRowPerm, int **jdsRowNNZ,
+                       int **jdsColStartIdx, int **jdsColIdx,
+                       float **jdsData) {
 
   // Row Permutation Vector
   *jdsRowPerm = (int *)malloc(sizeof(int) * dim);
