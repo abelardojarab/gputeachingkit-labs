@@ -1,7 +1,7 @@
 {
 	"answers": [
 		"One dot-product per output matrix element. $2 * numACols * numCRows * numCCols$",
-		"Each thread does $2 * ceil(numACols / TILE\_WIDTH)$  and there are $numCCols * numCRows$ active threads.",
+		"Each thread does $2 * ceil(numACols / TILE_WIDTH)$  and there are $numCCols * numCRows$ active threads.",
 		"Only the output matrix is written. $numCRows * numCCols$",
 		"Adjusting kernel launch parameters for optimal occupancy, ",
 		"Address index translation from the global space to the shared memory space is a new place to make errors.",
