@@ -9,7 +9,7 @@ The purpose of this lab is to implement a histogramming algorithm for an input a
 integers. This approach composes several distinct algorithmic steps to compute a histogram,
 which makes Thrust a valuable tools for its implementation.
 
-## Problem Setup
+# Problem Setup
 
 Consider the dataset 
 
@@ -25,7 +25,7 @@ Note that the number of bins is equal to
 
     max(input) + 1
 
-## Histogram Sort Approach
+# Histogram Sort Approach
 
 First, sort the input data using `thrust::sort`. Continuing with the original example:
 
@@ -57,11 +57,7 @@ Check the thrust documentation for details of how to use `upper_bound` and `adja
 
 # Prerequisites
 
-Before starting this lab, make sure that:
-
-* Requirement 1
-
-* Requirement 2
+Before starting this lab, make sure that you have completed all of the Module 7 lecture videos.
 
 # Instructions
 

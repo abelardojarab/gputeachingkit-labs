@@ -2,7 +2,7 @@
 	"answers": [
 		"Image processing, signal+processing, stencil operations.",
 		"Each output location requires KERNEL\\_WIDTH * KERNEL\\_WIDTH, and there are width*height*channels outputs",
-		"Each thread block reads (TILE\\_WIDTH+MASK\\_WIDTH-1)\\^2. There are width/TILE\\_WIDTH * height/TILE\\_WIDTH thread blocks, for a total of (TILE\\_WIDTH+MASK\\_WIDTH-1)\\^2 * height * width / TILE\\_WIDTH\\^2. This includes halo elements, which are not read. Subtract ((height+MASK\\_WIDTH/2)(width+MASK\\_WIDTH/2)-height*width)",
+		"Each thread block reads $(TILE\\_ WIDTH+MASK\\_WIDTH-1)^2$. There are $width/TILE\\_WIDTH * height/TILE\\_WIDTH$ thread blocks, for a total of $(TILE\\_WIDTH+MASK\\_WIDTH-1)^2 * height * width / TILE\\_WIDTH^2$. This includes halo elements, which are not read. Subtract $((height+MASK\\_WIDTH/2)(width+MASK\\_WIDTH/2)-height*width)$",
 		"One write per output location, or width*height*channels.",
 		"All threads do the same amount of convolution work, which is KERNEL\\_WIDTH * KERNEL\\_WIDTH",
 		"This will depend on the target machine. The CPU implementation's performance will drop with input size as the problem grows too large for the cache. The GPU implementation's FLOP rate should remain relatively constant across input sizes.",

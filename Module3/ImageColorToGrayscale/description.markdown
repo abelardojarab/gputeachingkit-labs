@@ -31,9 +31,22 @@ Before starting this lab, make sure that:
 
 # Image Format
 
-For people who are developing on their own system.
-The input image is stored in PPM `P6` format while the output grayscale image is stored in PPM `P5` format. Students can  create their own input images by exporting their image into PPM images.
+For people who are developing on their own system, the input image is stored in PPM `P6` format while the output grayscale image is stored in PPM `P5` format. Students can  create their own input images by exporting their image into PPM images.
 The easiest way to create image is via external tools. On Unix, `bmptoppm` converts BMP images to PPM images.
+
+# Instructions
+
+Edit the code in the code tab to perform the following:
+
+- allocate device memory
+- copy host memory to device
+- initialize thread block and kernel grid dimensions
+- invoke CUDA kernel
+- copy results from device to host
+- deallocate device memory
+
+Instructions about where to place each part of the code is
+demarcated by the `//@@` comment lines.
 
 # Local Setup Instructions
 

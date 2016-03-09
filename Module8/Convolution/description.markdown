@@ -3,7 +3,7 @@ title: Convolution
 author: GPU Teaching Kit -- Accelerated Computing
 ---
 
-## Objective
+# Objective
 
 The lab's objective is to implement a tiled image convolution using both shared
 and constant memory.
@@ -11,7 +11,7 @@ We will have a constant 5x5 convolution mask, but will have arbitrarily sized
 image (assume the image dimensions are greater than 5x5 for this Lab).
 
 To use the constant memory for the convolution mask, you can first transfer the mask data to the device.
-Assume you decided to name the pointer to the device array for the mask M.
+Consider the case  where the pointer to the device array for the mask is named M.
 You can use `const float * __restrict__ M` as one of the parameters during your kernel launch.
 This informs the compiler that the contents of the mask array are constants and will only be accessed through pointer variable `M`.
 This will enable the compiler to place the data into constant memory and allow the SM hardware to aggressively cache the mask data at runtime.
@@ -24,17 +24,17 @@ $$
 P_{i,j,c} = \sum_{x=-2}^{2} \sum_{y=-2}^2 I_{i+x,j+y,c} * M_{x,y}
 $$
 
-where `P_{i,j,c}` is the output pixel at position `i,j` in channel `c`, `I_{i,j,c}` is the input pixel at `i,j` in channel `c`
-(the number of channels will always be 3 for this MP corresponding to the RGB values), and `M_{x,y}` is
+where $P_{i,j,c}$ is the output pixel at position `i,j` in channel `c`, $I_{i,j,c}$ is the input pixel at `i,j` in channel `c`
+(the number of channels will always be 3 for this MP corresponding to the RGB values), and $M_{x,y}$ is
 the mask at position `x,y`.
 
-## Prerequisites
+# Prerequisites
 
 Before starting this lab, make sure that:
 
-* You have completed all week 3 lecture videos
+* You have completed all Module 8 Lecture videos
 
-## Input Data
+# Input Data
 
 The input is an interleaved image of `height x width x channels`.
 By interleaved, we mean that the the element `I[y][x]` contains three values representing the RGB channels.
@@ -49,7 +49,7 @@ For this assignment, the channel index is 0 for R, 1 for G, and 2 for B. So, to 
 For simplicity, you can assume that `channels` is always set to `3`.
 
 
-## Instructions
+# Instructions
 
 Edit the code in the code tab to perform the following:
 
@@ -65,7 +65,7 @@ Edit the code in the code tab to perform the following:
 Instructions about where to place each part of the code is
 demarcated by the `//@@` comment lines.
 
-## Pseudo Code
+# Pseudo Code
 
 A sequential pseudo code would look something like this:
 
@@ -104,7 +104,7 @@ end
 ~~~
 
 
-## Input Format
+# Input Format
 
 For people who are developing on their own system.
 The images are stored in PPM (`P6`) format, this means that you can (if you want) create your own input images.

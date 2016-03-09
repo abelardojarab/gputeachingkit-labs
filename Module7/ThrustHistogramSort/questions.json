@@ -1,4 +1,8 @@
 {
 	"questions": [
+		"Are there places in your solution where there is an implicit memory copy between the host and device (a copy that is not from `thrust::copy`)?",
+		"What is the asympotic runtime of this approach to histogram (\"bigO\" time)?",
+		"What is the asympotic runtime of the privatized atomic approach to histogram?",
+		"Why might the developers of Thrust not provide a straightforward \\texttt{thrust::histogram()} interface?"
 	]
 }
