@@ -2,6 +2,8 @@
 #ifndef __WB_LOGGER_H__
 #define __WB_LOGGER_H__
 
+#include <stdint.h>
+
 typedef enum en_wbLogLevel_t {
   wbLogLevel_unknown = -1,
   wbLogLevel_OFF = 0,
