@@ -57,7 +57,8 @@ static inline wbBool _almostEqual(float A, float B) {
   return _almostEqual(A, B, 0.2f);
 }
 
-static inline wbBool _almostEqual2sComplement(float A, float B, int maxUlps) {
+static inline wbBool _almostEqual2sComplement(float A, float B,
+                                              int maxUlps) {
   // Make sure maxUlps is non-negative and small enough that the
   // default NAN won't compare as equal to anything.
 
@@ -89,7 +90,8 @@ static inline wbBool _almostEqual2sComplement(float A, float B) {
   return _almostEqual2sComplement(A, B, 4);
 }
 
-static inline wbBool _almostEqual2sComplement(double A, double B, int maxUlps) {
+static inline wbBool _almostEqual2sComplement(double A, double B,
+                                              int maxUlps) {
   // Make sure maxUlps is non-negative and small enough that the
   // default NAN won't compare as equal to anything.
 
@@ -151,11 +153,13 @@ template <> inline int wbCompare(const float &a, const float &b) {
   }
 }
 
-template <typename T> static inline wbBool wbEqualQ(const T &a, const T &b) {
+template <typename T>
+static inline wbBool wbEqualQ(const T &a, const T &b) {
   return wbCompare(a, b) == 0;
 }
 
-template <typename T> static inline wbBool wbUnequalQ(const T &a, const T &b) {
+template <typename T>
+static inline wbBool wbUnequalQ(const T &a, const T &b) {
   return wbCompare(a, b) != 0;
 }
 

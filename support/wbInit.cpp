@@ -1,7 +1,7 @@
 
 #include <wb.h>
-#include <wbMPI.h>
 #include <wbCUDA.h>
+#include <wbMPI.h>
 
 #define MB (1 << 20)
 #ifndef WB_DEFAULT_HEAP_SIZE
@@ -10,18 +10,19 @@
 
 static bool _initializedQ = wbFalse;
 
-#if 0 // ndef _MSC_VER
+#if 0  // ndef _MSC_VER
 __attribute__((__constructor__))
 #endif /* _MSC_VER */
 void wb_init(int *
 #ifdef WB_USE_MPI
-argc
+                 argc
 #endif /* WB_USE_MPI */
-, char ***
+             ,
+             char ***
 #ifdef WB_USE_MPI
-argv
+                 argv
 #endif /* WB_USE_MPI */
-) {
+             ) {
   if (_initializedQ == wbTrue) {
     return;
   }

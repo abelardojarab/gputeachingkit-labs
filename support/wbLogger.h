@@ -39,13 +39,16 @@ struct st_wbLogger_t {
 #define wbLogEntry_getFunction(elem) ((elem)->fun)
 #define wbLogEntry_getFile(elem) ((elem)->file)
 
-#define wbLogEntry_setMessage(elem, val) (wbLogEntry_getMessage(elem) = val)
-#define wbLogEntry_setMPIRank(elem, val) (wbLogEntry_getMPIRank(elem) = val)
+#define wbLogEntry_setMessage(elem, val)                                  \
+  (wbLogEntry_getMessage(elem) = val)
+#define wbLogEntry_setMPIRank(elem, val)                                  \
+  (wbLogEntry_getMPIRank(elem) = val)
 #define wbLogEntry_setTime(elem, val) (wbLogEntry_getTime(elem) = val)
 #define wbLogEntry_setLevel(elem, val) (wbLogEntry_getLevel(elem) = val)
 #define wbLogEntry_setNext(elem, val) (wbLogEntry_getNext(elem) = val)
 #define wbLogEntry_setLine(elem, val) (wbLogEntry_getLine(elem) = val)
-#define wbLogEntry_setFunction(elem, val) (wbLogEntry_getFunction(elem) = val)
+#define wbLogEntry_setFunction(elem, val)                                 \
+  (wbLogEntry_getFunction(elem) = val)
 #define wbLogEntry_setFile(elem, val) (wbLogEntry_getFile(elem) = val)
 
 #define wbLogger_getLength(log) ((log)->length)
@@ -58,8 +61,8 @@ struct st_wbLogger_t {
 #define wbLogger_incrementLength(log) (wbLogger_getLength(log)++)
 #define wbLogger_decrementLength(log) (wbLogger_getLength(log)--)
 
-#define wbLog(level, ...)                                                      \
-  wbLogger_append(wbLogLevel_##level, wbString(__VA_ARGS__), wbFile,           \
+#define wbLog(level, ...)                                                 \
+  wbLogger_append(wbLogLevel_##level, wbString(__VA_ARGS__), wbFile,      \
                   wbFunction, wbLine)
 
 extern wbLogger_t _logger;

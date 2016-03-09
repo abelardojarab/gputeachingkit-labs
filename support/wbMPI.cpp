@@ -1,10 +1,10 @@
 
 #ifdef WB_USE_MPI
 
-#include <wb.h>
+#include <cstring>
 #include <mpich/mpi.h>
 #include <string>
-#include <cstring>
+#include <wb.h>
 
 static int rank = -1;
 

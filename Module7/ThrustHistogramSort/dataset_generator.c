@@ -1,9 +1,9 @@
 
 #include "stdio.h"
-#include "stdlib.h"
 #include "assert.h"
-#include "string.h"
 #include "limits.h"
+#include "stdlib.h"
+#include "string.h"
 #include "sys/stat.h"
 
 static char base_dir[] = "./ThrustHistogramSort/Dataset";
@@ -26,15 +26,17 @@ static void _mkdir(const char *dir) {
   mkdir(tmp, S_IRWXU);
 }
 
-static void generate_data(unsigned int **input, unsigned int **bins, size_t *num_bins, // outputs 
-                          const size_t num_inputs, const size_t max_num_bins) {        // input
+static void generate_data(unsigned int **input, unsigned int **bins,
+                          size_t *num_bins, // outputs
+                          const size_t num_inputs,
+                          const size_t max_num_bins) { // input
   // Allocate space for inputs
   *input = (unsigned int *)malloc(sizeof(unsigned int) * num_inputs);
 
   // Fill inuts, track the largest generated value
   int input_max = 0;
   for (unsigned int i = 0; i < num_inputs; i++) {
-    int newval  = rand() % max_num_bins;
+    int newval = rand() % max_num_bins;
     (*input)[i] = newval;
     if (newval > input_max) {
       input_max = newval;
@@ -43,7 +45,7 @@ static void generate_data(unsigned int **input, unsigned int **bins, size_t *num
 
   // Allocate 0s for the number of bins
   *num_bins = input_max + 1;
-  (*bins) = (unsigned int*) calloc( *num_bins,  sizeof(unsigned int) );
+  (*bins) = (unsigned int *)calloc(*num_bins, sizeof(unsigned int));
 
   // Compute the histogram
   for (unsigned int i = 0; i < num_inputs; ++i) {
@@ -68,7 +70,8 @@ static void write_data(char *file_name, unsigned int *data, int num) {
   fclose(handle);
 }
 
-static void create_dataset(int datasetNum, const size_t num_inputs, size_t max_bins) {
+static void create_dataset(int datasetNum, const size_t num_inputs,
+                           size_t max_bins) {
   char dir_name[PATH_MAX];
   sprintf(dir_name, "%s/%d", base_dir, datasetNum);
   _mkdir(dir_name);
@@ -89,11 +92,11 @@ static void create_dataset(int datasetNum, const size_t num_inputs, size_t max_b
 }
 
 int main() {
-  create_dataset(0, 16,   32);
+  create_dataset(0, 16, 32);
   create_dataset(1, 1024, 32);
-  create_dataset(2, 513,  32);
-  create_dataset(3, 511,  32);
-  create_dataset(4, 1,    32);
+  create_dataset(2, 513, 32);
+  create_dataset(3, 511, 32);
+  create_dataset(4, 1, 32);
   create_dataset(5, 4096, 4096);
   return 0;
 }

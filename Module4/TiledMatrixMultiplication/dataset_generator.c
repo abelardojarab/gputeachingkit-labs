@@ -1,9 +1,9 @@
 
 #include "stdio.h"
-#include "stdlib.h"
 #include "assert.h"
-#include "string.h"
 #include "limits.h"
+#include "stdlib.h"
+#include "string.h"
 #include "sys/stat.h"
 
 static char base_dir[] = "./TiledMatrixMultiplication/Dataset";
@@ -26,11 +26,11 @@ static void _mkdir(const char *dir) {
   mkdir(tmp, S_IRWXU);
 }
 
-#define value(arry, i, j, width) arry[( i )*width + (j)]
+#define value(arry, i, j, width) arry[(i)*width + (j)]
 
-static void compute(float *output, float *input0, float *input1, int numARows,
-                    int numAColumns, int numBRows, int numBColumns,
-                    int numCRows, int numCColumns) {
+static void compute(float *output, float *input0, float *input1,
+                    int numARows, int numAColumns, int numBRows,
+                    int numBColumns, int numCRows, int numCColumns) {
 
 #define A(i, j) value(input0, i, j, numAColumns)
 #define B(i, j) value(input1, i, j, numBColumns)
@@ -51,21 +51,22 @@ static void compute(float *output, float *input0, float *input1, int numARows,
 }
 
 static float *generate_data(int height, int width) {
-  float *data = ( float * )malloc(sizeof(float) * width * height);
-  for (int i = 0; i < width*height; i++) {
-	data[i] = (( float )(rand() % 20) - 5) / 5.0f;
+  float *data = (float *)malloc(sizeof(float) * width * height);
+  for (int i = 0; i < width * height; i++) {
+    data[i] = ((float)(rand() % 20) - 5) / 5.0f;
   }
   return data;
 }
 
 static char *strjoin(const char *s1, const char *s2) {
-  char *result = ( char * )malloc(strlen(s1) + strlen(s2) + 1);
+  char *result = (char *)malloc(strlen(s1) + strlen(s2) + 1);
   strcpy(result, s1);
   strcat(result, s2);
   return result;
 }
 
-static void write_data(char *file_name, float *data, int height, int width) {
+static void write_data(char *file_name, float *data, int height,
+                       int width) {
   FILE *handle = fopen(file_name, "w");
   fprintf(handle, "%d %d\n", height, width);
   for (int ii = 0; ii < height; ii++) {
@@ -83,12 +84,13 @@ static void write_data(char *file_name, float *data, int height, int width) {
   fclose(handle);
 }
 
-static void write_transpose_data(char *file_name, float *data, int height, int width) {
+static void write_transpose_data(char *file_name, float *data, int height,
+                                 int width) {
   FILE *handle = fopen(file_name, "w");
   fprintf(handle, "%d %d\n", width, height);
   for (int jj = 0; jj < width; jj++) {
     for (int ii = 0; ii < height; ii++) {
-      fprintf(handle, "%.2f", data[ii*width + jj]);
+      fprintf(handle, "%.2f", data[ii * width + jj]);
       if (ii != height - 1) {
         fprintf(handle, " ");
       }
@@ -101,7 +103,8 @@ static void write_transpose_data(char *file_name, float *data, int height, int w
   fclose(handle);
 }
 
-static void create_dataset(int num, int numARows, int numACols, int numBCols) {
+static void create_dataset(int num, int numARows, int numACols,
+                           int numBCols) {
   char dir_name[PATH_MAX];
   int numBRows = numACols;
   int numCRows = numARows;
@@ -117,10 +120,10 @@ static void create_dataset(int num, int numARows, int numACols, int numBCols) {
 
   float *input0_data = generate_data(numARows, numACols);
   float *input1_data = generate_data(numBRows, numBCols);
-  float *output_data = ( float * )calloc(sizeof(float), numCRows * numCCols);
+  float *output_data = (float *)calloc(sizeof(float), numCRows * numCCols);
 
-  compute(output_data, input0_data, input1_data, numARows, numACols, numBRows,
-          numBCols, numCRows, numCCols);
+  compute(output_data, input0_data, input1_data, numARows, numACols,
+          numBRows, numBCols, numCRows, numCCols);
 
   write_transpose_data(input0_file_name, input0_data, numARows, numACols);
   write_data(input1_file_name, input1_data, numBRows, numBCols);

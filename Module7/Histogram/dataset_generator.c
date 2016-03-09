@@ -1,9 +1,9 @@
 
 #include "stdio.h"
-#include "stdlib.h"
 #include "assert.h"
-#include "string.h"
 #include "limits.h"
+#include "stdlib.h"
+#include "string.h"
 #include "sys/stat.h"
 
 static char base_dir[] = "./Histogram/Dataset";
@@ -31,7 +31,8 @@ static void _mkdir(const char *dir) {
 static void compute(unsigned int *bins, unsigned int *input, int num) {
   for (int i = 0; i < num; ++i) {
     int idx = input[i];
-    if (bins[idx] < BIN_CAP) ++bins[idx];
+    if (bins[idx] < BIN_CAP)
+      ++bins[idx];
   }
 }
 
@@ -60,7 +61,8 @@ static void write_data(char *file_name, unsigned int *data, int num) {
   fclose(handle);
 }
 
-static void create_dataset(int datasetNum, size_t input_length, size_t num_bins) {
+static void create_dataset(int datasetNum, size_t input_length,
+                           size_t num_bins) {
   char dir_name[PATH_MAX];
   sprintf(dir_name, "%s/%d", base_dir, datasetNum);
   _mkdir(dir_name);
@@ -69,7 +71,8 @@ static void create_dataset(int datasetNum, size_t input_length, size_t num_bins)
   char *output_file_name = strjoin(dir_name, "/output.raw");
 
   unsigned int *input_data = generate_data(input_length, num_bins);
-  unsigned int *output_data = (unsigned int *)calloc(sizeof(unsigned int), num_bins);
+  unsigned int *output_data =
+      (unsigned int *)calloc(sizeof(unsigned int), num_bins);
 
   compute(output_data, input_data, input_length);
 

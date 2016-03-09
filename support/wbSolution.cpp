@@ -4,7 +4,9 @@
 char *solutionJSON = NULL;
 static string _solution_correctQ("");
 
-static void _onUnsameImageFunction(string str) { _solution_correctQ = str; }
+static void _onUnsameImageFunction(string str) {
+  _solution_correctQ = str;
+}
 
 template <typename T>
 static wbBool wbSolution_listCorrectQ(const char *expectedOutputFile,
@@ -13,17 +15,19 @@ static wbBool wbSolution_listCorrectQ(const char *expectedOutputFile,
   T *expectedData;
   int expectedRows, expectedColumns;
 
-  expectedData =
-      (T *)wbImport(expectedOutputFile, &expectedRows, &expectedColumns, type);
+  expectedData = (T *)wbImport(expectedOutputFile, &expectedRows,
+                               &expectedColumns, type);
 
   if (expectedData == NULL) {
     _solution_correctQ = "Failed to open expected output file.";
     res = wbFalse;
   } else if (expectedRows != wbSolution_getRows(sol)) {
-    wbLog(TRACE, "Number of rows in the solution is ", wbSolution_getRows(sol),
-          ". Expected number of rows is ", expectedRows, ".");
-    _solution_correctQ = "The number of rows in the solution did not match "
-                         "that of the expected results.";
+    wbLog(TRACE, "Number of rows in the solution is ",
+          wbSolution_getRows(sol), ". Expected number of rows is ",
+          expectedRows, ".");
+    _solution_correctQ =
+        "The number of rows in the solution did not match "
+        "that of the expected results.";
     res = wbFalse;
   } else if (expectedColumns != wbSolution_getColumns(sol)) {
     wbLog(TRACE, "Number of columns in the solution is ",
@@ -45,14 +49,15 @@ static wbBool wbSolution_listCorrectQ(const char *expectedOutputFile,
           string str;
           if (expectedColumns == 1) {
             str = wbString(
-                "The solution did not match the expected results at row ", ii,
-                ". Expecting ", expectedData[idx], " but got ",
+                "The solution did not match the expected results at row ",
+                ii, ". Expecting ", expectedData[idx], " but got ",
                 solutionData[idx], ".");
           } else {
-            str = wbString(
-                "The solution did not match the expected results at column ",
-                jj, " and row ", ii, ". Expecting ", expectedData[idx],
-                " but got ", solutionData[idx], ".");
+            str = wbString("The solution did not match the expected "
+                           "results at column ",
+                           jj, " and row ", ii, ". Expecting ",
+                           expectedData[idx], " but got ",
+                           solutionData[idx], ".");
           }
           _solution_correctQ = str;
           res = wbFalse;
@@ -70,7 +75,8 @@ static wbBool wbSolution_listCorrectQ(const char *expectedOutputFile,
   return res;
 }
 
-static wbBool wbSolution_correctQ(char *expectedOutputFile, wbSolution_t sol) {
+static wbBool wbSolution_correctQ(char *expectedOutputFile,
+                                  wbSolution_t sol) {
   if (expectedOutputFile == NULL) {
     _solution_correctQ = "Failed to determined the expected output file.";
     return wbFalse;
@@ -85,23 +91,29 @@ static wbBool wbSolution_correctQ(char *expectedOutputFile, wbSolution_t sol) {
     if (expectedImage == NULL) {
       _solution_correctQ = "Failed to open expected output file.";
       res = wbFalse;
-    } else if (wbImage_getWidth(expectedImage) != wbSolution_getWidth(sol)) {
-      _solution_correctQ = "The image width of the expected image does not "
-                           "match that of the solution.";
+    } else if (wbImage_getWidth(expectedImage) !=
+               wbSolution_getWidth(sol)) {
+      _solution_correctQ =
+          "The image width of the expected image does not "
+          "match that of the solution.";
       res = wbFalse;
-    } else if (wbImage_getHeight(expectedImage) != wbSolution_getHeight(sol)) {
-      _solution_correctQ = "The image height of the expected image does not "
-                           "match that of the solution.";
+    } else if (wbImage_getHeight(expectedImage) !=
+               wbSolution_getHeight(sol)) {
+      _solution_correctQ =
+          "The image height of the expected image does not "
+          "match that of the solution.";
       res = wbFalse;
     } else if (wbImage_getChannels(expectedImage) !=
                wbSolution_getChannels(sol)) {
-      _solution_correctQ = "The image channels of the expected image does not "
-                           "match that of the solution.";
+      _solution_correctQ =
+          "The image channels of the expected image does not "
+          "match that of the solution.";
       res = wbFalse;
     } else {
       solutionImage = (wbImage_t)wbSolution_getData(sol);
       wbAssert(solutionImage != NULL);
-      res = wbImage_sameQ(solutionImage, expectedImage, _onUnsameImageFunction);
+      res = wbImage_sameQ(solutionImage, expectedImage,
+                          _onUnsameImageFunction);
     }
     if (expectedImage != NULL) {
       wbImage_delete(expectedImage);
@@ -111,10 +123,12 @@ static wbBool wbSolution_correctQ(char *expectedOutputFile, wbSolution_t sol) {
     return wbSolution_listCorrectQ<unsigned char>(expectedOutputFile, sol,
                                                   "Integer");
   } else if (wbString_sameQ(wbSolution_getType(sol), "integral_vector")) {
-    return wbSolution_listCorrectQ<int>(expectedOutputFile, sol, "Integer");
+    return wbSolution_listCorrectQ<int>(expectedOutputFile, sol,
+                                        "Integer");
   } else if (wbString_sameQ(wbSolution_getType(sol), "vector") ||
              wbString_sameQ(wbSolution_getType(sol), "matrix")) {
-    return wbSolution_listCorrectQ<wbReal_t>(expectedOutputFile, sol, "Real");
+    return wbSolution_listCorrectQ<wbReal_t>(expectedOutputFile, sol,
+                                             "Real");
   } else {
     wbAssert(wbFalse);
     return wbFalse;
@@ -174,11 +188,12 @@ wbBool wbSolution(char *expectedOutputFile, char *outputFile, char *type0,
 
 wbBool wbSolution(char *expectedOutputFile, char *outputFile, char *type0,
                   void *data, int rows, int columns) {
-  return wbSolution(expectedOutputFile, outputFile, type0, data, rows, columns,
-                    1);
+  return wbSolution(expectedOutputFile, outputFile, type0, data, rows,
+                    columns, 1);
 }
 
-wbBool wbSolution(wbArg_t arg, void *data, int rows, int columns, int depth) {
+wbBool wbSolution(wbArg_t arg, void *data, int rows, int columns,
+                  int depth) {
   char *type;
   wbBool res;
   char *expectedOutputFile;
@@ -193,8 +208,8 @@ wbBool wbSolution(wbArg_t arg, void *data, int rows, int columns, int depth) {
   wbAssert(expectedOutputFile != NULL);
   wbAssert(outputFile != NULL);
 
-  res = wbSolution(expectedOutputFile, outputFile, type, data, rows, columns,
-                   depth);
+  res = wbSolution(expectedOutputFile, outputFile, type, data, rows,
+                   columns, depth);
 
   if (res) {
     ss << "{\n";
@@ -224,6 +239,6 @@ EXTERN_C wbBool wbSolution(wbArg_t arg, void *data, int rows) {
 }
 
 wbBool wbSolution(wbArg_t arg, wbImage_t img) {
-  return wbSolution(arg, img, wbImage_getHeight(img), wbImage_getWidth(img),
-                    wbImage_getChannels(img));
+  return wbSolution(arg, img, wbImage_getHeight(img),
+                    wbImage_getWidth(img), wbImage_getChannels(img));
 }

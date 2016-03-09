@@ -43,7 +43,8 @@ void wbFile_rewind(wbFile_t file);
 size_t wbFile_size(wbFile_t file);
 char *wbFile_read(wbFile_t file);
 char *wbFile_readLine(wbFile_t file);
-void wbFile_write(wbFile_t file, const void *buffer, size_t size, size_t count);
+void wbFile_write(wbFile_t file, const void *buffer, size_t size,
+                  size_t count);
 void wbFile_write(wbFile_t file, const void *buffer, size_t len);
 void wbFile_write(wbFile_t file, const char *buffer);
 void wbFile_writeLine(wbFile_t file, const char *buffer0);

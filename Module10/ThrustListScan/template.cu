@@ -1,11 +1,11 @@
-#include <wb.h>
-#include <thrust/host_vector.h>
 #include <thrust/device_vector.h>
+#include <thrust/host_vector.h>
+#include <wb.h>
 
 int main(int argc, char **argv) {
   wbArg_t args;
   float *hostInput, *hostOutput; // The input 1D list
-  int num_elements; // number of elements in the input list
+  int num_elements;              // number of elements in the input list
 
   args = wbArg_read(argc, argv);
 
@@ -26,10 +26,11 @@ int main(int argc, char **argv) {
   wbTime_stop(GPU, "Allocating GPU memory.");
 
   // Execute vector addition
-  wbTime_start(Compute, "Doing the computation on the GPU and copying data back to host");
+  wbTime_start(
+      Compute,
+      "Doing the computation on the GPU and copying data back to host");
   //@@ Insert Code here
   wbTime_stop(Compute, "Doing the computation on the GPU");
-
 
   wbSolution(args, hostOutput, num_elements);
 

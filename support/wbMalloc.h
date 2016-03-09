@@ -81,11 +81,11 @@ static inline void *_realloc(void *ptr, size_t size) THROW {
 #define wbNew(type) ((type *)_malloc(sizeof(type)))
 #define wbNewArray(type, len) ((type *)_malloc((len) * sizeof(type)))
 #define wbMalloc(sz) _malloc(sz)
-#define wbDelete(var)                                                          \
-  _free(var);                                                                  \
+#define wbDelete(var)                                                     \
+  _free(var);                                                             \
   var = NULL
-#define wbFree(var)                                                            \
-  _free(var);                                                                  \
+#define wbFree(var)                                                       \
+  _free(var);                                                             \
   var = NULL
 #define wbRealloc(var, newSize) _realloc(var, newSize)
 #define wbReallocArray(t, m, n) ((t *)_realloc(m, n * sizeof(t)))
@@ -129,8 +129,8 @@ static inline void *xRealloc(void *mem, size_t sz) {
 #define wbNewArray(type, len) ((type *)wbMalloc((len) * sizeof(type)))
 #define wbMalloc(sz) xMalloc(sz)
 #define wbDelete(var) wbFree(var)
-#define wbFree(var)                                                            \
-  xFree(var);                                                                  \
+#define wbFree(var)                                                       \
+  xFree(var);                                                             \
   var = NULL
 #define wbRealloc(var, newSize) xRealloc(var, newSize)
 #define wbReallocArray(t, m, n) ((t *)xRealloc(m, n * sizeof(t)))

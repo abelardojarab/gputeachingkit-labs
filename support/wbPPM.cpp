@@ -1,6 +1,6 @@
 
-#include <wb.h>
 #include <math.h>
+#include <wb.h>
 
 static inline float _min(float x, float y) { return x < y ? x : y; }
 
@@ -90,7 +90,6 @@ wbImage_t wbPPM_import(const char *filename) {
     goto cleanup;
   }
 
-
   // P5 are monochrome while P6/S6 are rgb
   // S6 needs to parse number of channels out of file
   if (strcmp(header, "P5") == 0 || strcmp(header, "P5\n") == 0) {
@@ -163,9 +162,9 @@ void wbPPM_export(const char *filename, wbImage_t img) {
   depth = 255;
 
   if (channels == 1) {
-      wbFile_writeLine(file, "P5");
+    wbFile_writeLine(file, "P5");
   } else {
-      wbFile_writeLine(file, "P6");
+    wbFile_writeLine(file, "P6");
   }
   wbFile_writeLine(file, "#Created via wbPPM Export");
   wbFile_writeLine(file, wbString(width, " ", height));

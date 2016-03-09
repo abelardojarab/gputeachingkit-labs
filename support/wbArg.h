@@ -22,7 +22,7 @@ struct st_wbArg_t {
 #define wbArg_setInputFiles(wa, val) (wbArg_getInputFiles(wa) = val)
 #define wbArg_setInputFile(wa, ii, val) (wbArg_getInputFile(wa, ii) = val)
 #define wbArg_setOutputFile(wa, val) (wbArg_getOutputFile(wa) = val)
-#define wbArg_setExpectedOutputFile(wa, val)                                   \
+#define wbArg_setExpectedOutputFile(wa, val)                              \
   (wbArg_getExpectedOutputFile(wa) = val)
 #define wbArg_setType(wa, val) (wbArg_getType(wa) = val)
 

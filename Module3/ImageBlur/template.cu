@@ -14,7 +14,6 @@
 
 //@@ INSERT CODE HERE
 
-
 int main(int argc, char *argv[]) {
   wbArg_t args;
   int imageWidth;

@@ -24,7 +24,8 @@ typedef struct st_wbSolution_t {
 #define wbSolution_getChannels wbSolution_getDepth
 
 #define wbSolution_setType(sol, val) (wbSolution_getType(sol) = val)
-#define wbSolution_setOutputFile(sol, val) (wbSolution_getOutputFile(sol) = val)
+#define wbSolution_setOutputFile(sol, val)                                \
+  (wbSolution_getOutputFile(sol) = val)
 #define wbSolution_setData(sol, val) (wbSolution_getData(sol) = val)
 #define wbSolution_setRows(sol, val) (wbSolution_getRows(sol) = val)
 #define wbSolution_setColumns(sol, val) (wbSolution_getColumns(sol) = val)

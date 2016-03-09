@@ -1,6 +1,6 @@
-#include <wb.h>
-#include <thrust/host_vector.h>
 #include <thrust/device_vector.h>
+#include <thrust/host_vector.h>
+#include <wb.h>
 
 int main(int argc, char *argv[]) {
   wbArg_t args;

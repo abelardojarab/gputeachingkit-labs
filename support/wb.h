@@ -20,9 +20,9 @@
 #endif /* _CRT_SECURE_NO_WARNINGS */
 #define _CRT_SECURE_NO_DEPRECATE 1
 #define _CRT_NONSTDC_NO_DEPRECATE 1
-#include <windows.h>
 #include <direct.h>
 #include <io.h>
+#include <windows.h>
 #endif /* _MSC_VER */
 
 #define wbStmt(stmt) stmt
@@ -38,8 +38,8 @@
 #define wbFile __FILE__
 #define wbFunction __func__
 
-#define wbExit()                                                               \
-  wbAssert(0);                                                                 \
+#define wbExit()                                                          \
+  wbAssert(0);                                                            \
   exit(1)
 
 #ifdef WB_USE_COURSERA
@@ -90,28 +90,28 @@ extern char *solutionJSON;
 #endif /* __APPLE__ */
 #endif /* WB_USE_OPENCL */
 
-#include <wbTypes.h>
-#include <wbMPI.h>
-#include <wbAssert.h>
-#include <wbMemoryManager.h>
-#include <wbMalloc.h>
-#include <wbString.h>
-#include <wbSandbox.h>
-#include <wbTimer.h>
-#include <wbLogger.h>
-#include <wbComparator.h>
-#include <wbFile.h>
-#include <wbImport.h>
-#include <wbExport.h>
-#include <wbCast.h>
-#include <wbImage.h>
 #include <wbArg.h>
-#include <wbSolution.h>
-#include <wbExit.h>
-#include <wbInit.h>
+#include <wbAssert.h>
 #include <wbCUDA.h>
-#include <wbSparse.h>
+#include <wbCast.h>
+#include <wbComparator.h>
+#include <wbExit.h>
+#include <wbExport.h>
+#include <wbFile.h>
+#include <wbImage.h>
+#include <wbImport.h>
+#include <wbInit.h>
+#include <wbLogger.h>
 #include <wbMD5.h>
+#include <wbMPI.h>
+#include <wbMalloc.h>
+#include <wbMemoryManager.h>
+#include <wbSandbox.h>
+#include <wbSolution.h>
+#include <wbSparse.h>
+#include <wbString.h>
+#include <wbTimer.h>
+#include <wbTypes.h>
 
 /***********************************************************/
 /***********************************************************/

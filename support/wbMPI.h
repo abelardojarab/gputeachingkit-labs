@@ -4,9 +4,9 @@
 
 #ifdef WB_USE_MPI
 
-#include <string>
 #include <cstring>
 #include <mpi/mpi.h>
+#include <string>
 
 #define isMasterQ ((wbMPI_getRank()) == 0)
 

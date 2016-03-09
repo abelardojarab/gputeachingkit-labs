@@ -53,7 +53,8 @@ static void detectEndianess() {
     return;
   if (p[0] == 0x12 && p[1] == 0x34 && p[2] == 0x56 && p[3] == 0x78) {
     g_bigEndian = 1;
-  } else if (p[0] == 0x78 && p[1] == 0x56 && p[2] == 0x34 && p[3] == 0x12) {
+  } else if (p[0] == 0x78 && p[1] == 0x56 && p[2] == 0x34 &&
+             p[3] == 0x12) {
     g_bigEndian = 0;
   } else {
     g_bigEndian = *sp != 0x12;
@@ -177,7 +178,7 @@ static void MD5Final(md5byte digest[16], struct MD5Context *ctx) {
 #define F4(x, y, z) (y ^ (x | ~z))
 
 /* This is the central step in the MD5 algorithm. */
-#define MD5STEP(f, w, x, y, z, in, s)                                          \
+#define MD5STEP(f, w, x, y, z, in, s)                                     \
   (w += f(x, y, z) + in, w = (w << s | w >> (32 - s)) + x)
 
 /*
@@ -281,7 +282,8 @@ static void MD5_buffer(const unsigned char *buf, unsigned int len,
 
 #define HEX_STRING "0123456789abcdef" /* to convert to hex */
 
-static void wbMD5_sigToString(unsigned char signature[16], char *str, int len) {
+static void wbMD5_sigToString(unsigned char signature[16], char *str,
+                              int len) {
   unsigned char *sig_p;
   char *str_p, *max_p;
   unsigned int high, low;

@@ -1,8 +1,8 @@
 #include "stdio.h"
-#include "stdlib.h"
 #include "assert.h"
-#include "string.h"
 #include "limits.h"
+#include "stdlib.h"
+#include "string.h"
 #include "sys/stat.h"
 
 #define CHANNELS 3
@@ -27,8 +27,8 @@ static void _mkdir(const char *dir) {
   mkdir(tmp, S_IRWXU);
 }
 
-static void compute(unsigned char *output, unsigned char *input, unsigned int y,
-                    unsigned int x) {
+static void compute(unsigned char *output, unsigned char *input,
+                    unsigned int y, unsigned int x) {
   for (unsigned int ii = 0; ii < y; ii++) {
     for (unsigned int jj = 0; jj < x; jj++) {
       unsigned int idx = ii * x + jj;
@@ -71,8 +71,9 @@ static char *strjoin(const char *s1, const char *s2) {
   return result;
 }
 
-static void write_data(char *file_name, unsigned char *data, unsigned int width,
-                       unsigned int height, unsigned int channels) {
+static void write_data(char *file_name, unsigned char *data,
+                       unsigned int width, unsigned int height,
+                       unsigned int channels) {
   FILE *handle = fopen(file_name, "w");
   if (channels == 1) {
     fprintf(handle, "P5\n");
@@ -89,7 +90,8 @@ static void write_data(char *file_name, unsigned char *data, unsigned int width,
   fclose(handle);
 }
 
-static void create_dataset(const int datasetNum, const int y, const int x) {
+static void create_dataset(const int datasetNum, const int y,
+                           const int x) {
   char dir_name[PATH_MAX];
   sprintf(dir_name, "%s/%d", base_dir, datasetNum);
   _mkdir(dir_name);
