@@ -10,5 +10,6 @@
 		"What do you think happens as you increase the mask size (say to 1024) while you set the block dimensions to 16x16? What do you end up spending most of your time doing? Does that put other constraints on the way you’d write your algorithm (think of the shared/constant memory size)?",
 		"Do you have to have a separate output memory buffer? Put it in another way, why can’t you perform the convolution in place?",
 		"What is the identity mask?"
-	]
+	],
+
 }
