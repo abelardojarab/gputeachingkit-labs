@@ -3,7 +3,7 @@
 #ifndef __WB_FILE_H__
 #define __WB_FILE_H__
 
-typedef struct st_wbFile_t {
+struct st_wbFile_t {
   int index;
   char *file;
   char *mode;
@@ -11,7 +11,7 @@ typedef struct st_wbFile_t {
   FILE *handle;
   size_t len;
   size_t offset;
-} * wbFile_t;
+};
 
 #define wbFile_getIndex(file) ((file)->index)
 #define wbFile_getFileName(file) ((file)->file)

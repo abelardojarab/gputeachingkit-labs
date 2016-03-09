@@ -90,8 +90,12 @@ extern char *solutionJSON;
 #endif /* __APPLE__ */
 #endif /* WB_USE_OPENCL */
 
-#include <wbArg.h>
+#include <wbTypes.h>
 #include <wbAssert.h>
+#include <wbMalloc.h>
+#include <wbString.h>
+
+#include <wbArg.h>
 #include <wbCUDA.h>
 #include <wbCast.h>
 #include <wbComparator.h>
@@ -104,14 +108,10 @@ extern char *solutionJSON;
 #include <wbLogger.h>
 #include <wbMD5.h>
 #include <wbMPI.h>
-#include <wbMalloc.h>
 #include <wbMemoryManager.h>
-#include <wbSandbox.h>
 #include <wbSolution.h>
 #include <wbSparse.h>
-#include <wbString.h>
 #include <wbTimer.h>
-#include <wbTypes.h>
 
 /***********************************************************/
 /***********************************************************/
