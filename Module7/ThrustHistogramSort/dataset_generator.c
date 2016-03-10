@@ -6,7 +6,7 @@
 #include "string.h"
 #include "sys/stat.h"
 
-static char base_dir[] = "./ThrustHistogramSort/Dataset";
+static char base_dir[] = "./ThrustHistogramSort/Dataset/";
 
 static void _mkdir(const char *dir) {
   char tmp[PATH_MAX];
@@ -76,8 +76,8 @@ static void create_dataset(int datasetNum, const size_t num_inputs,
   sprintf(dir_name, "%s/%d", base_dir, datasetNum);
   _mkdir(dir_name);
 
-  char *input_file_name = strjoin(dir_name, "/input.raw");
-  char *output_file_name = strjoin(dir_name, "/output.raw");
+  char *input_file_name = strjoin(dir_name, "input.raw");
+  char *output_file_name = strjoin(dir_name, "output.raw");
 
   unsigned int *input_data, *bin_data;
   size_t num_bins;
