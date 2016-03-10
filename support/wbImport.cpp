@@ -370,6 +370,68 @@ static inline wbImportRaw_t wbImportRaw_readAsReal(wbImportRaw_t raw) {
   return wbImportRaw_read(raw, wbType_real);
 }
 
+static inline wbImportText_t wbImportText_new(void) {
+  wbImportText_t text;
+
+  text = wbNew(struct st_wbImportText_t);
+
+  wbImportText_setLength(text, 0);
+  wbImportText_setData(text, NULL);
+  wbImportText_getFile(text) = NULL;
+
+  return text;
+}
+
+static inline void wbImportText_setFile(wbImportText_t text,
+                                        const char *path) {
+  if (text != NULL) {
+    if (wbImportText_getFile(text) != NULL) {
+      wbFile_delete(wbImportText_getFile(text));
+    }
+    if (path != NULL) {
+      wbImportText_getFile(text) = wbFile_open(path, "r");
+    } else {
+      wbImportText_getFile(text) = NULL;
+    }
+  }
+
+  return;
+}
+
+static inline void wbImportText_delete(wbImportText_t text) {
+  if (text != NULL) {
+    wbImportText_setFile(text, NULL);
+    if (wbImportText_getData(text)) {
+      wbDelete(wbImportText_getData(text));
+    }
+    wbDelete(text);
+  }
+}
+
+static inline wbImportText_t wbImportText_read(wbImportText_t text) {
+  char *data;
+  wbFile_t file;
+  int length;
+
+  if (text == NULL) {
+    return NULL;
+  }
+
+  file = wbImportText_getFile(text);
+
+  if (wbImportText_getData(text) != NULL) {
+    wbDelete(wbImportText_getData(text));
+    wbImportText_setData(text, NULL);
+  }
+
+  length = wbFile_size(file);
+  data = wbFile_read(file, length);
+
+  wbImportText_setData(text, data);
+
+  return text;
+}
+
 static inline wbImport_t wbImport_open(const char *file,
                                        wbImportKind_t kind) {
   wbImport_t imp;
@@ -399,6 +461,10 @@ static inline wbImport_t wbImport_open(const char *file,
     }
     wbImportCSV_setFile(csv, file);
     wbImport_setCSV(imp, csv);
+  } else if (kind == wbImportKind_tsv || kind == wbImportKind_csv) {
+    wbImportText_t text = wbImportText_new();
+    wbImportText_setFile(text, file);
+    wbImport_setText(imp, text);
   } else if (kind == wbImportKind_ppm) {
     wbImage_t img = wbPPM_import(file);
     wbImport_setImage(imp, img);
@@ -426,6 +492,8 @@ static inline wbImport_t wbImport_open(const char *file,
     kind = wbImportKind_raw;
   } else if (wbString_sameQ(type, "ppm")) {
     kind = wbImportKind_ppm;
+  } else if (wbString_sameQ(type, "text") || wbString_sameQ(type, "txt")) {
+    kind = wbImportKind_text;
   } else {
     wbLog(ERROR, "Invalid import type ", type0);
     wbExit();
@@ -450,6 +518,10 @@ static inline void wbImport_close(wbImport_t imp) {
     wbImportRaw_t raw = wbImport_getRaw(imp);
     wbImportRaw_delete(raw);
     wbImport_setRaw(imp, NULL);
+  } else if (kind == wbImportKind_text) {
+    wbImportText_t text = wbImport_getText(imp);
+    wbImportText_delete(text);
+    wbImport_setText(imp, NULL);
   } else if (kind == wbImportKind_ppm) {
   } else {
     wbLog(ERROR, "Invalid import type.");
@@ -504,6 +576,9 @@ static wbImportKind_t _parseImportExtension(const char *file) {
   } else if (wbString_sameQ(extension, "ppm") ||
              wbString_sameQ(extension, "pbm")) {
     kind = wbImportKind_ppm;
+  } else if (wbString_sameQ(extension, "text") ||
+             wbString_sameQ(extension, "txt")) {
+    kind = wbImportKind_text;
   } else {
     kind = wbImportKind_unknown;
     wbLog(ERROR, "File ", file, " does not have a compatible extension.");
