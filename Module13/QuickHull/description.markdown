@@ -1,7 +1,7 @@
 ---
-title: Bilateral Filter
+title: Quick Hull
 author: GPU Teaching Kit -- Accelerated Computing
-module: 12
+module: 13
 ---
 
 ## Objective

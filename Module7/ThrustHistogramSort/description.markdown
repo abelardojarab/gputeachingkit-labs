@@ -1,6 +1,7 @@
 ---
 title: ThrustHistogramSort
 author: GPU Teaching Kit -- Accelerated Computing
+module: 7
 ---
 
 # Objective
@@ -11,7 +12,7 @@ which makes Thrust a valuable tools for its implementation.
 
 # Problem Setup
 
-Consider the dataset 
+Consider the dataset
 
     input = [2 1 0 0 2 2 1 1 1 1 4]
 
@@ -37,7 +38,7 @@ Determine the number of bins by inspecting the last element of the list and addi
 
 To compute the histogram, we can compute the culumative histogram and then work backwards.
 To do this in Thrust, use `thrust::upper_bound`. `upper_bound` takes an input data range
-(the sorted input) and a set of search values, and for each search value will report the 
+(the sorted input) and a set of search values, and for each search value will report the
 largest index in the input range that the search value could be inserted into without
 changing the sorted order of the inputs. For example,
 

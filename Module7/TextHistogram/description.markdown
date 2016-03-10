@@ -1,6 +1,7 @@
 ---
 title: Histogram
 author: GPU Teaching Kit -- Accelerated Computing
+module: 7
 ---
 
 # Objective

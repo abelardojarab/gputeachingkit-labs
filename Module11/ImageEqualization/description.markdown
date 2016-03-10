@@ -1,6 +1,7 @@
 ---
 title: Image Equalization
 author: GPU Teaching Kit -- Accelerated Computing
+module: 11
 ---
 
 ## Objective

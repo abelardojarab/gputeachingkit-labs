@@ -1,6 +1,7 @@
 ---
 title: CUDA Image Color to Grayscale
 author: GPU Teaching Kit -- Accelerated Computing
+module: 3
 ---
 
 # Objective

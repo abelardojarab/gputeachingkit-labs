@@ -1,6 +1,7 @@
 ---
 title: Basic Matrix Multiplication
 author: GPU Teaching Kit -- Accelerated Computing
+module: 4
 ---
 
 # Objective

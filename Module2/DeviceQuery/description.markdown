@@ -1,7 +1,7 @@
 ---
-module: 2
 title: Device Query
 author: GPU Teaching Kit -- Accelerated Computing
+module: 2
 ---
 
 

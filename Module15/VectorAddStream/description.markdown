@@ -1,7 +1,7 @@
 ---
-title: Bilateral Filter
+title: Vector Addition (CUDA Streams)
 author: GPU Teaching Kit -- Accelerated Computing
-module: 12
+module: 15
 ---
 
 ## Objective

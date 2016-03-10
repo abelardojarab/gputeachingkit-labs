@@ -1,6 +1,7 @@
 ---
 title: List Scan
 author: GPU Teaching Kit -- Accelerated Computing
+module: 10
 ---
 
 # Objective

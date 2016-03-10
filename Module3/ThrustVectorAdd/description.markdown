@@ -1,6 +1,7 @@
 ---
 title: CUDA Thrust Vector Add
 author: GPU Teaching Kit -- Accelerated Computing
+module: 3
 ---
 
 # Objective

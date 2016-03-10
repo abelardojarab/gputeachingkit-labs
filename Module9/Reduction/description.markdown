@@ -1,6 +1,7 @@
 ---
 title: Reduction
 author: GPU Teaching Kit -- Accelerated Computing
+module: 9
 ---
 
 

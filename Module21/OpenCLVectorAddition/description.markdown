@@ -1,6 +1,7 @@
 ---
 title: OpenCL Vector Add
 author: GPU Teaching Kit -- Accelerated Computing
+module: 21
 ---
 
 # Objective

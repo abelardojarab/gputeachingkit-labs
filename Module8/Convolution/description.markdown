@@ -1,6 +1,7 @@
 ---
 title: Convolution
 author: GPU Teaching Kit -- Accelerated Computing
+module: 8
 ---
 
 # Objective

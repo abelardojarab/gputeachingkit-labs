@@ -1,6 +1,7 @@
 ---
 title: Reduction - Thrust
 author: GPU Teaching Kit -- Accelerated Computing
+module: 9
 ---
 ## Objective
 
