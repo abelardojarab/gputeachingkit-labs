@@ -49,7 +49,7 @@ static char *strjoin(const char *s1, const char *s2) {
   return result;
 }
 
-static void write_data(char *file_name, const char *data, int num) {
+static void write_data_str(char *file_name, const char *data, int num) {
   FILE *handle = fopen(file_name, "w");
   fprintf(handle, "%d", num);
   for (int ii = 0; ii < num; ii++) {
@@ -59,7 +59,7 @@ static void write_data(char *file_name, const char *data, int num) {
   fclose(handle);
 }
 
-static void write_data(char *file_name, unsigned int *data, int num) {
+static void write_data_int(char *file_name, unsigned int *data, int num) {
   FILE *handle = fopen(file_name, "w");
   fprintf(handle, "%d", num);
   for (int ii = 0; ii < num; ii++) {
@@ -69,7 +69,7 @@ static void write_data(char *file_name, unsigned int *data, int num) {
   fclose(handle);
 }
 
-static void create_dataset(int datasetNum, const char *str) {
+static void create_dataset_fixed(int datasetNum, const char *str) {
   char dir_name[PATH_MAX];
   sprintf(dir_name, "%s/%d", base_dir, datasetNum);
   _mkdir(dir_name);
@@ -82,13 +82,13 @@ static void create_dataset(int datasetNum, const char *str) {
 
   compute(output_data, str, strlen(str));
 
-  write_data(input_file_name, str, strlen(str));
-  write_data(output_file_name, output_data, NUM_BINS);
+  write_data_str(input_file_name, str, strlen(str));
+  write_data_int(output_file_name, output_data, NUM_BINS);
 
   free(output_data);
 }
 
-static void create_dataset(int datasetNum, size_t input_length) {
+static void create_dataset_random(int datasetNum, size_t input_length) {
   char dir_name[PATH_MAX];
   sprintf(dir_name, "%s/%d", base_dir, datasetNum);
   _mkdir(dir_name);
@@ -102,19 +102,19 @@ static void create_dataset(int datasetNum, size_t input_length) {
 
   compute(output_data, input_data, input_length);
 
-  write_data(input_file_name, input_data, input_length);
-  write_data(output_file_name, output_data, NUM_BINS);
+  write_data_str(input_file_name, input_data, input_length);
+  write_data_int(output_file_name, output_data, NUM_BINS);
 
   free(input_data);
   free(output_data);
 }
 
 int main() {
-  create_dataset(0, "the quick brown fox jumps over the lazy dog");
-  create_dataset(1, "gpu teaching kit - accelerated computing");
-  create_dataset(2, 16);
-  create_dataset(3, 513);
-  create_dataset(4, 511);
-  create_dataset(5, 1);
+  create_dataset_fixed(0, "the quick brown fox jumps over the lazy dog");
+  create_dataset_fixed(1, "gpu teaching kit - accelerated computing");
+  create_dataset_random(2, 16);
+  create_dataset_random(3, 513);
+  create_dataset_random(4, 511);
+  create_dataset_random(5, 1);
   return 0;
 }
