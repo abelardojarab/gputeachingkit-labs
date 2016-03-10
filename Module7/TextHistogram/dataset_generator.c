@@ -1,9 +1,9 @@
 
 #include "stdio.h"
-#include "stdlib.h"
 #include "assert.h"
-#include "string.h"
 #include "limits.h"
+#include "stdlib.h"
+#include "string.h"
 #include "sys/stat.h"
 
 static char base_dir[] = "./TextHistogram/Dataset";
@@ -34,7 +34,7 @@ static void compute(unsigned int *bins, const char *input, int num) {
 }
 
 static char *generate_data(size_t n) {
-  char *data =  (char*) malloc(n + 1);
+  char *data = (char *)malloc(n + 1);
   for (unsigned int i = 0; i < n; i++) {
     data[i] = (rand() % (128 - 32)) + 32; // random printable character
   }
@@ -77,7 +77,8 @@ static void create_dataset(int datasetNum, const char *str) {
   char *input_file_name = strjoin(dir_name, "/input.raw");
   char *output_file_name = strjoin(dir_name, "/output.raw");
 
-  unsigned int *output_data = (unsigned int *)calloc(sizeof(unsigned int), NUM_BINS);
+  unsigned int *output_data =
+      (unsigned int *)calloc(sizeof(unsigned int), NUM_BINS);
 
   compute(output_data, str, strlen(str));
 
@@ -96,7 +97,8 @@ static void create_dataset(int datasetNum, size_t input_length) {
   char *output_file_name = strjoin(dir_name, "/output.raw");
 
   char *input_data = generate_data(input_length);
-  unsigned int *output_data = (unsigned int *)calloc(sizeof(unsigned int), NUM_BINS);
+  unsigned int *output_data =
+      (unsigned int *)calloc(sizeof(unsigned int), NUM_BINS);
 
   compute(output_data, input_data, input_length);
 
@@ -106,7 +108,6 @@ static void create_dataset(int datasetNum, size_t input_length) {
   free(input_data);
   free(output_data);
 }
-
 
 int main() {
   create_dataset(0, "the quick brown fox jumps over the lazy dog");
