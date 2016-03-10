@@ -1,4 +1,5 @@
 ---
+module: 2
 title: Device Query
 author: GPU Teaching Kit -- Accelerated Computing
 ---
@@ -33,7 +34,7 @@ The `wbLog` function logs results, specifically we log the following hardware fe
 
 * Warp size
 
-The details and meaning of these quantities will be explained in the first and second modules of the teaching kit.
+The details are explained in the first and second modules of the teaching kit.
 
 # Local Setup Instructions
 
