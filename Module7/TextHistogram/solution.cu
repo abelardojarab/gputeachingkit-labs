@@ -1,6 +1,6 @@
 #include <wb.h>
 
-#define NUM_BINS 4096
+#define NUM_BINS 128
 
 #define CUDA_CHECK(ans)                                                   \
   { gpuAssert((ans), __FILE__, __LINE__); }
@@ -14,7 +14,7 @@ inline void gpuAssert(cudaError_t code, const char *file, int line,
   }
 }
 
-__global__ void histogram_kernel(unsigned int *input, unsigned int *bins,
+__global__ void histogram_kernel(const char *input, unsigned int *bins,
                                  unsigned int num_elements,
                                  unsigned int num_bins) {
 
@@ -31,7 +31,7 @@ __global__ void histogram_kernel(unsigned int *input, unsigned int *bins,
   // Histogram
   for (unsigned int i = tid; i < num_elements;
        i += blockDim.x * gridDim.x) {
-    atomicAdd(&(bins_s[input[i]]), 1);
+    atomicAdd(&(bins_s[(unsigned int) input[i]]), 1);
   }
   __syncthreads();
 
@@ -42,23 +42,14 @@ __global__ void histogram_kernel(unsigned int *input, unsigned int *bins,
   }
 }
 
-__global__ void convert_kernel(unsigned int *bins, unsigned int num_bins) {
-
-  unsigned int tid = blockIdx.x * blockDim.x + threadIdx.x;
-
-  if (tid < num_bins) {
-    bins[tid] = min(bins[tid], 127);
-  }
-}
-
-void histogram(unsigned int *input, unsigned int *bins,
+void histogram(const char *input, unsigned int *bins,
                unsigned int num_elements, unsigned int num_bins) {
 
   // zero out bins
   CUDA_CHECK(cudaMemset(bins, 0, num_bins * sizeof(unsigned int)));
   // Launch histogram kernel on the bins
   {
-    dim3 blockDim(512), gridDim(30);
+    dim3 blockDim(128), gridDim(30);
     histogram_kernel<<<gridDim, blockDim,
                        num_bins * sizeof(unsigned int)>>>(
         input, bins, num_elements, num_bins);
@@ -66,29 +57,21 @@ void histogram(unsigned int *input, unsigned int *bins,
     CUDA_CHECK(cudaDeviceSynchronize());
   }
 
-  // Make sure bin values are not too large
-  {
-    dim3 blockDim(512);
-    dim3 gridDim((num_bins + blockDim.x - 1) / blockDim.x);
-    convert_kernel<<<gridDim, blockDim>>>(bins, num_bins);
-    CUDA_CHECK(cudaGetLastError());
-    CUDA_CHECK(cudaDeviceSynchronize());
-  }
 }
 
 int main(int argc, char *argv[]) {
   wbArg_t args;
   int inputLength;
-  unsigned int *hostInput;
+  char *hostInput;
   unsigned int *hostBins;
-  unsigned int *deviceInput;
+  char *deviceInput;
   unsigned int *deviceBins;
 
   args = wbArg_read(argc, argv);
 
   wbTime_start(Generic, "Importing data and creating memory on host");
-  hostInput = (unsigned int *)wbImport(wbArg_getInputFile(args, 0),
-                                       &inputLength, "Integer");
+  hostInput = (char *)wbImport(wbArg_getInputFile(args, 0),
+                                       &inputLength, "Text");
   hostBins = (unsigned int *)malloc(NUM_BINS * sizeof(unsigned int));
   wbTime_stop(Generic, "Importing data and creating memory on host");
 
@@ -97,8 +80,7 @@ int main(int argc, char *argv[]) {
 
   wbTime_start(GPU, "Allocating GPU memory.");
   //@@ Allocate GPU memory here
-  CUDA_CHECK(cudaMalloc((void **)&deviceInput,
-                        inputLength * sizeof(unsigned int)));
+  CUDA_CHECK(cudaMalloc((void **)&deviceInput, inputLength));
   CUDA_CHECK(
       cudaMalloc((void **)&deviceBins, NUM_BINS * sizeof(unsigned int)));
   CUDA_CHECK(cudaDeviceSynchronize());
@@ -107,7 +89,7 @@ int main(int argc, char *argv[]) {
   wbTime_start(GPU, "Copying input memory to the GPU.");
   //@@ Copy memory to the GPU here
   CUDA_CHECK(cudaMemcpy(deviceInput, hostInput,
-                        inputLength * sizeof(unsigned int),
+                        inputLength,
                         cudaMemcpyHostToDevice));
   CUDA_CHECK(cudaDeviceSynchronize());
   wbTime_stop(GPU, "Copying input memory to the GPU.");
@@ -116,7 +98,7 @@ int main(int argc, char *argv[]) {
   // ----------------------------------------------------------
   wbLog(TRACE, "Launching kernel");
   wbTime_start(Compute, "Performing CUDA computation");
-
+  // @@ Insert code here
   histogram(deviceInput, deviceBins, inputLength, NUM_BINS);
   wbTime_stop(Compute, "Performing CUDA computation");
 

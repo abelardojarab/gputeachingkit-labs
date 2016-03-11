@@ -29,7 +29,7 @@ static void _mkdir(const char *dir) {
 
 static void compute(unsigned int *bins, const char *input, int num) {
   for (int i = 0; i < num; ++i) {
-    ++bins[i];
+    ++bins[(unsigned int)input[i]];
   }
 }
 
@@ -51,9 +51,8 @@ static char *strjoin(const char *s1, const char *s2) {
 
 static void write_data_str(char *file_name, const char *data, int num) {
   FILE *handle = fopen(file_name, "w");
-  fprintf(handle, "%d", num);
   for (int ii = 0; ii < num; ii++) {
-    fprintf(handle, "\n%d", *data++);
+    fprintf(handle, "%c", *data++);
   }
   fflush(handle);
   fclose(handle);
@@ -74,11 +73,11 @@ static void create_dataset_fixed(int datasetNum, const char *str) {
   sprintf(dir_name, "%s/%d", base_dir, datasetNum);
   _mkdir(dir_name);
 
-  char *input_file_name = strjoin(dir_name, "/input.text");
+  char *input_file_name = strjoin(dir_name, "/input.txt");
   char *output_file_name = strjoin(dir_name, "/output.raw");
 
   unsigned int *output_data =
-      (unsigned int *)calloc(sizeof(unsigned int), NUM_BINS);
+      (unsigned int *)calloc(NUM_BINS, sizeof(unsigned int));
 
   compute(output_data, str, strlen(str));
 
@@ -86,6 +85,8 @@ static void create_dataset_fixed(int datasetNum, const char *str) {
   write_data_int(output_file_name, output_data, NUM_BINS);
 
   free(output_data);
+  free(input_file_name);
+  free(output_file_name);
 }
 
 static void create_dataset_random(int datasetNum, size_t input_length) {
@@ -93,20 +94,22 @@ static void create_dataset_random(int datasetNum, size_t input_length) {
   sprintf(dir_name, "%s/%d", base_dir, datasetNum);
   _mkdir(dir_name);
 
-  char *input_file_name = strjoin(dir_name, "input.raw");
-  char *output_file_name = strjoin(dir_name, "output.raw");
+  char *input_file_name = strjoin(dir_name, "/input.txt");
+  char *output_file_name = strjoin(dir_name, "/output.raw");
 
-  char *input_data = generate_data(input_length);
+  char *str = generate_data(input_length);
   unsigned int *output_data =
-      (unsigned int *)calloc(sizeof(unsigned int), NUM_BINS);
+      (unsigned int *)calloc(NUM_BINS, sizeof(unsigned int));
 
-  compute(output_data, input_data, input_length);
+  compute(output_data, str, input_length);
 
-  write_data_str(input_file_name, input_data, input_length);
+  write_data_str(input_file_name, str, input_length);
   write_data_int(output_file_name, output_data, NUM_BINS);
 
-  free(input_data);
+  free(str);
   free(output_data);
+  free(input_file_name);
+  free(output_file_name);
 }
 
 int main() {
