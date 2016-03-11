@@ -1,7 +1,5 @@
 
 #include <wb.h>
-#include <wbCUDA.h>
-#include <wbMPI.h>
 
 #define MB (1 << 20)
 #ifndef WB_DEFAULT_HEAP_SIZE
@@ -10,9 +8,9 @@
 
 static bool _initializedQ = wbFalse;
 
-#if 0  // ndef _MSC_VER
+#if 0  // ifndef WB_USE_WINDOWS
 __attribute__((__constructor__))
-#endif /* _MSC_VER */
+#endif /* WB_USE_WINDOWS */
 void wb_init(int *
 #ifdef WB_USE_MPI
                  argc
@@ -65,11 +63,7 @@ void wb_init(int *
 
 #endif /* WB_USE_CUDA */
 
-#ifdef WB_USE_CUSTOM_MALLOC
-  wbMemoryManager_new(WB_DEFAULT_HEAP_SIZE);
-#endif /* WB_USE_CUSTOM_MALLOC */
-
-#ifdef _MSC_VER
+#ifdef WB_USE_WINDOWS
   QueryPerformanceFrequency((LARGE_INTEGER *)&_hrtime_frequency);
 #endif /* _MSC_VER */
 
@@ -80,10 +74,6 @@ void wb_init(int *
   _initializedQ = wbTrue;
 
   wbFile_init();
-
-#ifdef WB_USE_SANDBOX
-  wbSandbox_new();
-#endif /* WB_USE_SANDBOX */
 
   solutionJSON = NULL;
 

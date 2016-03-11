@@ -10,8 +10,8 @@
 /***********************************************************/
 /***********************************************************/
 
-#include <stdio.h>
-#include <stdlib.h>
+#include <cstdio>
+#include <cstdlib>
 
 #ifdef _MSC_VER
 #define __func__ __FUNCTION__
@@ -23,6 +23,19 @@
 #include <direct.h>
 #include <io.h>
 #include <windows.h>
+#define WB_USE_WINDOWS
+#else /* _MSC_VER */
+#include <cstdint>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <time.h>
+#define WB_USE_UNIX
+#ifdef __APPLE__
+#include <mach/mach_time.h>
+#define WB_USE_DARWIN
+#else /* __APPLE__ */
+#define WB_USE_LINUX
+#endif /* __APPLE__ */
 #endif /* _MSC_VER */
 
 #define wbStmt(stmt) stmt
@@ -44,7 +57,6 @@
 
 #ifdef WB_USE_COURSERA
 #define wbLogger_printOnExit 1
-//#define WB_USE_SANDBOX
 #else /* WB_USE_COURSERA */
 #define wbLogger_printOnLog 1
 #endif /* WB_USE_COURSERA */
@@ -83,22 +95,25 @@ extern char *solutionJSON;
 /***********************************************************/
 
 #ifdef WB_USE_OPENCL
-#ifdef __APPLE__
+#ifdef WB_USE_DARWIN
 #include <OpenCL/opencl.h>
-#else
+#else /* WB_USE_DARWIN */
 #include <CL/cl.h>
-#endif /* __APPLE__ */
+#endif /* WB_USE_DARWIN */
 #endif /* WB_USE_OPENCL */
 
 #include <wbTypes.h>
+
 #include <wbAssert.h>
 #include <wbMalloc.h>
 #include <wbString.h>
+#include <wbUtils.h>
 
 #include <wbArg.h>
 #include <wbCUDA.h>
 #include <wbCast.h>
 #include <wbComparator.h>
+#include <wbDirectory.h>
 #include <wbExit.h>
 #include <wbExport.h>
 #include <wbFile.h>
@@ -108,9 +123,9 @@ extern char *solutionJSON;
 #include <wbLogger.h>
 #include <wbMD5.h>
 #include <wbMPI.h>
-#include <wbMemoryManager.h>
 #include <wbSolution.h>
 #include <wbSparse.h>
+#include <wbThrust.h>
 #include <wbTimer.h>
 
 /***********************************************************/

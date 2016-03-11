@@ -3,15 +3,7 @@
 #ifndef __WB_TIMER_H__
 #define __WB_TIMER_H__
 
-#include <stdint.h>
-#include <sys/types.h>
-#include <time.h>
-
-#ifdef __APPLE__
-#include <mach/mach_time.h>
-#endif /* __APPLE__ */
-
-#ifdef _WIN32
+#ifdef WB_USE_WINDOWS
 extern uint64_t _hrtime_frequency;
 #endif /* _WIN32 */
 

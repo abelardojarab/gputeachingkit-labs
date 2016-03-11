@@ -149,7 +149,6 @@ char *wbFile_read(wbFile_t file, size_t len) {
 }
 
 void wbFile_rewind(wbFile_t file) {
-
   if (file == NULL) {
     return;
   }
@@ -217,7 +216,6 @@ char *wbFile_read(wbFile_t file) {
 static char buffer[MAX_CHARS_PER_LINE];
 
 char *wbFile_readLine(wbFile_t file) {
-
   if (file == NULL) {
     return NULL;
   }

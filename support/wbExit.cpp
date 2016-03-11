@@ -9,7 +9,6 @@ enum {
 };
 
 void wb_atExit(void) {
-
   using std::cout;
   using std::endl;
 

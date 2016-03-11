@@ -32,7 +32,6 @@ EXTERN_C void CSRToJDS(int dim, int *csrRowPtr, int *csrColIdx,
                        float *csrData, int **jdsRowPerm, int **jdsRowNNZ,
                        int **jdsColStartIdx, int **jdsColIdx,
                        float **jdsData) {
-
   // Row Permutation Vector
   *jdsRowPerm = (int *)malloc(sizeof(int) * dim);
   for (int rowIdx = 0; rowIdx < dim; ++rowIdx) {
@@ -50,7 +49,7 @@ EXTERN_C void CSRToJDS(int dim, int *csrRowPtr, int *csrColIdx,
 
   // Starting point of each compressed column
   int maxRowNNZ = (*jdsRowNNZ)[0]; // Largest number of non-zeros per row
-  printf("jdsRowNNZ = %d\n", maxRowNNZ);
+  DEBUG(printf("jdsRowNNZ = %d\n", maxRowNNZ));
   *jdsColStartIdx = (int *)malloc(sizeof(int) * maxRowNNZ);
   (*jdsColStartIdx)[0] = 0; // First column starts at 0
   for (int col = 0; col < maxRowNNZ - 1; ++col) {
@@ -66,9 +65,9 @@ EXTERN_C void CSRToJDS(int dim, int *csrRowPtr, int *csrColIdx,
 
   // Sort the column indexes and data
   const int NNZ = csrRowPtr[dim];
-  printf("NNZ = %d\n", NNZ);
+  DEBUG(printf("NNZ = %d\n", NNZ));
   *jdsColIdx = (int *)malloc(sizeof(int) * NNZ);
-  printf("dim = %d\n", dim);
+  DEBUG(printf("dim = %d\n", dim));
   *jdsData = (float *)malloc(sizeof(float) * NNZ);
   for (int idx = 0; idx < dim; ++idx) { // For every row
     int row = (*jdsRowPerm)[idx];

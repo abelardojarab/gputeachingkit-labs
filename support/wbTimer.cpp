@@ -3,19 +3,19 @@
 #include <time.h>
 #include <wb.h>
 
-#ifdef _WIN32
+#ifdef WB_USE_WINDOWS
 uint64_t _hrtime_frequency = 0;
-#endif /* _WIN32 */
+#endif /* WB_USE_WINDOWS */
 wbTimer_t _timer = NULL;
 
-#ifdef __APPLE__
+#ifdef WB_USE_DARWIN
 static double o_timebase = 0;
 static uint64_t o_timestart = 0;
-#endif /* __APPLE__ */
+#endif /* WB_USE_DARWIN */
 
 uint64_t _hrtime(void) {
 #define NANOSEC ((uint64_t)1e9)
-#ifdef _MSC_VER
+#ifdef WB_USE_WINDOWS
   LARGE_INTEGER counter;
   if (!QueryPerformanceCounter(&counter)) {
     return 0;
@@ -25,7 +25,7 @@ uint64_t _hrtime(void) {
           << 32);
 #else
   struct timespec ts;
-#ifdef __APPLE__
+#ifdef WB_USE_DARWIN
 #define O_NANOSEC (+1.0E-9)
 #define O_GIGA UINT64_C(1000000000)
   if (!o_timestart) {
@@ -40,11 +40,11 @@ uint64_t _hrtime(void) {
   ts.tv_nsec = diff - (ts.tv_sec * O_GIGA);
 #undef O_NANOSEC
 #undef O_GIGA
-#else /* __APPLE__ */
+#else  /* WB_USE_DARWIN */
   clock_gettime(CLOCK_MONOTONIC, &ts);
-#endif /* __APPLE__ */
+#endif /* WB_USE_DARWIN */
   return (((uint64_t)ts.tv_sec) * NANOSEC + ts.tv_nsec);
-#endif /* _MSC_VER */
+#endif /* WB_USE_WINDOWS */
 #undef NANOSEC
 }
 

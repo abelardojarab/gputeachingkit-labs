@@ -548,7 +548,7 @@ static inline void *wbImport_read(wbImport_t imp, wbType_t type) {
     wbImportText_t text = wbImport_getText(imp);
     text = wbImportText_read(text);
     data = wbImportText_getData(text);
- 
+
   } else {
     wbLog(ERROR, "Invalid import type.");
     wbExit();
@@ -568,7 +568,7 @@ static inline wbReal_t *wbImport_readAsReal(wbImport_t imp) {
 
 static inline wbChar_t *wbImport_readAsText(wbImport_t imp) {
   void *data = wbImport_read(imp, wbType_ubit8);
-  return (wbChar_t*) data;
+  return (wbChar_t *)data;
 }
 
 static wbImportKind_t _parseImportExtension(const char *file) {
@@ -658,7 +658,6 @@ void *wbImport(const char *file, int *resRows, int *resColumns,
   memcpy(res, data, sz * rows * columns);
 
   wbImport_close(imp);
-
 
   return res;
 }
