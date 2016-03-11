@@ -13,7 +13,19 @@ typedef enum en_wbExportKind_t {
   wbExportKind_csv,
   wbExportKind_tsv,
   wbExportKind_ppm,
+  wbExportKind_text,
 } wbExportKind_t;
+
+typedef struct st_wbExportText_t {
+  int length;
+  wbFile_t file;
+} * wbExportText_t;
+
+#define wbExportText_getLength(txt) ((txt)->length)
+#define wbExportText_getFile(txt) ((txt)->file)
+
+#define wbExportText_setLength(txt, val)                                  \
+  (wbExportText_getLength(txt) = val)
 
 typedef struct st_wbExportRaw_t {
   int rows;
@@ -55,6 +67,7 @@ typedef struct st_wbExport_t {
     wbExportRaw_t raw;
     wbExportCSV_t csv;
     wbImage_t img;
+    wbExportText_t text;
   } container;
   char *file;
 } wbExport_t;
@@ -64,12 +77,14 @@ typedef struct st_wbExport_t {
 #define wbExport_getRaw(exprt) (wbExport_getContainer(exprt).raw)
 #define wbExport_getCSV(exprt) (wbExport_getContainer(exprt).csv)
 #define wbExport_getImage(exprt) (wbExport_getContainer(exprt).img)
+#define wbExport_getText(exprt) (wbExport_getContainer(exprt).text)
 #define wbExport_getFile(exprt) ((exprt).file)
 
 #define wbExport_setKind(exprt, val) (wbExport_getKind(exprt) = val)
 #define wbExport_setRaw(exprt, val) (wbExport_getRaw(exprt) = val)
 #define wbExport_setCSV(exprt, val) (wbExport_getCSV(exprt) = val)
 #define wbExport_setImage(exprt, val) (wbExport_getImage(exprt) = val)
+#define wbExport_setText(exprt, val) (wbExport_getText(exprt) = val)
 #define wbExport_setFile(exprt, val) (wbExport_getFile(exprt) = val)
 
 void wbExport(const char *file, int *data, int rows, int columns);

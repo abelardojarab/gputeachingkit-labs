@@ -13,13 +13,6 @@ typedef enum en_wbImportKind_t {
   wbImportKind_text
 } wbImportKind_t;
 
-typedef enum en_wbType_t {
-  wbType_ubit8 = 0,
-  wbType_integer,
-  wbType_float,
-  wbType_double
-} wbType_t;
-
 #define wbType_real wbType_float
 
 typedef struct st_wbImportCSV_t {

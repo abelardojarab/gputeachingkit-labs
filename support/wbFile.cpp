@@ -45,6 +45,7 @@ void wbFile_delete(wbFile_t file) {
       wbDelete(wbFile_getMode(file));
     }
     if (wbFile_getFileHandle(file) != NULL) {
+      fflush(wbFile_getFileHandle(file));
       fclose(wbFile_getFileHandle(file));
     }
     if (idx >= 0) {

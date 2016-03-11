@@ -1,6 +1,66 @@
 
 #include <wb.h>
 
+static inline void wbExportText_setFile(wbExportText_t text,
+                                        const char *path) {
+  if (text != NULL) {
+    if (wbExportText_getFile(text) != NULL) {
+      wbFile_delete(wbExportText_getFile(text));
+    }
+    if (path != NULL) {
+      wbExportText_getFile(text) = wbFile_open(path, "w+");
+    } else {
+      wbExportText_getFile(text) = NULL;
+    }
+  }
+
+  return;
+}
+
+static inline wbExportText_t wbExportText_new(void) {
+  wbExportText_t text;
+
+  text = wbNew(struct st_wbExportText_t);
+
+  wbExportText_getFile(text) = NULL;
+  wbExportText_setLength(text, -1);
+
+  return text;
+}
+
+static inline void wbExportText_delete(wbExportText_t text) {
+  if (text != NULL) {
+    wbExportText_setFile(text, NULL);
+    wbDelete(text);
+  }
+  return;
+}
+
+static inline void wbExportText_write(wbExportText_t text,
+                                      const char *data, int length) {
+  int ii;
+  FILE *handle;
+  wbFile_t file;
+
+  if (text == NULL || wbExportText_getFile(text) == NULL) {
+    return;
+  }
+
+  file = wbExportText_getFile(text);
+
+  handle = wbFile_getFileHandle(file);
+
+  if (handle == NULL) {
+    return;
+  }
+
+  for (ii = 0; ii < length; ii++) {
+    fprintf(handle, "%c", data[ii]);
+  }
+
+  return;
+}
+
 static inline void wbExportRaw_setFile(wbExportRaw_t raw,
                                        const char *path) {
   if (raw != NULL) {
@@ -187,6 +247,10 @@ static inline wbExport_t wbExport_open(const char *file,
     wbExportRaw_t raw = wbExportRaw_new();
     wbExportRaw_setFile(raw, file);
     wbExport_setRaw(exprt, raw);
+  } else if (kind == wbExportKind_text) {
+    wbExportText_t txt = wbExportText_new();
+    wbExportText_setFile(txt, file);
+    wbExport_setText(exprt, txt);
   } else if (kind == wbExportKind_tsv || kind == wbExportKind_csv) {
     wbExportCSV_t csv = wbExportCSV_new();
     if (kind == wbExportKind_csv) {
@@ -222,6 +286,8 @@ static inline wbExport_t wbExport_open(const char *file,
     kind = wbExportKind_raw;
   } else if (wbString_sameQ(type, "ppm") || wbString_sameQ(type, "pbm")) {
     kind = wbExportKind_ppm;
+  } else if (wbString_sameQ(type, "txt") || wbString_sameQ(type, "text")) {
+    kind = wbExportKind_text;
   } else {
     wbLog(ERROR, "Invalid export type ", type0);
     wbExit();
@@ -251,6 +317,10 @@ static inline void wbExport_close(wbExport_t exprt) {
     wbExportRaw_t raw = wbExport_getRaw(exprt);
     wbExportRaw_delete(raw);
     wbExport_setRaw(exprt, NULL);
+  } else if (kind == wbExportKind_text) {
+    wbExportText_t text = wbExport_getText(exprt);
+    wbExportText_delete(text);
+    wbExport_setText(exprt, NULL);
   } else if (kind == wbExportKind_ppm) {
   } else {
     wbLog(ERROR, "Invalid export type.");
@@ -278,6 +348,15 @@ static inline void wbExport_write(wbExport_t exprt, void *data, int rows,
   } else if (kind == wbExportKind_raw) {
     wbExportRaw_t raw = wbExport_getRaw(exprt);
     wbExportRaw_write(raw, data, rows, columns, type);
+  } else if (kind == wbExportKind_text) {
+    wbExportText_t text = wbExport_getText(exprt);
+    if (columns == 0) {
+      columns = 1;
+    }
+    if (rows == 0) {
+      rows = 1;
+    }
+    wbExportText_write(text, (const char *)data, rows * columns);
   } else {
     wbLog(ERROR, "Invalid export type.");
     wbExit();
@@ -303,6 +382,9 @@ static wbExportKind_t _parseExportExtension(const char *file) {
   } else if (wbString_sameQ(extension, "raw") ||
              wbString_sameQ(extension, "dat")) {
     kind = wbExportKind_raw;
+  } else if (wbString_sameQ(extension, "text") ||
+             wbString_sameQ(extension, "txt")) {
+    kind = wbExportKind_text;
   } else if (wbString_sameQ(extension, "ppm")) {
     kind = wbExportKind_ppm;
   } else {
