@@ -623,7 +623,7 @@ void *wbImport(const char *file, int *resRows, int *resColumns,
     sz = sizeof(wbReal_t);
   } else if (wbString_sameQ(type, "Text")) {
     data = wbImport_readAsText(imp);
-    sz = 1;
+    sz = sizeof(char);
   } else {
     // printf("Reading as integer..d\n");
     data = wbImport_readAsInteger(imp);
