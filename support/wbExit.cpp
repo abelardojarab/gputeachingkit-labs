@@ -2,10 +2,10 @@
 #include <wb.h>
 
 enum {
-  wbMPI_timerTag = 2,
-  wbMPI_loggerTag = 4,
+  wbMPI_timerTag          = 2,
+  wbMPI_loggerTag         = 4,
   wbMPI_solutionExistsTag = 8,
-  wbMPI_solutionTag = 16
+  wbMPI_solutionTag       = 16
 };
 
 void wb_atExit(void) {
@@ -98,7 +98,7 @@ void wb_atExit(void) {
   // wbTimer_delete(_timer);
   // wbLogger_delete(_logger);
 
-  _timer = NULL;
+  _timer  = NULL;
   _logger = NULL;
 
 // wbFile_atExit();

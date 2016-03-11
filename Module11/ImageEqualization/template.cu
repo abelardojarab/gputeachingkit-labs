@@ -24,11 +24,11 @@ int main(int argc, char **argv) {
   inputImageFile = wbArg_getInputFile(args, 0);
 
   wbTime_start(Generic, "Importing data and creating memory on host");
-  inputImage = wbImport(inputImageFile);
-  imageWidth = wbImage_getWidth(inputImage);
-  imageHeight = wbImage_getHeight(inputImage);
+  inputImage    = wbImport(inputImageFile);
+  imageWidth    = wbImage_getWidth(inputImage);
+  imageHeight   = wbImage_getHeight(inputImage);
   imageChannels = wbImage_getChannels(inputImage);
-  outputImage = wbImage_new(imageWidth, imageHeight, imageChannels);
+  outputImage   = wbImage_new(imageWidth, imageHeight, imageChannels);
   wbTime_stop(Generic, "Importing data and creating memory on host");
 
   //@@ insert code here

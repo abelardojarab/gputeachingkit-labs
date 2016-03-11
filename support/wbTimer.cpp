@@ -9,7 +9,7 @@ uint64_t _hrtime_frequency = 0;
 wbTimer_t _timer = NULL;
 
 #ifdef WB_USE_DARWIN
-static double o_timebase = 0;
+static double o_timebase    = 0;
 static uint64_t o_timestart = 0;
 #endif /* WB_USE_DARWIN */
 
@@ -36,8 +36,8 @@ uint64_t _hrtime(void) {
     o_timestart = mach_absolute_time();
   }
   double diff = (mach_absolute_time() - o_timestart) * o_timebase;
-  ts.tv_sec = diff * O_NANOSEC;
-  ts.tv_nsec = diff - (ts.tv_sec * O_GIGA);
+  ts.tv_sec   = diff * O_NANOSEC;
+  ts.tv_nsec  = diff - (ts.tv_sec * O_GIGA);
 #undef O_NANOSEC
 #undef O_GIGA
 #else  /* WB_USE_DARWIN */
@@ -92,22 +92,22 @@ static inline void wbTimerNode_delete(wbTimerNode_t node) {
 
 static inline const char *_nodeKind(wbTimerKind_t kind) {
   switch (kind) {
-  case wbTimerKind_Generic:
-    return "Generic";
-  case wbTimerKind_IO:
-    return "IO";
-  case wbTimerKind_GPU:
-    return "GPU";
-  case wbTimerKind_Copy:
-    return "Copy";
-  case wbTimerKind_Driver:
-    return "Driver";
-  case wbTimerKind_CopyAsync:
-    return "CopyAsync";
-  case wbTimerKind_Compute:
-    return "Compute";
-  case wbTimerKind_CPUGPUOverlap:
-    return "CPUGPUOverlap";
+    case wbTimerKind_Generic:
+      return "Generic";
+    case wbTimerKind_IO:
+      return "IO";
+    case wbTimerKind_GPU:
+      return "GPU";
+    case wbTimerKind_Copy:
+      return "Copy";
+    case wbTimerKind_Driver:
+      return "Driver";
+    case wbTimerKind_CopyAsync:
+      return "CopyAsync";
+    case wbTimerKind_Compute:
+      return "Compute";
+    case wbTimerKind_CPUGPUOverlap:
+      return "CPUGPUOverlap";
   }
   return "Undefined";
 }
@@ -262,7 +262,9 @@ string wbTimer_toJSON(wbTimer_t timer) {
   }
 }
 
-string wbTimer_toJSON() { return wbTimer_toJSON(_timer); }
+string wbTimer_toJSON() {
+  return wbTimer_toJSON(_timer);
+}
 
 string wbTimer_toXML(wbTimer_t timer) {
   if (timer == NULL) {
@@ -301,7 +303,9 @@ string wbTimer_toXML(wbTimer_t timer) {
   }
 }
 
-string wbTimer_toXML() { return wbTimer_toXML(_timer); }
+string wbTimer_toXML() {
+  return wbTimer_toXML(_timer);
+}
 
 wbTimer_t wbTimer_new(void) {
   wbTimer_t timer = wbNew(struct st_wbTimer_t);

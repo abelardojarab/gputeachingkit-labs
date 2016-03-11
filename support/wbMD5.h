@@ -39,14 +39,14 @@ struct MD5Context {
 
 static void MD5Transform(UWORD32 buf[4], UWORD32 const in[16]);
 
-static int g_bigEndian = 0;
+static int g_bigEndian         = 0;
 static int g_endianessDetected = 0;
 
 static void detectEndianess() {
-  int nl = 0x12345678;
+  int nl   = 0x12345678;
   short ns = 0x1234;
 
-  unsigned char *p = (unsigned char *)(&nl);
+  unsigned char *p  = (unsigned char *)(&nl);
   unsigned char *sp = (unsigned char *)(&ns);
 
   if (g_endianessDetected)
@@ -138,7 +138,7 @@ static void MD5Update(struct MD5Context *ctx, md5byte const *buf,
  * 1 0* (64-bit count of bits processed, MSB-first)
  */
 static void MD5Final(md5byte digest[16], struct MD5Context *ctx) {
-  int count = ctx->bytes[0] & 0x3f; /* Number of bytes in ctx->in */
+  int count  = ctx->bytes[0] & 0x3f; /* Number of bytes in ctx->in */
   md5byte *p = (md5byte *)ctx->in + count;
 
   /* Set the first char of padding to 0x80.  There is always room. */
@@ -151,7 +151,7 @@ static void MD5Final(md5byte digest[16], struct MD5Context *ctx) {
     memset(p, 0, count + 8);
     byteSwap(ctx->in, 16);
     MD5Transform(ctx->buf, ctx->in);
-    p = (md5byte *)ctx->in;
+    p     = (md5byte *)ctx->in;
     count = 56;
   }
   memset(p, 0, count);
@@ -294,7 +294,7 @@ static void wbMD5_sigToString(unsigned char signature[16], char *str,
   for (sig_p = (unsigned char *)signature;
        sig_p < (unsigned char *)signature + 16; sig_p++) {
     high = *sig_p / 16;
-    low = *sig_p % 16;
+    low  = *sig_p % 16;
     /* account for 2 chars */
     if (str_p + 1 >= max_p) {
       break;

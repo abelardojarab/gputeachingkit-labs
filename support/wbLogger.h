@@ -6,7 +6,7 @@
 
 typedef enum en_wbLogLevel_t {
   wbLogLevel_unknown = -1,
-  wbLogLevel_OFF = 0,
+  wbLogLevel_OFF     = 0,
   wbLogLevel_FATAL,
   wbLogLevel_ERROR,
   wbLogLevel_WARN,

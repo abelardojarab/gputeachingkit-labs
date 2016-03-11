@@ -66,7 +66,7 @@ int main(int argc, char **argv) {
   hostB = (float *)wbImport(wbArg_getInputFile(args, 1), &numBRows,
                             &numBColumns);
   //@@ Set numCRows and numCColumns
-  numCRows = numARows;
+  numCRows    = numARows;
   numCColumns = numBColumns;
   //@@ Allocate the hostC matrix
   hostC = (float *)malloc(sizeof(float) * numCRows * numCColumns);

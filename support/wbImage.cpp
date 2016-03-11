@@ -2,9 +2,13 @@
 
 #include <wb.h>
 
-static inline float _min(float x, float y) { return x < y ? x : y; }
+static inline float _min(float x, float y) {
+  return x < y ? x : y;
+}
 
-static inline float _max(float x, float y) { return x > y ? x : y; }
+static inline float _max(float x, float y) {
+  return x > y ? x : y;
+}
 
 static inline float _clamp(float x, float start, float end) {
   return _min(_max(x, start), end);
@@ -42,9 +46,9 @@ void wbImage_delete(wbImage_t img) {
 
 static inline void wbImage_setPixel(wbImage_t img, int x, int y, int c,
                                     float val) {
-  float *data = wbImage_getData(img);
+  float *data  = wbImage_getData(img);
   int channels = wbImage_getChannels(img);
-  int pitch = wbImage_getPitch(img);
+  int pitch    = wbImage_getPitch(img);
 
   data[y * pitch + x * channels + c] = val;
 
@@ -52,9 +56,9 @@ static inline void wbImage_setPixel(wbImage_t img, int x, int y, int c,
 }
 
 static inline float wbImage_getPixel(wbImage_t img, int x, int y, int c) {
-  float *data = wbImage_getData(img);
+  float *data  = wbImage_getData(img);
   int channels = wbImage_getChannels(img);
-  int pitch = wbImage_getPitch(img);
+  int pitch    = wbImage_getPitch(img);
 
   return data[y * pitch + x * channels + c];
 }
@@ -86,8 +90,8 @@ wbBool wbImage_sameQ(wbImage_t a, wbImage_t b,
     wbAssert(aData != NULL);
     wbAssert(bData != NULL);
 
-    width = wbImage_getWidth(a);
-    height = wbImage_getHeight(a);
+    width    = wbImage_getWidth(a);
+    height   = wbImage_getHeight(a);
     channels = wbImage_getChannels(a);
 
     for (ii = 0; ii < height; ii++) {
@@ -118,7 +122,9 @@ wbBool wbImage_sameQ(wbImage_t a, wbImage_t b,
   }
 }
 
-static void wbImage_onUnsameFunction(string str) { wbLog(ERROR, str); }
+static void wbImage_onUnsameFunction(string str) {
+  wbLog(ERROR, str);
+}
 
 wbBool wbImage_sameQ(wbImage_t a, wbImage_t b) {
   return wbImage_sameQ(a, b, wbImage_onUnsameFunction);

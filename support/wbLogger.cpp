@@ -59,22 +59,22 @@ static inline void wbLogEntry_delete(wbLogEntry_t elem) {
 
 static inline const char *getLevelName(wbLogLevel_t level) {
   switch (level) {
-  case wbLogLevel_unknown:
-    return "Unknown";
-  case wbLogLevel_OFF:
-    return "Off";
-  case wbLogLevel_FATAL:
-    return "Fatal";
-  case wbLogLevel_ERROR:
-    return "Error";
-  case wbLogLevel_WARN:
-    return "Warn";
-  case wbLogLevel_INFO:
-    return "Info";
-  case wbLogLevel_DEBUG:
-    return "Debug";
-  case wbLogLevel_TRACE:
-    return "Trace";
+    case wbLogLevel_unknown:
+      return "Unknown";
+    case wbLogLevel_OFF:
+      return "Off";
+    case wbLogLevel_FATAL:
+      return "Fatal";
+    case wbLogLevel_ERROR:
+      return "Error";
+    case wbLogLevel_WARN:
+      return "Warn";
+    case wbLogLevel_INFO:
+      return "Info";
+    case wbLogLevel_DEBUG:
+      return "Debug";
+    case wbLogLevel_TRACE:
+      return "Trace";
   }
   return NULL;
 }
@@ -217,7 +217,9 @@ void wbLogger_append(wbLogLevel_t level, string msg, const char *file,
   return;
 }
 
-string wbLogger_toJSON() { return wbLogger_toJSON(_logger); }
+string wbLogger_toJSON() {
+  return wbLogger_toJSON(_logger);
+}
 
 string wbLogger_toJSON(wbLogger_t logger) {
   if (logger != NULL) {
@@ -237,7 +239,9 @@ string wbLogger_toJSON(wbLogger_t logger) {
   return "";
 }
 
-string wbLogger_toXML() { return wbLogger_toXML(_logger); }
+string wbLogger_toXML() {
+  return wbLogger_toXML(_logger);
+}
 
 string wbLogger_toXML(wbLogger_t logger) {
   if (logger != NULL) {

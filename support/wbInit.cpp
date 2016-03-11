@@ -69,8 +69,8 @@ void wb_init(int *
 
   _hrtime();
 
-  _timer = wbTimer_new();
-  _logger = wbLogger_new();
+  _timer        = wbTimer_new();
+  _logger       = wbLogger_new();
   _initializedQ = wbTrue;
 
   wbFile_init();

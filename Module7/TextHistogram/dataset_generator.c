@@ -7,7 +7,7 @@
 #include "sys/stat.h"
 
 static char base_dir[] = "./TextHistogram/Dataset/";
-const size_t NUM_BINS = 128;
+const size_t NUM_BINS  = 128;
 
 static void _mkdir(const char *dir) {
   char tmp[PATH_MAX];
@@ -73,7 +73,7 @@ static void create_dataset_fixed(int datasetNum, const char *str) {
   sprintf(dir_name, "%s/%d", base_dir, datasetNum);
   _mkdir(dir_name);
 
-  char *input_file_name = strjoin(dir_name, "/input.txt");
+  char *input_file_name  = strjoin(dir_name, "/input.txt");
   char *output_file_name = strjoin(dir_name, "/output.raw");
 
   unsigned int *output_data =
@@ -94,7 +94,7 @@ static void create_dataset_random(int datasetNum, size_t input_length) {
   sprintf(dir_name, "%s/%d", base_dir, datasetNum);
   _mkdir(dir_name);
 
-  char *input_file_name = strjoin(dir_name, "/input.txt");
+  char *input_file_name  = strjoin(dir_name, "/input.txt");
   char *output_file_name = strjoin(dir_name, "/output.raw");
 
   char *str = generate_data(input_length);

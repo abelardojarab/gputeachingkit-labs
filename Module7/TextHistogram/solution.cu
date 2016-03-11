@@ -31,7 +31,7 @@ __global__ void histogram_kernel(const char *input, unsigned int *bins,
   // Histogram
   for (unsigned int i = tid; i < num_elements;
        i += blockDim.x * gridDim.x) {
-    atomicAdd(&(bins_s[(unsigned int) input[i]]), 1);
+    atomicAdd(&(bins_s[(unsigned int)input[i]]), 1);
   }
   __syncthreads();
 
@@ -56,7 +56,6 @@ void histogram(const char *input, unsigned int *bins,
     CUDA_CHECK(cudaGetLastError());
     CUDA_CHECK(cudaDeviceSynchronize());
   }
-
 }
 
 int main(int argc, char *argv[]) {
@@ -70,8 +69,8 @@ int main(int argc, char *argv[]) {
   args = wbArg_read(argc, argv);
 
   wbTime_start(Generic, "Importing data and creating memory on host");
-  hostInput = (char *)wbImport(wbArg_getInputFile(args, 0),
-                                       &inputLength, "Text");
+  hostInput =
+      (char *)wbImport(wbArg_getInputFile(args, 0), &inputLength, "Text");
   hostBins = (unsigned int *)malloc(NUM_BINS * sizeof(unsigned int));
   wbTime_stop(Generic, "Importing data and creating memory on host");
 
@@ -88,8 +87,7 @@ int main(int argc, char *argv[]) {
 
   wbTime_start(GPU, "Copying input memory to the GPU.");
   //@@ Copy memory to the GPU here
-  CUDA_CHECK(cudaMemcpy(deviceInput, hostInput,
-                        inputLength,
+  CUDA_CHECK(cudaMemcpy(deviceInput, hostInput, inputLength,
                         cudaMemcpyHostToDevice));
   CUDA_CHECK(cudaDeviceSynchronize());
   wbTime_stop(GPU, "Copying input memory to the GPU.");

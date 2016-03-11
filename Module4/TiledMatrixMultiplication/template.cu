@@ -43,7 +43,7 @@ int main(int argc, char **argv) {
   hostB = (float *)wbImport(wbArg_getInputFile(args, 1), &numBRows,
                             &numBColumns);
   //@@ Set numCRows and numCColumns
-  numCRows = 0;
+  numCRows    = 0;
   numCColumns = 0;
   //@@ Allocate the hostC matrix
   wbTime_stop(Generic, "Importing data and creating memory on host");

@@ -49,7 +49,7 @@ void wbMPI_sendStringToMaster(const char *str, int tag) {
 
 int wbMPI_Init(int *argc, char ***argv) {
   int err = MPI_SUCCESS;
-  err = MPI_Init(argc, argv);
+  err     = MPI_Init(argc, argv);
   // printf("argc = %d\n", *argc);
   // err = MPI_Init(NULL, NULL);
   // printf("rank = %d is master = %d\n", wbMPI_getRank(), isMasterQ);

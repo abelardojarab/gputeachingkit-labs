@@ -9,7 +9,7 @@
 
 typedef enum en_wbExportKind_t {
   wbExportKind_unknown = -1,
-  wbExportKind_raw = 0x1000,
+  wbExportKind_raw     = 0x1000,
   wbExportKind_csv,
   wbExportKind_tsv,
   wbExportKind_ppm,

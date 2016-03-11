@@ -20,7 +20,7 @@ static wbBool wbSolution_listCorrectQ(const char *expectedOutputFile,
 
   if (expectedData == NULL) {
     _solution_correctQ = "Failed to open expected output file.";
-    res = wbFalse;
+    res                = wbFalse;
   } else if (expectedRows != wbSolution_getRows(sol)) {
     wbLog(TRACE, "Number of rows in the solution is ",
           wbSolution_getRows(sol), ". Expected number of rows is ",
@@ -60,7 +60,7 @@ static wbBool wbSolution_listCorrectQ(const char *expectedOutputFile,
                            solutionData[idx], ".");
           }
           _solution_correctQ = str;
-          res = wbFalse;
+          res                = wbFalse;
           goto matrixCleanup;
         }
       }
@@ -90,7 +90,7 @@ static wbBool wbSolution_correctQ(char *expectedOutputFile,
     wbImage_t expectedImage = wbImport(expectedOutputFile);
     if (expectedImage == NULL) {
       _solution_correctQ = "Failed to open expected output file.";
-      res = wbFalse;
+      res                = wbFalse;
     } else if (wbImage_getWidth(expectedImage) !=
                wbSolution_getWidth(sol)) {
       _solution_correctQ =
@@ -164,7 +164,7 @@ wbBool wbSolution(char *expectedOutputFile, char *outputFile, char *type0,
   if (outputFile != NULL) {
     if (wbString_sameQ(type, "image")) {
       wbImage_t inputImage = (wbImage_t)data;
-      wbImage_t img = wbImage_new(wbImage_getWidth(inputImage),
+      wbImage_t img        = wbImage_new(wbImage_getWidth(inputImage),
                                   wbImage_getHeight(inputImage),
                                   wbImage_getChannels(inputImage));
       memcpy(wbImage_getData(img), wbImage_getData(inputImage),
@@ -201,8 +201,8 @@ wbBool wbSolution(wbArg_t arg, void *data, int rows, int columns,
   stringstream ss;
 
   expectedOutputFile = wbArg_getExpectedOutputFile(arg);
-  outputFile = wbArg_getOutputFile(arg);
-  type = wbArg_getType(arg);
+  outputFile         = wbArg_getOutputFile(arg);
+  type               = wbArg_getType(arg);
 
   wbAssert(type != NULL);
   wbAssert(expectedOutputFile != NULL);

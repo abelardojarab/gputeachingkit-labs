@@ -27,7 +27,11 @@ extern "C" void wbMPI_Exit(void);
 #define MPI_Finalize wbMPI_Finalize
 
 #else  /* WB_USE_MPI */
-static inline int rankCount() { return 1; }
-static inline int wbMPI_getRank() { return 0; }
+static inline int rankCount() {
+  return 1;
+}
+static inline int wbMPI_getRank() {
+  return 0;
+}
 #endif /* WB_USE_MPI */
 #endif /* __WB_MPI_H__ */

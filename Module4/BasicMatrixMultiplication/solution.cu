@@ -51,7 +51,7 @@ int main(int argc, char **argv) {
   hostC = (float *)malloc(numARows * numBColumns * sizeof(float));
   wbTime_stop(Generic, "Importing data and creating memory on host");
 
-  numCRows = numARows;
+  numCRows    = numARows;
   numCColumns = numBColumns;
 
   wbLog(TRACE, "The dimensions of A are ", numARows, " x ", numAColumns);

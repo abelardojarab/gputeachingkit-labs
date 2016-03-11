@@ -67,10 +67,10 @@ static void create_dataset(int datasetNum, int dim) {
   sprintf(dir_name, "%s/%d", base_dir, datasetNum);
   _mkdir(dir_name);
 
-  char *input_file_name = strjoin(dir_name, "/input.raw");
+  char *input_file_name  = strjoin(dir_name, "/input.raw");
   char *output_file_name = strjoin(dir_name, "/output.raw");
 
-  int *input_data = generate_data(dim);
+  int *input_data  = generate_data(dim);
   int *output_data = (int *)calloc(sizeof(int), dim);
 
   compute(output_data, input_data, dim);

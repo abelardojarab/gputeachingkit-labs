@@ -65,7 +65,7 @@ static inline wbImportCSV_t wbImportCSV_findDimensions(wbImportCSV_t csv,
 
   while ((line = wbFile_readLine(file)) != NULL) {
     int currColumn = 0;
-    char *token = strtok(line, seperator);
+    char *token    = strtok(line, seperator);
     while (token != NULL) {
       token = strtok(NULL, seperator);
       currColumn++;
@@ -82,7 +82,7 @@ static inline wbImportCSV_t wbImportCSV_findDimensions(wbImportCSV_t csv,
 
   wbFile_rewind(file);
 
-  *resRows = rows;
+  *resRows    = rows;
   *resColumns = columns;
 
   return csv;
@@ -121,7 +121,7 @@ static inline int *csv_readAsInteger(wbFile_t file, char sep, int rows,
       char *token = strtok(line, seperator);
       while (token != NULL) {
         sscanf(token, "%d", &var);
-        token = strtok(NULL, seperator);
+        token      = strtok(NULL, seperator);
         data[ii++] = var;
       }
     }
@@ -161,7 +161,7 @@ static inline wbReal_t *csv_readAsReal(wbFile_t file, char sep, int rows,
       char *token = strtok(line, seperator);
       while (token != NULL) {
         sscanf(token, "%f", &var);
-        token = strtok(NULL, seperator);
+        token      = strtok(NULL, seperator);
         data[ii++] = var;
       }
     }
@@ -191,10 +191,10 @@ static inline wbImportCSV_t wbImportCSV_read(wbImportCSV_t csv,
     wbImportCSV_setColumnCount(csv, columns);
   }
 
-  file = wbImportCSV_getFile(csv);
+  file      = wbImportCSV_getFile(csv);
   seperator = wbImportCSV_getSeperator(csv);
-  rows = wbImportCSV_getRowCount(csv);
-  columns = wbImportCSV_getColumnCount(csv);
+  rows      = wbImportCSV_getRowCount(csv);
+  columns   = wbImportCSV_getColumnCount(csv);
 
   if (wbImportCSV_getData(csv) != NULL) {
     wbDelete(wbImportCSV_getData(csv));
@@ -271,8 +271,8 @@ static inline wbBool lineHasSpace(const char *line) {
 }
 
 static inline char *lineStrip(const char *line) {
-  char *sl = wbString_duplicate(line);
-  char *iter = sl;
+  char *sl    = wbString_duplicate(line);
+  char *iter  = sl;
   size_t slen = strlen(line);
 
   iter += slen - 1;
@@ -340,10 +340,10 @@ static inline wbImportRaw_t wbImportRaw_read(wbImportRaw_t raw,
     }
   }
 
-  file = wbImportRaw_getFile(raw);
+  file      = wbImportRaw_getFile(raw);
   seperator = ' ';
-  rows = wbImportRaw_getRowCount(raw);
-  columns = wbImportRaw_getColumnCount(raw);
+  rows      = wbImportRaw_getRowCount(raw);
+  columns   = wbImportRaw_getColumnCount(raw);
 
   if (wbImportRaw_getData(raw) != NULL) {
     wbDelete(wbImportRaw_getData(raw));
@@ -425,7 +425,7 @@ static inline wbImportText_t wbImportText_read(wbImportText_t text) {
   }
 
   length = wbFile_size(file);
-  data = wbFile_read(file, length);
+  data   = wbFile_read(file, length);
 
   wbImportText_setData(text, data);
   wbImportText_setLength(text, length);
@@ -546,8 +546,8 @@ static inline void *wbImport_read(wbImport_t imp, wbType_t type) {
     data = wbImportRaw_getData(raw);
   } else if (wbImportKind_text == kind) {
     wbImportText_t text = wbImport_getText(imp);
-    text = wbImportText_read(text);
-    data = wbImportText_getData(text);
+    text                = wbImportText_read(text);
+    data                = wbImportText_getData(text);
 
   } else {
     wbLog(ERROR, "Invalid import type.");
@@ -620,29 +620,29 @@ void *wbImport(const char *file, int *resRows, int *resColumns,
   imp = wbImport_open(file, kind);
   if (wbString_sameQ(type, "Real")) {
     data = wbImport_readAsReal(imp);
-    sz = sizeof(wbReal_t);
+    sz   = sizeof(wbReal_t);
   } else if (wbString_sameQ(type, "Text")) {
     data = wbImport_readAsText(imp);
-    sz = sizeof(char);
+    sz   = sizeof(char);
   } else {
     // printf("Reading as integer..d\n");
     data = wbImport_readAsInteger(imp);
-    sz = sizeof(int);
+    sz   = sizeof(int);
   }
 
   if (kind == wbImportKind_csv || kind == wbImportKind_tsv) {
-    rows = wbImportCSV_getRowCount(wbImport_getCSV(imp));
+    rows    = wbImportCSV_getRowCount(wbImport_getCSV(imp));
     columns = wbImportCSV_getColumnCount(wbImport_getCSV(imp));
   } else if (kind == wbImportKind_raw) {
-    rows = wbImportRaw_getRowCount(wbImport_getRaw(imp));
+    rows    = wbImportRaw_getRowCount(wbImport_getRaw(imp));
     columns = wbImportRaw_getColumnCount(wbImport_getRaw(imp));
   } else if (kind == wbImportKind_text) {
-    rows = 1;
+    rows    = 1;
     columns = wbImportText_getLength(wbImport_getText(imp));
   }
 
   if (rows == 1 && columns > 0) {
-    rows = columns;
+    rows    = columns;
     columns = 1;
   }
 
@@ -703,7 +703,7 @@ wbImage_t wbImport(const char *file) {
 
 int wbImport_flag(const char *file) {
   int res;
-  wbFile_t fh = wbFile_open(file, "r");
+  wbFile_t fh      = wbFile_open(file, "r");
   const char *line = wbFile_readLine(fh);
   sscanf(line, "%d", &res);
   wbFile_close(fh);

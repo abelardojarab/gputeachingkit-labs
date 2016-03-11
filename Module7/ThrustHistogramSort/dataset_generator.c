@@ -36,7 +36,7 @@ static void generate_data(unsigned int **input, unsigned int **bins,
   // Fill inuts, track the largest generated value
   int input_max = 0;
   for (unsigned int i = 0; i < num_inputs; i++) {
-    int newval = rand() % max_num_bins;
+    int newval  = rand() % max_num_bins;
     (*input)[i] = newval;
     if (newval > input_max) {
       input_max = newval;
@@ -45,7 +45,7 @@ static void generate_data(unsigned int **input, unsigned int **bins,
 
   // Allocate 0s for the number of bins
   *num_bins = input_max + 1;
-  (*bins) = (unsigned int *)calloc(*num_bins, sizeof(unsigned int));
+  (*bins)   = (unsigned int *)calloc(*num_bins, sizeof(unsigned int));
 
   // Compute the histogram
   for (unsigned int i = 0; i < num_inputs; ++i) {
@@ -76,7 +76,7 @@ static void create_dataset(int datasetNum, const size_t num_inputs,
   sprintf(dir_name, "%s/%d", base_dir, datasetNum);
   _mkdir(dir_name);
 
-  char *input_file_name = strjoin(dir_name, "input.raw");
+  char *input_file_name  = strjoin(dir_name, "input.raw");
   char *output_file_name = strjoin(dir_name, "output.raw");
 
   unsigned int *input_data, *bin_data;

@@ -16,12 +16,13 @@ using std::vector;
 using std::stringstream;
 using std::exception;
 
-template <typename T> static inline string wbString(const T &x);
+template <typename T>
+static inline string wbString(const T &x);
 
 static inline void wbString_replace(string &value, string const &search,
                                     string const &replace) {
   for (string::size_type next = value.find(search); next != string::npos;
-       next = value.find(search, next)) {
+       next                   = value.find(search, next)) {
     value.replace(next, search.length(), replace);
     next += replace.length();
   }
@@ -48,7 +49,7 @@ static inline char *wbString_duplicate(const char *str) {
   } else {
     char *newstr;
     size_t len = strlen(str);
-    newstr = wbNewArray(char, len + 1);
+    newstr     = wbNewArray(char, len + 1);
     memcpy(newstr, str, len * sizeof(char));
     newstr[len] = '\0';
     return newstr;
@@ -64,7 +65,8 @@ static inline string wbString(void) {
   return s;
 }
 
-template <typename T> static inline string wbString(const T &x) {
+template <typename T>
+static inline string wbString(const T &x) {
   try {
     stringstream ss;
     ss << x;
@@ -74,11 +76,13 @@ template <typename T> static inline string wbString(const T &x) {
   }
 }
 
-template <> inline string wbString(const bool &x) {
+template <>
+inline string wbString(const bool &x) {
   return x ? "True" : "False";
 }
 
-template <> inline string wbString(const vector<string> &x) {
+template <>
+inline string wbString(const vector<string> &x) {
   stringstream ss;
   ss << "{";
   for (size_t ii = 0; ii < x.size(); ii++) {
@@ -92,7 +96,8 @@ template <> inline string wbString(const vector<string> &x) {
   return ss.str();
 }
 
-template <> inline string wbString(const vector<int> &x) {
+template <>
+inline string wbString(const vector<int> &x) {
   stringstream ss;
   ss << "{";
   for (size_t ii = 0; ii < x.size(); ii++) {
@@ -106,7 +111,8 @@ template <> inline string wbString(const vector<int> &x) {
   return ss.str();
 }
 
-template <> inline string wbString(const vector<double> &x) {
+template <>
+inline string wbString(const vector<double> &x) {
   stringstream ss;
   ss << "{";
   for (size_t ii = 0; ii < x.size(); ii++) {

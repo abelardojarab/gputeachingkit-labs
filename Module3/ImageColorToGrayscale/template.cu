@@ -31,7 +31,7 @@ int main(int argc, char *argv[]) {
 
   inputImage = wbImport(inputImageFile);
 
-  imageWidth = wbImage_getWidth(inputImage);
+  imageWidth  = wbImage_getWidth(inputImage);
   imageHeight = wbImage_getHeight(inputImage);
   // For this lab the value is always 3
   imageChannels = wbImage_getChannels(inputImage);
@@ -39,7 +39,7 @@ int main(int argc, char *argv[]) {
   // Since the image is monochromatic, it only contains one channel
   outputImage = wbImage_new(imageWidth, imageHeight, 1);
 
-  hostInputImageData = wbImage_getData(inputImage);
+  hostInputImageData  = wbImage_getData(inputImage);
   hostOutputImageData = wbImage_getData(outputImage);
 
   wbTime_start(GPU, "Doing GPU Computation (memory + compute)");

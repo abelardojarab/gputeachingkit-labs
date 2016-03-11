@@ -6,8 +6,8 @@
 #include "string.h"
 #include "sys/stat.h"
 
-static char base_dir[] = "./Histogram/Dataset";
-const size_t NUM_BINS = 4096;
+static char base_dir[]     = "./Histogram/Dataset";
+const size_t NUM_BINS      = 4096;
 const unsigned int BIN_CAP = 127;
 
 static void _mkdir(const char *dir) {
@@ -67,7 +67,7 @@ static void create_dataset(int datasetNum, size_t input_length,
   sprintf(dir_name, "%s/%d", base_dir, datasetNum);
   _mkdir(dir_name);
 
-  char *input_file_name = strjoin(dir_name, "/input.raw");
+  char *input_file_name  = strjoin(dir_name, "/input.raw");
   char *output_file_name = strjoin(dir_name, "/output.raw");
 
   unsigned int *input_data = generate_data(input_length, num_bins);

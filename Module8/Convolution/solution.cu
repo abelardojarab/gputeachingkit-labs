@@ -25,9 +25,9 @@ __global__ void convolution(float *I, const float *__restrict__ M,
     // First batch loading
     int dest = threadIdx.y * TILE_WIDTH + threadIdx.x, destY = dest / w,
         destX = dest % w,
-        srcY = blockIdx.y * TILE_WIDTH + destY - Mask_radius,
-        srcX = blockIdx.x * TILE_WIDTH + destX - Mask_radius,
-        src = (srcY * width + srcX) * channels + k;
+        srcY  = blockIdx.y * TILE_WIDTH + destY - Mask_radius,
+        srcX  = blockIdx.x * TILE_WIDTH + destX - Mask_radius,
+        src   = (srcY * width + srcX) * channels + k;
     if (srcY >= 0 && srcY < height && srcX >= 0 && srcX < width)
       N_ds[destY][destX] = I[src];
     else
@@ -39,7 +39,7 @@ __global__ void convolution(float *I, const float *__restrict__ M,
     destY = dest / w, destX = dest % w;
     srcY = blockIdx.y * TILE_WIDTH + destY - Mask_radius;
     srcX = blockIdx.x * TILE_WIDTH + destX - Mask_radius;
-    src = (srcY * width + srcX) * channels + k;
+    src  = (srcY * width + srcX) * channels + k;
     if (destY < w) {
       if (srcY >= 0 && srcY < height && srcX >= 0 && srcX < width)
         N_ds[destY][destX] = I[src];
@@ -83,21 +83,21 @@ int main(int argc, char *argv[]) {
   arg = wbArg_read(argc, argv); /* parse the input arguments */
 
   inputImageFile = wbArg_getInputFile(arg, 0);
-  inputMaskFile = wbArg_getInputFile(arg, 1);
+  inputMaskFile  = wbArg_getInputFile(arg, 1);
 
-  inputImage = wbImport(inputImageFile);
+  inputImage   = wbImport(inputImageFile);
   hostMaskData = (float *)wbImport(inputMaskFile, &maskRows, &maskColumns);
 
   assert(maskRows == 5);    /* mask height is fixed to 5 in this mp */
   assert(maskColumns == 5); /* mask width is fixed to 5 in this mp */
 
-  imageWidth = wbImage_getWidth(inputImage);
-  imageHeight = wbImage_getHeight(inputImage);
+  imageWidth    = wbImage_getWidth(inputImage);
+  imageHeight   = wbImage_getHeight(inputImage);
   imageChannels = wbImage_getChannels(inputImage);
 
   outputImage = wbImage_new(imageWidth, imageHeight, imageChannels);
 
-  hostInputImageData = wbImage_getData(inputImage);
+  hostInputImageData  = wbImage_getData(inputImage);
   hostOutputImageData = wbImage_getData(outputImage);
 
   wbTime_start(GPU, "Doing GPU Computation (memory + compute)");

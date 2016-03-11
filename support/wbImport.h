@@ -6,7 +6,7 @@
 
 typedef enum en_wbImportKind_t {
   wbImportKind_unknown = -1,
-  wbImportKind_raw = 0x1000,
+  wbImportKind_raw     = 0x1000,
   wbImportKind_csv,
   wbImportKind_tsv,
   wbImportKind_ppm,

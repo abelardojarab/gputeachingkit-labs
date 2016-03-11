@@ -63,13 +63,15 @@ static char **parseInputFiles(char *arg, int *resCount) {
   token = strtok(arg, ",");
   while (token != NULL) {
     files[ii++] = wbString_duplicate(token);
-    token = strtok(NULL, ",");
+    token       = strtok(NULL, ",");
   }
   *resCount = ii;
   return files;
 }
 
-static char *parseString(char *arg) { return wbString_duplicate(arg); }
+static char *parseString(char *arg) {
+  return wbString_duplicate(arg);
+}
 
 EXTERN_C wbArg_t wbArg_read(int argc, char **argv) {
   int ii;

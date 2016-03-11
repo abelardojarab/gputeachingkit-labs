@@ -324,7 +324,7 @@ static void wbExport(const char *file, void *data, int rows, int columns,
     return;
   }
 
-  kind = _parseExportExtension(file);
+  kind  = _parseExportExtension(file);
   exprt = wbExport_open(file, kind);
 
   wbExport_write(exprt, data, rows, columns, type);
@@ -355,7 +355,7 @@ void wbExport(const char *file, unsigned char *data, int rows,
     return;
   }
 
-  kind = _parseExportExtension(file);
+  kind  = _parseExportExtension(file);
   exprt = wbExport_open(file, kind);
 
   wbExport_write(exprt, data, rows, columns, wbType_ubit8);
@@ -370,7 +370,7 @@ void wbExport(const char *file, int *data, int rows, int columns) {
     return;
   }
 
-  kind = _parseExportExtension(file);
+  kind  = _parseExportExtension(file);
   exprt = wbExport_open(file, kind);
 
   wbExport_write(exprt, data, rows, columns, wbType_integer);
@@ -385,7 +385,7 @@ void wbExport(const char *file, wbReal_t *data, int rows, int columns) {
     return;
   }
 
-  kind = _parseExportExtension(file);
+  kind  = _parseExportExtension(file);
   exprt = wbExport_open(file, kind);
 
   wbExport_write(exprt, data, rows, columns, wbType_real);
@@ -400,7 +400,7 @@ void wbExport(const char *file, wbImage_t img) {
     return;
   }
 
-  kind = _parseExportExtension(file);
+  kind  = _parseExportExtension(file);
   exprt = wbExport_open(file, kind);
 
   wbAssert(kind == wbExportKind_ppm);

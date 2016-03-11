@@ -46,7 +46,7 @@ static inline cudaError_t wbCUDAMalloc(void **devPtr, size_t sz) {
 
   _cudaMallocSize += sz;
   _cudaMemoryList[idx].mem = *devPtr;
-  _cudaMemoryList[idx].sz = sz;
+  _cudaMemoryList[idx].sz  = sz;
   _cudaMemoryListIdx++;
   return err;
 }

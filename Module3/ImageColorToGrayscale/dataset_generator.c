@@ -32,9 +32,9 @@ static void compute(unsigned char *output, unsigned char *input,
   for (unsigned int ii = 0; ii < y; ii++) {
     for (unsigned int jj = 0; jj < x; jj++) {
       unsigned int idx = ii * x + jj;
-      float r = input[3 * idx];     // red value for pixel
-      float g = input[3 * idx + 1]; // green value for pixel
-      float b = input[3 * idx + 2];
+      float r          = input[3 * idx];     // red value for pixel
+      float g          = input[3 * idx + 1]; // green value for pixel
+      float b          = input[3 * idx + 2];
       output[idx] = (unsigned char)(0.21f * r + 0.71f * g + 0.07f * b);
     }
   }
@@ -49,7 +49,7 @@ static unsigned char *generate_data(const unsigned int y,
   */
   unsigned int i;
 
-  const int maxVal = 255;
+  const int maxVal    = 255;
   unsigned char *data = (unsigned char *)malloc(y * x * 3);
 
   unsigned char *p = data;
@@ -57,9 +57,9 @@ static unsigned char *generate_data(const unsigned int y,
     unsigned short r = rand() % maxVal;
     unsigned short g = rand() % maxVal;
     unsigned short b = rand() % maxVal;
-    *p++ = r;
-    *p++ = g;
-    *p++ = b;
+    *p++             = r;
+    *p++             = g;
+    *p++             = b;
   }
   return data;
 }
@@ -96,7 +96,7 @@ static void create_dataset(const int datasetNum, const int y,
   sprintf(dir_name, "%s/%d", base_dir, datasetNum);
   _mkdir(dir_name);
 
-  char *input_file_name = strjoin(dir_name, "/input.ppm");
+  char *input_file_name  = strjoin(dir_name, "/input.ppm");
   char *output_file_name = strjoin(dir_name, "/output.pbm");
 
   unsigned char *input_data = generate_data(y, x);

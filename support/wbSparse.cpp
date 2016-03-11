@@ -13,14 +13,14 @@ static void sort(int *data, int *key, int start, int end) {
         right = right - 1;
       }
       if (left <= right) {
-        int tmp = key[left];
-        key[left] = key[right];
-        key[right] = tmp;
-        tmp = data[left];
-        data[left] = data[right];
+        int tmp     = key[left];
+        key[left]   = key[right];
+        key[right]  = tmp;
+        tmp         = data[left];
+        data[left]  = data[right];
         data[right] = tmp;
-        left = left + 1;
-        right = right - 1;
+        left        = left + 1;
+        right       = right - 1;
       }
     }
     sort(data, key, start, right);
@@ -50,7 +50,7 @@ EXTERN_C void CSRToJDS(int dim, int *csrRowPtr, int *csrColIdx,
   // Starting point of each compressed column
   int maxRowNNZ = (*jdsRowNNZ)[0]; // Largest number of non-zeros per row
   DEBUG(printf("jdsRowNNZ = %d\n", maxRowNNZ));
-  *jdsColStartIdx = (int *)malloc(sizeof(int) * maxRowNNZ);
+  *jdsColStartIdx      = (int *)malloc(sizeof(int) * maxRowNNZ);
   (*jdsColStartIdx)[0] = 0; // First column starts at 0
   for (int col = 0; col < maxRowNNZ - 1; ++col) {
     // Count the number of rows with entries in this column
@@ -70,13 +70,13 @@ EXTERN_C void CSRToJDS(int dim, int *csrRowPtr, int *csrColIdx,
   DEBUG(printf("dim = %d\n", dim));
   *jdsData = (float *)malloc(sizeof(float) * NNZ);
   for (int idx = 0; idx < dim; ++idx) { // For every row
-    int row = (*jdsRowPerm)[idx];
+    int row    = (*jdsRowPerm)[idx];
     int rowNNZ = (*jdsRowNNZ)[idx];
     for (int nnzIdx = 0; nnzIdx < rowNNZ; ++nnzIdx) {
-      int jdsPos = (*jdsColStartIdx)[nnzIdx] + idx;
-      int csrPos = csrRowPtr[row] + nnzIdx;
+      int jdsPos           = (*jdsColStartIdx)[nnzIdx] + idx;
+      int csrPos           = csrRowPtr[row] + nnzIdx;
       (*jdsColIdx)[jdsPos] = csrColIdx[csrPos];
-      (*jdsData)[jdsPos] = csrData[csrPos];
+      (*jdsData)[jdsPos]   = csrData[csrPos];
     }
   }
 }
