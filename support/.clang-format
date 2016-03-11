@@ -13,8 +13,6 @@ AllowShortIfStatementsOnASingleLine: false
 AllowShortLoopsOnASingleLine: false
 AlwaysBreakTemplateDeclarations: true
 IndentCaseLabels: true
-MacroBlockBegin: ''
-MacroBlockEnd:   ''
 SpacesBeforeTrailingComments: 1
 Standard:        Cpp11
 TabWidth:        4
