@@ -1,6 +1,6 @@
 #include "wb.h"
 
-#ifdef WB_USE_LINUX
+#ifdef WB_USE_UNIX
 static const char dir_seperator = '/';
 static void mkdir_(const char *dir) {
   mkdir(dir, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);

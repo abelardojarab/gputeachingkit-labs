@@ -1,16 +1,24 @@
 ##########################################
 # Options
 ##########################################
-WB_LIB_PATH=$(WB_PATH)/lib
-WB_SRC_PATH=$(WB_PATH)/src
+WB_LIB_PATH=$(CURDIR)/lib
+WB_SRC_PATH=$(CURDIR)
 
 ##########################################
 ##########################################
 
 CXX=g++
 DEFINES=
-CXX_FLAGS=-fPIC -Wno-unused-function -x c++ -O3 -g -std=c++11 -Wall -pedantic -I . -I $(WB_SRC_PATH) $(DEFINES)
-LIBS=-lm -lstdc++ -lrt
+CXX_FLAGS=-fPIC -Wno-unused-function -x c++ -O3 -g -std=c++11 -Wall -Wno-unused-function -pedantic -I . -I $(WB_SRC_PATH) $(DEFINES)
+LIBS=-lm -lstdc++
+
+##########################################
+##########################################
+
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S),Linux)
+    LIBS += -lrt
+endif
 
 ##########################################
 ##########################################
@@ -40,7 +48,7 @@ OBJECTS = $(SOURCES:.cpp=.o)
 
 .PHONY: all
 .SUFFIXES: .o .cpp
-all: libwb.a libwb.so
+all: libwb.so
 
 .cpp.o:
 	$(CXX) $(DEFINES) $(CXX_FLAGS) -c -o $@ $<
