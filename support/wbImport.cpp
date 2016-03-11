@@ -428,6 +428,7 @@ static inline wbImportText_t wbImportText_read(wbImportText_t text) {
   data = wbFile_read(file, length);
 
   wbImportText_setData(text, data);
+  wbImportText_setLength(text, length);
 
   return text;
 }
@@ -461,7 +462,7 @@ static inline wbImport_t wbImport_open(const char *file,
     }
     wbImportCSV_setFile(csv, file);
     wbImport_setCSV(imp, csv);
-  } else if (kind == wbImportKind_tsv || kind == wbImportKind_csv) {
+  } else if (kind == wbImportKind_text) {
     wbImportText_t text = wbImportText_new();
     wbImportText_setFile(text, file);
     wbImport_setText(imp, text);
@@ -543,6 +544,11 @@ static inline void *wbImport_read(wbImport_t imp, wbType_t type) {
     wbImportRaw_t raw = wbImport_getRaw(imp);
     wbImportRaw_read(raw, type);
     data = wbImportRaw_getData(raw);
+  } else if (wbImportKind_text == kind) {
+    wbImportText_t text = wbImport_getText(imp);
+    text = wbImportText_read(text);
+    data = wbImportText_getData(text);
+ 
   } else {
     wbLog(ERROR, "Invalid import type.");
     wbExit();
@@ -558,6 +564,11 @@ static inline int *wbImport_readAsInteger(wbImport_t imp) {
 static inline wbReal_t *wbImport_readAsReal(wbImport_t imp) {
   void *data = wbImport_read(imp, wbType_real);
   return (wbReal_t *)data;
+}
+
+static inline wbChar_t *wbImport_readAsText(wbImport_t imp) {
+  void *data = wbImport_read(imp, wbType_ubit8);
+  return (wbChar_t*) data;
 }
 
 static wbImportKind_t _parseImportExtension(const char *file) {
@@ -610,6 +621,9 @@ void *wbImport(const char *file, int *resRows, int *resColumns,
   if (wbString_sameQ(type, "Real")) {
     data = wbImport_readAsReal(imp);
     sz = sizeof(wbReal_t);
+  } else if (wbString_sameQ(type, "Text")) {
+    data = wbImport_readAsText(imp);
+    sz = 1;
   } else {
     // printf("Reading as integer..d\n");
     data = wbImport_readAsInteger(imp);
@@ -622,6 +636,9 @@ void *wbImport(const char *file, int *resRows, int *resColumns,
   } else if (kind == wbImportKind_raw) {
     rows = wbImportRaw_getRowCount(wbImport_getRaw(imp));
     columns = wbImportRaw_getColumnCount(wbImport_getRaw(imp));
+  } else if (kind == wbImportKind_text) {
+    rows = 1;
+    columns = wbImportText_getLength(wbImport_getText(imp));
   }
 
   if (rows == 1 && columns > 0) {
@@ -641,6 +658,7 @@ void *wbImport(const char *file, int *resRows, int *resColumns,
   memcpy(res, data, sz * rows * columns);
 
   wbImport_close(imp);
+
 
   return res;
 }

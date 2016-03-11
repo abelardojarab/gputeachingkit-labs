@@ -5,6 +5,7 @@
 
 typedef bool wbBool;
 typedef float wbReal_t;
+typedef char wbChar_t;
 
 typedef struct st_wbTimerNode_t *wbTimerNode_t;
 typedef struct st_wbTimer_t *wbTimer_t;
