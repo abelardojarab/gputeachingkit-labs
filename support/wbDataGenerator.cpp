@@ -108,25 +108,43 @@ static void genRaw(const char *path, wbRaw_GenerateParams_t params) {
 }
 
 static void genCSV(const char *path, wbCSV_GenerateParams_t params) {
-  wbTodo("implement genCSV");
+  int rows      = _max(1, params.rows);
+  int cols      = _max(1, params.cols);
+  int minVal    = params.minVal;
+  int maxVal    = params.maxVal;
+  wbType_t type = params.type;
+  void *data    = genRandomList(type, rows * cols, minVal, maxVal);
+  wbExport(path, wbExportKind_csv, data, rows, cols, type);
+  wbDelete(data);
 }
 
 static void genTSV(const char *path, wbTSV_GenerateParams_t params) {
-  wbTodo("implement genTSV");
+  int rows      = _max(1, params.rows);
+  int cols      = _max(1, params.cols);
+  int minVal    = params.minVal;
+  int maxVal    = params.maxVal;
+  wbType_t type = params.type;
+  void *data    = genRandomList(type, rows * cols, minVal, maxVal);
+  wbExport(path, wbExportKind_tsv, data, rows, cols, type);
+  wbDelete(data);
 }
 
 static void genText(const char *path, wbText_GenerateParams_t params) {
-  wbTodo("implement genText");
+  int length    = _max(1, params.length);
+  wbType_t type = wbType_ascii;
+  void *data    = genRandomList(type, length, 32, 128);
+  wbExport(path, wbExportKind_text, data, length, 1, type);
+  wbDelete(data);
 }
 
 static void genPPM(const char *path, wbPPM_GenerateParams_t params) {
-  int width       = _max(1, params.width);
-  int height      = _max(1, params.height);
-  int channels    = _max(1, params.channels);
-  wbReal_t minVal = params.minVal;
-  wbReal_t maxVal = params.maxVal;
-  wbType_t type   = wbType_float;
-  float *data     = (float *)genRandomList(type, width * height * channels,
+  int width     = _max(1, params.width);
+  int height    = _max(1, params.height);
+  int channels  = _max(1, params.channels);
+  float minVal  = params.minVal;
+  float maxVal  = params.maxVal;
+  wbType_t type = wbType_float;
+  float *data   = (float *)genRandomList(type, width * height * channels,
                                        minVal, maxVal);
   wbImage_t img = wbImage_new(width, height, channels, data);
   wbExport(path, img);

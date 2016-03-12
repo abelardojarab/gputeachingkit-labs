@@ -7,7 +7,6 @@
 typedef struct {
   int rows;
   int cols;
-  char seperator;
   wbType_t type;
   int minVal;
   int maxVal;
@@ -33,8 +32,8 @@ typedef struct {
   int width;
   int height;
   int channels;
-  wbReal_t minVal;
-  wbReal_t maxVal;
+  float minVal;
+  float maxVal;
 } wbPPM_GenerateParams_t;
 
 typedef struct { int length; } wbText_GenerateParams_t;
