@@ -9,6 +9,15 @@ box: webgpu/pandoc
 build:
   steps:
     - script:
+      name: install git
+      code: |
+        apt-get update
+        apt-get install -y git
+    - script:
+      name: initialize git submodules
+      code: |
+        git submodule update --init --recursive
+    - script:
       name: install golang
       code: |
         version="1.6"
