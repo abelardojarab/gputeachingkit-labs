@@ -12,6 +12,7 @@
 
 #include <cstdio>
 #include <cstdlib>
+#include <cstring>
 
 #ifdef _MSC_VER
 #define __func__ __FUNCTION__
@@ -127,6 +128,8 @@ extern char *solutionJSON;
 #include <wbSparse.h>
 #include <wbThrust.h>
 #include <wbTimer.h>
+
+#include <wbDataGenerator.h>
 
 /***********************************************************/
 /***********************************************************/

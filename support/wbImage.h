@@ -27,6 +27,7 @@ struct st_wbImage_t {
 
 typedef void (*wbImage_onSameFunction_t)(string str);
 
+wbImage_t wbImage_new(int width, int height, int channels, float *data);
 wbImage_t wbImage_new(int width, int height, int channels);
 wbImage_t wbImage_new(int width, int height);
 void wbImage_delete(wbImage_t img);

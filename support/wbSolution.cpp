@@ -178,6 +178,8 @@ wbBool wbSolution(char *expectedOutputFile, char *outputFile, char *type0,
       wbExport(outputFile, (wbReal_t *)data, rows, columns);
     } else if (wbString_sameQ(type, "histogram")) {
       wbExport(outputFile, (unsigned char *)data, rows, columns);
+    } else if (wbString_sameQ(type, "text")) {
+      wbExport_text(outputFile, (unsigned char *)data, rows * columns);
     }
   }
 

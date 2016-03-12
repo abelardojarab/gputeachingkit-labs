@@ -7,6 +7,7 @@
 #include <iostream>
 #include <ostream>
 #include <sstream>
+#include <string.h>
 #include <string>
 #include <vector>
 #include <wb.h>

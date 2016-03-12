@@ -19,4 +19,6 @@
 #define wbAssertMessage(...)
 #endif /* WB_DEBUG */
 
+#define wbTodo(msg) wbAssertMessage(msg, false)
+
 #endif /* __WB_ASSERT_H__ */

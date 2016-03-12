@@ -14,8 +14,7 @@ static inline float _clamp(float x, float start, float end) {
   return _min(_max(x, start), end);
 }
 
-wbImage_t wbImage_new(int width, int height, int channels) {
-  float *data;
+wbImage_t wbImage_new(int width, int height, int channels, float *data) {
   wbImage_t img;
 
   img = wbNew(struct st_wbImage_t);
@@ -25,10 +24,13 @@ wbImage_t wbImage_new(int width, int height, int channels) {
   wbImage_setChannels(img, channels);
   wbImage_setPitch(img, width * channels);
 
-  data = wbNewArray(float, width *height *channels);
-
   wbImage_setData(img, data);
   return img;
+}
+
+wbImage_t wbImage_new(int width, int height, int channels) {
+  float *data = wbNewArray(float, width *height *channels);
+  return wbImage_new(width, height, channels, data);
 }
 
 wbImage_t wbImage_new(int width, int height) {

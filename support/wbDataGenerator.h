@@ -9,15 +9,23 @@ typedef struct {
   int cols;
   char seperator;
   wbType_t type;
-  int min;
-  int max;
+  int minVal;
+  int maxVal;
 } wbCSV_GenerateParams_t;
 
 typedef struct {
   int rows;
   int cols;
-  int min;
-  int max;
+  wbType_t type;
+  int minVal;
+  int maxVal;
+} wbTSV_GenerateParams_t;
+
+typedef struct {
+  int rows;
+  int cols;
+  int minVal;
+  int maxVal;
   wbType_t type;
 } wbRaw_GenerateParams_t;
 
@@ -25,8 +33,8 @@ typedef struct {
   int width;
   int height;
   int channels;
-  wbReal_t min;
-  wbReal_t max;
+  wbReal_t minVal;
+  wbReal_t maxVal;
 } wbPPM_GenerateParams_t;
 
 typedef struct { int length; } wbText_GenerateParams_t;
@@ -34,7 +42,8 @@ typedef struct { int length; } wbText_GenerateParams_t;
 typedef union {
   wbCSV_GenerateParams_t csv;
   wbRaw_GenerateParams_t raw;
-  wbPPM_GenerateParams_t image;
+  wbTSV_GenerateParams_t tsv;
+  wbPPM_GenerateParams_t ppm;
   wbText_GenerateParams_t text;
 } wbGenerateParams_t;
 

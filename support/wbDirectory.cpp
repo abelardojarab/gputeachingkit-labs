@@ -29,3 +29,12 @@ EXTERN_C void CreateDirectory(const char *dir) {
     }
   mkdir_(tmp);
 }
+
+EXTERN_C char *DirectoryName(const char *pth0) {
+  char *pth = wbString_duplicate(pth0);
+  char *p   = strrchr(pth, dir_seperator);
+  if (p) {
+    p[0] = 0;
+  }
+  return pth;
+}

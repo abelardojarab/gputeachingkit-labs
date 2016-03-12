@@ -13,3 +13,5 @@ build-*
 *.log
 *.o
 lib/
+test-dataset/
+test

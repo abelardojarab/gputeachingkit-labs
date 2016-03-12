@@ -42,6 +42,11 @@ SOURCES :=  $(WB_SRC_PATH)/wbArg.cpp               \
 
 OBJECTS = $(SOURCES:.cpp=.o)
 
+TESTS :=  $(WB_SRC_PATH)/wb_test.cpp               \
+					$(WB_SRC_PATH)/wbDataGenerator_test.cpp
+
+TESTOBJECTS = $(TESTS:.cpp=.o)
+
 ##############################################
 # OUTPUT
 ##############################################
@@ -60,6 +65,10 @@ libwb.so: $(OBJECTS)
 libwb.a: $(OBJECTS)
 	mkdir -p $(WB_LIB_PATH)
 	ar rcs -o $(WB_LIB_PATH)/$@ $(OBJECTS)
+
+test: $(TESTOBJECTS) $(OBJECTS)
+	$(CXX) -fPIC $(LIBS) -o $@ $(TESTOBJECTS) $(OBJECTS)
+
 
 clean:
 	rm -fr $(ARCH)

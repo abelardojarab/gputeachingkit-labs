@@ -98,4 +98,9 @@ void wbExport(const char *file, wbReal_t *data, int rows, int columns);
 void wbExport(const char *file, wbReal_t *data, int rows);
 void wbExport(const char *file, wbImage_t img);
 
+void wbExport(const char *file, wbExportKind_t kind, void *data, int rows,
+              int columns, wbType_t type);
+
+void wbExport_text(const char *file, void *data, int length);
+
 #endif /* __WB_EXPORT_H__ */

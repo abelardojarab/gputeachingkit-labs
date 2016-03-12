@@ -474,6 +474,20 @@ void wbExport(const char *file, wbReal_t *data, int rows, int columns) {
   wbExport_close(exprt);
 }
 
+void wbExport(const char *file, wbExportKind_t kind, void *data, int rows,
+              int columns, wbType_t type) {
+  wbExport_t exprt;
+
+  if (file == NULL) {
+    return;
+  }
+
+  exprt = wbExport_open(file, kind);
+
+  wbExport_write(exprt, data, rows, columns, type);
+  wbExport_close(exprt);
+}
+
 void wbExport(const char *file, wbImage_t img) {
   wbExportKind_t kind;
   wbExport_t exprt;
@@ -489,4 +503,8 @@ void wbExport(const char *file, wbImage_t img) {
 
   wbExport_writeAsImage(exprt, img);
   wbExport_close(exprt);
+}
+
+void wbExport_text(const char *file, void *data, int length) {
+  wbExport(file, wbExportKind_text, data, 1, length, wbType_ascii);
 }
