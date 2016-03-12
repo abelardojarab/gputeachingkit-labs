@@ -16,7 +16,7 @@ set(WBLIB "wb")
 
 set(BUILD_LIBWB_LIBRARY ON CACHE BOOL "Turn on build of libwb library")
 set(BUILD_SOLUTION ON CACHE BOOL "Turn on build of code solution")
-set(BUILD_DESCRIPTION OFF CACHE BOOL "Turn on build of lab description")
+# set(BUILD_DESCRIPTION OFF CACHE BOOL "Turn on build of lab description")
 set(BUILD_DATASET_GENERATOR ON CACHE BOOL "Turn on building of dataset generator")
 set(BUILD_TEMPLATE OFF CACHE BOOL "Turn on build of code templates")
 
@@ -151,7 +151,7 @@ macro(add_lab NAME)
 endmacro(add_lab)
 
 
-include(support/sources.cmake)
+include(libwb/sources.cmake)
 include(Module2/sources.cmake)
 include(Module3/sources.cmake)
 include(Module4/sources.cmake)
