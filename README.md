@@ -2,6 +2,16 @@
 
 [![wercker status](https://app.wercker.com/status/9d9b1d04c2f4c3afc6a3d829dcf7e68e/m "wercker status")](https://app.wercker.com/project/bykey/9d9b1d04c2f4c3afc6a3d829dcf7e68e)
 
+## Checkout
+
+The project depends on an external repository. Use
+
+```
+git clone --recursive https://adakkak@bitbucket.org/hwuligans/gputeachingkit-labs-full.git
+```
+
+to clone the project along with all it's dependencies
+
 ## Software Requirements
 
 _Caution: **You must have an [NVIDIA CUDA Capable GPU](https://developer.nvidia.com/cuda-gpus)
