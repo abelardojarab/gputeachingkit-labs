@@ -96,7 +96,7 @@ if (UNIX)
     endif ()
 endif ()
 
-include_directories(${PROJECT_SOURCE_DIR}/support)
+include_directories(${PROJECT_SOURCE_DIR}/libwb)
 
 macro(add_lab_helper NAME SOURCES)
 	cuda_add_executable(${NAME} ${SOURCES})
