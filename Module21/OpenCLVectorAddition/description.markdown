@@ -1,5 +1,5 @@
 ---
-title: OpenCL Vector Add
+title: OpenCL Vector Addition
 author: GPU Teaching Kit -- Accelerated Computing
 module: 21
 ---
