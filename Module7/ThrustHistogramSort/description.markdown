@@ -1,5 +1,5 @@
 ---
-title: ThrustHistogramSort
+title: Thrust Histogram Sort
 author: GPU Teaching Kit -- Accelerated Computing
 module: 7
 ---
