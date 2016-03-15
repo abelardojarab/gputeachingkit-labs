@@ -161,4 +161,10 @@ include(Module9/sources.cmake)
 include(Module10/sources.cmake)
 include(Module11/sources.cmake)
 include(Module12/sources.cmake)
-include(Module22/sources.cmake)
+
+
+# These are the OpenCL and OpenACC 
+# labs and are not supported by the
+# current cmake configuration
+# include(Module21/sources.cmake)
+# include(Module22/sources.cmake)
