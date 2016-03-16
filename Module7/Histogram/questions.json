@@ -1,5 +1,12 @@
 {
-	"questions": [
-		""
-	]
+  "questions": [
+    "Describe all optimizations you tried regardless of whether you committed to them or abandoned them and whether they improved or hurt performance.",
+    "Were there any difficulties you had with completing the optimization correctly.",
+    "Which optimizations gave the most benifit.",
+    "For the histogram kernel, how many global memory reads are being performed by your kernel? explain.",
+    "For the histogram kernel, how many global memory writes are being performed by your kernel? explain.",
+    "For the histogram kernel, how many atomic operations are being performed by your kernel? explain.",
+    "For the histogram kernel, what contentions would you expect if every element in the array has the same value?",
+    "For the histogram kernel, what contentions would you expect if every element in the input array has a random value?"
+  ]
 }
