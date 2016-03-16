@@ -1,0 +1,6 @@
+{
+	"questions": [
+		"Are there places in your solution where there is an implicit memory copy between the host and device (a copy that is not from `thrust::copy`)?",
+		"If the Thrust version of reduce were not performing as well as you expected, how might you go about investigating and solving the problem?"
+	]
+}
