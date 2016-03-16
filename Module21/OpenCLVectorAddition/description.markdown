@@ -1,5 +1,5 @@
 ---
-title: OpenCL Vector Add
+title: OpenCL Vector Addition
 author: GPU Teaching Kit -- Accelerated Computing
 module: 21
 ---
@@ -43,7 +43,7 @@ where `<expected.raw>` is the expected output, `<input0.raw>,<input1.raw>` is th
 
 The local CMake does not build this lab. An example makefile is
 
-```{.sh}
+```{.bash}
 NVCC=nvcc
 INCLUDE= -I../../libwb
 LIBWB= -L../../build -lwb
@@ -52,11 +52,11 @@ LIBS= -lOpenCL $(LIBWB)
 all: template
 
 template:
-	$(NVCC) -std=c++11 template.cpp $(INCLUDE) $(LIBS) -o OpenCLVectorAdd_Template
+    $(NVCC) -std=c++11 template.cpp $(INCLUDE) $(LIBS) -o OpenCLVectorAdd_Template
 
 solution:
-	$(NVCC) solution.c $(INCLUDE)
+    $(NVCC) solution.c $(INCLUDE)
 
 clean:
-	rm -f OpenCLVectorAdd_Template
+    rm -f OpenCLVectorAdd_Template
 ```
