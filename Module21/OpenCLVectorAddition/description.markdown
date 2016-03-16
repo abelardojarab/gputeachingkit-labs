@@ -18,14 +18,15 @@ This lab uses a separate build system. Consult the provided `Makefile`.
 - Edit the makefile target `all` to look like `all: template solution` to compile the solution.
 
 Edit the code in the code tab to perform the following:
-- Allocate
- device memory
+- Set up an OpenCL context and command queue
+- Invoke the OpenCL API to build the kernel
+- Allocate device memory
 - Copy host memory to device
-- Initialize thread block and kernel grid dimensions
-- Invoke CUDA kernel
+- Initialize work-group and global sizes
+- Enqueue the kernel
 - Copy results from device to host
 - Free device memory
-- Write the CUDA kernel
+- Write the OpenCL kernel
 
 Instructions about where to place each part of the code is demarcated by the `//@@` comment lines.
 
@@ -35,7 +36,7 @@ The most recent version of source code for this lab along with the build-scripts
 The executable generated as a result of compiling the lab can be run using the following command:
 
 ```
-./VectorAdd_Template -e <expected.raw> -i <intput1.raw>,<input2.raw> \
+./OpenCLVectorAdd_Template -e <expected.raw> -i <intput1.raw>,<input2.raw> \
   -o <output.raw> -t vector
 ```
 
