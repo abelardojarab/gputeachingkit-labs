@@ -10,13 +10,13 @@ Implement a kernel to perform an inclusive prefix scan on a 1D list using [Thrus
 Given an input
 
 ```{.cpp}
-x = [x0 x1 x2 ...]
+x = [x0, x1, x2, ...]
 ```
 
 Produce an output
 
 ```{.cpp}
-y = [y0 y1 y2 ...]
+y = [y0, y1, y2, ...]
 ```
 
 where
@@ -28,7 +28,7 @@ y[2] = 0 + x[0] + x[1]
 y[i] = y[i-1] + x[i-1]
 ```
 
-The prefix scan should produce `y` given `x` and use the `thrust::exclusive_scan` function. The input and output will both be `float` arrays of equal length.
+The prefix scan should produce `y` given `x` and use the `thrust::inclusive_scan` function. The input and output will both be `float` arrays of equal length.
 
 # Prerequisites
 Before starting this lab, make sure that:
