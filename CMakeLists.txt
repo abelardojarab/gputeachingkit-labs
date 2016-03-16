@@ -114,10 +114,10 @@ endmacro(add_lab_solution)
 
 
 macro(add_lab_template NAME SOURCES)
-# template code is not meant to be compilable,
-# so we do not copile it. Enable the BUILD_TEMPLATE
-# flag during cmake generation to override this
-# behavior
+    # template code is not meant to be compilable,
+    # so we do not copile it. Enable the BUILD_TEMPLATE
+    # flag during cmake generation to override this
+    # behavior
 	if (BUILD_TEMPLATE)
 		add_lab_helper("${NAME}_Template" ${SOURCES})
 	endif(BUILD_TEMPLATE)
@@ -126,7 +126,8 @@ endmacro(add_lab_template)
 macro(add_generator NAME SOURCES)
   if (BUILD_DATASET_GENERATOR)
 		add_executable("${NAME}_DatasetGenerator" ${SOURCES})
-                set_property(TARGET "${NAME}_DatasetGenerator" PROPERTY C_STANDARD 99)
+        set_property(TARGET "${NAME}_DatasetGenerator" PROPERTY CXX_STANDARD 11)
+	    target_link_libraries(${NAME} ${WBLIB})
 		if(UNIX)
 			target_link_libraries("${NAME}_DatasetGenerator" ${LINK_LIBRARIES})
 		endif(UNIX)
