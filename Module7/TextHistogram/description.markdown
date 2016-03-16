@@ -1,11 +1,11 @@
----
+-t-
 title: Text Histogram
 author: GPU Teaching Kit -- Accelerated Computing
 module: 7
 ---
 
 # Objective
-The purpose of this lab is to implement an efficient histogram algorithm for an input array of integers within a given range. Each integer will map into a single bin, so the values will range from 0 to (NUM_BINS - 1). The histogram bins will use unsigned 32-bit counters that must be saturated at 127 (i.e. no roll back to 0 allowed). The input length can be assumed to be less than $2^{32}$. `NUM_BINS` is fixed at 4096 for this lab.
+The purpose of this lab is to implement an efficient histogram algorithm for an input array of ASCII characters. There are 128 ASCII characters and each character will map into its own bin for a fixed total of 128 bins. The histogram bins will be unsigned 32-bit counters that do not saturate. Use the approach of creating a privitized histogram in shared memory for each thread block, then atomically modifying the global histogram.
 
 # Instructions
 Edit the code in the code tab to perform the following:
@@ -25,7 +25,7 @@ The executable generated as a result of compiling the lab can be run using the f
 
 ```
 ./Histogram_Template -e <expected.raw> \
-  -i <input.raw> -o <output.raw> -t integral_vector
+  -i <input.txt> -o <output.raw> -t integral_vector
 ```
 
-where `<expected.raw>` is the expected output, `<input.raw>` is the input dataset, and `<output.raw>` is an optional path to store the results. The datasets can be generated using the dataset generator built as part of the compilation process.
+where `<expected.raw>` is the expected output, `<input.txt>` is the input dataset, and `<output.raw>` is an optional path to store the results. The datasets can be generated using the dataset generator built as part of the compilation process.
