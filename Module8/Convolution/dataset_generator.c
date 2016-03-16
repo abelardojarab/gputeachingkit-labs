@@ -1,4 +1,4 @@
-#include <wbDataGenerator.h>
+#include "wb.h"
 
 int main(void) {
 
