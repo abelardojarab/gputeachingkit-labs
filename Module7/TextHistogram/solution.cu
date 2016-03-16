@@ -49,7 +49,7 @@ void histogram(const char *input, unsigned int *bins,
   CUDA_CHECK(cudaMemset(bins, 0, num_bins * sizeof(unsigned int)));
   // Launch histogram kernel on the bins
   {
-    dim3 blockDim(128), gridDim(30);
+    dim3 blockDim(256), gridDim(30);
     histogram_kernel<<<gridDim, blockDim,
                        num_bins * sizeof(unsigned int)>>>(
         input, bins, num_elements, num_bins);

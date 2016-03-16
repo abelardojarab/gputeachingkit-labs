@@ -1,5 +1,10 @@
 {
 	"questions" : [
-		""
+		"Were there any difficulties you had with completing the optimization correctly.",
+		"Which optimizations gave the most benifit.",
+		"For the histogram kernel, how many global memory reads are being performed by your kernel? explain.",
+		"For the histogram kernel, how many global memory writes are being performed by your kernel? explain.",
+		"For the histogram kernel, how many atomic operations are being performed by your kernel? explain.",
+		"Most text files will consist of only letters, numberm and whitespace characters. These 95 characters make up fall between ASCII numbers 32 - 126. What can we say about atomic access contention if more than 95 threads are simultaneously trying to atomically increment a private histogram?"
 	]
 }
