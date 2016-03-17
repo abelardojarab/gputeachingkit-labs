@@ -5,7 +5,7 @@
 		"Using shared memory privitization provides significant performance improvement.",
 		"One read per input element.",
 		"Each threadblock does an atomic add into every global memory bin.",
-		"One atomic operation per input element into shared memory, then NUM_BINS atomic operation per thread block to accumulate the results into the global bins.",
+		"One atomic operation per input element into shared memory, then NUM\\_BINS atomic operation per thread block to accumulate the results into the global bins.",
 		"There will be at least one bin with multiple threads accessing it. Those accesses will be serialized."
 	]
 }
