@@ -23,9 +23,6 @@ int main(int argc, char **argv) {
   float *hostInput1;
   float *hostInput2;
   float *hostOutput;
-  float *deviceInput1;
-  float *deviceInput2;
-  float *deviceOutput;
 
   args = wbArg_read(argc, argv);
 

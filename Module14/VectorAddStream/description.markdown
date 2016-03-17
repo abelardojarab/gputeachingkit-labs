@@ -18,7 +18,7 @@ Before starting this lab, make sure that:
 
 Edit the code in the code tab to perform the following:
 
-* You MUST use at least 4 CUDA streams in your program, but you may adjust it to be larger for larged datasets.
+* You MUST use at least 4 CUDA streams in your program, but you may adjust it to be larger for largest datasets.
 * Allocate device memory
 * Interleave the host memory copy to device to hide 
 * Initialize thread block and kernel grid dimensions
@@ -33,7 +33,7 @@ The most recent version of source code for this lab along with the build-scripts
 The executable generated as a result of compiling the lab can be run using the following command:
 
 ```
-./VectorAdd_Template -e <expected.raw> -i <intput1.raw>,<input2.raw> \
+./VectorAdd_Stream_Template -e <expected.raw> -i <intput1.raw>,<input2.raw> \
   -o <output.raw> -t vector
 ```
 
