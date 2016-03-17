@@ -46,7 +46,7 @@ Instructions about where to place each part of the code is demarcated by the `//
 # Pseudo Code
 A sequential pseudo code would look something like this:
 
-```
+```{.ruby}
 maskWidth := 5
 maskRadius := maskWidth/2 # this is integer division, so the result is 2
 for i from 0 to height do
@@ -74,7 +74,7 @@ end
 
 where `clamp` is defined as
 
-```
+```{.ruby}
 def clamp(x, lower, upper)
   return min(max(x, lower), upper)
 end

@@ -14,8 +14,8 @@ Before starting this lab, make sure that:
 
 # Instructions
 This lab uses a separate build system. Consult the provided `Makefile`.
-- Edit the makefile variable `LIBWB` to point to the location of `libwb.so`. If the Modules were built in `/path/to/build`, that location should be `/path/to/build`.
-- Edit the makefile target `all` to look like `all: template solution` to compile the solution.
+- Edit the `Makefile` variable `LIBWB` to point to the location of `libwb.so`. If the Modules were built in `/path/to/build`, that location should be `/path/to/build`.
+- Edit the `Makefile` target `all` to look like `all: template solution` to compile the solution.
 
 Edit the code in the code tab to perform the following:
 - Set up an OpenCL context and command queue
@@ -35,14 +35,14 @@ The most recent version of source code for this lab along with the build-scripts
 
 The executable generated as a result of compiling the lab can be run using the following command:
 
-```
+```{.bash}
 ./OpenCLVectorAdd_Template -e <expected.raw> -i <intput1.raw>,<input2.raw> \
   -o <output.raw> -t vector
 ```
 
 where `<expected.raw>` is the expected output, `<input0.raw>,<input1.raw>` is the input dataset, and `<output.raw>` is an optional path to store the results. The datasets can be generated using the dataset generator built as part of the compilation process.
 
-The local CMake does not build this lab. An example makefile is
+The local CMake does not build this lab. An example `Makefile` is
 
 ```{.bash}
 NVCC=nvcc

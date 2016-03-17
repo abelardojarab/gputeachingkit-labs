@@ -37,13 +37,13 @@ sorted = [0 0 1 1 1 1 1 2 2 2 4]
 
 Determine the number of bins by inspecting the last element of the list and adding 1:
 
-```
+```{.cpp}
 num_bins = sorted.back() + 1
 ```
 
 To compute the histogram, we can compute the culumative histogram and then work backwards. To do this in Thrust, use `thrust::upper_bound`. `upper_bound` takes an input data range (the sorted input) and a set of search values, and for each search value will report the largest index in the input range that the search value could be inserted into without changing the sorted order of the inputs. For example,
 
-```
+```{.cpp}
 [2 8 11 11 12] = thrust::upper_bound([0 0 1 1 1 1 1 2 2 2 4], // input
                                      [0 1 2 3 4])             // search
 ```
@@ -52,7 +52,7 @@ By carefully crafting the search data, `thrust::upper_bound` will produce a cumu
 
 Once the cumulative histogram is produced, use `thrust::adjacent_different` to compute the histogram.
 
-```
+```{.cpp}
 [2 5 3 0 1] = thrust::adjacent_difference([2 8 11 11 12])
 ```
 
@@ -75,7 +75,7 @@ The most recent version of source code for this lab along with the build-scripts
 
 The executable generated as a result of compiling the lab can be run using the following command:
 
-```
+```{.bash}
 ./ThrustHistogramSort_Template -e <expected.raw> \
   -i <input.raw> -o <output.raw> -t integral_vector
 ```

@@ -31,7 +31,7 @@ The most recent version of source code for this lab along with the build-scripts
 
 The executable generated as a result of compiling the lab can be run using the following command:
 
-```
+```{.bash}
 ./ListScan_Template -e <expected.raw> \
   -i <input.raw> -o <output.raw> -t vector
 ```

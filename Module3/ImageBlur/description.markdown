@@ -5,7 +5,7 @@ module: 3
 ---
 
 # Objective
-The purpose of this lab is to implement an efficient image blurring algorithm for an input image. Like the image convolution MP, the image is represented as `RGB float` values. You will operate directly on the RGB float values and use a 3x3 Box Filter to blur the original image to produce the burred image.
+The purpose of this lab is to implement an efficient image blurring algorithm for an input image. Like the image convolution MP, the image is represented as `RGB float` values. You will operate directly on the RGB float values and use a 3x3 Box Filter to blur the original image to produce the blurred image.
 
 # Prerequisites
 Before starting this lab, make sure that:
@@ -27,7 +27,7 @@ The most recent version of source code for this lab along with the build-scripts
 
 The executable generated as a result of compiling the lab can be run using the following command:
 
-```
+```{.bash}
 ./ImageBlur_Template -e <expected.ppm> -i <input.ppm> \
   -o <output.ppm> -t image
 ```

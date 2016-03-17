@@ -23,7 +23,7 @@ The most recent version of source code for this lab along with the build-scripts
 
 The executable generated as a result of compiling the lab can be run using the following command:
 
-```
+```{.bash}
 ./Histogram_Template -e <expected.raw> \
   -i <input.txt> -o <output.raw> -t integral_vector
 ```

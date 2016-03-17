@@ -7,17 +7,17 @@ module: 3
 # Objective
 The purpose of this lab is to convert an RGB image into a gray scale image. The input is an RGB triple of float values and the student will convert that triple to a single float grayscale intensity value. A pseudo-code version of the algorithm is shown bellow:
 
-```
-    for ii from 0 to height do
-        for jj from 0 to width do
-            idx = ii * width + jj
-            # here channels is 3
-            r = input[3*idx]
-            g = input[3*idx + 1]
-            b = input[3*idx + 2]
-            grayImage[idx] = (0.21*r + 0.71*g + 0.07*b)
-        end
+```{.ruby}
+for ii from 0 to height do
+    for jj from 0 to width do
+        idx = ii * width + jj
+        # here channels is 3
+        r = input[3*idx]
+        g = input[3*idx + 1]
+        b = input[3*idx + 2]
+        grayImage[idx] = (0.21*r + 0.71*g + 0.07*b)
     end
+end
 ```
 
 # Prerequisites
@@ -43,7 +43,7 @@ The most recent version of source code for this lab along with the build-scripts
 
 The executable generated as a result of compiling the lab can be run using the following command:
 
-```
+```{.bash}
 ./ImageColorToGrayscale_Template -e <expected.pbm> \
     -i <input.ppm> -o <output.pbm> -t image`.
 ```

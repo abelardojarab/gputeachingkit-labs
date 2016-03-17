@@ -12,7 +12,7 @@ The most recent version of source code for this lab along with the build-scripts
 
 The executable generated as a result of compiling the lab can be run using the following command:
 
-```
+```{.bash}
 ./OpenAccVectorAdd_Template -e <expected.raw> \
   -i <input0.raw>,<input1.raw> -o <output.raw> -t vector
 ```
