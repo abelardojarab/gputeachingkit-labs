@@ -1,4 +1,4 @@
--t-
+---
 title: Text Histogram
 author: GPU Teaching Kit -- Accelerated Computing
 module: 7
