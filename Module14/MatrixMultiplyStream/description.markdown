@@ -1,7 +1,7 @@
 ---
 title: Matrix Multiplication (CUDA Streams)
 author: GPU Teaching Kit -- Accelerated Computing
-module: 15
+module: 14
 ---
 
 ## Objective

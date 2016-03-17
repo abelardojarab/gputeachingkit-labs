@@ -1,7 +1,7 @@
 ---
 title: Bilateral Filter
 author: GPU Teaching Kit -- Accelerated Computing
-module: 12
+module: 11
 ---
 
 ## Objective

@@ -1,7 +1,7 @@
 ---
 title: Breadth-First Search
 author: GPU Teaching Kit -- Accelerated Computing
-module: 12
+module: 11
 ---
 
 # Objective

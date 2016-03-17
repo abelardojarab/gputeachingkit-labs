@@ -1,7 +1,7 @@
 ---
 title: OpenACC CUDA Vector Add
 author: GPU Teaching Kit -- Accelerated Computing
-module: 22
+module: 21
 ---
 
 # Objective

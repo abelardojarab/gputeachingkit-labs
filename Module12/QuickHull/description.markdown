@@ -1,7 +1,7 @@
 ---
 title: Quick Hull
 author: GPU Teaching Kit -- Accelerated Computing
-module: 13
+module: 12
 ---
 
 ## Objective
