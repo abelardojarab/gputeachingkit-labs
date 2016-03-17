@@ -1,16 +1,5 @@
 # GPU Teaching Kit -- Accelerated Computing Labs
 
-## Checkout
-
-The project depends on an external [libwb](https://github.com/abduld/libwb) repository [![Build Status](https://travis-ci.org/abduld/libwb.svg?branch=master)](https://travis-ci.org/abduld/libwb)
-. Use
-
-```
-git clone --recursive https://adakkak@bitbucket.org/hwuligans/gputeachingkit-labs-full.git
-```
-
-to clone the project along with all it's dependencies
-
 ## Software Requirements
 
 _Caution: **You must have an [NVIDIA CUDA Capable GPU](https://developer.nvidia.com/cuda-gpus)
@@ -40,8 +29,11 @@ First, regardless of the platform compiling the labs the
 Now, checkout the the GPU Teaching Kit -- Accelerated Computing Labs from the
 [Bitbucket repository](https://bitbucket.org/hwuligans/gputeachingkit-labs)
 
-~~~
-git clone git@bitbucket.org:hwuligans/gputeachingkit-labs.git
+Since, the project depends on an external [libwb](https://github.com/abduld/libwb) repository [![Build Status](https://travis-ci.org/abduld/libwb.svg?branch=master)](https://travis-ci.org/abduld/libwb)
+ we must perform a recursive clone (to also checkout the `libwb` repository).
+
+~~~{.bash}
+git clone --recursive git@bitbucket.org:hwuligans/gputeachingkit-labs.git
 ~~~
 
 In the next section we will show how to compile and run the labs on Linux, OSX,
