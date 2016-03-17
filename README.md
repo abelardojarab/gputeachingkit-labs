@@ -1,10 +1,9 @@
 # GPU Teaching Kit -- Accelerated Computing Labs
 
-[![wercker status](https://app.wercker.com/status/9d9b1d04c2f4c3afc6a3d829dcf7e68e/m "wercker status")](https://app.wercker.com/project/bykey/9d9b1d04c2f4c3afc6a3d829dcf7e68e)
-
 ## Checkout
 
-The project depends on an external repository. Use
+The project depends on an external [libwb](https://github.com/abduld/libwb) repository [![Build Status](https://travis-ci.org/abduld/libwb.svg?branch=master)](https://travis-ci.org/abduld/libwb)
+. Use
 
 ```
 git clone --recursive https://adakkak@bitbucket.org/hwuligans/gputeachingkit-labs-full.git
