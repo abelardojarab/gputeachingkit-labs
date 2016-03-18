@@ -1,31 +1,8 @@
-#include "stdio.h"
-#include "assert.h"
-#include "limits.h"
-#include "stdlib.h"
-#include "string.h"
-#include "sys/stat.h"
+#include "wb.h"
 
 #define CHANNELS 3
 
-static char base_dir[] = "./ImageColorToGrayscale/Dataset";
-
-static void _mkdir(const char *dir) {
-  char tmp[PATH_MAX];
-  char *p = NULL;
-  size_t len;
-
-  snprintf(tmp, sizeof(tmp), "%s", dir);
-  len = strlen(tmp);
-  if (tmp[len - 1] == '/')
-    tmp[len - 1] = 0;
-  for (p = tmp + 1; *p; p++)
-    if (*p == '/') {
-      *p = 0;
-      mkdir(tmp, S_IRWXU);
-      *p = '/';
-    }
-  mkdir(tmp, S_IRWXU);
-}
+static char *base_dir;
 
 static void compute(unsigned char *output, unsigned char *input,
                     unsigned int y, unsigned int x) {
@@ -64,13 +41,6 @@ static unsigned char *generate_data(const unsigned int y,
   return data;
 }
 
-static char *strjoin(const char *s1, const char *s2) {
-  char *result = (char *)malloc(strlen(s1) + strlen(s2) + 1);
-  strcpy(result, s1);
-  strcat(result, s2);
-  return result;
-}
-
 static void write_data(char *file_name, unsigned char *data,
                        unsigned int width, unsigned int height,
                        unsigned int channels) {
@@ -92,12 +62,12 @@ static void write_data(char *file_name, unsigned char *data,
 
 static void create_dataset(const int datasetNum, const int y,
                            const int x) {
-  char dir_name[PATH_MAX];
-  sprintf(dir_name, "%s/%d", base_dir, datasetNum);
-  _mkdir(dir_name);
 
-  char *input_file_name  = strjoin(dir_name, "/input.ppm");
-  char *output_file_name = strjoin(dir_name, "/output.pbm");
+  const char *dir_name =
+      wbDirectory_create(wbPath_join(base_dir, datasetNum));
+
+  char *input_file_name  = wbPath_join(dir_name, "input.ppm");
+  char *output_file_name = wbPath_join(dir_name, "output.pbm");
 
   unsigned char *input_data = generate_data(y, x);
   unsigned char *output_data =
@@ -113,6 +83,10 @@ static void create_dataset(const int datasetNum, const int y,
 }
 
 int main() {
+
+  base_dir = wbPath_join(wbDirectory_current(), "ImageColorToGrayscale",
+                         "Dataset");
+
   create_dataset(0, 256, 256);
   create_dataset(1, 512, 512);
   create_dataset(2, 512, 256);

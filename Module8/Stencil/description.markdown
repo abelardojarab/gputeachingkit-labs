@@ -25,8 +25,8 @@ for i from 1 to height-1:   # notice the ranges exclude the boundary
     for j from 1 to width-1:  # this is done for simplification
         for k from 1 to depth-1:# the output is set to 0 along the boundary
             res = in(i, j, k + 1) + in(i, j, k - 1) + in(i, j + 1, k) +
-                in(i, j - 1, k) + in(i + 1, j, k) + in(i - 1, j, k) -
-                6 * in(i, j, k)
+                  in(i, j - 1, k) + in(i + 1, j, k) + in(i - 1, j, k) -
+                  6 * in(i, j, k)
             out(i, j, k) = Clamp(res, 0, 255)
         end
     end

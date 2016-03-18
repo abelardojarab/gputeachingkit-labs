@@ -53,7 +53,7 @@ static void create_dataset(int datasetNum, int dim) {
 
 int main() {
   base_dir =
-      wbPath_join(wbDirectory_current(), "VectorAddStream", "Dataset");
+      wbPath_join(wbDirectory_current(), "OpenCLVectorAdd", "Dataset");
 
   create_dataset(0, 16);
   create_dataset(1, 64);

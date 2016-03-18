@@ -1,63 +1,24 @@
 
-#include "stdio.h"
-#include "assert.h"
-#include "limits.h"
-#include "stdlib.h"
-#include "string.h"
-#include "sys/stat.h"
+#include "wb.h"
 
-static char base_dir[] = "./ThrustHistogramSort/Dataset/";
+static char *base_dir;
+const size_t NUM_BINS      = 32;
+const unsigned int BIN_CAP = 127;
 
-static void _mkdir(const char *dir) {
-  char tmp[PATH_MAX];
-  char *p = NULL;
-  size_t len;
-
-  snprintf(tmp, sizeof(tmp), "%s", dir);
-  len = strlen(tmp);
-  if (tmp[len - 1] == '/')
-    tmp[len - 1] = 0;
-  for (p = tmp + 1; *p; p++)
-    if (*p == '/') {
-      *p = 0;
-      mkdir(tmp, S_IRWXU);
-      *p = '/';
-    }
-  mkdir(tmp, S_IRWXU);
-}
-
-static void generate_data(unsigned int **input, unsigned int **bins,
-                          size_t *num_bins, // outputs
-                          const size_t num_inputs,
-                          const size_t max_num_bins) { // input
-  // Allocate space for inputs
-  *input = (unsigned int *)malloc(sizeof(unsigned int) * num_inputs);
-
-  // Fill inuts, track the largest generated value
-  int input_max = 0;
-  for (unsigned int i = 0; i < num_inputs; i++) {
-    int newval  = rand() % max_num_bins;
-    (*input)[i] = newval;
-    if (newval > input_max) {
-      input_max = newval;
-    }
-  }
-
-  // Allocate 0s for the number of bins
-  *num_bins = input_max + 1;
-  (*bins)   = (unsigned int *)calloc(*num_bins, sizeof(unsigned int));
-
-  // Compute the histogram
-  for (unsigned int i = 0; i < num_inputs; ++i) {
-    (*bins)[(*input)[i]]++;
+static void compute(unsigned int *bins, unsigned int *input, int num) {
+  for (int i = 0; i < num; ++i) {
+    int idx = input[i];
+    if (bins[idx] < BIN_CAP)
+      ++bins[idx];
   }
 }
 
-static char *strjoin(const char *s1, const char *s2) {
-  char *result = (char *)malloc(strlen(s1) + strlen(s2) + 1);
-  strcpy(result, s1);
-  strcat(result, s2);
-  return result;
+static unsigned int *generate_data(size_t n, unsigned int num_bins) {
+  unsigned int *data = (unsigned int *)malloc(sizeof(unsigned int) * n);
+  for (unsigned int i = 0; i < n; i++) {
+    data[i] = rand() % num_bins;
+  }
+  return data;
 }
 
 static void write_data(char *file_name, unsigned int *data, int num) {
@@ -70,33 +31,37 @@ static void write_data(char *file_name, unsigned int *data, int num) {
   fclose(handle);
 }
 
-static void create_dataset(int datasetNum, const size_t num_inputs,
-                           size_t max_bins) {
-  char dir_name[PATH_MAX];
-  sprintf(dir_name, "%s/%d", base_dir, datasetNum);
-  _mkdir(dir_name);
+static void create_dataset(int datasetNum, size_t input_length,
+                           size_t num_bins) {
 
-  char *input_file_name  = strjoin(dir_name, "input.raw");
-  char *output_file_name = strjoin(dir_name, "output.raw");
+  const char *dir_name =
+      wbDirectory_create(wbPath_join(base_dir, datasetNum));
 
-  unsigned int *input_data, *bin_data;
-  size_t num_bins;
+  char *input_file_name  = wbPath_join(dir_name, "input.raw");
+  char *output_file_name = wbPath_join(dir_name, "output.raw");
 
-  generate_data(&input_data, &bin_data, &num_bins, num_inputs, max_bins);
+  unsigned int *input_data = generate_data(input_length, num_bins);
+  unsigned int *output_data =
+      (unsigned int *)calloc(sizeof(unsigned int), num_bins);
 
-  write_data(input_file_name, input_data, num_inputs);
-  write_data(output_file_name, bin_data, num_bins);
+  compute(output_data, input_data, input_length);
+
+  write_data(input_file_name, input_data, input_length);
+  write_data(output_file_name, output_data, num_bins);
 
   free(input_data);
-  free(bin_data);
+  free(output_data);
 }
 
 int main() {
-  create_dataset(0, 16, 32);
-  create_dataset(1, 1024, 32);
-  create_dataset(2, 513, 32);
-  create_dataset(3, 511, 32);
-  create_dataset(4, 1, 32);
-  create_dataset(5, 4096, 4096);
+  base_dir =
+      wbPath_join(wbDirectory_current(), "ThrustHistogramSort", "Dataset");
+
+  create_dataset(0, 16, NUM_BINS);
+  create_dataset(1, 1024, NUM_BINS);
+  create_dataset(2, 513, NUM_BINS);
+  create_dataset(3, 511, NUM_BINS);
+  create_dataset(4, 1, NUM_BINS);
+  create_dataset(5, 500000, NUM_BINS);
   return 0;
 }

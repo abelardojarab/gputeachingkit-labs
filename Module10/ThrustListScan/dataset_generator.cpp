@@ -1,30 +1,7 @@
 
-#include "stdio.h"
-#include "assert.h"
-#include "limits.h"
-#include "stdlib.h"
-#include "string.h"
-#include "sys/stat.h"
+#include "wb.h"
 
-static char base_dir[] = "./ThrustListScan/Dataset";
-
-static void _mkdir(const char *dir) {
-  char tmp[PATH_MAX];
-  char *p = NULL;
-  size_t len;
-
-  snprintf(tmp, sizeof(tmp), "%s", dir);
-  len = strlen(tmp);
-  if (tmp[len - 1] == '/')
-    tmp[len - 1] = 0;
-  for (p = tmp + 1; *p; p++)
-    if (*p == '/') {
-      *p = 0;
-      mkdir(tmp, S_IRWXU);
-      *p = '/';
-    }
-  mkdir(tmp, S_IRWXU);
-}
+static char *base_dir;
 
 static void compute(float *output, float *input, int num) {
   int ii;
@@ -44,13 +21,6 @@ static float *generate_data(int n) {
   return data;
 }
 
-static char *strjoin(const char *s1, const char *s2) {
-  char *result = (char *)malloc(strlen(s1) + strlen(s2) + 1);
-  strcpy(result, s1);
-  strcat(result, s2);
-  return result;
-}
-
 static void write_data(char *file_name, float *data, int num) {
   int ii;
   FILE *handle = fopen(file_name, "w");
@@ -63,12 +33,11 @@ static void write_data(char *file_name, float *data, int num) {
 }
 
 static void create_dataset(int datasetNum, int dim) {
-  char dir_name[PATH_MAX];
-  sprintf(dir_name, "%s/%d", base_dir, datasetNum);
-  _mkdir(dir_name);
+  const char *dir_name =
+      wbDirectory_create(wbPath_join(base_dir, datasetNum));
 
-  char *input_file_name  = strjoin(dir_name, "/input.raw");
-  char *output_file_name = strjoin(dir_name, "/output.raw");
+  char *input_file_name  = wbPath_join(dir_name, "input.raw");
+  char *output_file_name = wbPath_join(dir_name, "output.raw");
 
   float *input_data  = generate_data(dim);
   float *output_data = (float *)malloc(sizeof(float) * dim);
@@ -83,6 +52,8 @@ static void create_dataset(int datasetNum, int dim) {
 }
 
 int main() {
+  base_dir =
+      wbPath_join(wbDirectory_current(), "ThrustListScan", "Dataset");
   create_dataset(0, 16);
   create_dataset(1, 64);
   create_dataset(2, 93);

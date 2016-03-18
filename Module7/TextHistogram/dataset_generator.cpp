@@ -1,31 +1,8 @@
 
-#include "stdio.h"
-#include "assert.h"
-#include "limits.h"
-#include "stdlib.h"
-#include "string.h"
-#include "sys/stat.h"
+#include "wb.h"
 
-static char base_dir[] = "./TextHistogram/Dataset/";
-const size_t NUM_BINS  = 128;
-
-static void _mkdir(const char *dir) {
-  char tmp[PATH_MAX];
-  char *p = NULL;
-  size_t len;
-
-  snprintf(tmp, sizeof(tmp), "%s", dir);
-  len = strlen(tmp);
-  if (tmp[len - 1] == '/')
-    tmp[len - 1] = 0;
-  for (p = tmp + 1; *p; p++)
-    if (*p == '/') {
-      *p = 0;
-      mkdir(tmp, S_IRWXU);
-      *p = '/';
-    }
-  mkdir(tmp, S_IRWXU);
-}
+static char *base_dir;
+const size_t NUM_BINS = 128;
 
 static void compute(unsigned int *bins, const char *input, int num) {
   for (int i = 0; i < num; ++i) {
@@ -40,13 +17,6 @@ static char *generate_data(size_t n) {
   }
   data[n] = 0; // null-terminated
   return data;
-}
-
-static char *strjoin(const char *s1, const char *s2) {
-  char *result = (char *)malloc(strlen(s1) + strlen(s2) + 1);
-  strcpy(result, s1);
-  strcat(result, s2);
-  return result;
 }
 
 static void write_data_str(char *file_name, const char *data, int num) {
@@ -69,12 +39,11 @@ static void write_data_int(char *file_name, unsigned int *data, int num) {
 }
 
 static void create_dataset_fixed(int datasetNum, const char *str) {
-  char dir_name[PATH_MAX];
-  sprintf(dir_name, "%s/%d", base_dir, datasetNum);
-  _mkdir(dir_name);
+  const char *dir_name =
+      wbDirectory_create(wbPath_join(base_dir, datasetNum));
 
-  char *input_file_name  = strjoin(dir_name, "/input.txt");
-  char *output_file_name = strjoin(dir_name, "/output.raw");
+  char *input_file_name  = wbPath_join(dir_name, "input.txt");
+  char *output_file_name = wbPath_join(dir_name, "output.raw");
 
   unsigned int *output_data =
       (unsigned int *)calloc(NUM_BINS, sizeof(unsigned int));
@@ -90,12 +59,12 @@ static void create_dataset_fixed(int datasetNum, const char *str) {
 }
 
 static void create_dataset_random(int datasetNum, size_t input_length) {
-  char dir_name[PATH_MAX];
-  sprintf(dir_name, "%s/%d", base_dir, datasetNum);
-  _mkdir(dir_name);
 
-  char *input_file_name  = strjoin(dir_name, "/input.txt");
-  char *output_file_name = strjoin(dir_name, "/output.raw");
+  const char *dir_name =
+      wbDirectory_create(wbPath_join(base_dir, datasetNum));
+
+  char *input_file_name  = wbPath_join(dir_name, "input.txt");
+  char *output_file_name = wbPath_join(dir_name, "output.raw");
 
   char *str = generate_data(input_length);
   unsigned int *output_data =
@@ -113,6 +82,9 @@ static void create_dataset_random(int datasetNum, size_t input_length) {
 }
 
 int main() {
+  base_dir =
+      wbPath_join(wbDirectory_current(), "TextHistogram", "Dataset");
+
   create_dataset_fixed(0, "the quick brown fox jumps over the lazy dog");
   create_dataset_fixed(1, "gpu teaching kit - accelerated computing");
   create_dataset_random(2, 16);

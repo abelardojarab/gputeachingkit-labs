@@ -1,35 +1,12 @@
 
-#include "stdio.h"
-#include "assert.h"
-#include "limits.h"
-#include "stdlib.h"
-#include "string.h"
-#include "sys/stat.h"
+#include "wb.h"
 
-static char base_dir[] = "./MatrixMultiplication/Dataset";
-
-static void _mkdir(const char *dir) {
-  char tmp[PATH_MAX];
-  char *p = NULL;
-  size_t len;
-
-  snprintf(tmp, sizeof(tmp), "%s", dir);
-  len = strlen(tmp);
-  if (tmp[len - 1] == '/')
-    tmp[len - 1] = 0;
-  for (p = tmp + 1; *p; p++)
-    if (*p == '/') {
-      *p = 0;
-      mkdir(tmp, S_IRWXU);
-      *p = '/';
-    }
-  mkdir(tmp, S_IRWXU);
-}
+static char *base_dir;
 
 #define value(arry, i, j, width) arry[(i)*width + (j)]
 
 static void compute(float *output, float *input0, float *input1,
-                    int numARows, int numAColumns, int numBRows,
+                    int /*numARows*/, int numAColumns, int /*numBRows*/,
                     int numBColumns, int numCRows, int numCColumns) {
 
 #define A(i, j) value(input0, i, j, numAColumns)
@@ -57,13 +34,6 @@ static float *generate_data(int height, int width) {
     data[i] = ((float)(rand() % 20) - 5) / 5.0f;
   }
   return data;
-}
-
-static char *strjoin(const char *s1, const char *s2) {
-  char *result = (char *)malloc(strlen(s1) + strlen(s2) + 1);
-  strcpy(result, s1);
-  strcat(result, s2);
-  return result;
 }
 
 static void write_data(char *file_name, float *data, int height,
@@ -106,20 +76,18 @@ static void write_transpose_data(char *file_name, float *data, int height,
   fclose(handle);
 }
 
-static void create_dataset(int num, int numARows, int numACols,
+static void create_dataset(int datasetNum, int numARows, int numACols,
                            int numBCols) {
-  char dir_name[PATH_MAX];
   int numBRows = numACols;
   int numCRows = numARows;
   int numCCols = numBCols;
 
-  sprintf(dir_name, "%s/%d", base_dir, num);
+  const char *dir_name =
+      wbDirectory_create(wbPath_join(base_dir, datasetNum));
 
-  _mkdir(dir_name);
-
-  char *input0_file_name = strjoin(dir_name, "/input0.raw");
-  char *input1_file_name = strjoin(dir_name, "/input1.raw");
-  char *output_file_name = strjoin(dir_name, "/output.raw");
+  char *input0_file_name = wbPath_join(dir_name, "input0.raw");
+  char *input1_file_name = wbPath_join(dir_name, "input1.raw");
+  char *output_file_name = wbPath_join(dir_name, "output.raw");
 
   float *input0_data = generate_data(numARows, numACols);
   float *input1_data = generate_data(numBRows, numBCols);
@@ -138,6 +106,9 @@ static void create_dataset(int num, int numARows, int numACols,
 }
 
 int main() {
+  base_dir = wbPath_join(wbDirectory_current(), "MatrixMultiplication",
+                         "Dataset");
+
   create_dataset(0, 16, 16, 16);
   create_dataset(1, 64, 64, 64);
   create_dataset(2, 64, 128, 64);
