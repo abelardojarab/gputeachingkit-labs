@@ -1,24 +1,22 @@
 ---
-title: CUDA Stencil
+title: Stencil
 author: GPU Teaching Kit -- Accelerated Computing
 module: 8
 ---
 ## Objective
 
-The purpose of this lab is to practice shared-memory tiling by implementing a 7-point stencil.
+The purpose of this lab is to perform shared-memory tiling by implementing a 7-point stencil.
 
 ## Instructions
 
 * Edit the code to implement a 7-point stencil.
-
 * Edit the code to launch the kernel you implemented. The function should launch 2D CUDA grid and blocks.
-
 * Answer the questions found in the questions tab.
 
 
 # Algorithm
 
-You will be implementing a simple 7-point stencil without having to deal with boundary conditions. The result is clamped so the range is between 0 and 255.
+You will be implementing a 7-point stencil without having to deal with boundary conditions. The result is clamped so the range is between the values of `0` and `255`.
 
 ```{.ruby}
 for i from 1 to height-1:   # notice the ranges exclude the boundary
