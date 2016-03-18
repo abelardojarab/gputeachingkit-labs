@@ -28,10 +28,11 @@ __global__ void convolution(float *I, const float *__restrict__ M,
         srcY  = blockIdx.y * TILE_WIDTH + destY - Mask_radius,
         srcX  = blockIdx.x * TILE_WIDTH + destX - Mask_radius,
         src   = (srcY * width + srcX) * channels + k;
-    if (srcY >= 0 && srcY < height && srcX >= 0 && srcX < width)
+    if (srcY >= 0 && srcY < height && srcX >= 0 && srcX < width) {
       N_ds[destY][destX] = I[src];
-    else
+    } else {
       N_ds[destY][destX] = 0;
+    }
 
     // Second batch loading
     dest =
@@ -41,19 +42,22 @@ __global__ void convolution(float *I, const float *__restrict__ M,
     srcX = blockIdx.x * TILE_WIDTH + destX - Mask_radius;
     src  = (srcY * width + srcX) * channels + k;
     if (destY < w) {
-      if (srcY >= 0 && srcY < height && srcX >= 0 && srcX < width)
+      if (srcY >= 0 && srcY < height && srcX >= 0 && srcX < width) {
         N_ds[destY][destX] = I[src];
-      else
+      } else {
         N_ds[destY][destX] = 0;
+      }
     }
     __syncthreads();
 
     float accum = 0;
     int y, x;
-    for (y = 0; y < Mask_width; y++)
-      for (x = 0; x < Mask_width; x++)
+    for (y = 0; y < Mask_width; y++) {
+      for (x = 0; x < Mask_width; x++) {
         accum +=
             N_ds[threadIdx.y + y][threadIdx.x + x] * M[y * Mask_width + x];
+      }
+    }
     y = blockIdx.y * TILE_WIDTH + threadIdx.y;
     x = blockIdx.x * TILE_WIDTH + threadIdx.x;
     if (y < height && x < width)
