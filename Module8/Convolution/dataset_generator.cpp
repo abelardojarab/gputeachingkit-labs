@@ -44,7 +44,7 @@ void compute(wbImage_t output, wbImage_t input, float *mask, int mask_rows,
   int img_height = wbImage_getHeight(input);
 
   assert(img_width == wbImage_getWidth(output));
-  assert(img_height == wbImage_getheight(output));
+  assert(img_height == wbImage_getHeight(output));
   assert(mask_rows % 2 == 1);
   assert(mask_cols % 2 == 1);
 
