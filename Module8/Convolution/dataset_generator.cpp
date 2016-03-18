@@ -1,22 +1,15 @@
 #include "wb.h"
 #include "limits.h"
 
-static char base_dir[] = "./Convolution/Dataset/";
+static char * base_dir;
 
-static char *strjoin(const char *s1, const char *s2) {
-  char *result = (char *)malloc(strlen(s1) + strlen(s2) + 1);
-  strcpy(result, s1);
-  strcat(result, s2);
-  return result;
-}
-
-char *generateInput(int datasetNum, char *dirName, wbGenerateParams_t params) {
-  char *input_file_name = strjoin(dirName, "/input0.ppm");
-  GenerateDataset(input_file_name, wbExportKind_ppm, params);
+char *generateInput(int /*datasetNum*/, char *dirName, wbGenerateParams_t params) {
+  char *input_file_name = wbPath_join(dirName, "input0.ppm");
+  wbDataset_generate(input_file_name, wbExportKind_ppm, params);
   return input_file_name;
 }
 
-char *generateMask(int datasetNum, char *dirName) {
+char *generateMask(int /*datasetNum*/, char *dirName) {
   // Mask generation parameters
   wbRaw_GenerateParams_t raw_params;
   raw_params.rows = 5;
@@ -29,8 +22,8 @@ char *generateMask(int datasetNum, char *dirName) {
   wbGenerateParams_t params;
   params.raw = raw_params;
 
-  char *mask_file_name = strjoin(dirName, "/input1.raw");
-  GenerateDataset(mask_file_name, wbExportKind_raw, params);
+  char *mask_file_name = wbPath_join(dirName, "input1.raw");
+  wbDataset_generate(mask_file_name, wbExportKind_raw, params);
   return mask_file_name;
 }
 
@@ -83,9 +76,7 @@ void compute(wbImage_t output, wbImage_t input, float *mask, int mask_rows, int 
 }
 
 void generate(int datasetNum, int height, int width, int minVal, int maxVal) {
-  // Determine path
-  char dir_name[PATH_MAX];
-  snprintf(dir_name, PATH_MAX, "%s/%d", base_dir, datasetNum);
+  char * dir_name = wbPath_join(base_dir, datasetNum);
 
   // Image generation parameters
   wbPPM_GenerateParams_t ppm_params;
@@ -112,7 +103,7 @@ void generate(int datasetNum, int height, int width, int minVal, int maxVal) {
   compute(outputImage, inputImage, mask_data, mask_rows, mask_cols);
 
   // Exporto output image
-  char *output_file_name = strjoin(dir_name, "/output.ppm");
+  char *output_file_name = wbPath_join(dir_name, "output.ppm");
   wbExport(output_file_name, outputImage);
 
   free(input_image_file_name);
@@ -121,12 +112,14 @@ void generate(int datasetNum, int height, int width, int minVal, int maxVal) {
 }
 
 int main(void) {
-
+  base_dir = wbPath_join(wbDirectory_current(), "Convolution", "Dataset");
   generate(0, 64, 64, 0, 1); 
   generate(1, 128, 64, 0, 1); 
   generate(2, 64, 128, 0, 1); 
   generate(3, 64, 5, 0, 1); 
   generate(4, 64, 3, 0, 1); 
+  generate(5, 228, 128, 0, 1); 
+  generate(6, 28, 12, 0, 1); 
 
   return 0;
 }
