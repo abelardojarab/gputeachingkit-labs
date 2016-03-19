@@ -11,9 +11,6 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 project(teachingkit-labs)
 
-set(WBLIB "wb")
-
-
 set(BUILD_LIBWB_LIBRARY ON CACHE BOOL "Turn on build of libwb library")
 set(BUILD_SOLUTION ON CACHE BOOL "Turn on build of code solution")
 # set(BUILD_DESCRIPTION OFF CACHE BOOL "Turn on build of lab description")
@@ -97,8 +94,6 @@ if (UNIX)
     endif ()
 endif ()
 
-include_directories(${PROJECT_SOURCE_DIR}/libwb)
-
 macro(add_lab_helper NAME SOURCES)
 	cuda_add_executable(${NAME} ${SOURCES})
 	target_link_libraries(${NAME} ${WBLIB})
@@ -152,8 +147,15 @@ macro(add_lab NAME)
 	endif (BUILD_DESCRIPTION)
 endmacro(add_lab)
 
+include_directories(${PROJECT_SOURCE_DIR}/libwb)
 
-include(libwb/sources.cmake)
+if (BUILD_LIBWB_LIBRARY)
+  include(libwb/sources.cmake)
+  cuda_add_library(${WBLIB} ${LIBWB_SOURCE_FILES} STATIC)
+  set_property(TARGET ${WBLIB} PROPERTY CXX_STANDARD 11)
+endif (BUILD_LIBWB_LIBRARY)
+
+
 include(Module2/sources.cmake)
 include(Module3/sources.cmake)
 include(Module4/sources.cmake)
