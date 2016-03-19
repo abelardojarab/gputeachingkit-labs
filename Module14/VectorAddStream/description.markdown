@@ -11,23 +11,25 @@ The purpose of this lab is to get you familiar with using the CUDA streaming API
 # Prerequisites
 
 Before starting this lab, make sure that:
-* You have completed the vector addition lab
-* You have completed all Module 14 lecture videos
+
+- You have completed the vector addition lab
+- You have completed all Module 14 lecture videos
 
 # Instruction
 
 Edit the code in the code tab to perform the following:
 
-* You MUST use at least 4 CUDA streams in your program, but you may adjust it to be larger for largest datasets.
-* Allocate device memory
-* Interleave the host memory copy to device to hide 
-* Initialize thread block and kernel grid dimensions
-* Invoke CUDA kernel
-* Copy results from device to host asynchronously
+- You MUST use at least 4 CUDA streams in your program, but you may adjust it to be larger for largest datasets.
+- Allocate device memory
+- Interleave the host memory copy to device to hide 
+- Initialize thread block and kernel grid dimensions
+- Invoke CUDA kernel
+- Copy results from device to host asynchronously
 
 Instructions about where to place each part of the code is demarcated by the `//@@` comment lines.
 
 # Local Setup Instructions
+
 The most recent version of source code for this lab along with the build-scripts can be found on the [Bitbucket repository](LINKTOLAB). A description on how to use the [CMake](https://cmake.org/) tool in along with how to build the labs for local development found in the [README](LINKTOREADME) document in the root of the repository.
 
 The executable generated as a result of compiling the lab can be run using the following command:

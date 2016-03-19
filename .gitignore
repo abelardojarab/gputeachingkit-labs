@@ -13,3 +13,4 @@ build-*
 *.log
 *.o
 pdfs/
+node_modules

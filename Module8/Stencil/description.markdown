@@ -3,16 +3,16 @@ title: Stencil
 author: GPU Teaching Kit -- Accelerated Computing
 module: 8
 ---
-## Objective
+
+# Objective
 
 The purpose of this lab is to perform shared-memory tiling by implementing a 7-point stencil.
 
-## Instructions
+# Instructions
 
-* Edit the code to implement a 7-point stencil.
-* Edit the code to launch the kernel you implemented. The function should launch 2D CUDA grid and blocks.
-* Answer the questions found in the questions tab.
-
+- Edit the code to implement a 7-point stencil.
+- Edit the code to launch the kernel you implemented. The function should launch 2D CUDA grid and blocks.
+- Answer the questions found in the questions tab.
 
 # Algorithm
 

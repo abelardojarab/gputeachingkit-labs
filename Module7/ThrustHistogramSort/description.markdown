@@ -5,9 +5,11 @@ module: 7
 ---
 
 # Objective
+
 The purpose of this lab is to implement a histogramming algorithm for an input array of integers. This approach composes several distinct algorithmic steps to compute a histogram, which makes Thrust a valuable tools for its implementation.
 
 # Problem Setup
+
 Consider the dataset
 
 ```{.cpp}
@@ -29,6 +31,7 @@ max(input) + 1
 ```
 
 # Histogram Sort Approach
+
 First, sort the input data using `thrust::sort`. Continuing with the original example:
 
 ```
@@ -59,10 +62,13 @@ Once the cumulative histogram is produced, use `thrust::adjacent_different` to c
 Check the thrust documentation for details of how to use `upper_bound` and `adjacent_difference`. Instead of constructing the search array in device memory, you may be able to use `thrust::counting_iterator`.
 
 # Prerequisites
+
 Before starting this lab, make sure that you have completed all of the Module 7 lecture videos.
 
 # Instructions
+
 Edit the code in the code tab to perform the following:
+
 - allocate space for input on the GPU
 - copy host memory to device
 - invoke thrust functions
@@ -71,6 +77,7 @@ Edit the code in the code tab to perform the following:
 Instructions about where to place each part of the code is demarcated by the `//@@` comment lines.
 
 # Local Setup Instructions
+
 The most recent version of source code for this lab along with the build-scripts can be found on the [Bitbucket repository](LINKTOLAB). A description on how to use the [CMake](https://cmake.org/) tool in along with how to build the labs for local development found in the [README](LINKTOREADME) document in the root of the repository.
 
 The executable generated as a result of compiling the lab can be run using the following command:
@@ -83,4 +90,5 @@ The executable generated as a result of compiling the lab can be run using the f
 where `<expected.raw>` is the expected output, `<input.raw>` is the input dataset, and `<output.raw>` is an optional path to store the results. The datasets can be generated using the dataset generator built as part of the compilation process.
 
 # Attribution
+
 This is a simplified version of the material presented in the Thrust repository [here](https://github.com/thrust/thrust/blob/master/examples/histogram.cu).

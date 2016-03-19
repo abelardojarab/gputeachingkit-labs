@@ -5,6 +5,7 @@ module: 8
 ---
 
 # Objective
+
 The lab's objective is to implement a tiled image convolution using both shared and constant memory. We will have a constant 5x5 convolution mask, but will have arbitrarily sized image (assume the image dimensions are greater than 5x5 for this Lab).
 
 To use the constant memory for the convolution mask, you can first transfer the mask data to the device. Consider the case  where the pointer to the device array for the mask is named M. You can use `const float * __restrict__ M` as one of the parameters during your kernel launch. This informs the compiler that the contents of the mask array are constants and will only be accessed through pointer variable `M`. This will enable the compiler to place the data into constant memory and allow the SM hardware to aggressively cache the mask data at runtime.
@@ -16,10 +17,13 @@ $$ P_{i,j,c} = \sum_{x=-2}^{2} \sum_{y=-2}^2 I_{i+x,j+y,c} * M_{x,y} $$
 where $P_{i,j,c}$ is the output pixel at position `i,j` in channel `c`, $I_{i,j,c}$ is the input pixel at `i,j` in channel `c` (the number of channels will always be 3 for this MP corresponding to the RGB values), and $M_{x,y}$ is the mask at position `x,y`.
 
 # Prerequisites
+
 Before starting this lab, make sure that:
+
 - You have completed all Module 8 Lecture videos
 
 # Input Data
+
 The input is an interleaved image of `height x width x channels`. By interleaved, we mean that the the element `I[y][x]` contains three values representing the RGB channels. This means that to index a particular element's value, you will have to do something like:
 
 ```{.cpp}
@@ -31,7 +35,9 @@ For this assignment, the channel index is 0 for R, 1 for G, and 2 for B. So, to 
 For simplicity, you can assume that `channels` is always set to `3`.
 
 # Instructions
+
 Edit the code in the code tab to perform the following:
+
 - allocate device memory
 - copy host memory to device
 - initialize thread block and kernel grid dimensions
@@ -44,6 +50,7 @@ Edit the code in the code tab to perform the following:
 Instructions about where to place each part of the code is demarcated by the `//@@` comment lines.
 
 # Pseudo Code
+
 A sequential pseudo code would look something like this:
 
 ```{.ruby}
@@ -81,6 +88,7 @@ end
 ```
 
 # Local Setup Instructions
+
 The most recent version of source code for this lab along with the build-scripts can be found on the [Bitbucket repository](LINKTOLAB). A description on how to use the [CMake](https://cmake.org/) tool in along with how to build the labs for local development found in the [README](LINKTOREADME) document in the root of the repository.
 
 The executable generated as a result of compiling the lab can be run using the following command:

@@ -5,15 +5,20 @@ module: 4
 ---
 
 # Objective
+
 Implement a basic dense matrix multiplication routine. Optimizations such as tiling and usage of shared memory are not required for this lab.
 
 # Prerequisites
+
 Before starting this lab, make sure that:
+
 - You have completed "Vector Addition" Lab
 - You have completed the required teaching kit modules
 
 # Instructions
+
 Edit the code in the code tab to perform the following:
+
 - allocate device memory
 - copy host memory to device
 - initialize thread block and kernel grid dimensions
@@ -24,6 +29,7 @@ Edit the code in the code tab to perform the following:
 Instructions about where to place each part of the code is demarcated by the `//@@` comment lines.
 
 # Local Setup Instructions
+
 The most recent version of source code for this lab along with the build-scripts can be found on the [Bitbucket repository](LINKTOLAB). A description on how to use the [CMake](https://cmake.org/) tool in along with how to build the labs for local development found in the [README](LINKTOREADME) document in the root of the repository.
 
 The executable generated as a result of compiling the lab can be run using the following command:

@@ -5,14 +5,19 @@ module: 10
 ---
 
 # Objective
+
 The purpose of this lab is to implement an efficient histogramming equalization     algorithm for an input image. Like the image convolution MP, the image is represented as `RGB float` values. You will convert that to `GrayScale unsigned char` values and compute the histogram. Based on the histogram, you will compute a histogram equalization function which you will     then apply to the original image to get the color corrected image.
 
 # Prerequisites
+
 Before starting this lab, make sure that:
+
 - You have completed all week 5 lecture videos
 
 # Instruction
+
 Edit the code in the code tab to perform the following:
+
 - Cast the image to `unsigned char`
 - Convert the image from RGB to Gray Scale
 - Compute the histogram of the image
@@ -20,6 +25,7 @@ Edit the code in the code tab to perform the following:
 - Apply the equalization function to the input image to get the color corrected image
 
 # Background
+
 In this section we discuss some of the background details of the histogram equalization algorithm. For images that represent the full color space, we expect an image's histogram to be evenly distributed. This means that we expect the bin values in the histogram to be `256/pixel_count`. This algorithm adjust an image's histogram so that all bins have equal probability.
 
 ![image](Module10/ImageEqualization/imgs/image.png "thumbnail")
@@ -51,9 +57,11 @@ Note that the CDF of the histogram of the new image has been transformed into an
 ![compare](Module10/ImageEqualization/imgs/compare.png "thumbnail")
 
 # Implementation Steps
+
 Here we show the steps to be performed. The computation to be performed by each kernel is illustrated with serial pseudo code.
 
 ## Cast the image from `float` to `unsigned char`
+
 Implement a kernel that casts the image from `float *` to `unsigned char *`.
 
 ```{.ruby}
@@ -63,6 +71,7 @@ end
 ```
 
 ## Convert the image from RGB to GrayScale
+
 Implement a kernel that converts the the RGB image to GrayScale
 
 ```{.ruby}
@@ -79,6 +88,7 @@ end
 ```
 
 ## Compute the histogram of `grayImage`
+
 Implement a kernel that computes the histogram (like in the lectures) of the image.
 
 ```{.ruby}
@@ -89,6 +99,7 @@ end
 ```
 
 ## Compute the Cumulative Distribution Function of `histogram`
+
 This is a scan operation like you have done in the previous lab
 
 ```{.ruby}
@@ -107,6 +118,7 @@ end
 ```
 
 ## Compute the minimum value of the CDF
+
 This is a reduction operation using the min function
 
 ```{.ruby}
@@ -117,6 +129,7 @@ end
 ```
 
 ## Define the histogram equalization function
+
 The histogram equalization function (`correct`) remaps the cdf of the histogram of the image to a linear function and is defined as
 
 ```{.ruby}
@@ -134,6 +147,7 @@ end
 ```
 
 ## Apply the histogram equalization function
+
 Once you have implemented all of the above, then you     are ready to correct the input image
 
 ```{.ruby}
@@ -152,8 +166,8 @@ end
 
 And you're done
 
-
 # Local Setup Instructions
+
 The most recent version of source code for this lab along with the build-scripts can be found on the [Bitbucket repository](LINKTOLAB). A description on how to use the [CMake](https://cmake.org/) tool in along with how to build the labs for local development found in the [README](LINKTOREADME) document in the root of the repository.
 
 The executable generated as a result of compiling the lab can be run using the following command:
