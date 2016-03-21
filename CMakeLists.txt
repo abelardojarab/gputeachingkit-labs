@@ -10,7 +10,18 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 
 project(teachingkit-labs)
-find_package(CUDA REQUIRED)
+
+set(BUILD_LIBWB_LIBRARY ON CACHE BOOL "Turn on build of libwb library")
+set(BUILD_SOLUTION ON CACHE BOOL "Turn on build of code solution")
+# set(BUILD_DESCRIPTION OFF CACHE BOOL "Turn on build of lab description")
+set(BUILD_DATASET_GENERATOR ON CACHE BOOL "Turn on building of dataset generator")
+set(BUILD_TEMPLATE OFF CACHE BOOL "Turn on build of code templates")
+
+if (BUILD_SOLUTION OR BUILD_TEMPLATE) 
+  find_package(CUDA REQUIRED)
+else()
+  find_package(CUDA)
+endif ()
 
 # allow C99 for cmake versions less than 3.1
 macro(use_c99)
@@ -36,8 +47,9 @@ use_c99()
 if (UNIX)
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wno-unused-function -Wno-unused-parameter -Wextra")
 	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wno-unused-function -Wno-unused-parameter -Wextra")
-	set(CUDA_NVCC_FLAGS ${CUDA_NVCC_FLAGS} " -Xcompiler;-Wno-unused-function")
-	set(CUDA_NVCC_FLAGS ${CUDA_NVCC_FLAGS} " -Xcompiler;-Wno-unused-parameter")
+	set(CUDA_NVCC_FLAGS "${CUDA_NVCC_FLAGS} -Xcompiler;-Wno-unused-function")
+	set(CUDA_NVCC_FLAGS "${CUDA_NVCC_FLAGS} -Xcompiler;-Wno-unused-parameter")
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 endif ()
 
 # Select the correct host compiler on OS X
@@ -51,13 +63,13 @@ if (APPLE)
         set(CUDA_HOST_COMPILER ${GCC_EXECUTABLE})
     else ()
         # OS X 10.8+
-				find_program(CLANG_EXECUTABLE NAMES clang++-3.6 clang++ PATHS ENV PATH)
-				if (NOT CLANG_EXECUTABLE)
-				    message(FATAL_ERROR "Could not find host compiler 'clang++'")
-				endif ()
-				set(CUDA_HOST_COMPILER ${CLANG_EXECUTABLE})
-			        set(CMAKE_CXX_FLAGS    "${CMAKE_CXX_FLAGS} -std=c++11 -isystem ${CUDA_INCLUDE_DIRS}")
-				set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -stdlib=libc++" )
+        find_program(CLANG_EXECUTABLE NAMES clang++-3.6 clang++ PATHS ENV PATH)
+        if (NOT CLANG_EXECUTABLE)
+            message(FATAL_ERROR "Could not find host compiler 'clang++'")
+        endif ()
+        set(CUDA_HOST_COMPILER ${CLANG_EXECUTABLE})
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -isystem ${CUDA_INCLUDE_DIRS}")
+		set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -stdlib=libc++" )
     endif ()
 endif ()
 
@@ -82,17 +94,6 @@ if (UNIX)
     endif ()
 endif ()
 
-set(WBLIB "wb")
-
-
-set(BUILD_LIBWB_LIBRARY ON CACHE BOOL "Turn on build of libwb library")
-set(BUILD_SOLUTION ON CACHE BOOL "Turn on build of code solution")
-set(BUILD_DESCRIPTION OFF CACHE BOOL "Turn on build of lab description")
-set(BUILD_DATASET_GENERATOR ON CACHE BOOL "Turn on building of dataset generator")
-set(BUILD_TEMPLATE OFF CACHE BOOL "Turn on build of code templates")
-
-include_directories(${PROJECT_SOURCE_DIR}/support)
-
 macro(add_lab_helper NAME SOURCES)
 	cuda_add_executable(${NAME} ${SOURCES})
 	target_link_libraries(${NAME} ${WBLIB})
@@ -109,10 +110,10 @@ endmacro(add_lab_solution)
 
 
 macro(add_lab_template NAME SOURCES)
-# template code is not meant to be compilable,
-# so we do not copile it. Enable the BUILD_TEMPLATE
-# flag during cmake generation to override this
-# behavior
+    # template code is not meant to be compilable,
+    # so we do not copile it. Enable the BUILD_TEMPLATE
+    # flag during cmake generation to override this
+    # behavior
 	if (BUILD_TEMPLATE)
 		add_lab_helper("${NAME}_Template" ${SOURCES})
 	endif(BUILD_TEMPLATE)
@@ -121,11 +122,12 @@ endmacro(add_lab_template)
 macro(add_generator NAME SOURCES)
   if (BUILD_DATASET_GENERATOR)
 		add_executable("${NAME}_DatasetGenerator" ${SOURCES})
-                set_property(TARGET "${NAME}_DatasetGenerator" PROPERTY C_STANDARD 99)
+        set_property(TARGET "${NAME}_DatasetGenerator" PROPERTY CXX_STANDARD 11)
+	    target_link_libraries("${NAME}_DatasetGenerator" ${WBLIB})
 		if(UNIX)
 			target_link_libraries("${NAME}_DatasetGenerator" ${LINK_LIBRARIES})
 		endif(UNIX)
-              endif (BUILD_DATASET_GENERATOR)
+  endif (BUILD_DATASET_GENERATOR)
 endmacro(add_generator)
 
 macro(add_lab NAME)
@@ -145,10 +147,29 @@ macro(add_lab NAME)
 	endif (BUILD_DESCRIPTION)
 endmacro(add_lab)
 
+include_directories(${PROJECT_SOURCE_DIR}/libwb)
 
-include(support/sources.cmake)
+if (BUILD_LIBWB_LIBRARY)
+  include(libwb/sources.cmake)
+  cuda_add_library(${WBLIB} ${LIBWB_SOURCE_FILES} STATIC)
+  set_property(TARGET ${WBLIB} PROPERTY CXX_STANDARD 11)
+endif (BUILD_LIBWB_LIBRARY)
+
+
 include(Module2/sources.cmake)
 include(Module3/sources.cmake)
-#include(Module4/sources.cmake)
+include(Module4/sources.cmake)
+include(Module7/sources.cmake)
+include(Module8/sources.cmake)
+include(Module9/sources.cmake)
+include(Module10/sources.cmake)
 include(Module11/sources.cmake)
-include(Module23/sources.cmake)
+# include(Module12/sources.cmake)
+include(Module14/sources.cmake)
+
+
+# These are the OpenCL and OpenACC 
+# labs and are not supported by the
+# current cmake configuration
+# include(Module21/sources.cmake)
+# include(Module22/sources.cmake)

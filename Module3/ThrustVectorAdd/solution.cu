@@ -1,6 +1,6 @@
-#include <wb.h>
-#include <thrust/host_vector.h>
 #include <thrust/device_vector.h>
+#include <thrust/host_vector.h>
+#include <wb.h>
 
 int main(int argc, char *argv[]) {
   wbArg_t args;
@@ -21,7 +21,7 @@ int main(int argc, char *argv[]) {
 
   // Declare and allocate host output
   //@@ Insert code here
-  hostOutput = (float*)malloc(sizeof(float) * inputLength);
+  hostOutput = (float *)malloc(sizeof(float) * inputLength);
 
   wbTime_start(GPU, "Doing GPU Computation (memory + compute)");
 
@@ -44,8 +44,7 @@ int main(int argc, char *argv[]) {
   wbTime_start(Compute, "Doing the computation on the GPU");
   //@@ Insert Code here
   thrust::transform(deviceInput1.begin(), deviceInput1.end(),
-                    deviceInput2.begin(),
-                    deviceOutput.begin(),
+                    deviceInput2.begin(), deviceOutput.begin(),
                     thrust::plus<float>());
   wbTime_stop(Compute, "Doing the computation on the GPU");
   /////////////////////////////////////////////////////////

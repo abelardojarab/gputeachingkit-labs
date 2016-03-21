@@ -1,6 +1,5 @@
 # GPU Teaching Kit -- Accelerated Computing Labs
 
-
 ## Software Requirements
 
 _Caution: **You must have an [NVIDIA CUDA Capable GPU](https://developer.nvidia.com/cuda-gpus)
@@ -24,14 +23,17 @@ the process of compiling and running a lab.
 
 In this section we describe how to setup your machine to compile the labs.
 First, regardless of the platform compiling the labs the
-[CUDA Toolkit](https://developer.nvidia.com/cuda-downloads) and 
+[CUDA Toolkit](https://developer.nvidia.com/cuda-downloads) and
 [CMake](https://cmake.org/) must be installed.
 
 Now, checkout the the GPU Teaching Kit -- Accelerated Computing Labs from the
 [Bitbucket repository](https://bitbucket.org/hwuligans/gputeachingkit-labs)
 
-~~~
-git clone git@bitbucket.org:hwuligans/gputeachingkit-labs.git
+Since, the project depends on an external [libwb](https://github.com/abduld/libwb) repository [![Build Status](https://travis-ci.org/abduld/libwb.svg?branch=master)](https://travis-ci.org/abduld/libwb)
+ we must perform a recursive clone (to also checkout the `libwb` repository).
+
+~~~{.bash}
+git clone --recursive git@bitbucket.org:hwuligans/gputeachingkit-labs.git
 ~~~
 
 In the next section we will show how to compile and run the labs on Linux, OSX,
@@ -82,7 +84,7 @@ as part of the build process
 as part of the build process (the templates are missing critical code that
 makes them uncompilable).
 
-Templates are meant to be used as starting 
+Templates are meant to be used as starting
 code for students whereas the solution is meant for instructor use.
 
 If you have modified the above, then you should type `g` to regenerate the Makefile and then `q` to quit out of `ccmake`.
@@ -112,7 +114,7 @@ The CMake system then searches the system and populates the proper options in yo
 
 ![compiler-options](https://s3.amazonaws.com/gpuedx/resources/screenshots/3.PNG)
 
-Clicking `Generate` button, the CMake system creates the build scripts in the previously specified build directory. Since we selected Visual Studio, a Visual Studio solution is generated. 
+Clicking `Generate` button, the CMake system creates the build scripts in the previously specified build directory. Since we selected Visual Studio, a Visual Studio solution is generated.
 
 ![vs-dir](https://s3.amazonaws.com/gpuedx/resources/screenshots/4.PNG)
 

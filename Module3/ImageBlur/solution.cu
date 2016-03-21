@@ -29,7 +29,8 @@ __global__ void blurKernel(float *out, float *in, int width, int height) {
         int currow = row + blurrow;
         int curcol = col + blurcol;
         // Verify we have a valid image pixel
-        if (currow > -1 && currow < height && curcol > -1 && curcol < width) {
+        if (currow > -1 && currow < height && curcol > -1 &&
+            curcol < width) {
           pixVal += in[currow * width + curcol];
           pixels++; // Keep track of number of pixels in the avg
         }
@@ -61,13 +62,13 @@ int main(int argc, char *argv[]) {
 
   // The input image is in grayscale, so the number of channels
   // is 1
-  imageWidth = wbImage_getWidth(inputImage);
+  imageWidth  = wbImage_getWidth(inputImage);
   imageHeight = wbImage_getHeight(inputImage);
 
   // Since the image is monochromatic, it only contains only one channel
   outputImage = wbImage_new(imageWidth, imageHeight, 1);
 
-  hostInputImageData = wbImage_getData(inputImage);
+  hostInputImageData  = wbImage_getData(inputImage);
   hostOutputImageData = wbImage_getData(outputImage);
 
   wbTime_start(GPU, "Doing GPU Computation (memory + compute)");

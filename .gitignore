@@ -6,3 +6,11 @@
 *.fatbin
 build
 build-*
+
+.srclib-cache/
+.srclib-store/
+*.swp
+*.log
+*.o
+pdfs/
+node_modules
