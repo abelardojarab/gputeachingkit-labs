@@ -172,14 +172,14 @@ int main(int argc, char *argv[]) {
   numNextLevelNodes_h = 0;
   nextLevelNodes_h    = (int *)malloc((numNodes) * sizeof(int));
 
-  wbLog(INFO, "# Mode = %u\n", mode);
-  wbLog(INFO, "# Nodes = %u\n", numNodes);
-  wbLog(INFO, "# Total Neighbors = %d\n", numTotalNeighbors_h);
-  wbLog(INFO, "# Current Level Nodes = %d\n", numCurrLevelNodes);
+  wbLog(TRACE, "# Mode = %u\n", mode);
+  wbLog(TRACE, "# Nodes = %u\n", numNodes);
+  wbLog(TRACE, "# Total Neighbors = %d\n", numTotalNeighbors_h);
+  wbLog(TRACE, "# Current Level Nodes = %d\n", numCurrLevelNodes);
 
   // (do not modify) Allocate device variables --------------------------
 
-  wbLog(INFO, "Allocating device variables...");
+  wbLog(TRACE, "Allocating device variables...");
 
   wbCheck(cudaMalloc((void **)&nodePtrs_d, (numNodes + 1) * sizeof(int)));
   wbCheck(cudaMalloc((void **)&nodeVisited_d, numNodes * sizeof(int)));
@@ -194,7 +194,7 @@ int main(int argc, char *argv[]) {
 
   // (do not modify) Copy host variables to device --------------------
 
-  wbLog(INFO, "Copying data from host to device...");
+  wbLog(TRACE, "Copying data from host to device...");
 
   wbCheck(cudaMemcpy(nodePtrs_d, nodePtrs_h, (numNodes + 1) * sizeof(int),
                      cudaMemcpyHostToDevice));
