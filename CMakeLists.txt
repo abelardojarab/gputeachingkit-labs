@@ -40,15 +40,16 @@ use_c99()
 # with 'set' and change the value of COMPUTE_CAPABILITY to one of the following
 # hardware architectures: Tesla-class '11', '12', or '13'; Fermi-class '20'
 # or '21'; Kepler-class '30', '32', '35'; or Maxwell-class '50' or '52'
-set(COMPUTE_CAPABILITY 35)
-set(CUDA_NVCC_FLAGS ${CUDA_NVCC_FLAGS};--gpu-architecture;sm_${COMPUTE_CAPABILITY})
+#set(COMPUTE_CAPABILITY 35)
+#set(CUDA_NVCC_FLAGS "${CUDA_NVCC_FLAGS} --gpu-architecture sm_${COMPUTE_CAPABILITY}")
+list(APPEND CUDA_NVCC_FLAGS -arch=sm_35)
 
 # Set warning levels for host compilation
 if (UNIX)
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wno-unused-function -Wno-unused-parameter -Wextra")
 	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wno-unused-function -Wno-unused-parameter -Wextra")
-	set(CUDA_NVCC_FLAGS "${CUDA_NVCC_FLAGS} -Xcompiler;-Wno-unused-function")
-	set(CUDA_NVCC_FLAGS "${CUDA_NVCC_FLAGS} -Xcompiler;-Wno-unused-parameter")
+	set(CUDA_NVCC_FLAGS "${CUDA_NVCC_FLAGS} -Xcompiler -Wno-unused-function")
+	set(CUDA_NVCC_FLAGS "${CUDA_NVCC_FLAGS} -Xcompiler -Wno-unused-parameter")
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 endif ()
 
