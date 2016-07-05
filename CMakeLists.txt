@@ -40,8 +40,8 @@ use_c99()
 # with 'set' and change the value of COMPUTE_CAPABILITY to one of the following
 # hardware architectures: Tesla-class '11', '12', or '13'; Fermi-class '20'
 # or '21'; Kepler-class '30', '32', '35'; or Maxwell-class '50' or '52'
-# set(COMPUTE_CAPABILITY 35)
-# set(CUDA_NVCC_FLAGS ${CUDA_NVCC_FLAGS};--gpu-architecture;sm_${COMPUTE_CAPABILITY})
+set(COMPUTE_CAPABILITY 35)
+set(CUDA_NVCC_FLAGS ${CUDA_NVCC_FLAGS};--gpu-architecture;sm_${COMPUTE_CAPABILITY})
 
 # Set warning levels for host compilation
 if (UNIX)
@@ -166,6 +166,7 @@ include(Module10/sources.cmake)
 include(Module11/sources.cmake)
 include(Module12/sources.cmake)
 include(Module14/sources.cmake)
+#include(Module24/sources.cmake)
 
 
 # These are the OpenCL and OpenACC 
