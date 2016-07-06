@@ -1,8 +1,16 @@
-# GPU Breadth-First Search
+---
+title: Breadth-First Search Queue
+author: GPU Teaching Kit -- Accelerated Computing
+module: 12
+---
+
+# Objective
 
 The purpose of this lab is to understand hierarchical queuing in the context of the breadth first search algorithm as an example. You will implement a single iteration of breadth first search that takes a set of nodes in the current level (also called wave-front) as input and outputs the set of nodes belonging to the next level. You will implement two kernels:
 * A simple version with global queuing
 * An optimized version that uses shared-memory queuing.
+
+# Instructions
 
 The graph structure is stored in the following way:
 
@@ -43,8 +51,15 @@ Sequential pseudocode for the kernel is:
 
 An empty stub for the kernels is provided. All you need to do is correctly implement the kernel code.
 
-## Local Development
+# Local Setup Instructions
 
-Use the dataset generator, and the following example command to check for correctness.
+The most recent version of source code for this lab along with the build-scripts can be found on the [Bitbucket repository](LINKTOLAB). A description on how to use the [CMake](https://cmake.org/) tool in along with how to build the labs for local development found in the [README](LINKTOREADME) document in the root of the repository.
 
-./bfs-queuing -e BfsQueue/Dataset/0/output.raw -i BfsQueue/Dataset/0/input0.raw,BfsQueue/Dataset/0/input1.raw,BfsQueue/Dataset/0/input2.raw,BfsQueue/Dataset/0/input3.raw,BfsQueue/Dataset/0/input4.raw -t integral_vector
+The executable generated as a result of compiling the lab can be run using the following command:
+
+```{.bash}
+./BfsQueue_Template -e <expected.raw> \
+  -i <input0.raw>,<input1.raw>,<input2.raw>,<input3.raw>,<input4.raw> -t integral_vector
+```
+
+where `<expected.raw>` is the expected output, `<input.raw>` is the input dataset. The datasets can be generated using the dataset generator built as part of the compilation process.
