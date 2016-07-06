@@ -116,7 +116,7 @@ void compute(unsigned int numNodes, unsigned int *nodePtrs,
 static void create_dataset(const int datasetNum, const int numNodes,
                            const int maxNeighborsPerNode, Mode mode) {
 
-  nst char *dir_name =
+  const char *dir_name =
       wbDirectory_create(wbPath_join(base_dir, datasetNum));
 
   // graph structure and current level (input data)
