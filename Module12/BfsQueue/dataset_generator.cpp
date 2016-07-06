@@ -12,7 +12,7 @@ static void write_data(char *file_name, unsigned int *data,
                        unsigned int len) {
   FILE *handle = fopen(file_name, "w");
   fprintf(handle, "%d\n", len);
-  for (int i = 0; i < len; ++i) {
+  for (unsigned int i = 0; i < len; ++i) {
     fprintf(handle, "%d\n", data[i]);
   }
 
