@@ -106,8 +106,8 @@ static void create_dataset(int datasetNum, int numARows, int numACols,
 }
 
 int main() {
-  base_dir = wbPath_join(wbDirectory_current(), "MatrixMultiplication",
-                         "Dataset");
+  base_dir =
+      wbPath_join(wbDirectory_current(), "Mandelbrot_Dynamic", "Dataset");
 
   create_dataset(0, 16, 16, 16);
   create_dataset(1, 64, 64, 64);

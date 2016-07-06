@@ -17,7 +17,7 @@ set(BUILD_SOLUTION ON CACHE BOOL "Turn on build of code solution")
 set(BUILD_DATASET_GENERATOR ON CACHE BOOL "Turn on building of dataset generator")
 set(BUILD_TEMPLATE OFF CACHE BOOL "Turn on build of code templates")
 
-if (BUILD_SOLUTION OR BUILD_TEMPLATE) 
+if (BUILD_SOLUTION OR BUILD_TEMPLATE)
   find_package(CUDA REQUIRED)
 else()
   find_package(CUDA)
@@ -35,22 +35,24 @@ macro(use_c99)
 endmacro(use_c99)
 use_c99()
 
+
+# set(CUDA_NVCC_FLAGS "${CUDA_NVCC_FLAGS} --verbose")
+
 # For some MPs it may be necessary to specify the compute capability of your
 # NVIDIA GPU. In that case, simply uncomment the following two lines that start
 # with 'set' and change the value of COMPUTE_CAPABILITY to one of the following
 # hardware architectures: Tesla-class '11', '12', or '13'; Fermi-class '20'
 # or '21'; Kepler-class '30', '32', '35'; or Maxwell-class '50' or '52'
-#set(COMPUTE_CAPABILITY 35)
-#set(CUDA_NVCC_FLAGS "${CUDA_NVCC_FLAGS} --gpu-architecture sm_${COMPUTE_CAPABILITY}")
-list(APPEND CUDA_NVCC_FLAGS -arch=sm_35)
+set(COMPUTE_CAPABILITY 35)
+set(CUDA_SEPARABLE_COMPILATION TRUE)
+set(CUDA_NVCC_FLAGS "${CUDA_NVCC_FLAGS} --gpu-architecture;sm_${COMPUTE_CAPABILITY}")
+# list(APPEND CUDA_NVCC_FLAGS -arch=sm_35)
 
 # Set warning levels for host compilation
 if (UNIX)
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wno-unused-function -Wno-unused-parameter -Wextra")
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wno-unused-function -Wno-unused-parameter -Wextra -std=c++11")
 	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wno-unused-function -Wno-unused-parameter -Wextra")
-	set(CUDA_NVCC_FLAGS "${CUDA_NVCC_FLAGS} -Xcompiler -Wno-unused-function")
-	set(CUDA_NVCC_FLAGS "${CUDA_NVCC_FLAGS} -Xcompiler -Wno-unused-parameter")
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+	set(CUDA_NVCC_FLAGS "${CUDA_NVCC_FLAGS} -Xcompiler -Wno-unused-function,-Wno-unused-parameter")
 endif ()
 
 # Select the correct host compiler on OS X
@@ -97,10 +99,7 @@ endif ()
 
 macro(add_lab_helper NAME SOURCES)
 	cuda_add_executable(${NAME} ${SOURCES})
-	target_link_libraries(${NAME} ${WBLIB})
-	if(UNIX)
-		target_link_libraries(${NAME} ${LINK_LIBRARIES})
-	endif()
+	target_link_libraries(${NAME} ${WBLIB} ${LINK_LIBRARIES})
 endmacro(add_lab_helper)
 
 macro(add_lab_solution NAME SOURCES)
@@ -124,10 +123,7 @@ macro(add_generator NAME SOURCES)
   if (BUILD_DATASET_GENERATOR)
 		add_executable("${NAME}_DatasetGenerator" ${SOURCES})
         set_property(TARGET "${NAME}_DatasetGenerator" PROPERTY CXX_STANDARD 11)
-	    target_link_libraries("${NAME}_DatasetGenerator" ${WBLIB})
-		if(UNIX)
-			target_link_libraries("${NAME}_DatasetGenerator" ${LINK_LIBRARIES})
-		endif(UNIX)
+    target_link_libraries("${NAME}_DatasetGenerator" ${WBLIB} ${LINK_LIBRARIES})
   endif (BUILD_DATASET_GENERATOR)
 endmacro(add_generator)
 
@@ -167,10 +163,9 @@ include(Module10/sources.cmake)
 include(Module11/sources.cmake)
 include(Module12/sources.cmake)
 include(Module14/sources.cmake)
-#include(Module24/sources.cmake)
+include(Module24/sources.cmake)
 
-
-# These are the OpenCL and OpenACC 
+# These are the OpenCL and OpenACC
 # labs and are not supported by the
 # current cmake configuration
 # include(Module21/sources.cmake)
