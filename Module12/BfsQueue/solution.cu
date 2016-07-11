@@ -172,10 +172,10 @@ int main(int argc, char *argv[]) {
   numNextLevelNodes_h = 0;
   nextLevelNodes_h    = (int *)malloc((numNodes) * sizeof(int));
 
-  wbLog(TRACE, "# Mode = %u\n", mode);
-  wbLog(TRACE, "# Nodes = %u\n", numNodes);
-  wbLog(TRACE, "# Total Neighbors = %d\n", numTotalNeighbors_h);
-  wbLog(TRACE, "# Current Level Nodes = %d\n", numCurrLevelNodes);
+  wbLog(TRACE, "# Modes = ", mode);
+  wbLog(TRACE, "# Nodes = ", numNodes);
+  wbLog(TRACE, "# Total Neighbors = ", numTotalNeighbors_h);
+  wbLog(TRACE, "# Current Level Nodes = ", numCurrLevelNodes);
 
   // (do not modify) Allocate device variables --------------------------
 
