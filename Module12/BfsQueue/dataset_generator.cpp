@@ -174,7 +174,7 @@ int main() {
   create_dataset(2, 4097, 13, GPU_GLOBAL_QUEUE);
   create_dataset(3, 4097, 13, GPU_BLOCK_QUEUE);
 
-  create_dataset(4, 200000, 10, GPU_GLOBAL_QUEUE);
-  create_dataset(5, 200000, 10, GPU_BLOCK_QUEUE);
+  create_dataset(4, 20000, 10, GPU_GLOBAL_QUEUE);
+  create_dataset(5, 20000, 10, GPU_BLOCK_QUEUE);
   return 0;
 }
