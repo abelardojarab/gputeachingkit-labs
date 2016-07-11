@@ -15,10 +15,6 @@
     }                                                                     \
   } while (0)
 
-#if __BYTE_ORDER != __LITTLE_ENDIAN
-#error "File I/O is not implemented for this system: wrong endianness."
-#endif
-
 // Global queuing stub
 __global__ void gpu_global_queuing_kernel(
     int *nodePtrs, int *nodeNeighbors, int *nodeVisited,
