@@ -15,10 +15,6 @@
     }                                                                     \
   } while (0)
 
-#if __BYTE_ORDER != __LITTLE_ENDIAN
-#error "File I/O is not implemented for this system: wrong endianness."
-#endif
-
 // Global queuing stub
 __global__ void gpu_global_queuing_kernel(
     int *nodePtrs, int *nodeNeighbors, int *nodeVisited,
@@ -39,9 +35,10 @@ __global__ void gpu_block_queuing_kernel(
     int *currLevelNodes, int *nextLevelNodes,
     const unsigned int numCurrLevelNodes, int *numNextLevelNodes) {
 
-  //@@ INSERT KERNEL CODE HERE
+  //@@ Insert Block Queuing Code Here
 
   // Initialize shared memory queue
+
   // Loop over all nodes in the curent level
   // Loop over all neighbors of the node
   // If the neighbor hasn't been visited yet
@@ -49,6 +46,7 @@ __global__ void gpu_block_queuing_kernel(
   // If full, add it to the global queue
 
   // Allocate space for block queue to go into global queue
+
   // Store block queue in global queue
 }
 
@@ -119,10 +117,10 @@ int main(int argc, char *argv[]) {
   numNextLevelNodes_h = 0;
   nextLevelNodes_h    = (int *)malloc((numNodes) * sizeof(int));
 
-  wbLog(TRACE, "# Mode = %u\n", mode);
-  wbLog(TRACE, "# Nodes = %u\n", numNodes);
-  wbLog(TRACE, "# Total Neighbors = %d\n", numTotalNeighbors_h);
-  wbLog(TRACE, "# Current Level Nodes = %d\n", numCurrLevelNodes);
+  wbLog(TRACE, "# Modes = ", mode);
+  wbLog(TRACE, "# Nodes = ", numNodes);
+  wbLog(TRACE, "# Total Neighbors = ", numTotalNeighbors_h);
+  wbLog(TRACE, "# Current Level Nodes = ", numCurrLevelNodes);
 
   // (do not modify) Allocate device variables --------------------------
 
