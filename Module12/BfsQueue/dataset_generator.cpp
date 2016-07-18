@@ -169,12 +169,10 @@ static void create_dataset(const int datasetNum, const int numNodes,
 int main() {
   base_dir = wbPath_join(wbDirectory_current(), "BfsQueue", "Dataset");
   create_dataset(0, 1024, 2, GPU_GLOBAL_QUEUE);
-  create_dataset(1, 1024, 2, GPU_BLOCK_QUEUE);
-
-  create_dataset(2, 4097, 13, GPU_GLOBAL_QUEUE);
-  create_dataset(3, 4097, 13, GPU_BLOCK_QUEUE);
-
-  create_dataset(4, 20000, 10, GPU_GLOBAL_QUEUE);
+  create_dataset(1, 4097, 13, GPU_GLOBAL_QUEUE);
+  create_dataset(2, 20000, 10, GPU_GLOBAL_QUEUE);
+  create_dataset(3, 1024, 2, GPU_BLOCK_QUEUE);
+  create_dataset(4, 4097, 13, GPU_BLOCK_QUEUE);
   create_dataset(5, 20000, 10, GPU_BLOCK_QUEUE);
   return 0;
 }
