@@ -51,6 +51,9 @@ Sequential pseudocode for the kernel is:
 
 An empty stub for the kernels is provided. All you need to do is correctly implement the kernel code.
 
+# Test Datasets
+The first three datasets invoke the Global Queue kernel. The second three invoke the Block Queue Kernel
+
 # Local Setup Instructions
 
 The most recent version of source code for this lab along with the build-scripts can be found on the [Bitbucket repository](LINKTOLAB). A description on how to use the [CMake](https://cmake.org/) tool in along with how to build the labs for local development found in the [README](LINKTOREADME) document in the root of the repository.
