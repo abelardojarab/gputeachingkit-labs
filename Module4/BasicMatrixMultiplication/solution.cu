@@ -19,7 +19,7 @@ __global__ void sgemm(float *A, float *B, float *C, int numARows,
 #define wbCheck(stmt)                                                     \
   do {                                                                    \
     cudaError_t err = stmt;                                               \
-    if (err == cudaSuccess) {                                             \
+    if (err != cudaSuccess) {                                             \
       wbLog(ERROR, "Failed to run stmt ", #stmt);                         \
       return -1;                                                          \
     }                                                                     \
