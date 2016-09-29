@@ -50,10 +50,10 @@ set(CUDA_NVCC_FLAGS "${CUDA_NVCC_FLAGS} --gpu-architecture;sm_${COMPUTE_CAPABILI
 
 # Set warning levels for host compilation
 if (UNIX)
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wno-unused-function -Wno-unused-parameter -Wextra -std=c++11 -DWB_USE_CUDA")
-  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wno-unused-function -Wno-unused-parameter -Wextra -DWB_USE_CUDA")
-	set(CUDA_PROPAGATE_HOST_FLAGS OFF)
-	set(CUDA_NVCC_FLAGS "${CUDA_NVCC_FLAGS} -Xcompiler -Wno-unused-function,-Wno-unused-parameter")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wno-unused-function -Wno-unused-parameter -Wextra -Wno-unused-variable -std=c++11 -DWB_USE_CUDA")
+  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wno-unused-function -Wno-unused-parameter -Wno-unused-variable -Wextra -DWB_USE_CUDA")
+  set(CUDA_PROPAGATE_HOST_FLAGS OFF)
+	set(CUDA_NVCC_FLAGS "${CUDA_NVCC_FLAGS} -Xcompiler -Wno-unused-function,-Wno-unused-parameter,-Wno-unused-variable")
 	set(CUDA_NVCC_FLAGS "${CUDA_NVCC_FLAGS} -std=c++11")
 endif ()
 
@@ -80,6 +80,7 @@ endif ()
 
 # Add debugging to CUDA NVCC flags (for NVidia's NSight tools)
 set(CUDA_NVCC_FLAGS_DEBUG ${CUDA_NVCC_FLAGS_DEBUG} "-G")
+
 
 # Set the correct linker options on UNIX platforms
 if (UNIX)
@@ -152,6 +153,8 @@ if (BUILD_LIBWB_LIBRARY)
   include(libwb/sources.cmake)
   cuda_add_library(${WBLIB} ${LIBWB_SOURCE_FILES} STATIC)
   set_property(TARGET ${WBLIB} PROPERTY CXX_STANDARD 11)
+  target_link_libraries(${WBLIB} ${LINK_LIBRARIES})
+  target_link_libraries(${WBLIB} ${CUDA_LIBRARY})
 endif (BUILD_LIBWB_LIBRARY)
 
 
