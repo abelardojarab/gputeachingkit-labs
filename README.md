@@ -68,7 +68,7 @@ Note the options available to you, specifically:
 
 ~~~
 BUILD_DESCRIPTION               *OFF
-BUILD_GENERATOR                 *ON
+BUILD_DATASET_GENERATOR         *ON
 BUILD_LIBWB_LIBRARY             *ON
 BUILD_SOLUTION                  *ON
 BUILD_TEMPLATE                  *OFF
@@ -76,7 +76,7 @@ BUILD_TEMPLATE                  *OFF
 
 * `BUILD_DESCRIPTION` -- option toggles whether to regenerate
 `pdf` and `docx` lab output (this requires a python, latex, and pandoc installation)
-* `BUILD_GENERATOR` -- option toggles whether to build the dataset
+* `BUILD_DATASET_GENERATOR` -- option toggles whether to build the dataset
 generator scripts as part of the build process
 * `BUILD_LIBWB_LIBRARY` -- option toggles whether to build the `libwb` (the support library)
 as part of the build process
