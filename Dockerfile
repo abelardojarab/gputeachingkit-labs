@@ -17,7 +17,7 @@ RUN cmake -DBUILD_DESCRIPTION=OFF \
           -DBUILD_SOLUTION=ON \
           -DBUILD_TEMPLATE=OFF \
           ${WORK_DIR}/src && \
-    make
+    make VERBOSE=1
 
 # Setup user.
 RUN chmod u+s /usr/bin/whoami && \

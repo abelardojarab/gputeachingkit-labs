@@ -23,6 +23,8 @@ else()
   find_package(CUDA)
 endif ()
 
+set(CUDA_ATTACH_VS_BUILD_RULE_TO_CUDA_FILE OFF)
+
 # allow C99 for cmake versions less than 3.1
 macro(use_c99)
   if (CMAKE_VERSION VERSION_LESS "3.1")
