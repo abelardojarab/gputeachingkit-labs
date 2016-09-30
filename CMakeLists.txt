@@ -24,6 +24,8 @@ else()
 endif ()
 
 set(CUDA_ATTACH_VS_BUILD_RULE_TO_CUDA_FILE OFF)
+set(CUDA_USE_STATIC_CUDA_RUNTIME ON)
+set(CUDA_VERBOSE_BUILD OFF)
 
 # allow C99 for cmake versions less than 3.1
 macro(use_c99)
@@ -86,7 +88,7 @@ set(CUDA_NVCC_FLAGS_DEBUG ${CUDA_NVCC_FLAGS_DEBUG} "-G")
 
 # Set the correct linker options on UNIX platforms
 if (UNIX)
-    set(LINK_LIBRARIES "-lm")
+    set(LINK_LIBRARIES "-lm -lcuda")
     if (APPLE)
         find_library(CUDA_LIBRARY NAMES CUDA)
         get_filename_component(FRAMEWORK_DIRECTORY ${CUDA_LIBRARY} DIRECTORY)
@@ -105,6 +107,7 @@ endif (UNIX)
 macro(add_lab_helper NAME SOURCES)
 	cuda_add_executable(${NAME} ${SOURCES})
 	target_link_libraries(${NAME} ${WBLIB} ${LINK_LIBRARIES})
+    target_link_libraries(${NAME} ${CUDA_cudart_static_LIBRARY})
     target_link_libraries(${NAME} ${CUDA_LIBRARIES})
 endmacro(add_lab_helper)
 
@@ -130,6 +133,7 @@ macro(add_generator NAME SOURCES)
 	cuda_add_executable("${NAME}_DatasetGenerator" ${SOURCES})
     set_property(TARGET "${NAME}_DatasetGenerator" PROPERTY CXX_STANDARD 11)
     target_link_libraries("${NAME}_DatasetGenerator" ${WBLIB} ${LINK_LIBRARIES})
+    target_link_libraries("${NAME}_DatasetGenerator" ${CUDA_cudart_static_LIBRARY})
     target_link_libraries("${NAME}_DatasetGenerator" ${CUDA_LIBRARIES})
   endif (BUILD_DATASET_GENERATOR)
 endmacro(add_generator)
@@ -152,12 +156,14 @@ macro(add_lab NAME)
 endmacro(add_lab)
 
 include_directories(${PROJECT_SOURCE_DIR}/libwb)
+CUDA_INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/libwb)
 
 if (BUILD_LIBWB_LIBRARY)
-  include(libwb/sources.cmake)
-  cuda_add_library(${WBLIB} ${LIBWB_SOURCE_FILES} STATIC)
-  target_link_libraries(${WBLIB} ${LINK_LIBRARIES})
-  target_link_libraries(${WBLIB} ${CUDA_LIBRARIES})
+    include(libwb/sources.cmake)
+    cuda_add_library(${WBLIB} ${LIBWB_SOURCE_FILES} STATIC)
+    target_link_libraries(${WBLIB} ${LINK_LIBRARIES})
+    target_link_libraries(${WBLIB} ${CUDA_cudart_static_LIBRARY})
+    target_link_libraries(${WBLIB} ${CUDA_LIBRARIES})
 endif (BUILD_LIBWB_LIBRARY)
 
 
