@@ -104,7 +104,6 @@ macro(add_lab_helper NAME SOURCES)
 	cuda_add_executable(${NAME} ${SOURCES})
 	target_link_libraries(${NAME} ${WBLIB} ${LINK_LIBRARIES})
     target_link_libraries(${NAME} ${CUDA_LIBRARIES})
-    message(STATUS ${CUDA_LIBRARIES})
 endmacro(add_lab_helper)
 
 macro(add_lab_solution NAME SOURCES)
