@@ -17,7 +17,7 @@ set(BUILD_SOLUTION ON CACHE BOOL "Turn on build of code solution")
 set(BUILD_DATASET_GENERATOR ON CACHE BOOL "Turn on building of dataset generator")
 set(BUILD_TEMPLATE OFF CACHE BOOL "Turn on build of code templates")
 
-if (BUILD_SOLUTION OR BUILD_TEMPLATE)
+if (BUILD_SOLUTION OR BUILD_TEMPLATE OR BUILD_LIBWB_LIBRARY)
   find_package(CUDA REQUIRED)
 else()
   find_package(CUDA)
