@@ -1,3 +1,4 @@
+set(CUDA_SEPARABLE_COMPILATION ON)
 add_lab("ThrustVectorAdd")
 add_lab_template("ThrustVectorAdd" ${CMAKE_CURRENT_LIST_DIR}/template.cu)
 add_lab_solution("ThrustVectorAdd" ${CMAKE_CURRENT_LIST_DIR}/solution.cu)

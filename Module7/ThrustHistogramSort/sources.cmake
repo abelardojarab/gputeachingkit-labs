@@ -1,3 +1,4 @@
+set(CUDA_SEPARABLE_COMPILATION ON)
 add_lab("ThrustHistogramSort")
 add_lab_template("ThrustHistogramSort" ${CMAKE_CURRENT_LIST_DIR}/template.cu)
 add_lab_solution("ThrustHistogramSort" ${CMAKE_CURRENT_LIST_DIR}/solution.cu)
