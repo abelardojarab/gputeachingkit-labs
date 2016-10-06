@@ -16,6 +16,7 @@ RUN cmake -DBUILD_DESCRIPTION=OFF \
           -DBUILD_LIBWB_LIBRARY=ON \
           -DBUILD_SOLUTION=ON \
           -DBUILD_TEMPLATE=OFF \
+          -DBUILD_USING_DOCKER=ON \
           ${WORK_DIR}/src && \
     make
 

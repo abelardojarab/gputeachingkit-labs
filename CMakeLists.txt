@@ -16,6 +16,7 @@ set(BUILD_SOLUTION ON CACHE BOOL "Turn on build of code solution")
 # set(BUILD_DESCRIPTION OFF CACHE BOOL "Turn on build of lab description")
 set(BUILD_DATASET_GENERATOR ON CACHE BOOL "Turn on building of dataset generator")
 set(BUILD_TEMPLATE OFF CACHE BOOL "Turn on build of code templates")
+set(BUILD_USING_DOCKER OFF CACHE INTERNAL "Turn on if you are building within docker" FORCE)
 
 if (BUILD_SOLUTION OR BUILD_TEMPLATE OR BUILD_LIBWB_LIBRARY)
   find_package(CUDA REQUIRED)

@@ -1,3 +1,5 @@
 include(${CMAKE_CURRENT_LIST_DIR}/ListScan/sources.cmake)
+if (NOT BUILD_USING_DOCKER)
 include(${CMAKE_CURRENT_LIST_DIR}/ThrustListScan/sources.cmake)
+endif (NOT BUILD_USING_DOCKER)
 # include(${CMAKE_CURRENT_LIST_DIR}/ImageEqualization/sources.cmake)
