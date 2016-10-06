@@ -21,18 +21,11 @@ RUN cmake -DBUILD_DESCRIPTION=OFF \
           ${WORK_DIR}/src && \
     make -j4
 
-# Setup user.
-RUN chmod u+s /usr/bin/whoami && \
-    adduser --system --no-create-home --disabled-password --disabled-login --shell /bin/sh user && \
-    find / -perm +6000 -type f -exec chmod a-s {} \;  || true # Remove Setuid/Setgid Binaries
-
 ENV HOME ${WORK_DIR}
 ENV SOURCE_DIR ${WORK_DIR}
 ENV BUILD_DIR ${WORK_DIR}
 
 VOLUME ${WORK_DIR}
 WORKDIR ${WORK_DIR}
-
-USER user
 
 CMD /bin/bash
