@@ -1,5 +1,5 @@
 include(${CMAKE_CURRENT_LIST_DIR}/Histogram/sources.cmake)
 include(${CMAKE_CURRENT_LIST_DIR}/TextHistogram/sources.cmake)
 if (NOT BUILD_USING_DOCKER)
-include(${CMAKE_CURRENT_LIST_DIR}/ThrustHistogramSort/sources.cmake)
+#include(${CMAKE_CURRENT_LIST_DIR}/ThrustHistogramSort/sources.cmake)
 endif (NOT BUILD_USING_DOCKER)
