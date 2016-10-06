@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.1 FATAL_ERROR)
 
 set(CMAKE_BUILD_TYPE Release)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
@@ -18,49 +18,54 @@ set(BUILD_DATASET_GENERATOR ON CACHE BOOL "Turn on building of dataset generator
 set(BUILD_TEMPLATE OFF CACHE BOOL "Turn on build of code templates")
 set(BUILD_USING_DOCKER OFF CACHE INTERNAL "Turn on if you are building within docker" FORCE)
 
+
+list(INSERT CMAKE_MODULE_PATH 0 ${PROJECT_SOURCE_DIR}/support/cmake/modules)
+
 if (BUILD_SOLUTION OR BUILD_TEMPLATE OR BUILD_LIBWB_LIBRARY)
   find_package(CUDA REQUIRED)
 else()
   find_package(CUDA)
 endif ()
 
+find_package(EnableCxx11 REQUIRED)
+
 set(CUDA_ATTACH_VS_BUILD_RULE_TO_CUDA_FILE OFF)
 set(CUDA_USE_STATIC_CUDA_RUNTIME ON)
 set(CUDA_VERBOSE_BUILD OFF)
 
 # allow C99 for cmake versions less than 3.1
-macro(use_c99)
-  if (CMAKE_VERSION VERSION_LESS "3.1")
-    if (CMAKE_C_COMPILER_ID STREQUAL "GNU")
-      set (CMAKE_C_FLAGS "--std=gnu99 ${CMAKE_C_FLAGS}")
-    endif (CMAKE_C_COMPILER_ID STREQUAL "GNU")
-  else (CMAKE_VERSION VERSION_LESS "3.1")
-    set (CMAKE_C_STANDARD 99)
-  endif (CMAKE_VERSION VERSION_LESS "3.1")
-endmacro(use_c99)
-use_c99()
+set (CMAKE_C_STANDARD 99)
+
+if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+  if(CMAKE_CXX_COMPILER_VERSION VERSION_GREATER "4.9.3")
+    if(CUDA_VERSION VERSION_LESS "8.0")
+      message(STATUS "Found gcc >=5 and CUDA <= 7.5, adding workaround C++ flags")
+      set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D_FORCE_INLINES")
+    endif(CUDA_VERSION VERSION_LESS "8.0")
+  endif(CMAKE_CXX_COMPILER_VERSION VERSION_GREATER "4.9.3")
+endif(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
 
 
-# set(CUDA_NVCC_FLAGS "${CUDA_NVCC_FLAGS} --verbose")
+set(CUDA_PROPAGATE_HOST_FLAGS TRUE)
 
 # For some MPs it may be necessary to specify the compute capability of your
 # NVIDIA GPU. In that case, simply uncomment the following two lines that start
 # with 'set' and change the value of COMPUTE_CAPABILITY to one of the following
 # hardware architectures: Tesla-class '11', '12', or '13'; Fermi-class '20'
 # or '21'; Kepler-class '30', '32', '35'; or Maxwell-class '50' or '52'
-set(COMPUTE_CAPABILITY 35)
-# set(CUDA_SEPARABLE_COMPILATION TRUE)
-set(CUDA_NVCC_FLAGS "${CUDA_NVCC_FLAGS} --gpu-architecture;sm_${COMPUTE_CAPABILITY}")
-# list(APPEND CUDA_NVCC_FLAGS -arch=sm_35)
+CUDA_SELECT_NVCC_ARCH_FLAGS(ARCH_FLAGS 3.0 3.5+PTX 5.0 Maxwell 6.1)
+list(APPEND CUDA_NVCC_FLAGS ${ARCH_FLAGS})
 
 # Set warning levels for host compilation
 if (UNIX)
-    set(CUDA_PROPAGATE_HOST_FLAGS OFF)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wno-unused-function -Wno-unused-parameter -Wextra -Wno-unused-variable -std=c++11 -DWB_USE_CUDA")
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wno-unused-function -Wno-unused-parameter -Wno-unused-variable -Wextra -DWB_USE_CUDA")
-    set(CUDA_NVCC_FLAGS "${CUDA_NVCC_FLAGS} -Xcompiler -Wno-unused-function,-Wno-unused-parameter,-Wno-unused-variable")
-    set(CUDA_NVCC_FLAGS "${CUDA_NVCC_FLAGS} -std=c++11")
+    add_compile_options(-Wno-unused-function)
+    add_compile_options(-Wno-unused-parameter)
+    add_compile_options(-Wextra)
+    add_compile_options(-Wno-unused-variable)
 endif ()
+
+
+add_definitions(-DWB_USE_CUDA)
 
 # Select the correct host compiler on OS X
 if (APPLE)
@@ -82,10 +87,6 @@ if (APPLE)
 		set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -stdlib=libc++" )
     endif (${CMAKE_SYSTEM_VERSION} LESS 12.0)
 endif (APPLE)
-
-# Add debugging to CUDA NVCC flags (for NVidia's NSight tools)
-set(CUDA_NVCC_FLAGS_DEBUG ${CUDA_NVCC_FLAGS_DEBUG} "-G")
-
 
 # Set the correct linker options on UNIX platforms
 if (UNIX)
@@ -132,7 +133,6 @@ endmacro(add_lab_template)
 macro(add_generator NAME SOURCES)
   if (BUILD_DATASET_GENERATOR)
 	cuda_add_executable("${NAME}_DatasetGenerator" ${SOURCES})
-    set_property(TARGET "${NAME}_DatasetGenerator" PROPERTY CXX_STANDARD 11)
     target_link_libraries("${NAME}_DatasetGenerator" ${WBLIB} ${LINK_LIBRARIES})
     target_link_libraries("${NAME}_DatasetGenerator" ${CUDA_cudart_static_LIBRARY})
     target_link_libraries("${NAME}_DatasetGenerator" ${CUDA_LIBRARIES})

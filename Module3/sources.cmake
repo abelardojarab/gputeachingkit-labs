@@ -1,6 +1,4 @@
 include(${CMAKE_CURRENT_LIST_DIR}/VectorAdd/sources.cmake)
 include(${CMAKE_CURRENT_LIST_DIR}/ImageBlur/sources.cmake)
 include(${CMAKE_CURRENT_LIST_DIR}/ImageColorToGrayscale/sources.cmake)
-if (NOT BUILD_USING_DOCKER)
 include(${CMAKE_CURRENT_LIST_DIR}/ThrustVectorAdd/sources.cmake)
-endif (NOT BUILD_USING_DOCKER)

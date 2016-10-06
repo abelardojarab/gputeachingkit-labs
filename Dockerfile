@@ -1,4 +1,4 @@
-FROM nvidia/cuda:8.0-devel
+FROM nvidia/cuda:devel-ubuntu16.04
 
 MAINTAINER Abdul Dakkak "dakkak@illinois.edu"
 
@@ -17,8 +17,9 @@ RUN cmake -DBUILD_DESCRIPTION=OFF \
           -DBUILD_SOLUTION=ON \
           -DBUILD_TEMPLATE=OFF \
           -DBUILD_USING_DOCKER=ON \
+          -DCMAKE_BUILD_TYPE=Release \
           ${WORK_DIR}/src && \
-    make
+    make -j4
 
 # Setup user.
 RUN chmod u+s /usr/bin/whoami && \
