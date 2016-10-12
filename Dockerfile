@@ -1,4 +1,4 @@
-FROM nvidia/cuda:devel-ubuntu16.04
+FROM nvidia/cuda:8.0-devel-ubuntu16.04
 
 MAINTAINER Abdul Dakkak "dakkak@illinois.edu"
 
@@ -16,10 +16,9 @@ RUN cmake -DBUILD_DESCRIPTION=OFF \
           -DBUILD_LIBWB_LIBRARY=ON \
           -DBUILD_SOLUTION=ON \
           -DBUILD_TEMPLATE=OFF \
-          -DBUILD_USING_DOCKER=ON \
           -DCMAKE_BUILD_TYPE=Release \
           ${WORK_DIR}/src && \
-    make -j4
+    make -j"$(nproc)"
 
 ENV HOME ${WORK_DIR}
 ENV SOURCE_DIR ${WORK_DIR}
@@ -27,5 +26,3 @@ ENV BUILD_DIR ${WORK_DIR}
 
 VOLUME ${WORK_DIR}
 WORKDIR ${WORK_DIR}
-
-CMD /bin/bash
