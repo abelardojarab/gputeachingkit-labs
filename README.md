@@ -132,10 +132,10 @@ Once the lab is built, it can be run. Here we run the device query lab
 
 ## Using Docker
 
-Included with the teaching kit is a [Docker](http://docker.io/) build file. This file can be used to build and launch a container which contains the teaching kit labs along with all the software required to run them. Using a GPU within Docker is only supported on Linux, and we recommend using (NVIDIA-Docker)[https://github.com/NVIDIA/nvidia-docker] to run the Docker image. To build the Docker container do
+Included with the teaching kit is a [Docker](http://docker.io/) build file. This file can be used to build and launch a container which contains the teaching kit labs along with all the software required to run them. Using a GPU within Docker is only supported on Linux, and we recommend using [NVIDIA-Docker](https://github.com/NVIDIA/nvidia-docker) to run the Docker image. To build the Docker container do
 
 ~~~
 docker build . -t gputeachingkit
 ~~~
 
-Once built, the `gputeachingkit` image would be listed by the `docker images` command. Launching the Docker container locally with GPU support is best accomplished using (NVIDIA-Docker)[https://github.com/NVIDIA/nvidia-docker/wiki/nvidia-docker#running-it-locally]. Launching the Docker container on AWS is also supported by NVIDIA-Docker and you can refer to their (wiki)[https://github.com/NVIDIA/nvidia-docker/wiki/Deploy-on-Amazon-EC2] for details.
+Once built, the `gputeachingkit` image would be listed by the `docker images` command. Launching the Docker container locally with GPU support is best accomplished using [NVIDIA-Docker](https://github.com/NVIDIA/nvidia-docker/wiki/nvidia-docker#running-it-locally). Launching the Docker container on AWS is also supported by NVIDIA-Docker and you can refer to their [wiki](https://github.com/NVIDIA/nvidia-docker/wiki/Deploy-on-Amazon-EC2) for details.
