@@ -1,5 +1,7 @@
 # GPU Teaching Kit -- Accelerated Computing Labs
 
+[TOC]
+
 ## Software Requirements
 
 _Caution: **You must have an [NVIDIA CUDA Capable GPU](https://developer.nvidia.com/cuda-gpus)
