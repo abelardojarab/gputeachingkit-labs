@@ -8,7 +8,7 @@ _Caution: **You must have an [NVIDIA CUDA Capable GPU](https://developer.nvidia.
 to use the compiled binaries.**_
 
 The labs in the teaching kit require a CUDA supported operating system,
-C compiler, and a recent CUDA Toolkit. The CUDA Toolkit can be downloaded
+C compiler, and the CUDA 8 Toolkit. The CUDA 8 Toolkit can be downloaded
 from the [CUDA Download](https://developer.nvidia.com/cuda-downloads) page.
 Instructions on how to install the CUDA Toolkit are available in the
 [Quick Start page](http://docs.nvidia.com/cuda/cuda-quick-start-guide/index.html).
@@ -17,7 +17,7 @@ Installation guides and the list of supported C compilers for [Windows](http://d
 [OSX](http://docs.nvidia.com/cuda/cuda-installation-guide-mac-os-x/index.html) are
 also found in the [CUDA Toolkit Documentation Page](http://docs.nvidia.com/cuda/index.html).
 
-Aside from a C compiler and the CUDA Toolkit, [CMake](https://cmake.org/) 3.1 or later is required
+Aside from a C compiler and the CUDA 8 Toolkit, [CMake](https://cmake.org/) 3.1 or later is required
 to generate build scripts for your target IDE and compiler. The next section describes
 the process of compiling and running a lab.
 
