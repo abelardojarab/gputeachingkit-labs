@@ -3,7 +3,8 @@ FROM nvidia/cuda:8.0-devel-ubuntu16.04
 MAINTAINER Abdul Dakkak "dakkak@illinois.edu"
 
 RUN apt-get update && \
-    apt-get install --no-install-recommends -y unzip git cmake && \
+    apt-get install --no-install-recommends -y \
+      unzip git cmake cmake-curses-gui && \
     rm -rf /var/lib/apt/lists/*
 
 
