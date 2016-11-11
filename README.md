@@ -141,3 +141,11 @@ docker build . -t gputeachingkit
 ~~~
 
 Once built, the `gputeachingkit` image would be listed by the `docker images` command. Launching the Docker container locally with GPU support is best accomplished using [NVIDIA-Docker](https://github.com/NVIDIA/nvidia-docker/wiki/nvidia-docker#running-it-locally). Launching the Docker container on AWS is also supported by NVIDIA-Docker and you can refer to their [wiki](https://github.com/NVIDIA/nvidia-docker/wiki/Deploy-on-Amazon-EC2) for details. For an overview of NVIDIA-Docker, please see their [blog post](https://devblogs.nvidia.com/parallelforall/nvidia-docker-gpu-server-application-deployment-made-easy/).
+
+By default, docker volumes are not persistent. To perserve your code across docker sessions, a volume must be shared between the host system and the container. The following command mounts `$HOME/teachingkit_src` on the host system to `/opt/teachingkit/src` in the container.
+
+~~~
+docker run -v $HOME/teachingkit_src:/opt/teachingkit/src -it gputeachingkit 
+~~~
+
+The [Docker documentation](https://docs.docker.com/engine/tutorials/dockervolumes/) has more details on how to manage docker volumes.
