@@ -16,8 +16,13 @@ Installation guides and the list of supported C compilers for [Windows](http://d
 also found in the [CUDA Toolkit Documentation Page](http://docs.nvidia.com/cuda/index.html).
 
 Aside from a C compiler and the CUDA Toolkit, [CMake](https://cmake.org/) 2.8 or later is required
-to generate build scripts for your target IDE and compiler. The next section describes
-the process of compiling and running a lab.
+to generate build scripts for your target IDE and compiler. 
+  
+The usage of OpenACC directives for the Module 21 labs require access to the PGI OpenACC compiler.
+Please follow the instructions [here](https://bitbucket.org/hwuligans/gputeachingkit-labs/src/master/Module21/OpenACCVectorAdd/PGI_LICENCE_INFO.markdown?fileviewer=file-view-default) in this Bitbucket repository to download the
+tools, generate the license file and install the license.
+ 
+The next section describes the process of compiling and running a lab.
 
 ## Compiling and Running Labs
 
