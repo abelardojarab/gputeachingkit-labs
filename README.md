@@ -3,7 +3,7 @@
 ## Software Requirements
 
 **You must have an [NVIDIA CUDA Capable GPU](https://developer.nvidia.com/cuda-gpus)
-to use the compiled binaries.**_
+to use the compiled binaries.**
 
 The labs in the teaching kit require a CUDA supported operating system,
 C compiler, and a recent CUDA Toolkit. The CUDA Toolkit can be downloaded
