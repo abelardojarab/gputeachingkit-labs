@@ -26,8 +26,7 @@ First, regardless of the platform compiling the labs the
 [CUDA Toolkit](https://developer.nvidia.com/cuda-downloads) and
 [CMake](https://cmake.org/) must be installed.
 
-Now, checkout the the GPU Teaching Kit -- Accelerated Computing Labs from the
-[Bitbucket repository](https://bitbucket.org/hwuligans/gputeachingkit-labs)
+Now, checkout the the GPU Teaching Kit -- Accelerated Computing Labs from this Bitbucket repository.
 
 Since, the project depends on an external [libwb](https://github.com/abduld/libwb) repository [![Build Status](https://travis-ci.org/abduld/libwb.svg?branch=master)](https://travis-ci.org/abduld/libwb)
  we must perform a recursive clone (to also checkout the `libwb` repository).
