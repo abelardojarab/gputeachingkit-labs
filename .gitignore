@@ -14,3 +14,4 @@ build-*
 *.o
 pdfs/
 node_modules
+.cmaketools.json
