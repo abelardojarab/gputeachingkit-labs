@@ -4,8 +4,8 @@
 
 ## Software Requirements
 
-_Caution: **You must have an [NVIDIA CUDA Capable GPU](https://developer.nvidia.com/cuda-gpus)
-to use the compiled binaries.**_
+**You must have an [NVIDIA CUDA Capable GPU](https://developer.nvidia.com/cuda-gpus)
+to use the compiled binaries.**
 
 The labs in the teaching kit require a CUDA supported operating system,
 C compiler, and the CUDA 8 Toolkit. The CUDA 8 Toolkit can be downloaded
@@ -17,9 +17,14 @@ Installation guides and the list of supported C compilers for [Windows](http://d
 [OSX](http://docs.nvidia.com/cuda/cuda-installation-guide-mac-os-x/index.html) are
 also found in the [CUDA Toolkit Documentation Page](http://docs.nvidia.com/cuda/index.html).
 
-Aside from a C compiler and the CUDA 8 Toolkit, [CMake](https://cmake.org/) 3.1 or later is required
-to generate build scripts for your target IDE and compiler. The next section describes
-the process of compiling and running a lab.
+Aside from a C compiler and the CUDA Toolkit, [CMake](https://cmake.org/) 2.8 or later is required
+to generate build scripts for your target IDE and compiler. 
+  
+The usage of OpenACC directives for the Module 21 labs requires access to the PGI OpenACC compiler.
+Please follow the instructions [here](https://bitbucket.org/hwuligans/gputeachingkit-labs/src/master/Module21/OpenACCVectorAdd/PGI_LICENCE_INFO.markdown?fileviewer=file-view-default) in this Bitbucket repository to download the
+tools, generate the license file and install the license.
+ 
+The next section describes the process of compiling and running a lab.
 
 ## Compiling and Running Labs
 
@@ -28,8 +33,7 @@ First, regardless of the platform compiling the labs the
 [CUDA Toolkit](https://developer.nvidia.com/cuda-downloads) and
 [CMake](https://cmake.org/) must be installed.
 
-Now, checkout the the GPU Teaching Kit -- Accelerated Computing Labs from the
-[Bitbucket repository](https://bitbucket.org/hwuligans/gputeachingkit-labs)
+Now, checkout the the GPU Teaching Kit -- Accelerated Computing Labs from this Bitbucket repository.
 
 Since, the project depends on an external [libwb](https://github.com/abduld/libwb) repository [![Build Status](https://travis-ci.org/abduld/libwb.svg?branch=master)](https://travis-ci.org/abduld/libwb)
  we must perform a recursive clone (to also checkout the `libwb` repository).
