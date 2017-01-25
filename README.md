@@ -4,8 +4,8 @@ Welcome to the Accelerated Computing Teaching Kit Lab/solution repository. The k
  
 ## System and Software Requirements
 
-**You must use an [NVIDIA CUDA-enabled GPU](https://developer.nvidia.com/cuda-gpus)
-to use the compiled binaries.** Don't have access to GPUs?
+You must use an [NVIDIA CUDA-enabled GPU](https://developer.nvidia.com/cuda-gpus)
+to use the compiled binaries. **Don't have access to GPUs? Learn how to run these labs for free on GPUs in the cloud using the [NVIDIA-Docker instructions](#using-docker).**
 
 The labs in the teaching kit require a CUDA supported operating system,
 C compiler, and the CUDA 8 Toolkit. The CUDA 8 Toolkit can be downloaded
@@ -20,7 +20,7 @@ also found in the [CUDA Toolkit Documentation Page](http://docs.nvidia.com/cuda/
 Aside from a C compiler and the CUDA Toolkit, [CMake](https://cmake.org/) 2.8 or later is required
 to generate build scripts for your target IDE and compiler. 
   
-The usage of OpenACC directives for the Module 21 labs requires access to the PGI OpenACC compiler.
+**The usage of OpenACC directives for the Module 21 labs requires access to the PGI OpenACC compiler.**
 Please follow the instructions [here](https://bitbucket.org/hwuligans/gputeachingkit-labs/src/master/Module21/OpenACCVectorAdd/PGI_LICENCE_INFO.markdown?fileviewer=file-view-default) in this Bitbucket repository to download the
 tools, generate the license file and install the license.
  
