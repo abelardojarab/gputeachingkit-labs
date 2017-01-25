@@ -138,6 +138,8 @@ Once the lab is built, it can be run. Here we run the device query lab
 
 ## Using Docker
 
+[Why use NVIDIA-Docker?](https://github.com/NVIDIA/nvidia-docker/wiki/Why%20NVIDIA%20Docker)
+
 Included with the teaching kit is a [Docker](http://docker.io/) build file. This file can be used to build and launch a container which contains the teaching kit labs along with all the software required to run them. Using a GPU within Docker is only supported on Linux, and we recommend using [NVIDIA-Docker](https://github.com/NVIDIA/nvidia-docker) to run the Docker image. To build the Docker container do
 
 ~~~
