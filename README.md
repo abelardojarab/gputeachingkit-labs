@@ -4,8 +4,8 @@ Welcome to the Accelerated Computing Teaching Kit Lab/solution repository. The k
  
 ## System and Software Requirements
 
-**You must have an [NVIDIA CUDA-enabled GPU](https://developer.nvidia.com/cuda-gpus)
-to use the compiled binaries.**
+**You must use an [NVIDIA CUDA-enabled GPU](https://developer.nvidia.com/cuda-gpus)
+to use the compiled binaries.** Don't have access to GPUs?
 
 The labs in the teaching kit require a CUDA supported operating system,
 C compiler, and the CUDA 8 Toolkit. The CUDA 8 Toolkit can be downloaded
