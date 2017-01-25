@@ -1,10 +1,14 @@
-# GPU Teaching Kit -- Accelerated Computing Labs
+# Accelerated Computing Teaching Kit Lab/solution Repository
 
 [TOC]
 
 ## Software Requirements
 
-**You must have an [NVIDIA CUDA Capable GPU](https://developer.nvidia.com/cuda-gpus)
+Welcome to the Accelerated Computing Teaching Kit Lab/solution repository. The kit and associated labs are produced jointly by NVIDIA and University of Illinois (UIUC).  All material is available under the [Creative Commons Attribution-NonCommercial License](http://creativecommons.org/licenses/by-nc/4.0/).
+
+## System Requirements
+
+**You must have an [NVIDIA CUDA-enabled GPU](https://developer.nvidia.com/cuda-gpus)
 to use the compiled binaries.**
 
 The labs in the teaching kit require a CUDA supported operating system,
