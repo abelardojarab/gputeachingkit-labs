@@ -7,7 +7,7 @@ Welcome to the Accelerated Computing Teaching Kit Lab/solution repository. The k
 You must use an [NVIDIA CUDA-enabled GPU](https://developer.nvidia.com/cuda-gpus)
 to use the compiled binaries. **Don't have access to GPUs? Learn how to run these labs for free on GPUs in the cloud using the [NVIDIA-Docker instructions](#markdown-header-using-docker).**
 
-The labs in the teaching kit require a CUDA supported operating system,
+The labs in the Teaching Kit require a CUDA supported operating system,
 C compiler, and the CUDA 8 Toolkit. The CUDA 8 Toolkit can be downloaded
 from the [CUDA Download](https://developer.nvidia.com/cuda-downloads) page.
 Instructions on how to install the CUDA Toolkit are available in the
@@ -140,13 +140,15 @@ Once the lab is built, it can be run. Here we run the device query lab
 
 [Why use NVIDIA-Docker?](https://github.com/NVIDIA/nvidia-docker/wiki/Why%20NVIDIA%20Docker)
 
-Included with the teaching kit is a [Docker](http://docker.io/) build file. This file can be used to build and launch a container which contains the teaching kit labs along with all the software required to run them. Using a GPU within Docker is only supported on Linux, and we recommend using [NVIDIA-Docker](https://github.com/NVIDIA/nvidia-docker) to run the Docker image. To build the Docker container do
+Included with the Teaching Kit is a [Docker](http://docker.io/) build file. This file can be used to build and launch a container which contains the teaching kit labs along with all the software required to run them. Using a GPU within Docker is only supported on Linux, and we recommend using [NVIDIA-Docker](https://github.com/NVIDIA/nvidia-docker) to run the Docker image. To build the Docker container do
 
 ~~~
 docker build . -t gputeachingkit
 ~~~
 
-Once built, the `gputeachingkit` image would be listed by the `docker images` command. Launching the Docker container locally with GPU support is best accomplished using [NVIDIA-Docker](https://github.com/NVIDIA/nvidia-docker/wiki/nvidia-docker#running-it-locally). Launching the Docker container on AWS is also supported by NVIDIA-Docker and you can refer to their [wiki](https://github.com/NVIDIA/nvidia-docker/wiki/Deploy-on-Amazon-EC2) for details. For an overview of NVIDIA-Docker, please see their [blog post](https://devblogs.nvidia.com/parallelforall/nvidia-docker-gpu-server-application-deployment-made-easy/).
+Once built, the `gputeachingkit` image would be listed by the `docker images` command. Launching the Docker container locally with GPU support is best accomplished using [NVIDIA-Docker](https://github.com/NVIDIA/nvidia-docker/wiki/nvidia-docker#running-it-locally). **Launching the Docker container on AWS and other GPUs in the cloud is also supported by NVIDIA-Docker and you can refer to their [wiki](https://github.com/NVIDIA/nvidia-docker/wiki/Deploy-on-Amazon-EC2) for details. Both instructors and students can apply for free time on AWS GPUs in the cloud for teaching via the [AWS Educate](https://aws.amazon.com/education/awseducate/) program** 
+
+For an overview of NVIDIA-Docker, please see their [blog post](https://devblogs.nvidia.com/parallelforall/nvidia-docker-gpu-server-application-deployment-made-easy/).
 
 By default, docker volumes are not persistent. To perserve your code across docker sessions, a volume must be shared between the host system and the container. The following command mounts `$HOME/teachingkit_src` on the host system to `/opt/teachingkit/src` in the container.
 
