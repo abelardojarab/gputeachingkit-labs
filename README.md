@@ -7,7 +7,7 @@ Welcome to the Accelerated Computing Teaching Kit Lab/solution repository. The k
 You must use an [NVIDIA CUDA-enabled GPU](https://developer.nvidia.com/cuda-gpus)
 to use the compiled binaries. 
 
-**Don't have access to GPUs? The GPU Teaching Kit comes with codes worth up to $125 of Amazon Web Services (AWS) GPU compute credit for each student in your course, as well as $200 for yourself as the instructor, to provide a GPU compute platform to work on the open-ended labs. To request a code for yourself and your students, please send an email to [NVDLI@nvidia.com](mailto: NVDLI@nvidia) with the subject line “GPU Teaching Kit AWS Access”. An Email will follow with your code and instructions for giving access to your students. Learn how to run these labs on AWS GPUs in the cloud using the [NVIDIA-Docker instructions](#markdown-header-using-docker).**
+**Don't have access to GPUs? The GPU Teaching Kit comes with codes worth up to $125 of Amazon Web Services (AWS) GPU compute credit for each student in your course, as well as $200 for yourself as the instructor, to provide a GPU compute platform to work on the open-ended labs. To request a code for yourself and your students, please send an email to [NVDLI@nvidia.com](mailto: NVDLI@nvidia) with the subject line “GPU Teaching Kit AWS Access”. An email will follow with your code and instructions for giving access to your students. Learn how to run these labs on AWS GPUs in the cloud using the [NVIDIA-Docker instructions](#markdown-header-using-docker).**
 
 The labs in the Teaching Kit require a CUDA supported operating system,
 C compiler, and the CUDA 8 Toolkit. The CUDA 8 Toolkit can be downloaded
@@ -161,3 +161,36 @@ docker run -v $HOME/teachingkit_src:/opt/teachingkit/src -it gputeachingkit
 ~~~
 
 The [Docker documentation](https://docs.docker.com/engine/tutorials/dockervolumes/) has more details on how to manage docker volumes.
+
+## NVIDIA Online GPU Labs
+
+This teaching kit includes access to free online labs (“Qwiklabs”) using GPUs in the cloud - a value of up to $30 per person per lab. These online labs reinforce accelerated computing concepts presented in the teaching kit to students in a more applied manner. Each Qwiklab is a live, hands-on, self-paced learning environment that includes a set of interactive instructions to walk students through applied accelerated computing concepts. Students must complete each lab within the allotted time.
+
+Online NVIDIA Qwiklab topics include:
+
+* CUDA C/C++, Fortran, Python
+* OpenACC
+* Introduction to Deep Learning
+* Optimization and Debugging
+* Multiple-GPU programming
+* Libraries
+* And More!
+
+To see a list of ALL available labs please go to the [catalog](https://nvidia.qwiklab.com/catalog) and click on the "Labs" tab.
+
+*To enable these labs for your students, please create an account at https://nvidia.qwiklab.com and send your Qwiklab account email address to [NVDLI@nvidia.com](mailto: NVDLI@nvidia.com) with the subject line “GPU Teaching Kit Qwiklab Access”. Email instructions will then follow for giving access to your students.*
+
+Please see `Online GPU Labs.pdf` from the GPU Teaching Kit `.zip` for more details.
+
+## About the NVIDIA Deep Learning Institute (DLI)
+The NVIDIA DLI offers hands-on training for developers, data scientists, and researchers looking to solve challenging problems with deep learning.
+
+Through self-paced online labs and instructor-led workshops, DLI provides training on the latest techniques for designing, training, and deploying neural networks across a variety of application domains including self-driving cars, healthcare, robotics, finance, and video analytics.
+
+#### Start a Deep Learning Project
+Explore three simple steps to kick off your deep learning initiative for a solo project, a small team, or at scale: www.nvidia.com/deep-learning/developer.
+
+#### Keep Learning with DLI
+Check out upcoming workshops in your area at www.nvidia.com/dli. 
+
+Request an onsite workshop for your team at www.nvidia.com/requestdli.
