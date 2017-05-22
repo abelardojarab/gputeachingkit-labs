@@ -150,7 +150,7 @@ docker build . -t gputeachingkit
 
 Once built, the `gputeachingkit` image will be listed by the `docker images` command. Launching the Docker container locally with GPU support is best accomplished using [NVIDIA-Docker](https://github.com/NVIDIA/nvidia-docker/wiki/nvidia-docker#running-it-locally). 
 
-**Launching the Docker container on AWS and other GPUs in the cloud is also supported by NVIDIA-Docker and you can refer to their [wiki](https://github.com/NVIDIA/nvidia-docker/wiki/Deploy-on-Amazon-EC2) for details. Both instructors and students can apply for free time on AWS GPUs in the cloud for teaching via the [AWS Educate](https://aws.amazon.com/education/awseducate/) program** 
+**Launching the Docker container on AWS and other GPUs in the cloud is also supported by NVIDIA-Docker and you can refer to their [wiki](https://github.com/NVIDIA/nvidia-docker/wiki/Deploy-on-Amazon-EC2) for details.** 
 
 For an overview of NVIDIA-Docker, please see their [blog post](https://devblogs.nvidia.com/parallelforall/nvidia-docker-gpu-server-application-deployment-made-easy/).
 
