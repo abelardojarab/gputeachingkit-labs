@@ -5,7 +5,9 @@ Welcome to the Accelerated Computing Teaching Kit Lab/solution repository. The k
 ## System and Software Requirements
 
 You must use an [NVIDIA CUDA-enabled GPU](https://developer.nvidia.com/cuda-gpus)
-to use the compiled binaries. **Don't have access to GPUs? Learn how to run these labs for free on GPUs in the cloud using the [NVIDIA-Docker instructions](#markdown-header-using-docker).**
+to use the compiled binaries. 
+
+**Don't have access to GPUs? The GPU Teaching Kit comes with codes worth up to $125 of Amazon Web Services (AWS) GPU compute credit for each student in your course, as well as $200 for yourself as the instructor, to provide a GPU compute platform to work on the open-ended labs. To request a code for yourself and your students, please send an email to [NVDLI@nvidia.com](mailto: NVDLI@nvidia) with the subject line “GPU Teaching Kit AWS Access”. An Email will follow with your code and instructions for giving access to your students. Learn how to run these labs on AWS GPUs in the cloud using the [NVIDIA-Docker instructions](#markdown-header-using-docker).**
 
 The labs in the Teaching Kit require a CUDA supported operating system,
 C compiler, and the CUDA 8 Toolkit. The CUDA 8 Toolkit can be downloaded
